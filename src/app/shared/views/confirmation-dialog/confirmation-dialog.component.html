@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <strong>{{confirmationDialogBox.title}}</strong>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{confirmationDialogBox.message}}</p>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-card-actions align="end">
+      <button mat-stroked-button (click)="onClickDecline()"
+        cdkFocusInitial>{{confirmationDialogType == "OK/CANCEL" ? 'Cancel' : 'No'}}</button>
+      <button mat-button color="warn"
+        (click)="onClickAccept()">{{confirmationDialogType == "OK/CANCEL" ? 'OK' : 'Yes'}}</button>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card>

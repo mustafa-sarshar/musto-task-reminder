@@ -1,0 +1,59 @@
+<mat-card>
+  <form autoComplete="off" (ngSubmit)="onSubmitForm()" [formGroup]="formGroupEl">
+    <mat-card-header>
+      <mat-card-title>
+        Sign Up!
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" formControlName="username" placeholder="username" id="username">
+        <mat-icon color="default" matSuffix>person</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="Email" id="email" email>
+        <mat-icon color="default" matSuffix>mail</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Birth date</mat-label>
+        <input matInput type="date" formControlName="birthDate" placeholder="birth" id="birth">
+        <mat-icon color="default" matSuffix>calendar_month</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input matInput formControlName="password" placeholder="" id="password" autoComplete="off"
+          [type]="hidePasswordValue ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hidePasswordValue = !hidePasswordValue"
+          [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordValue">
+          <mat-icon color="default">{{hidePasswordValue ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card-actions align="end">
+        <button mat-stroked-button type="submit" [disabled]="!formGroupEl.valid || isDataFetching">Sign Up</button>
+        <!-- <button mat-stroked-button type="submit">Sign Up</button> -->
+        <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">Cancel</button>
+      </mat-card-actions>
+    </mat-card-footer>
+    <!-- <div class="help-box"
+      *ngIf="!formEl.valid && formEl.touched && formEl.dirty && ((!formEl.controls['username'].valid && formEl.controls['username'].touched && formEl.controls['username'].dirty) || (!formEl.controls['pass'].valid && formEl.controls['pass'].touched && formEl.controls['pass'].dirty) || (!formEl.controls['email'].valid && formEl.controls['email'].touched && formEl.controls['email'].dirty) || (!formEl.controls['birth'].valid && formEl.controls['birth'].touched && formEl.controls['birth'].dirty))">
+      <span><strong>Help:</strong></span>
+      <ul>
+        <li
+          *ngIf="!formEl.controls['username'].valid && formEl.controls['username'].touched && formEl.controls['username'].dirty">
+          Username must be at least 5 characters long and alphanumeric!</li>
+        <li *ngIf="!formEl.controls['pass'].valid && formEl.controls['pass'].touched && formEl.controls['pass'].dirty">
+          Password must be at least 5 characters long!</li>
+        <li
+          *ngIf="!formEl.controls['email'].valid && formEl.controls['email'].touched && formEl.controls['email'].dirty">
+          Email must be valid!</li>
+        <li
+          *ngIf="!formEl.controls['birth'].valid && formEl.controls['birth'].touched && formEl.controls['birth'].dirty">
+          Birth date must be valid!</li>
+      </ul>
+    </div> -->
+  </form>
+</mat-card>
