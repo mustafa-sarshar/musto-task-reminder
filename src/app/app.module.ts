@@ -19,6 +19,9 @@ import { LanguageComponent } from "./shared/views/language/language.component";
 import { RegistrationComponent } from "./main/views/user/registration/registration.component";
 import { LoginComponent } from "./main/views/user/login/login.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { TasksComponent } from './main/views/tasks/tasks.component';
+import { UserProfileComponent } from './main/views/user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     LanguageComponent,
     RegistrationComponent,
     LoginComponent,
+    TasksComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +50,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     AppMaterialModule,
     LayoutModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

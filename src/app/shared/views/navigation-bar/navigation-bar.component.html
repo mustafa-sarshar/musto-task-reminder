@@ -4,11 +4,11 @@
     [ngClass]="{hidden: (isHandset$ | async) === false}">
     <mat-toolbar i18n color="default">Menu</mat-toolbar>
     <mat-nav-list>
-      <mat-list-item *ngIf="username" class="list-item" (click)="onClickUserProfile()" [matTooltip]="username">
+      <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickUserProfile()">
         <mat-icon mat-list-icon>person</mat-icon>
         <span i18n>User profile</span>
       </mat-list-item>
-      <mat-list-item *ngIf="username" class="list-item" (click)="onClickLogout()" matTooltip="Logout">
+      <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickLogout()" matTooltip="Logout">
         <mat-icon mat-list-icon>logout</mat-icon>
         <span i18n>Logout</span>
       </mat-list-item>
@@ -27,9 +27,9 @@
       <!-- Toolbar Content AND Nav Items Here -->
       <span class="app-brand" (click)="onClickAppBrand()">Musto Task Reminder</span>
       <span class="spacer"></span>
-      <div *ngIf="username && (isHandset$ | async) === false">
+      <div *ngIf="isUserAuthenticated && (isHandset$ | async) === false">
         <button i18n mat-icon-button color="default" aria-label="to go to the user profile"
-          [matTooltip]="username" (click)="onClickUserProfile()">
+          (click)="onClickUserProfile()">
           <mat-icon>person</mat-icon>
         </button>
         <button i18n-arial-label mat-icon-button color="default" aria-label="to logout from the app" matTooltip="Logout"
@@ -45,6 +45,8 @@
       </div>
     </mat-toolbar>
     <!-- Page Content Here -->
+    <div class="page-content">
+    </div>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -13,6 +13,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 /**
  * @constant
@@ -32,6 +33,7 @@ const materials = [
   MatExpansionModule,
   MatSidenavModule,
   MatListModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({

@@ -1,0 +1,38 @@
+<div class="tasks-container" *ngIf="userData">
+  <p class="tasks-content__title">All Tasks of {{userData.email}}</p>
+  <mat-card class="tasks-content__tasks">
+    <mat-card-header>
+      <div class="expansion-action-buttons">
+        <button mat-button (click)="accordion.openAll()">Expand All</button>
+        <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-selection-list #tasks>
+        <mat-accordion class="expansion-headers-align" multi>
+          <!-- <mat-list-option *ngFor="let task of userTasks"> -->
+          <mat-expansion-panel *ngFor="let task of userTasks">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{task.title}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-panel-description>
+              {{task.description}}
+              <mat-icon *ngIf="task.done === true" color="accent" [matTooltip]="task.doneReport()">task_alt</mat-icon>
+              <mat-icon *ngIf="!task.done" color="warn" [matTooltip]="task.doneReport()">schedule</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel>
+          <!-- </mat-list-option> -->
+        </mat-accordion>
+      </mat-selection-list>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card-subtitle>
+        Tasks to delete: {{tasks.selectedOptions.selected.length}}
+      </mat-card-subtitle>
+      <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+      </mat-paginator>
+    </mat-card-footer>
+  </mat-card>
+</div>

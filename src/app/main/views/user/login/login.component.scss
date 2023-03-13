@@ -1,0 +1,28 @@
+$break-point__vertical--xs: 440px;
+
+mat {
+  &-card {
+    display: flex;
+    flex-direction: column;
+
+    @media all and (max-height: $break-point__vertical--xs) {
+      overflow: scroll;
+      height: 95vh;
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+    }
+    &-title {
+      text-align: center;
+      padding: 1rem;
+      color: white;
+    }
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}

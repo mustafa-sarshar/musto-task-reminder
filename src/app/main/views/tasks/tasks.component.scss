@@ -1,0 +1,44 @@
+.tasks {
+  &-container {
+    height: 100%;
+  }
+
+  &-content {
+    &__title {
+      font-weight: bold;
+      border-bottom: 1px solid black;
+      padding-bottom: 1rem;
+      text-align: center;
+    }
+  }
+}
+
+.expansion {
+  &-action {
+    -buttons {
+      padding-bottom: 20px;
+    }
+  }
+
+  &-headers {
+    &-align {
+      .mat-expansion-panel-header-description {
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .mat-mdc-form-field + .mat-mdc-form-field {
+        margin-left: 8px;
+      }
+    }
+  }
+}
+
+mat {
+  &-list {
+    &-option {
+      height: 100%;
+      background-color: red;
+    }
+  }
+}

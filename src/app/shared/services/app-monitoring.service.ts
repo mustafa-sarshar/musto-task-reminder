@@ -14,11 +14,6 @@ export class AppMonitoringService {
     return this.isDataFetching.getValue();
   }
 
-  /**
-   * @method
-   * @description - Sets the current status of the data fetching
-   * @param status
-   */
   public setIsDataFetchingStatus(status: boolean): void {
     this.isDataFetching.next(status);
   }

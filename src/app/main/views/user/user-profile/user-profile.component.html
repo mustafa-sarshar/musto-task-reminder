@@ -1,0 +1,78 @@
+<div class="user-profile__container">
+  <mat-card class="user-profile__item">
+    <mat-card-header>
+      <mat-card-title class="user-profile__title">User Info</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="user-profile__body">
+      <mat-card-subtitle class="user-profile__userInfo">
+        <span>Username:</span>
+        <p>
+          <strong>{{userData.username}}</strong>
+        </p>
+        <span>Birth date:</span>
+        <p>
+          <strong>{{userData.birthDate | date:"fullDate"}}</strong>
+        </p>
+        <span>Email:</span>
+        <p>
+          <strong>{{userData.email}}</strong>
+        </p>
+      </mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-footer>
+      <button mat-stroked-button color="warn" (click)="onClickDeleteAccount()"
+        [disabled]="isDataFetching  || !userData.username">
+        Delete Account
+      </button>
+    </mat-card-footer>
+  </mat-card>
+  <mat-card class="user-profile__item">
+    <form autoComplete="off" [formGroup]="formGroupEl">
+      <mat-card-header>
+        <mat-card-title class="user-profile__title">Update Form</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" formControlName="username" placeholder="username" id="username">
+          <mat-icon color="default" matSuffix>person</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Birth date</mat-label>
+          <input matInput type="date" formControlName="birthDate" placeholder="birth" id="birth">
+          <mat-icon color="default" matSuffix>calendar_month</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Enter your password</mat-label>
+          <input matInput formControlName="password" placeholder="" id="password" autoComplete="off"
+            [type]="hidePasswordValue ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hidePasswordValue = !hidePasswordValue"
+            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordValue">
+            <mat-icon color="default">{{hidePasswordValue ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-footer>
+        <mat-card-actions align="end">
+          <button mat-stroked-button type="button" (click)="onSubmitForm()"
+            [disabled]="!formGroupEl.valid || isDataFetching">Sign Up</button>
+        </mat-card-actions>
+      </mat-card-footer>
+      <div class="help-box"
+        *ngIf="!formGroupEl.valid && formGroupEl.touched && formGroupEl.dirty && ((!formGroupEl.controls['username'].valid && formGroupEl.controls['username'].touched && formGroupEl.controls['username'].dirty) || (!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty) || (!formGroupEl.controls['birthDate'].valid && formGroupEl.controls['birthDate'].touched && formGroupEl.controls['birthDate'].dirty))">
+        <span class="help-box__title">Help:</span>
+        <ul>
+          <li
+            *ngIf="!formGroupEl.controls['username'].valid && formGroupEl.controls['username'].touched && formGroupEl.controls['username'].dirty">
+            Username must be at least 5 characters long and alphanumeric!</li>
+          <li
+            *ngIf="!formGroupEl.controls['birthDate'].valid && formGroupEl.controls['birthDate'].touched && formGroupEl.controls['birthDate'].dirty">
+            Birth date must be valid!</li>
+          <li
+            *ngIf="!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty">
+            Password must be at least 5 characters long!</li>
+        </ul>
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -1,11 +1,24 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
-import { FormGroup } from "@angular/forms";
-import { MatDialogRef } from "@angular/material/dialog";
+import { FormControl, Validators, FormGroup } from "@angular/forms";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subscription } from "rxjs";
 
-import { UserRegistrationCredentials } from "src/app/shared/models";
-import { AppMonitoringService, AuthService } from "src/app/shared/services";
+import {
+  AppMonitoringService,
+  AuthService,
+  DatabaseService,
+  LocalStorageService,
+} from "src/app/shared/services";
+import { AuthResponsePayload } from "src/app/shared/services/auth.service";
+
+import { LoginComponent } from "../login/login.component";
+import { LOGIN_SIGNUP_FORM_STYLE } from "src/configs";
+
+import {
+  UserProfile,
+  UserRegistrationCredentials,
+} from "src/app/shared/models";
 
 @Component({
   selector: "app-registration",
@@ -13,15 +26,19 @@ import { AppMonitoringService, AuthService } from "src/app/shared/services";
   styleUrls: ["./registration.component.scss"],
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
-  public isDataFetching: boolean = false;
-  private appMonitoringSubscription: Subscription = new Subscription();
-  public hidePasswordValue: boolean = true;
   public formGroupEl: FormGroup;
+  public isDataFetching: boolean = false;
+  public hidePasswordValue: boolean = true;
+  private appMonitoringSubscription: Subscription = new Subscription();
 
   constructor(
     private appMonitoringService: AppMonitoringService,
     private authService: AuthService,
-    private dialogRef: MatDialogRef<RegistrationComponent>
+    private databaseService: DatabaseService,
+    private localStorageService: LocalStorageService,
+    private dialogRef: MatDialogRef<RegistrationComponent>,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   public ngOnInit(): void {
@@ -33,7 +50,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.onClosing();
+    this.handleClosing();
   }
 
   private initForm(): void {
@@ -52,7 +69,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       ]),
       password: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(5),
       ]),
     });
   }
@@ -64,14 +81,80 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       this.formGroupEl.value["birthDate"],
       this.formGroupEl.value["password"]
     );
-    this.authService.registerUser(userData);
+
+    this.authService.handleUserRegistration(userData).subscribe({
+      next: (authResponse: AuthResponsePayload) => {
+        // Init a user profile after a successful user registration via Email & Password
+        const userProfileCredentials = new UserProfile(
+          authResponse.localId,
+          this.formGroupEl.value["username"],
+          this.formGroupEl.value["email"],
+          new Date(this.formGroupEl.value["birthDate"])
+        );
+        console.log("userProfileCredentials", userProfileCredentials);
+        this.databaseService
+          .initUserProfileInDatabase(userProfileCredentials)
+          .subscribe({
+            next: (_) => {
+              this.snackBar.open("Registration was successful!", "OK", {
+                duration: 2000,
+                panelClass: ["green-snackbar"],
+              });
+              this.dialogRef.close();
+              this.dialog.open(
+                LoginComponent,
+                LOGIN_SIGNUP_FORM_STYLE
+              ).componentInstance.userEmail = authResponse.email;
+            },
+            error: (error: any) => {
+              console.error("Registration error:", error.message);
+              this.snackBar.open(error.message, "OK", {
+                duration: 2000,
+                panelClass: ["red-snackbar"],
+              });
+
+              // Delete the user account if the was an error while storing user-profile data on database
+              this.authService
+                .handleDeleteUserAccount(authResponse.idToken)
+                .subscribe({
+                  next: (_) => {
+                    this.snackBar.open("Please try again!", "OK", {
+                      duration: 2000,
+                      panelClass: ["green-snackbar"],
+                    });
+                    this.localStorageService.resetUserDataFromLocalStorage();
+                    this.appMonitoringService.setIsDataFetchingStatus(false);
+                  },
+                  error: (error: any) => {
+                    console.error("Deletion error:", error.message);
+                    this.snackBar.open(error.message, "OK", {
+                      duration: 2000,
+                      panelClass: ["red-snackbar"],
+                    });
+                    this.localStorageService.resetUserDataFromLocalStorage();
+                    this.appMonitoringService.setIsDataFetchingStatus(false);
+                  },
+                });
+            },
+          });
+      },
+      error: (error: any) => {
+        console.error("Registration error:", error.message);
+        this.snackBar.open(error.message, "OK", {
+          duration: 2000,
+          panelClass: ["red-snackbar"],
+        });
+
+        this.appMonitoringService.setIsDataFetchingStatus(false);
+      },
+    });
   }
 
   public onClickCancel(): void {
-    this.onClosing();
+    this.handleClosing();
   }
 
-  private onClosing(): void {
+  private handleClosing(): void {
     this.appMonitoringService.setIsDataFetchingStatus(false); // Reset the isDataFetching variable in AppMonitoringService to false.
     this.appMonitoringSubscription.unsubscribe();
     this.dialogRef.close();

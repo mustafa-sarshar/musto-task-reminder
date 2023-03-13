@@ -1,1 +1,44 @@
-<p>login works!</p>
+<mat-card>
+  <form autoComplete="off" [formGroup]="formGroupEl">
+    <mat-card-header>
+      <mat-card-title>
+        Login!
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="Email" id="email" email>
+        <mat-icon color="default" matSuffix>mail</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Enter your password</mat-label>
+        <input matInput formControlName="password" placeholder="" id="password" autoComplete="off"
+          [type]="hidePasswordValue ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hidePasswordValue = !hidePasswordValue"
+          [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordValue">
+          <mat-icon color="default">{{hidePasswordValue ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card-actions align="end">
+        <button mat-stroked-button type="button" (click)="onSubmitForm()"
+          [disabled]="!formGroupEl.valid || isDataFetching">Login</button>
+        <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">Cancel</button>
+      </mat-card-actions>
+    </mat-card-footer>
+    <div class="help-box"
+      *ngIf="!formGroupEl.valid && formGroupEl.touched && formGroupEl.dirty && ((!formGroupEl.controls['email'].valid && formGroupEl.controls['email'].touched && formGroupEl.controls['email'].dirty) || (!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty))">
+      <span class="help-box__title">Help:</span>
+      <ul>
+        <li
+          *ngIf="!formGroupEl.controls['email'].valid && formGroupEl.controls['email'].touched && formGroupEl.controls['email'].dirty">
+          Email must be valid!</li>
+        <li
+          *ngIf="!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty">
+          Password must be at least 5 characters long!</li>
+      </ul>
+    </div>
+  </form>
+</mat-card>

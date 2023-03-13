@@ -1,27 +1,27 @@
 <mat-card>
-  <form autoComplete="off" (ngSubmit)="onSubmitForm()" [formGroup]="formGroupEl">
+  <form autoComplete="off" [formGroup]="formGroupEl">
     <mat-card-header>
       <mat-card-title>
         Sign Up!
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" color="accent">
         <mat-label>Username</mat-label>
         <input matInput type="text" formControlName="username" placeholder="username" id="username">
         <mat-icon color="default" matSuffix>person</mat-icon>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" color="accent">
         <mat-label>Email</mat-label>
         <input matInput type="email" formControlName="email" placeholder="Email" id="email" email>
         <mat-icon color="default" matSuffix>mail</mat-icon>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" color="accent">
         <mat-label>Birth date</mat-label>
         <input matInput type="date" formControlName="birthDate" placeholder="birth" id="birth">
         <mat-icon color="default" matSuffix>calendar_month</mat-icon>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" color="accent">
         <mat-label>Enter your password</mat-label>
         <input matInput formControlName="password" placeholder="" id="password" autoComplete="off"
           [type]="hidePasswordValue ? 'password' : 'text'">
@@ -33,27 +33,28 @@
     </mat-card-content>
     <mat-card-footer>
       <mat-card-actions align="end">
-        <button mat-stroked-button type="submit" [disabled]="!formGroupEl.valid || isDataFetching">Sign Up</button>
-        <!-- <button mat-stroked-button type="submit">Sign Up</button> -->
+        <button mat-stroked-button type="button" (click)="onSubmitForm()"
+          [disabled]="!formGroupEl.valid || isDataFetching">Sign Up</button>
         <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">Cancel</button>
       </mat-card-actions>
     </mat-card-footer>
-    <!-- <div class="help-box"
-      *ngIf="!formEl.valid && formEl.touched && formEl.dirty && ((!formEl.controls['username'].valid && formEl.controls['username'].touched && formEl.controls['username'].dirty) || (!formEl.controls['pass'].valid && formEl.controls['pass'].touched && formEl.controls['pass'].dirty) || (!formEl.controls['email'].valid && formEl.controls['email'].touched && formEl.controls['email'].dirty) || (!formEl.controls['birth'].valid && formEl.controls['birth'].touched && formEl.controls['birth'].dirty))">
-      <span><strong>Help:</strong></span>
+    <div class="help-box"
+      *ngIf="!formGroupEl.valid && formGroupEl.touched && formGroupEl.dirty && ((!formGroupEl.controls['username'].valid && formGroupEl.controls['username'].touched && formGroupEl.controls['username'].dirty) || (!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty) || (!formGroupEl.controls['email'].valid && formGroupEl.controls['email'].touched && formGroupEl.controls['email'].dirty) || (!formGroupEl.controls['birthDate'].valid && formGroupEl.controls['birthDate'].touched && formGroupEl.controls['birthDate'].dirty))">
+      <span class="help-box__title">Help:</span>
       <ul>
         <li
-          *ngIf="!formEl.controls['username'].valid && formEl.controls['username'].touched && formEl.controls['username'].dirty">
+          *ngIf="!formGroupEl.controls['username'].valid && formGroupEl.controls['username'].touched && formGroupEl.controls['username'].dirty">
           Username must be at least 5 characters long and alphanumeric!</li>
-        <li *ngIf="!formEl.controls['pass'].valid && formEl.controls['pass'].touched && formEl.controls['pass'].dirty">
-          Password must be at least 5 characters long!</li>
         <li
-          *ngIf="!formEl.controls['email'].valid && formEl.controls['email'].touched && formEl.controls['email'].dirty">
+          *ngIf="!formGroupEl.controls['email'].valid && formGroupEl.controls['email'].touched && formGroupEl.controls['email'].dirty">
           Email must be valid!</li>
         <li
-          *ngIf="!formEl.controls['birth'].valid && formEl.controls['birth'].touched && formEl.controls['birth'].dirty">
+          *ngIf="!formGroupEl.controls['birthDate'].valid && formGroupEl.controls['birthDate'].touched && formGroupEl.controls['birthDate'].dirty">
           Birth date must be valid!</li>
+        <li
+          *ngIf="!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty">
+          Password must be at least 5 characters long!</li>
       </ul>
-    </div> -->
+    </div>
   </form>
 </mat-card>

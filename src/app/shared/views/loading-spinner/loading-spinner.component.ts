@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { AppMonitoringService } from "../../services/app-monitoring.service";
 import { Subscription } from "rxjs";
+
+import { AppMonitoringService } from "../../services/app-monitoring.service";
 
 /**
  * @class
@@ -27,13 +28,13 @@ export class LoadingSpinnerComponent implements OnInit, OnDestroy {
    * @description - It initializes the component by subscribing and assigning the global dataFetching variable to the local showSpinner property.
    */
   ngOnInit(): void {
-    // this.showSpinner = this.appMonitoringService.getIsDataFetchingStatus();
-    // this.isDataFetchingSubs =
-    //   this.appMonitoringService.isDataFetchingSbj.subscribe({
-    //     next: (isDataFetching: boolean) => {
-    //       this.showSpinner = isDataFetching;
-    //     },
-    //   });
+    this.showSpinner = this.appMonitoringService.getIsDataFetchingStatus();
+    this.isDataFetchingSubs =
+      this.appMonitoringService.isDataFetching.subscribe({
+        next: (isDataFetching: boolean) => {
+          this.showSpinner = isDataFetching;
+        },
+      });
   }
 
   /**
