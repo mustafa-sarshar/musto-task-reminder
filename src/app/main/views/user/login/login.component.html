@@ -23,7 +23,7 @@
     </mat-card-content>
     <mat-card-footer>
       <mat-card-actions align="end">
-        <button mat-stroked-button type="button" (click)="onSubmitForm()"
+        <button mat-stroked-button type="button" (click)="onClickSubmit()"
           [disabled]="!formGroupEl.valid || isDataFetching">Login</button>
         <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">Cancel</button>
       </mat-card-actions>

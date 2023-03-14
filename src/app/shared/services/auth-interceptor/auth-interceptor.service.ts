@@ -9,8 +9,8 @@ import {
 import { Injectable } from "@angular/core";
 import { Observable, exhaustMap, take } from "rxjs";
 
-import { AuthService } from "./auth.service";
-import { User } from "../models/user.model";
+import { AuthService } from "../auth/auth.service";
+import { User } from "../../models";
 
 @Injectable({
   providedIn: "root",
@@ -25,13 +25,13 @@ export class AuthInterceptorService implements HttpInterceptor {
     return this.authService.userData.pipe(
       take(1),
       exhaustMap((userData: User) => {
-        console.log("exhaustMap", userData);
         if (!userData) {
           return next.handle(req);
         }
         const reqModified = req.clone({
           params: new HttpParams().set("auth", userData.token),
         });
+
         return next.handle(reqModified);
       })
     );

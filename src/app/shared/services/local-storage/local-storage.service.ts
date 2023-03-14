@@ -1,18 +1,13 @@
 import { Injectable } from "@angular/core";
-import { User } from "../models";
 
-export interface UserDataFromLocalStorage {
-  id: string;
-  email: string;
-  _token: string;
-  _tokenExpirationDate: string;
-}
+import { LogService } from "../log/log.service";
+import { Log, User, UserDataFromLocalStorage } from "../../models";
 
 @Injectable({
   providedIn: "root",
 })
 export class LocalStorageService {
-  constructor() {}
+  constructor(private logService: LogService) {}
 
   public getUserDataFromLocalStorage(): UserDataFromLocalStorage | null {
     const userData: string = localStorage.getItem("userData");
@@ -25,9 +20,14 @@ export class LocalStorageService {
 
   public storeUserDataOnLocalStorage(userData: User): void {
     localStorage.setItem("userData", JSON.stringify(userData));
+
+    this.logService.logToConsole(new Log("User data in LS changed!", "INFO"));
+    this.logService.logToConsole(new Log(userData));
   }
 
   public resetUserDataFromLocalStorage(): void {
     localStorage.clear();
+
+    this.logService.logToConsole(new Log("LocalStorage cleared!", "INFO"));
   }
 }

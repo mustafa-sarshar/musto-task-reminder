@@ -1,8 +1,8 @@
-import { Task } from "./task.model";
+import { Task } from "../task/task.model";
 
 export class User {
   constructor(
-    public id: string,
+    public uid: string,
     public email: string,
     private _token: string,
     private _tokenExpirationDate: Date,
@@ -33,12 +33,20 @@ export class UserLoginCredentials {
   constructor(public email: string, public password: string) {}
 }
 
-export class UserProfile {
-  constructor(
-    public id: string,
-    public username: string,
-    public email: string,
-    public birthDate: Date,
-    public tasks?: Task[]
-  ) {}
+export interface UserDataFromLocalStorage {
+  uid: string;
+  email: string;
+  _token: string;
+  _tokenExpirationDate: string;
+  username?: string;
+  birthDate?: string;
+  tasks?: Task[];
+}
+
+export interface UserDataFromDatabase {
+  uid: string;
+  email: string;
+  username: string;
+  birthDate: string;
+  tasks?: Task[];
 }

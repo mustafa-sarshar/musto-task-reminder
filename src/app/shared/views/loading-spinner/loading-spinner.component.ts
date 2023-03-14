@@ -1,7 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-
-import { AppMonitoringService } from "../../services/app-monitoring.service";
+import { AppMonitoringService } from "../../services";
 
 /**
  * @class

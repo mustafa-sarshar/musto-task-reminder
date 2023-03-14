@@ -1,15 +1,20 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subscription } from "rxjs";
 
-import { AppMonitoringService, AuthService } from "src/app/shared/services";
-import { AuthResponsePayload } from "src/app/shared/services/auth.service";
-import { UtilityService } from "src/app/shared/services/utility.service";
-
-import { UserLoginCredentials } from "src/app/shared/models";
+import {
+  AppMonitoringService,
+  AuthService,
+  LogService,
+} from "src/app/shared/services";
+import {
+  AuthResponsePayload,
+  Log,
+  Notification,
+  UserLoginCredentials,
+} from "src/app/shared/models";
 
 @Component({
   selector: "app-login",
@@ -26,8 +31,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private appMonitoringService: AppMonitoringService,
     private authService: AuthService,
+    private logService: LogService,
     private dialogRef: MatDialogRef<LoginComponent>,
-    private snackBar: MatSnackBar,
     private router: Router
   ) {}
 
@@ -59,11 +64,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  // get formControls() {
-  //   return (this.formGroupEl.get("hobbies") as FormArray).controls;
-  // }
-
-  public onSubmitForm(): void {
+  public onClickSubmit(): void {
     const userData = new UserLoginCredentials(
       this.formGroupEl.value["email"],
       this.formGroupEl.value["password"]
@@ -71,21 +72,23 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.authService.handleUserLogin(userData).subscribe({
       next: (response: AuthResponsePayload) => {
-        this.snackBar.open("Login was successful!", "OK", {
-          duration: 2000,
-          panelClass: ["green-snackbar"],
-        });
+        this.logService.logToConsole(new Log("Login was successful!", "INFO"));
+        this.logService.logToConsole(new Log(response));
+        this.logService.showNotification(
+          new Notification("Login was successful!", "SUCCESS")
+        );
 
         this.authService.activateUserAutoLogout(+response.expiresIn * 1000);
         this.dialogRef.close();
         this.router.navigate(["/tasks"]);
       },
       error: (error: any) => {
-        console.error("Login error:", error.message);
-        this.snackBar.open(error.message, "OK", {
-          duration: 2000,
-          panelClass: ["red-snackbar"],
-        });
+        this.logService.logToConsole(
+          new Log("Login Error: " + error.message, "ERROR")
+        );
+        this.logService.showNotification(
+          new Notification(error.message, "ERROR")
+        );
 
         this.appMonitoringService.setIsDataFetchingStatus(false);
       },

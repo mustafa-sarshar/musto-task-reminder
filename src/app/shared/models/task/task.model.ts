@@ -9,7 +9,7 @@ export class Task {
     public doneBy?: string
   ) {}
 
-  public doneReport() {
+  public report() {
     if (this.done) {
       if (this.doneAtDate && this.doneBy) {
         return `Done at ${this.doneAtDate.toUTCString()} by ${this.doneBy}`;

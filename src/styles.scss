@@ -1,5 +1,6 @@
 $color-snackbar-success: #1a6b1e;
 $color-snackbar-failure: #6e1610;
+$color-snackbar-warn: #ad7308;
 
 html,
 body {
@@ -54,6 +55,19 @@ body {
 
     button {
       background-color: $color-snackbar-failure !important;
+      color: white !important;
+      border: none !important;
+    }
+  }
+}
+
+.orange {
+  &-snackbar {
+    background: $color-snackbar-warn !important;
+    color: white !important;
+
+    button {
+      background-color: $color-snackbar-warn !important;
       color: white !important;
       border: none !important;
     }

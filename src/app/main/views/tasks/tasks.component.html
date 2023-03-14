@@ -11,17 +11,8 @@
       <mat-selection-list #tasks>
         <mat-accordion class="expansion-headers-align" multi>
           <!-- <mat-list-option *ngFor="let task of userTasks"> -->
-          <mat-expansion-panel *ngFor="let task of userTasks">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{task.title}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <mat-panel-description>
-              {{task.description}}
-              <mat-icon *ngIf="task.done === true" color="accent" [matTooltip]="task.doneReport()">task_alt</mat-icon>
-              <mat-icon *ngIf="!task.done" color="warn" [matTooltip]="task.doneReport()">schedule</mat-icon>
-            </mat-panel-description>
+          <mat-expansion-panel *ngFor="let task of userData.tasks">
+            <!-- <app-task-item [task]="task"></app-task-item> -->
           </mat-expansion-panel>
           <!-- </mat-list-option> -->
         </mat-accordion>

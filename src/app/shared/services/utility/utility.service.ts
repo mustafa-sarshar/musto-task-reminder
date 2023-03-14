@@ -2,21 +2,36 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { throwError } from "rxjs";
 
+import { User, UserDataFromLocalStorage } from "../../models";
+
 @Injectable({
   providedIn: "root",
 })
 export class UtilityService {
   constructor() {}
 
-  calculateExpirationDate(expiresIn: number): Date {
+  public calculateExpirationDate(expiresIn: number): Date {
     return new Date(new Date().getTime() + expiresIn * 1000);
   }
 
-  calculateExpirationDuration(expirationDate: string): number {
+  public calculateExpirationDuration(expirationDate: string): number {
     return new Date(expirationDate).getTime() - new Date().getTime();
   }
 
-  handleError(errorRes: HttpErrorResponse) {
+  public convertUserDataFormat(userData: UserDataFromLocalStorage): User {
+    const userDataLoaded = new User(
+      userData.uid,
+      userData.email,
+      userData._token,
+      new Date(userData._tokenExpirationDate),
+      userData.username,
+      new Date(userData.birthDate),
+      userData.tasks
+    );
+    return userDataLoaded;
+  }
+
+  public handleError(errorRes: HttpErrorResponse) {
     let errorMessage = "An unknown error ocurred!";
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(() => new Error(errorMessage));

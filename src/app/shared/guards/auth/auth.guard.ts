@@ -8,8 +8,8 @@ import {
 } from "@angular/router";
 import { Observable, map, take } from "rxjs";
 
-import { AuthService } from "../services";
-import { User } from "../models";
+import { AuthService } from "../../services";
+import { User } from "../../models";
 
 @Injectable({
   providedIn: "root",

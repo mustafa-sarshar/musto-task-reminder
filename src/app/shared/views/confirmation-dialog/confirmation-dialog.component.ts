@@ -4,7 +4,7 @@ import { MatDialogRef } from "@angular/material/dialog";
 import {
   ConfirmationDialogBox,
   ConfirmationDialogType,
-} from "../../models/dialog.model";
+} from "../../models/dialog/dialog.model";
 
 /**
  * @class
@@ -17,7 +17,6 @@ import {
 })
 export class ConfirmationDialogComponent {
   confirmationDialogBox = new ConfirmationDialogBox("", "");
-  confirmationDialogType: ConfirmationDialogType = "OK/CANCEL";
 
   /**
    * @constructor
