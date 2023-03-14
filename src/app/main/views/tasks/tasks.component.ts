@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MatAccordion } from "@angular/material/expansion";
 import { Subscription } from "rxjs";
 
-import { AuthService, LogService } from "src/app/shared/services";
+import { LogService } from "src/app/shared/services";
 import { Log, User } from "src/app/shared/models";
+import { DataFlowService } from "src/app/shared/services/data-flow/data-flow.service";
 
 @Component({
   selector: "app-tasks",
@@ -14,16 +15,16 @@ export class TasksComponent implements OnInit, OnDestroy {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   public userData: User | null = null;
 
-  private authServiceSubscription: Subscription = new Subscription();
+  private dataFlowServiceSubscription: Subscription = new Subscription();
   private databaseServiceSubscription: Subscription = new Subscription();
 
   constructor(
-    private authService: AuthService,
+    private dataFlowService: DataFlowService,
     private logService: LogService
   ) {}
 
   ngOnInit(): void {
-    this.authServiceSubscription = this.authService.userData.subscribe(
+    this.dataFlowServiceSubscription = this.dataFlowService.userData.subscribe(
       (userData: User | null) => {
         this.userData = userData;
         this.logService.logToConsole(
@@ -35,7 +36,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authServiceSubscription.unsubscribe();
+    this.dataFlowServiceSubscription.unsubscribe();
     this.databaseServiceSubscription.unsubscribe();
   }
 }

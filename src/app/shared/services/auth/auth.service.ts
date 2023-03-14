@@ -1,56 +1,34 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, Observable, catchError, tap } from "rxjs";
+import { Observable, catchError, tap } from "rxjs";
 
 import { LocalStorageService } from "../local-storage/local-storage.service";
-import { DatabaseService } from "../database/database.service";
 import { UtilityService } from "../utility/utility.service";
 
 import { environment } from "src/environments/environment";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import {
   AuthResponsePayload,
   AuthUserCredentials,
-  Log,
   User,
-  UserDataFromDatabase,
   UserDataFromLocalStorage,
   UserRegistrationCredentials,
 } from "../../models";
-import { LogService } from "../log/log.service";
+import { DataFlowService } from "../data-flow/data-flow.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  public userData: BehaviorSubject<User | null> =
-    new BehaviorSubject<User | null>(null);
   private tokenExpirationTimer = null;
 
   constructor(
     private localStorageService: LocalStorageService,
-    private databaseService: DatabaseService,
+    private dataFlowService: DataFlowService,
     private utilityService: UtilityService,
-    private logService: LogService,
     private http: HttpClient,
-    private router: Router,
-    private snackBar: MatSnackBar
+    private router: Router
   ) {}
-
-  public setUserData(userData: User | null) {
-    this.userData.next(userData);
-  }
-
-  public getUserData(): User | null {
-    const userData: UserDataFromLocalStorage =
-      this.localStorageService.getUserDataFromLocalStorage();
-    if (userData) {
-      return this.utilityService.convertUserDataFormat(userData);
-    } else {
-      return null;
-    }
-  }
 
   public handleUserRegistration(
     userData: UserRegistrationCredentials
@@ -104,14 +82,14 @@ export class AuthService {
             userData._tokenExpirationDate
           );
 
-        this.setUserData(userDataLoaded);
+        this.dataFlowService.setUserData(userDataLoaded);
         this.activateUserAutoLogout(expirationDuration);
       }
     }
   }
 
   public handleUserLogout(): void {
-    this.setUserData(null);
+    this.dataFlowService.setUserData(null);
     this.localStorageService.resetUserDataFromLocalStorage();
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
@@ -140,42 +118,16 @@ export class AuthService {
   private handleAuthentication(
     { localId, email, idToken, expiresIn },
     login: boolean = false
-  ): void {
+  ) {
     const expirationDate = this.utilityService.calculateExpirationDate(
       +expiresIn
     );
     const userData = new User(localId, email, idToken, expirationDate);
-    this.setUserData(userData);
+    this.dataFlowService.setUserData(userData);
 
     if (login) {
       this.activateUserAutoLogout(+expiresIn * 1000);
-      this.databaseService
-        .getUserProfileDataFromDatabase(userData.uid)
-        .subscribe({
-          next: (response: UserDataFromDatabase) => {
-            this.logService.logToConsole(
-              new Log(
-                "User profile data loaded from database successfully!",
-                "INFO"
-              )
-            );
-            this.logService.logToConsole(new Log(response));
-
-            userData.uid = response.uid;
-            userData.username = response.username;
-            userData.birthDate = new Date(response.birthDate);
-            userData.tasks = response.tasks;
-            this.localStorageService.storeUserDataOnLocalStorage(userData);
-            this.setUserData(userData);
-          },
-          error: (error) => {
-            this.logService.logToConsole(
-              new Log("getUserProfileDataFromDatabase" + error.message, "ERROR")
-            );
-
-            this.localStorageService.storeUserDataOnLocalStorage(userData);
-          },
-        });
+      this.dataFlowService.initUserProfileData(userData);
     }
   }
 }

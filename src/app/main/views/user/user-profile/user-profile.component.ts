@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import {
   ConfirmationDialogBox,
@@ -18,6 +17,7 @@ import {
   LocalStorageService,
   LogService,
 } from "src/app/shared/services";
+import { DataFlowService } from "src/app/shared/services/data-flow/data-flow.service";
 import { ConfirmationDialogComponent } from "src/app/shared/views/confirmation-dialog/confirmation-dialog.component";
 import { CONFIRMATION_POPUP_STYLE } from "src/configs";
 
@@ -32,14 +32,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   public isDataFetching: boolean = false;
   public hidePasswordValue: boolean = true;
   private appMonitoringServiceSubscription: Subscription = new Subscription();
-  private authServiceSubscription: Subscription = new Subscription();
+  private dataFlowServiceSubscription: Subscription = new Subscription();
 
   constructor(
     private appMonitoringService: AppMonitoringService,
     private databaseService: DatabaseService,
     private authService: AuthService,
-    private localStorageService: LocalStorageService,
     private logService: LogService,
+    private dataFlowService: DataFlowService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
@@ -52,7 +52,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.isDataFetching = status;
       });
 
-    this.authServiceSubscription = this.authService.userData.subscribe(
+    this.dataFlowServiceSubscription = this.dataFlowService.userData.subscribe(
       (userData: User) => {
         this.userData = userData;
         this.logService.logToConsole(
@@ -177,11 +177,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             .getUserProfileDataFromDatabase(this.userData.uid)
             .subscribe({
               next: (response: UserDataFromDatabase) => {
-                const userData = this.authService.getUserData();
+                const userData = this.dataFlowService.getUserData();
                 userData.username = response.username;
                 userData.birthDate = new Date(response.birthDate);
-                this.authService.setUserData(userData);
-                this.localStorageService.storeUserDataOnLocalStorage(userData);
+                this.dataFlowService.setUserData(userData);
                 this.resetForm();
 
                 this.logService.logToConsole(
@@ -233,6 +232,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   private onClosing(): void {
     this.appMonitoringService.setIsDataFetchingStatus(false);
     this.appMonitoringServiceSubscription.unsubscribe();
-    this.authServiceSubscription.unsubscribe();
+    this.dataFlowServiceSubscription.unsubscribe();
   }
 }

@@ -9,20 +9,20 @@ import {
 import { Injectable } from "@angular/core";
 import { Observable, exhaustMap, take } from "rxjs";
 
-import { AuthService } from "../auth/auth.service";
+import { DataFlowService } from "../data-flow/data-flow.service";
 import { User } from "../../models";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(private dataFlowService: DataFlowService) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return this.authService.userData.pipe(
+    return this.dataFlowService.userData.pipe(
       take(1),
       exhaustMap((userData: User) => {
         if (!userData) {

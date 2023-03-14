@@ -12,6 +12,7 @@ import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation
 
 import { ConfirmationDialogBox, Language, User } from "../../models";
 import { CONFIRMATION_POPUP_STYLE } from "src/configs";
+import { DataFlowService } from "../../services/data-flow/data-flow.service";
 
 @Component({
   selector: "app-navigation-bar",
@@ -28,17 +29,18 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   public isUserAuthenticated: boolean = false;
   public username: string = "";
   public language: Language = "EN";
-  private authServiceSubscription: Subscription = new Subscription();
+  private dataFlowServiceSubscription: Subscription = new Subscription();
 
   constructor(
+    private dataFlowService: DataFlowService,
+    private authService: AuthService,
     private breakpointObserver: BreakpointObserver,
     private dialog: MatDialog,
-    private router: Router,
-    private authService: AuthService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.authServiceSubscription = this.authService.userData.subscribe(
+    this.dataFlowServiceSubscription = this.dataFlowService.userData.subscribe(
       (userData: User | null) => {
         if (userData && userData.token) {
           this.isUserAuthenticated = true;
@@ -52,7 +54,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authServiceSubscription.unsubscribe();
+    this.dataFlowServiceSubscription.unsubscribe();
   }
 
   onClickAppBrand(): void {

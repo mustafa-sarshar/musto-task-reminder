@@ -10,12 +10,16 @@ import { Observable, map, take } from "rxjs";
 
 import { AuthService } from "../../services";
 import { User } from "../../models";
+import { DataFlowService } from "../../services/data-flow/data-flow.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private dataFlowService: DataFlowService,
+    private router: Router
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -25,7 +29,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.authService.userData.pipe(
+    return this.dataFlowService.userData.pipe(
       take(1),
       map((userData: User | null) => {
         if (userData) {
