@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
-import { environment } from "src/environments/environment.development";
+import { environment } from "src/environments/environment";
 import { Log, Notification } from "../../models";
 
 @Injectable({

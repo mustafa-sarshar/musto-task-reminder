@@ -7,7 +7,7 @@ import { LocalStorageService } from "../local-storage/local-storage.service";
 import { DatabaseService } from "../database/database.service";
 import { UtilityService } from "../utility/utility.service";
 
-import { environment } from "src/environments/environment.development";
+import { environment } from "src/environments/environment";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import {
   AuthResponsePayload,
