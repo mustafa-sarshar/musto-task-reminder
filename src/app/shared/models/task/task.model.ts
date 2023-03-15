@@ -1,10 +1,15 @@
+export class TaskGroup {
+  constructor(public gid: string, public title: string) {}
+}
+
 export class Task {
   constructor(
-    public id: string,
+    public tid: string,
     public title: string,
+    public group: TaskGroup,
     public description: string,
     public deadline: Date,
-    public done: boolean,
+    public done?: boolean,
     public doneAtDate?: Date,
     public doneBy?: string
   ) {}

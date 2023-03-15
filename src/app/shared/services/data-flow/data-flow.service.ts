@@ -1,17 +1,19 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
+import { LocalStorageService } from "../local-storage/local-storage.service";
+import { UtilityService } from "../utility/utility.service";
+import { LogService } from "../log/log.service";
+import { DatabaseService } from "../database/database.service";
+
 import {
   Log,
+  Task,
   User,
   UserDataFromDatabase,
   UserDataFromLocalStorage,
 } from "../../models";
-import { LocalStorageService } from "../local-storage/local-storage.service";
-import { UtilityService } from "../utility/utility.service";
-import { LogService } from "../log/log.service";
-import { AuthService } from "../auth/auth.service";
-import { DatabaseService } from "../database/database.service";
+import { userTasks } from "src/assets/data";
 
 @Injectable({
   providedIn: "root",
@@ -33,6 +35,19 @@ export class DataFlowService {
 
     this.logService.logToConsole(new Log("UserData SET", "INFO"));
     this.logService.logToConsole(new Log(userData));
+  }
+
+  public addUserTask(task: Task): void {
+    const userData = this.getUserData();
+    if (userData.tasks) {
+      userData.tasks = [...userData.tasks, task];
+    } else {
+      userData.tasks = [task];
+    }
+
+    this.logService.logToConsole(new Log("Task Added", "INFO"));
+    this.logService.logToConsole(new Log(task));
+    this.setUserData(userData);
   }
 
   public getUserData(): User | null {
@@ -61,7 +76,12 @@ export class DataFlowService {
           userData.uid = response.uid;
           userData.username = response.username;
           userData.birthDate = new Date(response.birthDate);
-          userData.tasks = response.tasks;
+          if (response.tasks) {
+            const tasksLoaded = Object.keys(response.tasks).map(
+              (key) => response.tasks[key]
+            );
+            userData.tasks = tasksLoaded;
+          }
           this.setUserData(userData);
         },
         error: (error) => {

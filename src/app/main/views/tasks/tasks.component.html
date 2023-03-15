@@ -1,29 +1,33 @@
 <div class="tasks-container" *ngIf="userData">
-  <p class="tasks-content__title">All Tasks of {{userData.email}}</p>
-  <mat-card class="tasks-content__tasks">
+  <p class="tasks-content__title">All Tasks of {{userData.username}}</p>
+  <mat-card class="tasks-content__tasks" *ngIf="userData['tasks']">
     <mat-card-header>
-      <div class="expansion-action-buttons">
-        <button mat-button (click)="accordion.openAll()">Expand All</button>
-        <button mat-button (click)="accordion.closeAll()">Collapse All</button>
-      </div>
+      No. of Tasks: {{userData.tasks.length}}
     </mat-card-header>
     <mat-card-content>
-      <mat-selection-list #tasks>
-        <mat-accordion class="expansion-headers-align" multi>
-          <!-- <mat-list-option *ngFor="let task of userTasks"> -->
-          <mat-expansion-panel *ngFor="let task of userData.tasks">
-            <!-- <app-task-item [task]="task"></app-task-item> -->
-          </mat-expansion-panel>
-          <!-- </mat-list-option> -->
-        </mat-accordion>
-      </mat-selection-list>
+      <app-tasks-list></app-tasks-list>
     </mat-card-content>
     <mat-card-footer>
-      <mat-card-subtitle>
-        Tasks to delete: {{tasks.selectedOptions.selected.length}}
-      </mat-card-subtitle>
       <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
       </mat-paginator>
+    </mat-card-footer>
+  </mat-card>
+  <mat-card *ngIf="!userData['tasks']">
+    <mat-card-header>
+      <h3>No Tasks</h3>
+    </mat-card-header>
+  </mat-card>
+  <mat-card class="tasks-content__tasks">
+    <mat-card-header>
+      Add a new task
+    </mat-card-header>
+    <mat-card-content>
+      <app-task-item></app-task-item>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card-actions>
+        <button (click)="onClickAddTask()">Add</button>
+      </mat-card-actions>
     </mat-card-footer>
   </mat-card>
 </div>

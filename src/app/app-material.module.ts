@@ -14,6 +14,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatTreeModule } from "@angular/material/tree";
+import { MatSelectModule } from "@angular/material/select";
 
 /**
  * @constant
@@ -34,6 +36,8 @@ const materials = [
   MatSidenavModule,
   MatListModule,
   MatPaginatorModule,
+  MatTreeModule,
+  MatSelectModule,
 ];
 
 @NgModule({

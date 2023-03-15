@@ -195,14 +195,16 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                 );
               },
               error: (error: any) => {
-                console.error(
-                  "Update data could not get retrieved!",
-                  error.message
+                this.logService.logToConsole(
+                  new Log(
+                    "Update data could not get retrieved!" + error.message,
+                    "ERROR"
+                  )
                 );
-                this.snackBar.open(error.message, "OK", {
-                  duration: 2000,
-                  panelClass: ["red-snackbar"],
-                });
+                this.logService.showNotification(
+                  new Notification(error.message, "ERROR")
+                );
+
                 this.appMonitoringService.setIsDataFetchingStatus(false);
               },
             });

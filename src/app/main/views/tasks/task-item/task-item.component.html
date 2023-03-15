@@ -1,12 +1,3 @@
 <div *ngIf="task">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      {{task.title}}
-    </mat-panel-title>
-  </mat-expansion-panel-header>
-  <mat-panel-description>
-    {{task.description}}
-    <mat-icon *ngIf="task.done === true" color="accent" [matTooltip]="task.report()">task_alt</mat-icon>
-    <mat-icon *ngIf="!task.done" color="warn" [matTooltip]="task.report()">schedule</mat-icon>
-  </mat-panel-description>
+  {{task.title}} -> {{task.description}} due to: {{task.deadline | date}}
 </div>

@@ -4,15 +4,15 @@ import { Observable, catchError } from "rxjs";
 
 import { environment } from "src/environments/environment";
 import { UtilityService } from "../utility/utility.service";
-import { User } from "../../models";
+import { Task, User } from "../../models";
 
 @Injectable({
   providedIn: "root",
 })
 export class DatabaseService {
   constructor(
-    private http: HttpClient,
-    private utilityService: UtilityService
+    private utilityService: UtilityService,
+    private http: HttpClient
   ) {}
 
   public setUserProfileInDatabase(userData: User): Observable<Object> {
@@ -40,12 +40,12 @@ export class DatabaseService {
 
   public updateUserProfileDataInDatabase(
     uid: string,
-    dataToPatch: any
+    dataToPath: any
   ): Observable<Object> {
     return this.http
-      .patch<User>(
+      .patch<any>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}.json`,
-        dataToPatch
+        dataToPath
       )
       .pipe(catchError(this.utilityService.handleError));
   }
@@ -54,6 +54,15 @@ export class DatabaseService {
     return this.http
       .delete<User>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}.json`
+      )
+      .pipe(catchError(this.utilityService.handleError));
+  }
+
+  public addUserTask(uid: string, task: Task): Observable<Object> {
+    return this.http
+      .patch<Task>(
+        `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}/tasks/${task.tid}.json`,
+        task
       )
       .pipe(catchError(this.utilityService.handleError));
   }

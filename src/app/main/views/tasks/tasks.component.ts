@@ -5,6 +5,9 @@ import { Subscription } from "rxjs";
 import { LogService } from "src/app/shared/services";
 import { Log, User } from "src/app/shared/models";
 import { DataFlowService } from "src/app/shared/services/data-flow/data-flow.service";
+import { MatDialog } from "@angular/material/dialog";
+import { TaskAddComponent } from "./task-add/task-add.component";
+import { TASK_ADD_FORM_STYLE } from "src/configs";
 
 @Component({
   selector: "app-tasks",
@@ -20,10 +23,11 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataFlowService: DataFlowService,
-    private logService: LogService
+    private logService: LogService,
+    private dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.dataFlowServiceSubscription = this.dataFlowService.userData.subscribe(
       (userData: User | null) => {
         this.userData = userData;
@@ -35,7 +39,18 @@ export class TasksComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
+    this.handleClosing();
+  }
+
+  public onClickAddTask(): void {
+    this.dialog.open(
+      TaskAddComponent,
+      TASK_ADD_FORM_STYLE
+    ).componentInstance.userId = this.userData.uid;
+  }
+
+  private handleClosing(): void {
     this.dataFlowServiceSubscription.unsubscribe();
     this.databaseServiceSubscription.unsubscribe();
   }

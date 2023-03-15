@@ -5,14 +5,13 @@ import { MatDialog } from "@angular/material/dialog";
 import { map, shareReplay } from "rxjs/operators";
 import { Observable, Subscription } from "rxjs";
 
-import { AuthService } from "../../services";
+import { AuthService, DataFlowService } from "../../services";
 
 import { LanguageComponent } from "../language/language.component";
 import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
 
 import { ConfirmationDialogBox, Language, User } from "../../models";
 import { CONFIRMATION_POPUP_STYLE } from "src/configs";
-import { DataFlowService } from "../../services/data-flow/data-flow.service";
 
 @Component({
   selector: "app-navigation-bar",
