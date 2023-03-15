@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, catchError } from "rxjs";
 
-import { environment } from "src/environments/environment";
 import { UtilityService } from "../utility/utility.service";
+import { environment } from "src/environments/environment";
 import { Task, User } from "../../models";
 
 @Injectable({
@@ -63,6 +63,14 @@ export class DatabaseService {
       .patch<Task>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}/tasks/${task.tid}.json`,
         task
+      )
+      .pipe(catchError(this.utilityService.handleError));
+  }
+
+  public deleteUserTask(uid: string, taskId: string): Observable<Object> {
+    return this.http
+      .delete<Task>(
+        `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}/tasks/${taskId}.json`
       )
       .pipe(catchError(this.utilityService.handleError));
   }

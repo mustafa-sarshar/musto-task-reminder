@@ -38,7 +38,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.dataFlowServiceSubscription = this.dataFlowService.userData.subscribe(
       (userData: User | null) => {
         if (userData && userData.token) {
@@ -52,19 +52,27 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.dataFlowServiceSubscription.unsubscribe();
   }
 
-  onClickAppBrand(): void {
+  public onClickAppBrand(): void {
     this.router.navigate(["/tasks"]);
   }
 
-  onClickUserProfile(): void {
+  public onClickTasks(): void {
+    this.router.navigate(["/tasks"]);
+  }
+
+  public onClickUserProfile(): void {
     this.router.navigate(["/user-profile"]);
   }
 
-  onClickLogout(): void {
+  public onClickSyncData(): void {
+    this.dataFlowService.syncUserData();
+  }
+
+  public onClickLogout(): void {
     const dialogRef = this.dialog.open(
       ConfirmationDialogComponent,
       CONFIRMATION_POPUP_STYLE
@@ -82,7 +90,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     });
   }
 
-  onClickLanguage(): void {
+  public onClickLanguage(): void {
     this.dialog.open(LanguageComponent);
   }
 }

@@ -8,12 +8,12 @@ import { DatabaseService } from "../database/database.service";
 
 import {
   Log,
+  Notification,
   Task,
   User,
   UserDataFromDatabase,
   UserDataFromLocalStorage,
 } from "../../models";
-import { userTasks } from "src/assets/data";
 
 @Injectable({
   providedIn: "root",
@@ -50,6 +50,20 @@ export class DataFlowService {
     this.setUserData(userData);
   }
 
+  public deleteUserTask(taskId: string): void {
+    const userData = this.getUserData();
+    if (userData.tasks) {
+      const tasksFiltered = userData.tasks.filter(
+        (task: Task) => task.tid !== taskId
+      );
+      userData.tasks = [...tasksFiltered];
+    }
+
+    this.logService.logToConsole(new Log("Task Deleted", "INFO"));
+    this.logService.logToConsole(new Log(taskId));
+    this.setUserData(userData);
+  }
+
   public getUserData(): User | null {
     const userData: UserDataFromLocalStorage =
       this.localStorageService.getUserDataFromLocalStorage();
@@ -60,7 +74,7 @@ export class DataFlowService {
     }
   }
 
-  public initUserProfileData(userData: User) {
+  public initUserProfileData(userData: User, syncData: boolean = false) {
     this.databaseService
       .getUserProfileDataFromDatabase(userData.uid)
       .subscribe({
@@ -72,6 +86,11 @@ export class DataFlowService {
             )
           );
           this.logService.logToConsole(new Log(response));
+          if (syncData) {
+            this.logService.showNotification(
+              new Notification("Data got synced successfully!", "SUCCESS")
+            );
+          }
 
           userData.uid = response.uid;
           userData.username = response.username;
@@ -82,15 +101,28 @@ export class DataFlowService {
             );
             userData.tasks = tasksLoaded;
           }
+
           this.setUserData(userData);
         },
         error: (error) => {
           this.logService.logToConsole(
             new Log("getUserProfileDataFromDatabase" + error.message, "ERROR")
           );
+          if (syncData) {
+            this.logService.showNotification(
+              new Notification("Data could not get synced!", "WARN")
+            );
+          }
 
           this.setUserData(userData);
         },
       });
+  }
+
+  public syncUserData(): void {
+    const userData = this.getUserData();
+    if (userData) {
+      this.initUserProfileData(userData, true);
+    }
   }
 }

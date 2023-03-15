@@ -1,19 +1,32 @@
-$break-point__vertical--xs: 440px;
+$break-point__vertical--xs: 750px;
+$break-point__vertical--xxs: 370px;
 
 mat {
   &-card {
     display: flex;
     flex-direction: column;
+    overflow: scroll;
+    height: 75vh;
 
     @media all and (max-height: $break-point__vertical--xs) {
-      overflow: scroll;
       height: 95vh;
     }
 
+    &-header,
+    &-actions {
+      flex-grow: 0;
+    }
+
     &-content {
+      overflow: auto;
       display: flex;
       flex-direction: column;
+
+      @media all and (max-height: $break-point__vertical--xxs) {
+        overflow: visible;
+      }
     }
+
     &-title {
       text-align: center;
       padding: 1rem;

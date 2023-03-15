@@ -1,3 +1,15 @@
-<div *ngIf="task">
-  {{task.title}} -> {{task.description}} due to: {{task.deadline | date}}
+<div class="task-content" *ngIf="task">
+  <div class="task-content__label" [matTooltip]="task.description">
+    {{task.title}} (due to: {{task.deadline | date}})
+  </div>
+  <div class="task-content__actions">
+    <button mat-icon-button color="default" aria-label="to see task's details" (click)="onClickDetails()"
+      matTooltip="See the details">
+      <mat-icon>info</mat-icon>
+    </button>
+    <button mat-icon-button color="default" aria-label="to delete the task" (click)="onClickDelete()"
+      matTooltip="Delete the task">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
 </div>

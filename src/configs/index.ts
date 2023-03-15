@@ -30,3 +30,14 @@ export const TASK_ADD_FORM_STYLE = {
   maxWidth: "480px",
   disableClose: true,
 };
+
+/**
+ * @constant
+ * @description Holds the css style of Task Add components
+ */
+export const TASK_DETAILS_FORM_STYLE = {
+  width: "80%",
+  minWidth: "250px",
+  maxWidth: "480px",
+  disableClose: true,
+};

@@ -4,10 +4,19 @@
     [ngClass]="{hidden: (isHandset$ | async) === false}">
     <mat-toolbar i18n color="default">Menu</mat-toolbar>
     <mat-nav-list>
+      <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickTasks()" matTooltip="Tasks">
+        <mat-icon mat-list-icon>task</mat-icon>
+        <span i18n>Tasks</span>
+      </mat-list-item>
       <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickUserProfile()"
         [matTooltip]="username">
         <mat-icon mat-list-icon>person</mat-icon>
         <span i18n>User profile</span>
+      </mat-list-item>
+      <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickSyncData()"
+        matTooltip="Synchronize data">
+        <mat-icon mat-list-icon>sync</mat-icon>
+        <span i18n>Synchronize data</span>
       </mat-list-item>
       <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickLogout()" matTooltip="Logout">
         <mat-icon mat-list-icon>logout</mat-icon>
@@ -29,9 +38,17 @@
       <span class="app-brand" (click)="onClickAppBrand()">Musto Task Reminder</span>
       <span class="spacer"></span>
       <div *ngIf="isUserAuthenticated && (isHandset$ | async) === false">
+        <button i18n mat-icon-button color="default" aria-label="to go to the tasks page" (click)="onClickTasks()"
+          matTooltip="tasks">
+          <mat-icon>task</mat-icon>
+        </button>
         <button i18n mat-icon-button color="default" aria-label="to go to the user profile"
           (click)="onClickUserProfile()" [matTooltip]="username">
           <mat-icon>person</mat-icon>
+        </button>
+        <button i18n-arial-label mat-icon-button color="default" aria-label="to synchronize data with the database"
+          matTooltip="Synchronize data" (click)="onClickSyncData()">
+          <mat-icon>sync</mat-icon>
         </button>
         <button i18n-arial-label mat-icon-button color="default" aria-label="to logout from the app" matTooltip="Logout"
           (click)="onClickLogout()">

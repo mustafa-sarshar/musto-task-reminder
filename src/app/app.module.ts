@@ -27,6 +27,7 @@ import { TasksListComponent } from "./main/views/tasks/tasks-list/tasks-list.com
 import { TaskItemComponent } from "./main/views/tasks/task-item/task-item.component";
 import { TaskEditComponent } from "./main/views/tasks/task-edit/task-edit.component";
 import { TaskAddComponent } from "./main/views/tasks/task-add/task-add.component";
+import { TaskDetailsComponent } from './main/views/tasks/task-details/task-details.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TaskAddComponent } from "./main/views/tasks/task-add/task-add.component
     TaskItemComponent,
     TaskEditComponent,
     TaskAddComponent,
+    TaskDetailsComponent,
   ],
   imports: [
     BrowserModule,

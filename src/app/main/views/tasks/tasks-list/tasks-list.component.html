@@ -1,5 +1,5 @@
-<ul *ngIf="tasks">
-  <li *ngFor="let task of tasks">
-    <app-task-item [task]="task"></app-task-item>
-  </li>
-</ul>
+<mat-list role="list" *ngIf="tasks && userId">
+  <mat-list-item role="listitem" *ngFor="let task of tasks">
+    <app-task-item [task]="task" [userId]="userId"></app-task-item>
+  </mat-list-item>
+</mat-list>

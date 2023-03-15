@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
+
 import { AuthService } from "./shared/services";
 
 @Component({
@@ -16,5 +17,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.activateUserAutoLogin();
+    // console.log(process.env);
   }
 }

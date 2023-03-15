@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subscription } from "rxjs";
 import {
   ConfirmationDialogBox,
@@ -14,7 +13,6 @@ import {
   AppMonitoringService,
   AuthService,
   DatabaseService,
-  LocalStorageService,
   LogService,
 } from "src/app/shared/services";
 import { DataFlowService } from "src/app/shared/services/data-flow/data-flow.service";
@@ -40,8 +38,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private logService: LogService,
     private dataFlowService: DataFlowService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {

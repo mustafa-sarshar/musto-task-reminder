@@ -7,8 +7,12 @@ export class Task {
     public tid: string,
     public title: string,
     public group: TaskGroup,
-    public description: string,
     public deadline: Date,
+    public description?: string,
+    public webLink?: string,
+    public imageLink?: string,
+    public videoLink?: string,
+    public voiceLink?: string,
     public done?: boolean,
     public doneAtDate?: Date,
     public doneBy?: string

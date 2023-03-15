@@ -4,6 +4,12 @@ import { throwError } from "rxjs";
 
 import { User, UserDataFromLocalStorage } from "../../models";
 
+type ValidationPatterns =
+  | "USERNAME"
+  | "TASK_TITLE"
+  | "TASK_DESCRIPTION"
+  | "WEB_LINK";
+
 @Injectable({
   providedIn: "root",
 })
@@ -122,6 +128,28 @@ export class UtilityService {
         break;
     }
     return randomId;
+  }
+
+  public getValidationPattern(patternName: ValidationPatterns): string {
+    let pattern = "";
+    switch (patternName) {
+      case "USERNAME":
+        pattern = "";
+        break;
+      case "TASK_TITLE":
+        pattern = "^[a-zA-Z]*[a-zA-Z][-a-zA-Z0-9,/() ]*$";
+        break;
+      case "TASK_DESCRIPTION":
+        pattern = "^[a-zA-Z0-9]*[a-zA-Z0-9][-a-zA-Z0-9,/() ]*$";
+        break;
+      case "WEB_LINK":
+        pattern =
+          "[Hh][Tt][Tt][Pp][Ss]?://(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::d{2,5})?(?:/[^s]*)?";
+        break;
+      default:
+        break;
+    }
+    return pattern;
   }
 
   public handleError(errorRes: HttpErrorResponse) {

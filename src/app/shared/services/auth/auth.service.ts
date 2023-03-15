@@ -3,6 +3,10 @@ import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { Observable, catchError, tap } from "rxjs";
 
+import { LocalStorageService } from "../local-storage/local-storage.service";
+import { UtilityService } from "../utility/utility.service";
+import { DataFlowService } from "../data-flow/data-flow.service";
+
 import {
   AuthResponsePayload,
   AuthUserCredentials,
@@ -10,11 +14,6 @@ import {
   UserDataFromLocalStorage,
   UserRegistrationCredentials,
 } from "../../models";
-
-import { LocalStorageService } from "../local-storage/local-storage.service";
-import { UtilityService } from "../utility/utility.service";
-import { DataFlowService } from "../data-flow/data-flow.service";
-
 import { environment } from "src/environments/environment";
 
 @Injectable({

@@ -9,6 +9,7 @@ import { DataFlowService, LogService } from "src/app/shared/services";
   styleUrls: ["./tasks-list.component.scss"],
 })
 export class TasksListComponent implements OnInit, OnDestroy {
+  public userId: string | null = null;
   public tasks: Task[] | null = null;
   private dataFlowServiceSubscription: Subscription = new Subscription();
 
@@ -25,6 +26,7 @@ export class TasksListComponent implements OnInit, OnDestroy {
 
         if (userData.tasks) {
           this.tasks = [...userData.tasks];
+          this.userId = userData.uid;
         }
       }
     );
