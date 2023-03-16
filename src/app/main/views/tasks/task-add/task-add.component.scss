@@ -21,6 +21,7 @@ mat {
       overflow: auto;
       display: flex;
       flex-direction: column;
+      padding-top: 1rem;
 
       @media all and (max-height: $break-point__vertical--xxs) {
         overflow: visible;
