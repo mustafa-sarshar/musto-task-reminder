@@ -1,8 +1,13 @@
 <div class="task-content" *ngIf="task">
-  <div class="task-content__label" [matTooltip]="task.description">
-    {{task.title}} (due to: {{task.deadline | date}})
+  <div class="task-content__label mat-typography" [matTooltip]="task.description">
+    {{task.title}}
   </div>
+  <div class="space-flex"></div>
   <div class="task-content__actions">
+    <button mat-icon-button color="default" aria-label="to finish the task" (click)="onClickToggleDone()"
+      [matTooltip]="task.done ? (task.doneAtDate | date) : (task.deadline | date)">
+      <mat-icon color="{{task.done ? 'accent' : 'warn'}}">{{task.done ? 'done' : 'timer'}}</mat-icon>
+    </button>
     <button mat-icon-button color="default" aria-label="to see task's details" (click)="onClickDetails()"
       matTooltip="See the details">
       <mat-icon>info</mat-icon>

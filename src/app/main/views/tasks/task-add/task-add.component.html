@@ -14,7 +14,7 @@
       <mat-form-field appearance="outline" color="accent">
         <mat-label>Group</mat-label>
         <mat-select formControlName="group">
-          <mat-option *ngFor="let group of taskGroups" [value]="group.gid">
+          <mat-option *ngFor="let group of taskGroups" [value]="group.title">
             {{group.title}}
           </mat-option>
         </mat-select>
@@ -51,6 +51,7 @@
         <mat-icon color="default" matSuffix>record_voice_over</mat-icon>
       </mat-form-field>
     </mat-card-content>
+    <mat-card-content class="space-flex"></mat-card-content>
     <mat-card-footer>
       <mat-card-actions align="end">
         <button mat-stroked-button type="button" (click)="onClickSubmit()"

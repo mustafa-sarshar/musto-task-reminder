@@ -1,11 +1,11 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <strong>{{confirmationDialogBox.title}}</strong>
+      <strong class="dialog-title">{{confirmationDialogBox.title}}</strong>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <p>{{confirmationDialogBox.message}}</p>
+    <mat-label class="dialog-message">{{confirmationDialogBox.message}}</mat-label>
   </mat-card-content>
   <mat-card-footer>
     <mat-card-actions align="end" *ngIf="confirmationDialogBox.dialogType">

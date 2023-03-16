@@ -1,7 +1,9 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { MatDialog } from "@angular/material/dialog";
+import { MatDrawer } from "@angular/material/sidenav";
+import { MatIconButton } from "@angular/material/button";
 import { map, shareReplay } from "rxjs/operators";
 import { Observable, Subscription } from "rxjs";
 
@@ -19,6 +21,7 @@ import { CONFIRMATION_POPUP_STYLE } from "src/configs";
   styleUrls: ["./navigation-bar.component.scss"],
 })
 export class NavigationBarComponent implements OnInit, OnDestroy {
+  @ViewChild("drawer") drawerEl: MatDrawer;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -62,14 +65,17 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
 
   public onClickTasks(): void {
     this.router.navigate(["/tasks"]);
+    this.drawerEl.close();
   }
 
   public onClickUserProfile(): void {
     this.router.navigate(["/user-profile"]);
+    this.drawerEl.close();
   }
 
   public onClickSyncData(): void {
     this.dataFlowService.syncUserData();
+    this.drawerEl.close();
   }
 
   public onClickLogout(): void {
@@ -86,11 +92,13 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((answer) => {
       if (answer) {
         this.authService.handleUserLogout();
+        this.drawerEl.close();
       }
     });
   }
 
   public onClickLanguage(): void {
     this.dialog.open(LanguageComponent);
+    this.drawerEl.close();
   }
 }

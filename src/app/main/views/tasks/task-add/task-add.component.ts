@@ -31,7 +31,7 @@ export class TaskAddComponent implements OnInit, OnDestroy {
     private dataFlowService: DataFlowService,
     private utilityService: UtilityService,
     private databaseService: DatabaseService,
-    private dialogRef: DialogRef
+    private dialogRef: DialogRef<TaskAddComponent>
   ) {}
 
   public ngOnInit(): void {

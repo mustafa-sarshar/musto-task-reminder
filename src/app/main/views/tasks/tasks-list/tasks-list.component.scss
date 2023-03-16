@@ -1,7 +1,5 @@
-ul {
-  li {
-    margin-left: 1rem;
-    list-style: decimal;
-    width: 100%;
+.task {
+  &-item {
+    margin-bottom: 1rem;
   }
 }

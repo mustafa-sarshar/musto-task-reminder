@@ -46,7 +46,10 @@ export class TaskItemComponent implements OnInit, OnDestroy {
   }
 
   public onClickDetails(): void {
-    this.dialog.open(TaskDetailsComponent, TASK_DETAILS_FORM_STYLE);
+    this.dialog.open(
+      TaskDetailsComponent,
+      TASK_DETAILS_FORM_STYLE
+    ).componentInstance.task = this.task;
   }
 
   public onClickDelete(): void {
@@ -90,6 +93,56 @@ export class TaskItemComponent implements OnInit, OnDestroy {
               this.appMonitoringService.setIsDataFetchingStatus(false);
             },
           });
+      }
+    });
+  }
+
+  public onClickToggleDone(): void {
+    const dialogRef = this.dialog.open(
+      ConfirmationDialogComponent,
+      CONFIRMATION_POPUP_STYLE
+    );
+    dialogRef.componentInstance.confirmationDialogBox =
+      new ConfirmationDialogBox(
+        this.task.done ? "Be Careful!" : "Congratulations!",
+        this.task.done ? "Is the task not done yet?" : "Is the task done?",
+        "YES/NO"
+      );
+    dialogRef.afterClosed().subscribe((answer) => {
+      if (answer) {
+        this.appMonitoringService.setIsDataFetchingStatus(true);
+        if (this.task.done) {
+          this.task.done = false;
+          this.task.doneAtDate = null;
+        } else {
+          this.task.done = true;
+          this.task.doneAtDate = new Date();
+        }
+
+        this.databaseService.updateUserTask(this.userId, this.task).subscribe({
+          next: (response: any) => {
+            this.logService.logToConsole(
+              new Log("The task in database updated successfully!", "INFO")
+            );
+            this.logService.logToConsole(new Log(response));
+            this.logService.showNotification(
+              new Notification("Task updated successfully!", "SUCCESS")
+            );
+
+            this.dataFlowService.updateUserTask(this.task);
+            this.appMonitoringService.setIsDataFetchingStatus(false);
+          },
+          error: (error) => {
+            this.logService.logToConsole(
+              new Log("The task couldn't get updated!", "ERROR")
+            );
+            this.logService.showNotification(
+              new Notification(error.message, "ERROR")
+            );
+
+            this.appMonitoringService.setIsDataFetchingStatus(false);
+          },
+        });
       }
     });
   }

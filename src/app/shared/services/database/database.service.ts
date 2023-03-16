@@ -74,4 +74,13 @@ export class DatabaseService {
       )
       .pipe(catchError(this.utilityService.handleError));
   }
+
+  public updateUserTask(uid: string, task: Task): Observable<Object> {
+    return this.http
+      .patch<Task>(
+        `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}/tasks/${task.tid}.json`,
+        task
+      )
+      .pipe(catchError(this.utilityService.handleError));
+  }
 }

@@ -64,6 +64,20 @@ export class DataFlowService {
     this.setUserData(userData);
   }
 
+  public updateUserTask(userTask: Task): void {
+    const userData = this.getUserData();
+    if (userData.tasks) {
+      const userDataFiltered = userData.tasks.filter(
+        (task: Task) => task.tid !== userTask.tid
+      );
+      userData.tasks = [...userDataFiltered, userTask];
+    }
+
+    this.logService.logToConsole(new Log("Task updated", "INFO"));
+    this.logService.logToConsole(new Log(userTask.tid));
+    this.setUserData(userData);
+  }
+
   public getUserData(): User | null {
     const userData: UserDataFromLocalStorage =
       this.localStorageService.getUserDataFromLocalStorage();

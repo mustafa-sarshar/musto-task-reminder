@@ -41,3 +41,7 @@
   letter-spacing: 2px;
   cursor: pointer;
 }
+
+.mat-focus-indicator::before {
+  border-color: transparent !important;
+}

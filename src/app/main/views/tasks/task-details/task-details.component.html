@@ -1,1 +1,49 @@
-<p>task-details works!</p>
+<mat-card *ngIf="task">
+  <mat-card-header>
+    <mat-card-title>
+      Task Details
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-label>Title</mat-label>
+    <mat-icon color="default" matSuffix>task</mat-icon><br>
+    <mat-label>{{task.title}}</mat-label>
+    <hr>
+    <mat-label>Group</mat-label>
+    <mat-icon color="default" matSuffix>group_work</mat-icon><br>
+    <mat-label>{{task.group}}</mat-label>
+    <hr>
+    <mat-label>Deadline</mat-label>
+    <mat-icon color="default" matSuffix>calendar_month</mat-icon><br>
+    <mat-label>{{task.deadline | date}}</mat-label>
+    <hr>
+    <mat-label>Description</mat-label>
+    <mat-icon color="default" matSuffix>description</mat-icon><br>
+    <mat-label>{{task.description}}</mat-label>
+    <hr>
+    <div>
+      <button type="button" aria-label="Open the web link" mat-icon-button (click)="onClickLink(task.webLink)"
+        [disabled]="!task.webLink">
+        <mat-icon aria-label="web link icon">link</mat-icon>
+      </button>
+      <button type="button" aria-label="Open the web link" mat-icon-button (click)="onClickLink(task.imageLink)"
+        [disabled]="!task.imageLink">
+        <mat-icon aria-label="web link icon">image</mat-icon>
+      </button>
+      <button type="button" aria-label="Open the web link" mat-icon-button (click)="onClickLink(task.videoLink)"
+        [disabled]="!task.videoLink">
+        <mat-icon aria-label="web link icon">videocam</mat-icon>
+      </button>
+      <button type="button" aria-label="Open the web link" mat-icon-button (click)="onClickLink(task.voiceLink)"
+        [disabled]="!task.voiceLink">
+        <mat-icon aria-label="web link icon">record_voice_over</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-card-actions align="end">
+      <button mat-stroked-button type="button" (click)="onClickOk()" color="warn">Cancel</button>
+    </mat-card-actions>
+  </mat-card-footer>
+
+</mat-card>

@@ -113,3 +113,9 @@ input.ng-invalid.ng-touched {
     }
   }
 }
+
+.space {
+  &-flex {
+    flex: 1 !important;
+  }
+}

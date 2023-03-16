@@ -13,10 +13,9 @@
         <mat-icon mat-list-icon>person</mat-icon>
         <span i18n>User profile</span>
       </mat-list-item>
-      <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickSyncData()"
-        matTooltip="Synchronize data">
+      <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickSyncData()" matTooltip="Sync data">
         <mat-icon mat-list-icon>sync</mat-icon>
-        <span i18n>Synchronize data</span>
+        <span i18n>Sync data</span>
       </mat-list-item>
       <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickLogout()" matTooltip="Logout">
         <mat-icon mat-list-icon>logout</mat-icon>
@@ -47,7 +46,7 @@
           <mat-icon>person</mat-icon>
         </button>
         <button i18n-arial-label mat-icon-button color="default" aria-label="to synchronize data with the database"
-          matTooltip="Synchronize data" (click)="onClickSyncData()">
+          matTooltip="Sync data" (click)="onClickSyncData()">
           <mat-icon>sync</mat-icon>
         </button>
         <button i18n-arial-label mat-icon-button color="default" aria-label="to logout from the app" matTooltip="Logout"

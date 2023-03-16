@@ -2,7 +2,14 @@
   <p class="tasks-content__title">All Tasks of {{userData.username}}</p>
   <mat-card class="tasks-content__tasks" *ngIf="userData['tasks']">
     <mat-card-header>
-      No. of Tasks: {{userData.tasks.length}}
+      <mat-label>
+        No. of Tasks: {{userData.tasks.length}}
+      </mat-label>
+      <mat-card-content class="space-flex"></mat-card-content>
+      <button mat-icon-button color="default" aria-label="to finish the task" (click)="onClickAddTask()"
+        matTooltip="Add a new task">
+        <mat-icon color="accent">add_box</mat-icon>
+      </button>
     </mat-card-header>
     <mat-card-content>
       <app-tasks-list></app-tasks-list>
@@ -16,18 +23,5 @@
     <mat-card-header>
       <h3>No Tasks</h3>
     </mat-card-header>
-  </mat-card>
-  <mat-card class="tasks-content__tasks">
-    <mat-card-header>
-      Add a new task
-    </mat-card-header>
-    <mat-card-content>
-      <app-task-item></app-task-item>
-    </mat-card-content>
-    <mat-card-footer>
-      <mat-card-actions>
-        <button (click)="onClickAddTask()">Add</button>
-      </mat-card-actions>
-    </mat-card-footer>
   </mat-card>
 </div>
