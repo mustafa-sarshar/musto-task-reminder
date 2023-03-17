@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" fullscreen>
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false"
     [ngClass]="{hidden: (isHandset$ | async) === false}">
@@ -63,7 +63,10 @@
     </mat-toolbar>
     <!-- Page Content Here -->
     <div class="page-content">
+      <ng-content></ng-content>
     </div>
-    <ng-content></ng-content>
+    <div class="page-footer">
+      <app-footer></app-footer>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

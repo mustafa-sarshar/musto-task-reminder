@@ -1,43 +1,14 @@
 .footer {
-  &-toolbar {
-    position: sticky;
-    bottom: 0;
-    z-index: 900;
-    width: 100%;
-  }
-
   &-container {
-    margin: 10px auto;
-    padding: 5px 0 40px 0;
+    margin: 0 auto;
+    padding: 5px 0 10px 0;
     text-align: center;
     background-color: #212121;
     width: 100%;
+    z-index: 1;
 
     * {
       vertical-align: middle;
-    }
-  }
-
-  &__links {
-    text-decoration: none;
-    font-weight: bold;
-    text-shadow: 1px 1px 3px white, -1px -1px 3px white;
-    color: black;
-
-    &:link,
-    &:visited {
-      color: black;
-    }
-
-    &:hover,
-    &:focus {
-      color: #303030;
-      text-decoration: underline;
-    }
-
-    &:active {
-      color: yellow;
-      text-shadow: none;
     }
   }
 

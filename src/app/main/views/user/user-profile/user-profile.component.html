@@ -20,10 +20,12 @@
       </mat-card-subtitle>
     </mat-card-content>
     <mat-card-footer>
-      <button mat-stroked-button color="warn" (click)="onClickDeleteAccount()"
-        [disabled]="isDataFetching  || !userData.username">
-        Delete Account
-      </button>
+      <mat-card-actions class="page-actions">
+        <button mat-stroked-button color="warn" (click)="onClickDeleteAccount()"
+          [disabled]="isDataFetching  || !userData.username">
+          Delete Account
+        </button>
+      </mat-card-actions>
     </mat-card-footer>
   </mat-card>
   <mat-card class="user-profile__item">
@@ -44,7 +46,7 @@
         </mat-form-field>
       </mat-card-content>
       <mat-card-footer>
-        <mat-card-actions align="end">
+        <mat-card-actions align="end" class="page-actions">
           <button mat-stroked-button type="button" (click)="onClickSubmit()"
             [disabled]="!formGroupEl.valid || isDataFetching || (!formGroupEl.controls['username'].value && !formGroupEl.controls['birthDate'].value)">Apply
             Changes</button>

@@ -1,13 +1,16 @@
-.sidenav-container {
-  height: 100%;
-}
+$size-toolbar: 56px;
+$size-footer: 113px;
 
 .sidenav {
   width: 200px;
-}
 
-.sidenav .mat-toolbar {
-  background: inherit;
+  &-container {
+    min-height: 100vh;
+  }
+
+  .mat-toolbar {
+    background: inherit;
+  }
 }
 
 .mat-toolbar.mat-primary {
@@ -42,6 +45,25 @@
   cursor: pointer;
 }
 
-.mat-focus-indicator::before {
-  border-color: transparent !important;
+.mat {
+  &-focus {
+    &-indicator {
+      &::before {
+        border-color: transparent !important;
+      }
+    }
+  }
+}
+
+.page {
+  &-content {
+    margin-bottom: 0.5rem;
+    min-height: calc(100% - $size-toolbar - $size-footer);
+    // border: 3px solid yellow;
+  }
+  &-footer {
+    position: sticky;
+    bottom: 0;
+    height: 113px;
+  }
 }

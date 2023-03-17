@@ -1,6 +1,5 @@
 $break-point__horizontal--xs: 576px;
 $break-point__vertical--xs: 840px;
-$size-footer: 150px;
 
 .page {
   &-container {
@@ -9,12 +8,11 @@ $size-footer: 150px;
     justify-content: center;
     align-items: center;
     width: 95%;
-    height: 90%;
+    height: 100%;
     margin: 0 auto;
 
     @media all and (max-height: $break-point__vertical--xs) {
-      margin-bottom: $size-footer;
-      height: auto;
+      // justify-content: start;
     }
   }
 
@@ -54,6 +52,7 @@ $size-footer: 150px;
     align-items: center;
     justify-content: center;
     width: 100%;
+    z-index: 0;
 
     button {
       margin: 0 0.5rem;
