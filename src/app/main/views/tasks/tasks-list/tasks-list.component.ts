@@ -1,7 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { Log, Task, User } from "src/app/shared/models";
-import { DataFlowService, LogService } from "src/app/shared/services";
+import {
+  DataFlowService,
+  LogService,
+  UtilityService,
+} from "src/app/shared/services";
 
 @Component({
   selector: "app-tasks-list",
@@ -11,14 +16,17 @@ import { DataFlowService, LogService } from "src/app/shared/services";
 export class TasksListComponent implements OnInit, OnDestroy {
   public userId: string | null = null;
   public tasks: Task[] | null = null;
+  public formGroupEl: FormGroup;
   private dataFlowServiceSubscription: Subscription = new Subscription();
 
   constructor(
     private dataFlowService: DataFlowService,
-    private logService: LogService
+    private logService: LogService,
+    private utilityService: UtilityService
   ) {}
 
   public ngOnInit(): void {
+    this.initForm();
     this.dataFlowServiceSubscription = this.dataFlowService.userData.subscribe(
       (userData: User | null) => {
         this.logService.logToConsole(new Log("Tasks Loaded", "INFO"));
@@ -34,5 +42,25 @@ export class TasksListComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.dataFlowServiceSubscription.unsubscribe();
+  }
+
+  private initForm(): void {
+    this.formGroupEl = new FormGroup({
+      title: new FormControl(
+        {
+          value: "",
+          disabled: this.tasks && this.tasks.length === 0,
+        },
+        [
+          Validators.pattern(
+            this.utilityService.getValidationPattern("TASK_TITLE")
+          ),
+        ]
+      ),
+    });
+  }
+
+  public onClickClearSearchBox(): void {
+    this.formGroupEl.setValue({ title: "" });
   }
 }

@@ -1,5 +1,32 @@
 .task {
   &-item {
-    margin-bottom: 1rem;
+    margin-bottom: 0.1rem;
+  }
+}
+
+.search {
+  &-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    width: 100%;
+  }
+
+  &-box {
+    &__content {
+      flex: 1;
+      margin: 0;
+
+      mat-form-field {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    &__actions {
+      padding: 0;
+      margin: 0;
+    }
   }
 }

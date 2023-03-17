@@ -11,6 +11,7 @@ import { AppComponent } from "./app.component";
 import { AppMaterialModule } from "./app-material.module";
 
 import { httpInterceptorProviders } from "./shared/services/auth-interceptor/auth-interceptor.service";
+import { FilterArrayPipe } from "./shared/pipes";
 
 import { WelcomePageComponent } from "./main/views/welcome-page/welcome-page.component";
 import { ConfirmationDialogComponent } from "./shared/views/confirmation-dialog/confirmation-dialog.component";
@@ -25,9 +26,8 @@ import { TasksComponent } from "./main/views/tasks/tasks.component";
 import { UserProfileComponent } from "./main/views/user/user-profile/user-profile.component";
 import { TasksListComponent } from "./main/views/tasks/tasks-list/tasks-list.component";
 import { TaskItemComponent } from "./main/views/tasks/task-item/task-item.component";
-import { TaskEditComponent } from "./main/views/tasks/task-edit/task-edit.component";
-import { TaskAddComponent } from "./main/views/tasks/task-add/task-add.component";
-import { TaskDetailsComponent } from './main/views/tasks/task-details/task-details.component';
+import { TaskDetailsComponent } from "./main/views/tasks/task-details/task-details.component";
+import { TaskAddEditComponent } from "./main/views/tasks/task-add-edit/task-add-edit.component";
 
 @NgModule({
   declarations: [
@@ -44,9 +44,10 @@ import { TaskDetailsComponent } from './main/views/tasks/task-details/task-detai
     UserProfileComponent,
     TasksListComponent,
     TaskItemComponent,
-    TaskEditComponent,
-    TaskAddComponent,
+    TaskAddEditComponent,
     TaskDetailsComponent,
+    TaskAddEditComponent,
+    FilterArrayPipe,
   ],
   imports: [
     BrowserModule,

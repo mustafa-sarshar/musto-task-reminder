@@ -1,5 +1,5 @@
 <div class="task-content" *ngIf="task">
-  <div class="task-content__label mat-typography" [matTooltip]="task.description">
+  <div class="task-content__title mat-typography" [matTooltip]="task.description">
     {{task.title}}
   </div>
   <div class="space-flex"></div>
@@ -11,6 +11,10 @@
     <button mat-icon-button color="default" aria-label="to see task's details" (click)="onClickDetails()"
       matTooltip="See the details">
       <mat-icon>info</mat-icon>
+    </button>
+    <button mat-icon-button color="default" aria-label="to edit the task" (click)="onClickEdit()"
+      matTooltip="Edit the task">
+      <mat-icon>edit</mat-icon>
     </button>
     <button mat-icon-button color="default" aria-label="to delete the task" (click)="onClickDelete()"
       matTooltip="Delete the task">

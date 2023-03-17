@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        Add a new Task
+        {{task ? 'Edit the task' : 'Add a new Task'}}
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -34,28 +34,36 @@
         <mat-label>Web Link</mat-label>
         <input matInput type="text" formControlName="webLink" placeholder="https://..." id="webLink">
         <mat-icon color="default" matSuffix>link</mat-icon>
+        <a *ngIf="task && task.webLink" [href]="task.webLink" target="_blank" rel="noopener noreferrer"><mat-icon
+            color="default" matSuffix matTooltip="Check the current web link">link</mat-icon></a>
       </mat-form-field>
       <mat-form-field appearance="outline" color="accent">
         <mat-label>Image Link</mat-label>
         <input matInput type="text" formControlName="imageLink" placeholder="https://..." id="imageLink">
         <mat-icon color="default" matSuffix>image</mat-icon>
+        <a *ngIf="task && task.imageLink" [href]="task.imageLink" target="_blank" rel="noopener noreferrer"><mat-icon
+            color="default" matSuffix matTooltip="Check the current image link">image</mat-icon></a>
       </mat-form-field>
       <mat-form-field appearance="outline" color="accent">
         <mat-label>Video Link</mat-label>
         <input matInput type="text" formControlName="videoLink" placeholder="https://..." id="videoLink">
         <mat-icon color="default" matSuffix>videocam</mat-icon>
+        <a *ngIf="task && task.videoLink" [href]="task.videoLink" target="_blank" rel="noopener noreferrer"><mat-icon
+            color="default" matSuffix matTooltip="Check the current video link">videocam</mat-icon></a>
       </mat-form-field>
       <mat-form-field appearance="outline" color="accent">
         <mat-label>Voice Link</mat-label>
         <input matInput type="text" formControlName="voiceLink" placeholder="https://..." id="voiceLink">
         <mat-icon color="default" matSuffix>record_voice_over</mat-icon>
+        <a *ngIf="task && task.voiceLink" [href]="task.voiceLink" target="_blank" rel="noopener noreferrer"><mat-icon
+            color="default" matSuffix matTooltip="Check the current voice link">record_voice_over</mat-icon></a>
       </mat-form-field>
     </mat-card-content>
     <mat-card-content class="space-flex"></mat-card-content>
     <mat-card-footer>
       <mat-card-actions align="end">
         <button mat-stroked-button type="button" (click)="onClickSubmit()"
-          [disabled]="!formGroupEl.valid || isDataFetching">Add</button>
+          [disabled]="!formGroupEl.valid || isDataFetching">{{task ? 'Apply Changes': 'Add'}}</button>
         <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">Cancel</button>
       </mat-card-actions>
     </mat-card-footer>

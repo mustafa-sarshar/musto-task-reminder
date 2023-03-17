@@ -1,22 +1,29 @@
+$break-point__horizontal--xs: 700px;
+
 .task {
   &-content {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0.5rem 1rem;
-    height: 50px;
+    padding: 0.5rem auto;
 
-    &__label {
-      display: table-cell;
+    &__title {
       font-size: 14px;
-      margin-left: 8px;
-      overflow-wrap: break-word;
+      width: calc(48px * 4);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      // inline-size: calc(48px * 3);
+      // overflow: hidden;
+      // overflow-wrap: break-word;
+      // hyphens: manual;
     }
 
     &__actions {
       display: flex;
       flex-direction: row;
       justify-content: center;
+      width: calc(48px * 4);
       margin-left: 0.5rem;
       border-radius: 1.5rem;
       background-color: #0000001c;

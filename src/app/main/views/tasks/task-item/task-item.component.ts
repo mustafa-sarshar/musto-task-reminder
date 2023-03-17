@@ -18,6 +18,7 @@ import {
   Notification,
   Task,
 } from "src/app/shared/models";
+import { TaskAddEditComponent } from "../task-add-edit/task-add-edit.component";
 
 @Component({
   selector: "app-task-item",
@@ -145,5 +146,14 @@ export class TaskItemComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  public onClickEdit(): void {
+    const dialogRef = this.dialog.open(
+      TaskAddEditComponent,
+      TASK_DETAILS_FORM_STYLE
+    );
+    dialogRef.componentInstance.task = this.task;
+    dialogRef.componentInstance.userId = this.userId;
   }
 }

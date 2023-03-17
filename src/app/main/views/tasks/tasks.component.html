@@ -1,5 +1,8 @@
 <div class="tasks-container" *ngIf="userData">
-  <p class="tasks-content__title">All Tasks of {{userData.username}}</p>
+  <p class="tasks-content__title">
+    All Tasks of <br>
+    <i>{{userData.username}}</i>
+  </p>
   <mat-card class="tasks-content__tasks" *ngIf="userData['tasks']">
     <mat-card-header>
       <mat-label>
@@ -8,9 +11,9 @@
       <mat-card-content class="space-flex"></mat-card-content>
       <button mat-icon-button color="default" aria-label="to finish the task" (click)="onClickAddTask()"
         matTooltip="Add a new task">
-        <mat-icon color="accent">add_box</mat-icon>
+        <mat-icon color="default">add_box</mat-icon>
       </button>
-    </mat-card-header>
+    </mat-card-header>    
     <mat-card-content>
       <app-tasks-list></app-tasks-list>
     </mat-card-content>

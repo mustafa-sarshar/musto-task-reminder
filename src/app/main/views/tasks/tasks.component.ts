@@ -6,8 +6,8 @@ import { LogService } from "src/app/shared/services";
 import { Log, User } from "src/app/shared/models";
 import { DataFlowService } from "src/app/shared/services/data-flow/data-flow.service";
 import { MatDialog } from "@angular/material/dialog";
-import { TaskAddComponent } from "./task-add/task-add.component";
 import { TASK_ADD_FORM_STYLE } from "src/configs";
+import { TaskAddEditComponent } from "./task-add-edit/task-add-edit.component";
 
 @Component({
   selector: "app-tasks",
@@ -45,7 +45,7 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   public onClickAddTask(): void {
     this.dialog.open(
-      TaskAddComponent,
+      TaskAddEditComponent,
       TASK_ADD_FORM_STYLE
     ).componentInstance.userId = this.userData.uid;
   }

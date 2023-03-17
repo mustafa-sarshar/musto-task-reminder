@@ -1,27 +1,39 @@
-<mat-card *ngIf="task">
-  <mat-card-header>
+<mat-card *ngIf="task" class="details-container">
+  <mat-card-header class="details-content__title">
     <mat-card-title>
       Task Details
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-label>Title</mat-label>
-    <mat-icon color="default" matSuffix>task</mat-icon><br>
-    <mat-label>{{task.title}}</mat-label>
-    <hr>
-    <mat-label>Group</mat-label>
-    <mat-icon color="default" matSuffix>group_work</mat-icon><br>
-    <mat-label>{{task.group}}</mat-label>
-    <hr>
-    <mat-label>Deadline</mat-label>
-    <mat-icon color="default" matSuffix>calendar_month</mat-icon><br>
-    <mat-label>{{task.deadline | date}}</mat-label>
-    <hr>
-    <mat-label>Description</mat-label>
-    <mat-icon color="default" matSuffix>description</mat-icon><br>
-    <mat-label>{{task.description}}</mat-label>
-    <hr>
-    <div>
+    <div class="details-content__infos">
+      <mat-icon color="default" matSuffix>task</mat-icon>
+      <mat-label>Title</mat-label>
+      <p>
+        {{task.title}}
+      </p>
+    </div>
+    <div class="details-content__infos">
+      <mat-icon color="default" matSuffix>group_work</mat-icon>
+      <mat-label>Group</mat-label>
+      <p>
+        {{task.group}}
+      </p>
+    </div>
+    <div class="details-content__infos">
+      <mat-icon color="default" matSuffix>calendar_month</mat-icon>
+      <mat-label>Deadline</mat-label>
+      <p>
+        {{task.deadline | date}}
+      </p>
+    </div>
+    <div class="details-content__infos">
+      <mat-icon color="default" matSuffix>description</mat-icon>
+      <mat-label>Description</mat-label>
+      <p>
+        {{task.description}}
+      </p>
+    </div>
+    <div class="details-content__actions">
       <button type="button" aria-label="Open the web link" mat-icon-button (click)="onClickLink(task.webLink)"
         [disabled]="!task.webLink">
         <mat-icon aria-label="web link icon">link</mat-icon>
