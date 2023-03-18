@@ -1,22 +1,19 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { Subscription } from "rxjs";
-import {
-  ConfirmationDialogBox,
-  Log,
-  Notification,
-  User,
-  UserDataFromDatabase,
-} from "src/app/shared/models";
+
+import { ConfirmationDialogComponent } from "src/app/shared/views/confirmation-dialog/confirmation-dialog.component";
+
 import {
   AppMonitoringService,
-  AuthService,
-  DatabaseService,
   LogService,
+  DataFlowService,
+  UtilityService,
 } from "src/app/shared/services";
-import { DataFlowService } from "src/app/shared/services/data-flow/data-flow.service";
-import { ConfirmationDialogComponent } from "src/app/shared/views/confirmation-dialog/confirmation-dialog.component";
+import { UserProfileService } from "./user-profile.service";
+
+import { ConfirmationDialogBox, Log, User } from "src/app/shared/models";
 import { CONFIRMATION_POPUP_STYLE } from "src/configs";
 
 @Component({
@@ -34,16 +31,16 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private appMonitoringService: AppMonitoringService,
-    private databaseService: DatabaseService,
-    private authService: AuthService,
     private logService: LogService,
     private dataFlowService: DataFlowService,
+    private userProfileService: UserProfileService,
+    public utilityService: UtilityService,
     private dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
     this.appMonitoringService.setIsDataFetchingStatus(true);
-    this.initForm();
+    this.formGroupEl = this.userProfileService.initForm();
     this.appMonitoringServiceSubscription =
       this.appMonitoringService.isDataFetching.subscribe((status: boolean) => {
         this.isDataFetching = status;
@@ -56,26 +53,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           new Log("User Data loaded @Tasks", "INFO")
         );
         this.logService.logToConsole(new Log(userData));
+        this.appMonitoringService.setIsDataFetchingStatus(false);
       }
     );
-    this.appMonitoringService.setIsDataFetchingStatus(false);
   }
 
   public ngOnDestroy(): void {
-    this.onClosing();
-  }
-
-  private initForm(): void {
-    this.formGroupEl = new FormGroup({
-      username: new FormControl({ value: "", disabled: this.isDataFetching }, [
-        Validators.minLength(5),
-        Validators.pattern("[a-zA-Z0-9-]+"),
-      ]),
-      birthDate: new FormControl(
-        { value: "", disabled: this.isDataFetching },
-        []
-      ),
-    });
+    this.appMonitoringService.setIsDataFetchingStatus(false);
+    this.appMonitoringServiceSubscription.unsubscribe();
+    this.dataFlowServiceSubscription.unsubscribe();
   }
 
   onClickDeleteAccount(): void {
@@ -92,65 +78,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         );
       dialogRef.afterClosed().subscribe((answer) => {
         if (answer) {
-          this.authService
-            .handleDeleteUserAccount(this.userData.token)
-            .subscribe({
-              next: (_) => {
-                this.logService.logToConsole(
-                  new Log("The account is deleted successfully!", "INFO")
-                );
-
-                this.databaseService
-                  .deleteUserProfileFromDatabase(this.userData.uid)
-                  .subscribe({
-                    next: (_) => {
-                      this.logService.logToConsole(
-                        new Log("User profile is deleted successfully!", "INFO")
-                      );
-                      this.logService.showNotification(
-                        new Notification(
-                          "The account is deleted successfully!",
-                          "SUCCESS"
-                        )
-                      );
-
-                      this.authService.handleUserLogout();
-                      this.appMonitoringService.setIsDataFetchingStatus(false);
-                    },
-                    error: (error: any) => {
-                      this.logService.logToConsole(
-                        new Log("User profile could not be deleted!", "ERROR")
-                      );
-                      this.logService.showNotification(
-                        new Notification(error.message, "ERROR")
-                      );
-
-                      this.authService.handleUserLogout();
-                      this.appMonitoringService.setIsDataFetchingStatus(false);
-                    },
-                  });
-              },
-              error: (error: any) => {
-                this.logService.logToConsole(
-                  new Log("Deletion error:" + error.message, "ERROR")
-                );
-                this.logService.showNotification(
-                  new Notification(error.message, "ERROR")
-                );
-
-                this.appMonitoringService.setIsDataFetchingStatus(false);
-              },
-            });
+          this.userProfileService.handleDeleteAccount(this.userData);
         }
       });
     }
   }
 
   public onClickReset(): void {
-    this.resetForm();
+    this.formGroupEl.reset();
   }
 
-  public onClickSubmit(): void {
+  public onClickApplyChanges(): void {
     const dataToPatch = {};
     if (this.formGroupEl.controls["username"].value) {
       dataToPatch["username"] = this.formGroupEl.controls["username"].value;
@@ -158,79 +96,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     if (this.formGroupEl.controls["birthDate"].value) {
       dataToPatch["birthDate"] = this.formGroupEl.controls["birthDate"].value;
     }
-    this.databaseService
-      .updateUserProfileDataInDatabase(this.userData.uid, dataToPatch)
-      .subscribe({
-        next: (response) => {
-          this.logService.logToConsole(
-            new Log("User profile is updated successfully!", "INFO")
-          );
-          this.logService.logToConsole(new Log(response));
-          this.logService.showNotification(
-            new Notification("User profile is updated successfully!", "SUCCESS")
-          );
-
-          this.databaseService
-            .getUserProfileDataFromDatabase(this.userData.uid)
-            .subscribe({
-              next: (response: UserDataFromDatabase) => {
-                const userData = this.dataFlowService.getUserData();
-                userData.username = response.username;
-                userData.birthDate = new Date(response.birthDate);
-                this.dataFlowService.setUserData(userData);
-                this.resetForm();
-
-                this.logService.logToConsole(
-                  new Log("User data synced successfully!", "INFO")
-                );
-                this.logService.logToConsole(new Log(userData));
-                this.logService.showNotification(
-                  new Notification(
-                    "User profile is updated successfully!",
-                    "SUCCESS"
-                  )
-                );
-              },
-              error: (error: any) => {
-                this.logService.logToConsole(
-                  new Log(
-                    "Update data could not get retrieved!" + error.message,
-                    "ERROR"
-                  )
-                );
-                this.logService.showNotification(
-                  new Notification(error.message, "ERROR")
-                );
-
-                this.appMonitoringService.setIsDataFetchingStatus(false);
-              },
-            });
-
-          this.appMonitoringService.setIsDataFetchingStatus(false);
-        },
-        error: (error: any) => {
-          this.logService.logToConsole(
-            new Log(
-              "User profile could not be updated!" + error.message,
-              "ERROR"
-            )
-          );
-          this.logService.showNotification(
-            new Notification(error.message, "ERROR")
-          );
-
-          this.appMonitoringService.setIsDataFetchingStatus(false);
-        },
-      });
-  }
-
-  private resetForm(): void {
-    this.formGroupEl.reset();
-  }
-
-  private onClosing(): void {
-    this.appMonitoringService.setIsDataFetchingStatus(false);
-    this.appMonitoringServiceSubscription.unsubscribe();
-    this.dataFlowServiceSubscription.unsubscribe();
+    this.userProfileService.handleApplyChanges(this.userData, dataToPatch, () =>
+      this.formGroupEl.reset()
+    );
   }
 }

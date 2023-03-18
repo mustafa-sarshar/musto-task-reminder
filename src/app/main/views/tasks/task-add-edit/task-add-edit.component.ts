@@ -42,10 +42,12 @@ export class TaskAddEditComponent {
   }
 
   public ngOnDestroy(): void {
-    this.handleClosing();
+    this.appMonitoringService.setIsDataFetchingStatus(false);
+    this.appMonitoringSubscription.unsubscribe();
   }
 
   public onClickSubmit() {
+    this.appMonitoringService.setIsDataFetchingStatus(true);
     const taskSubmitted: Task = new Task(
       this.utilityService.randomIdGenerator(20, "MIXED", ""),
       this.formGroupEl.controls["title"].value,
@@ -68,28 +70,18 @@ export class TaskAddEditComponent {
 
     if (this.task) {
       // Handle the task editing process
-      this.taskAddEditService.handleEditTask(
-        this.userId,
-        taskSubmitted,
-        this.handleClosing
+      this.taskAddEditService.handleEditTask(this.userId, taskSubmitted, () =>
+        this.dialogRef.close()
       );
     } else {
       // Handle the task adding process
-      this.taskAddEditService.handleAddTask(
-        this.userId,
-        taskSubmitted,
-        this.handleClosing
+      this.taskAddEditService.handleAddTask(this.userId, taskSubmitted, () =>
+        this.dialogRef.close()
       );
     }
   }
 
   public onClickCancel(): void {
-    this.handleClosing();
-  }
-
-  private handleClosing(): void {
-    this.appMonitoringService.setIsDataFetchingStatus(false);
-    this.appMonitoringSubscription.unsubscribe();
     this.dialogRef.close();
   }
 }

@@ -47,8 +47,8 @@
       </mat-card-content>
       <mat-card-footer>
         <mat-card-actions align="end" class="page-actions">
-          <button mat-stroked-button type="button" (click)="onClickSubmit()"
-            [disabled]="!formGroupEl.valid || isDataFetching || (!formGroupEl.controls['username'].value && !formGroupEl.controls['birthDate'].value)">Apply
+          <button mat-stroked-button type="button" [disabled]="!formGroupEl.valid || isDataFetching"
+            (click)="onClickApplyChanges()">Apply
             Changes</button>
           <button mat-stroked-button color="warn" type="button" (click)="onClickReset()">Reset</button>
         </mat-card-actions>
@@ -59,10 +59,12 @@
         <ul>
           <li
             *ngIf="!formGroupEl.controls['username'].valid && formGroupEl.controls['username'].touched && formGroupEl.controls['username'].dirty">
-            Username must be at least 5 characters long and alphanumeric!</li>
+            {{utilityService.getValidationMessage("USERNAME")}}
+          </li>
           <li
             *ngIf="!formGroupEl.controls['birthDate'].valid && formGroupEl.controls['birthDate'].touched && formGroupEl.controls['birthDate'].dirty">
-            Birth date must be valid!</li>
+            {{utilityService.getValidationMessage("BIRTH_DATE")}}
+          </li>
         </ul>
       </div>
     </form>

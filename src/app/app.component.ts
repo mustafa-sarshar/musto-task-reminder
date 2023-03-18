@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 
 import { AuthService } from "./shared/services";
@@ -8,14 +8,17 @@ import { AuthService } from "./shared/services";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
-export class AppComponent implements OnInit {
-  title: string = "Musto Task Reminder";
+export class AppComponent implements OnInit, OnDestroy {
+  public title: string = "Musto Task Reminder";
+  public timerRef: any = null;
 
   constructor(private titleService: Title, private authService: AuthService) {
     this.titleService.setTitle($localize`${this.title}`);
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.authService.activateUserAutoLogin();
   }
+
+  public ngOnDestroy(): void {}
 }

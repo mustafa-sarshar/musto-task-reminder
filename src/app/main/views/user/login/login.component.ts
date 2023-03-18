@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public onClickSubmit(): void {
+    this.appMonitoringService.setIsDataFetchingStatus(true);
     const userCredentials = new UserLoginCredentials(
       this.formGroupEl.value["email"],
       this.formGroupEl.value["password"]

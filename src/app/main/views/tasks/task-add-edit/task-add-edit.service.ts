@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import {
@@ -9,12 +9,14 @@ import {
   UtilityService,
 } from "src/app/shared/services";
 import { Log, Notification, Task } from "src/app/shared/models";
+import { Subscription } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
-export class TaskAddEditService implements OnInit {
+export class TaskAddEditService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
+  private appMonitoringServiceSubscription: Subscription = new Subscription();
 
   constructor(
     private utilityService: UtilityService,
@@ -25,11 +27,16 @@ export class TaskAddEditService implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.appMonitoringService.isDataFetching.subscribe(
-      (isDataFetching: boolean) => {
-        this.isDataFetching = isDataFetching;
-      }
-    );
+    this.appMonitoringServiceSubscription =
+      this.appMonitoringService.isDataFetching.subscribe(
+        (isDataFetching: boolean) => {
+          this.isDataFetching = isDataFetching;
+        }
+      );
+  }
+
+  public ngOnDestroy(): void {
+    this.appMonitoringServiceSubscription.unsubscribe();
   }
 
   public initForm(task: Task): FormGroup {
@@ -207,14 +214,14 @@ export class TaskAddEditService implements OnInit {
         );
       },
       error: (error: any) => {
+        this.appMonitoringService.setIsDataFetchingStatus(false);
+
         this.logService.logToConsole(
           new Log("Task could not get added!" + error.message, "ERROR")
         );
         this.logService.showNotification(
           new Notification(error.message, "ERROR")
         );
-
-        this.appMonitoringService.setIsDataFetchingStatus(false);
       },
     });
   }

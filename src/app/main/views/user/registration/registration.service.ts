@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Subscription } from "rxjs";
 
 import {
   AppMonitoringService,
@@ -16,8 +17,6 @@ import {
   User,
   UserRegistrationCredentials,
 } from "src/app/shared/models";
-import { Subscription } from "rxjs";
-import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -32,8 +31,7 @@ export class RegistrationService implements OnInit, OnDestroy {
     private authService: AuthService,
     private logService: LogService,
     private localStorageService: LocalStorageService,
-    private databaseService: DatabaseService,
-    private router: Router
+    private databaseService: DatabaseService
   ) {}
 
   public ngOnInit(): void {
@@ -114,6 +112,7 @@ export class RegistrationService implements OnInit, OnDestroy {
               );
 
               callbackSuccess(authResponse.email);
+              this.appMonitoringService.setIsDataFetchingStatus(false);
             },
             error: (error: any) => {
               this.logService.logToConsole(

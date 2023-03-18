@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { MatDialog } from "@angular/material/dialog";
 import { MatDrawer } from "@angular/material/sidenav";
-import { MatIconButton } from "@angular/material/button";
+import { Router } from "@angular/router";
 import { map, shareReplay } from "rxjs/operators";
 import { Observable, Subscription } from "rxjs";
 

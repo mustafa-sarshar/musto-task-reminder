@@ -1,28 +1,14 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { FormControl, Validators, FormGroup } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Subscription } from "rxjs";
 
-import {
-  AppMonitoringService,
-  AuthService,
-  DatabaseService,
-  LocalStorageService,
-  LogService,
-  UtilityService,
-} from "src/app/shared/services";
+import { AppMonitoringService, UtilityService } from "src/app/shared/services";
 
 import { LoginComponent } from "../login/login.component";
 import { LOGIN_SIGNUP_FORM_STYLE } from "src/configs";
 
-import {
-  AuthResponsePayload,
-  Log,
-  Notification,
-  User,
-  UserRegistrationCredentials,
-} from "src/app/shared/models";
+import { UserRegistrationCredentials } from "src/app/shared/models";
 import { RegistrationService } from "./registration.service";
 
 @Component({
@@ -38,15 +24,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   constructor(
     private appMonitoringService: AppMonitoringService,
-    private authService: AuthService,
-    private databaseService: DatabaseService,
-    private localStorageService: LocalStorageService,
-    private logService: LogService,
     public utilityService: UtilityService,
     private registrationService: RegistrationService,
     private dialogRef: MatDialogRef<RegistrationComponent>,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
@@ -62,6 +43,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   public onClickSubmit(): void {
+    this.appMonitoringService.setIsDataFetchingStatus(true);
     const userCredentials: UserRegistrationCredentials =
       new UserRegistrationCredentials(
         this.formGroupEl.value["username"],
