@@ -23,6 +23,7 @@ import {
   User,
   UserRegistrationCredentials,
 } from "src/app/shared/models";
+import { RegistrationService } from "./registration.service";
 
 @Component({
   selector: "app-registration",
@@ -42,13 +43,14 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private localStorageService: LocalStorageService,
     private logService: LogService,
     public utilityService: UtilityService,
+    private registrationService: RegistrationService,
     private dialogRef: MatDialogRef<RegistrationComponent>,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
 
   public ngOnInit(): void {
-    this.initForm();
+    this.formGroupEl = this.registrationService.initForm();
     this.appMonitoringSubscription =
       this.appMonitoringService.isDataFetching.subscribe((status: boolean) => {
         this.isDataFetching = status;
@@ -59,126 +61,25 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.handleClosing();
   }
 
-  private initForm(): void {
-    this.formGroupEl = new FormGroup({
-      username: new FormControl({ value: "", disabled: this.isDataFetching }, [
-        Validators.required,
-        Validators.minLength(
-          this.utilityService.getValidationLengthMin("USERNAME")
-        ),
-        Validators.maxLength(
-          this.utilityService.getValidationLengthMax("USERNAME")
-        ),
-        Validators.pattern(
-          this.utilityService.getValidationPattern("USERNAME")
-        ),
-      ]),
-      email: new FormControl({ value: "", disabled: this.isDataFetching }, [
-        Validators.required,
-        Validators.email,
-      ]),
-      birthDate: new FormControl({ value: "", disabled: this.isDataFetching }, [
-        Validators.required,
-        this.utilityService.validateAge,
-      ]),
-      password: new FormControl({ value: "", disabled: this.isDataFetching }, [
-        Validators.required,
-        Validators.minLength(
-          this.utilityService.getValidationLengthMin("PASSWORD")
-        ),
-        Validators.maxLength(
-          this.utilityService.getValidationLengthMax("PASSWORD")
-        ),
-      ]),
-    });
-  }
-
   public onClickSubmit(): void {
-    const userData = new UserRegistrationCredentials(
-      this.formGroupEl.value["username"],
-      this.formGroupEl.value["email"],
-      this.formGroupEl.value["birthDate"],
-      this.formGroupEl.value["password"]
+    const userCredentials: UserRegistrationCredentials =
+      new UserRegistrationCredentials(
+        this.formGroupEl.value["username"],
+        this.formGroupEl.value["email"],
+        this.formGroupEl.value["birthDate"],
+        this.formGroupEl.value["password"]
+      );
+
+    this.registrationService.handleRegistration(
+      userCredentials,
+      (userEmail: string) => {
+        this.dialogRef.close();
+        this.dialog.open(
+          LoginComponent,
+          LOGIN_SIGNUP_FORM_STYLE
+        ).componentInstance.userEmail = userEmail;
+      }
     );
-
-    this.authService.handleUserRegistration(userData).subscribe({
-      next: (authResponse: AuthResponsePayload) => {
-        // Init a user profile after a successful user registration via Email & Password
-        const userProfileCredentials = new User(
-          authResponse.localId,
-          this.formGroupEl.value["email"],
-          "",
-          new Date(""),
-          this.formGroupEl.value["username"],
-          new Date(this.formGroupEl.value["birthDate"])
-        );
-
-        this.databaseService
-          .setUserProfileInDatabase(userProfileCredentials)
-          .subscribe({
-            next: (_) => {
-              this.logService.logToConsole(
-                new Log("User registered successfully", "INFO")
-              );
-              this.logService.logToConsole(new Log(userProfileCredentials));
-              this.logService.showNotification(
-                new Notification("Registration was successful!", "SUCCESS")
-              );
-
-              this.dialogRef.close();
-              this.dialog.open(
-                LoginComponent,
-                LOGIN_SIGNUP_FORM_STYLE
-              ).componentInstance.userEmail = authResponse.email;
-            },
-            error: (error: any) => {
-              this.logService.logToConsole(
-                new Log("Registration error:" + error.message, "ERROR")
-              );
-              this.logService.showNotification(
-                new Notification(error.message, "ERROR")
-              );
-
-              // Delete the user account if the was an error while storing user-profile data on database
-              this.authService
-                .handleDeleteUserAccount(authResponse.idToken)
-                .subscribe({
-                  next: (_) => {
-                    this.logService.logToConsole(
-                      new Log("User account deleted successfully!", "INFO")
-                    );
-                    this.logService.showNotification(
-                      new Notification("Please try again!", "WARN")
-                    );
-
-                    this.localStorageService.resetUserDataFromLocalStorage();
-                    this.appMonitoringService.setIsDataFetchingStatus(false);
-                  },
-                  error: (error: any) => {
-                    this.logService.logToConsole(
-                      new Log("Deletion error:" + error.message, "ERROR")
-                    );
-                    this.logService.showNotification(
-                      new Notification(error.message, "ERROR")
-                    );
-
-                    this.localStorageService.resetUserDataFromLocalStorage();
-                    this.appMonitoringService.setIsDataFetchingStatus(false);
-                  },
-                });
-            },
-          });
-      },
-      error: (error: any) => {
-        console.error("Registration error:", error.message);
-        this.snackBar.open(error.message, "OK", {
-          duration: 2000,
-          panelClass: ["red-snackbar"],
-        });
-
-        this.appMonitoringService.setIsDataFetchingStatus(false);
-      },
-    });
   }
 
   public onClickCancel(): void {

@@ -9,9 +9,9 @@ import { DataFlowService } from "../data-flow/data-flow.service";
 
 import {
   AuthResponsePayload,
-  AuthUserCredentials,
   User,
   UserDataFromLocalStorage,
+  UserLoginCredentials,
   UserRegistrationCredentials,
 } from "../../models";
 import { environment } from "src/environments/environment";
@@ -51,7 +51,7 @@ export class AuthService {
   }
 
   public handleUserLogin(
-    userCredentials: AuthUserCredentials
+    userCredentials: UserLoginCredentials
   ): Observable<AuthResponsePayload> {
     return this.http
       .post<AuthResponsePayload>(

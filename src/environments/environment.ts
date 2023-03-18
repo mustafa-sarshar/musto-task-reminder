@@ -2,7 +2,6 @@ import {
   FIREBASE_URL,
   FIREBASE_API_KEY,
   FIREBASE_COLLECTION_USERS,
-  FIREBASE_COLLECTION_TASKS,
 } from "../../.env";
 
 export const environment = {
@@ -17,6 +16,5 @@ export const environment = {
     "https://identitytoolkit.googleapis.com/v1/accounts:delete",
   firebaseCollections: {
     collectionUsers: FIREBASE_COLLECTION_USERS,
-    collectionTasks: FIREBASE_COLLECTION_TASKS,
   },
 };

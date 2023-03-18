@@ -1,14 +1,14 @@
 import {
   User,
-  UserRegistrationCredentials,
   UserLoginCredentials,
+  UserRegistrationCredentials,
   UserDataFromLocalStorage,
   UserDataFromDatabase,
 } from "./user/user.model";
 import { ConfirmationDialogBox } from "./dialog/dialog.model";
 import { Task } from "./task/task.model";
 import { Language } from "./language/language.model";
-import { AuthResponsePayload, AuthUserCredentials } from "./auth/auth.model";
+import { AuthResponsePayload } from "./auth/auth.model";
 import {
   Log,
   LogType,
@@ -19,15 +19,14 @@ import {
 
 export {
   User,
-  UserRegistrationCredentials,
   UserLoginCredentials,
+  UserRegistrationCredentials,
   UserDataFromLocalStorage,
   UserDataFromDatabase,
   ConfirmationDialogBox,
   Task,
   Language,
   AuthResponsePayload,
-  AuthUserCredentials,
   Log,
   LogType,
   Notification,

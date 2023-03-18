@@ -1,8 +1,3 @@
-export interface AuthUserCredentials {
-  email: string;
-  password: string;
-}
-
 export interface AuthResponsePayload {
   idToken: string;
   email: string;

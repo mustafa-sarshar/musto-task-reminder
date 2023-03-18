@@ -1,16 +1,15 @@
 import { DialogRef } from "@angular/cdk/dialog";
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, Input } from "@angular/core";
+import { FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { Log, Notification } from "src/app/shared/models";
+import { Log } from "src/app/shared/models";
 import { Task, TaskGroup } from "src/app/shared/models/task/task.model";
 import {
   AppMonitoringService,
-  DataFlowService,
-  DatabaseService,
   LogService,
   UtilityService,
 } from "src/app/shared/services";
+import { TaskAddEditService } from "./task-add-edit.service";
 import { userTasksGroups } from "src/assets/data";
 
 @Component({
@@ -29,14 +28,13 @@ export class TaskAddEditComponent {
   constructor(
     private logService: LogService,
     private appMonitoringService: AppMonitoringService,
-    private dataFlowService: DataFlowService,
     public utilityService: UtilityService,
-    private databaseService: DatabaseService,
+    private taskAddEditService: TaskAddEditService,
     private dialogRef: DialogRef<TaskAddEditComponent>
   ) {}
 
   public ngOnInit(): void {
-    this.initForm();
+    this.formGroupEl = this.taskAddEditService.initForm(this.task);
     this.appMonitoringSubscription =
       this.appMonitoringService.isDataFetching.subscribe((status: boolean) => {
         this.isDataFetching = status;
@@ -45,128 +43,6 @@ export class TaskAddEditComponent {
 
   public ngOnDestroy(): void {
     this.handleClosing();
-  }
-
-  private initForm(): void {
-    this.formGroupEl = new FormGroup({
-      title: new FormControl(
-        {
-          value: this.task ? this.task.title : "",
-          disabled: this.isDataFetching,
-        },
-        [
-          Validators.required,
-          Validators.minLength(
-            this.utilityService.getValidationLengthMin("TASK_TITLE")
-          ),
-          Validators.maxLength(
-            this.utilityService.getValidationLengthMax("TASK_TITLE")
-          ),
-          Validators.pattern(
-            this.utilityService.getValidationPattern("TASK_TITLE")
-          ),
-        ]
-      ),
-      group: new FormControl(
-        {
-          value: this.task ? this.task.group : "",
-          disabled: this.isDataFetching,
-        },
-        [Validators.required]
-      ),
-      deadline: new FormControl(
-        {
-          value: this.task ? this.task.deadline : "",
-          disabled: this.isDataFetching,
-        },
-        [Validators.required, this.utilityService.validateDateMin]
-      ),
-      description: new FormControl(
-        {
-          value: this.task ? this.task.description : "",
-          disabled: this.isDataFetching,
-        },
-        [
-          Validators.minLength(
-            this.utilityService.getValidationLengthMin("TASK_DESCRIPTION")
-          ),
-          Validators.maxLength(
-            this.utilityService.getValidationLengthMax("TASK_DESCRIPTION")
-          ),
-          Validators.pattern(
-            this.utilityService.getValidationPattern("TASK_DESCRIPTION")
-          ),
-        ]
-      ),
-      webLink: new FormControl(
-        {
-          value: this.task ? this.task.webLink : "",
-          disabled: this.isDataFetching,
-        },
-        [
-          Validators.minLength(
-            this.utilityService.getValidationLengthMin("WEB_LINK")
-          ),
-          Validators.maxLength(
-            this.utilityService.getValidationLengthMax("WEB_LINK")
-          ),
-          Validators.pattern(
-            this.utilityService.getValidationPattern("WEB_LINK")
-          ),
-        ]
-      ),
-      imageLink: new FormControl(
-        {
-          value: this.task ? this.task.imageLink : "",
-          disabled: this.isDataFetching,
-        },
-        [
-          Validators.minLength(
-            this.utilityService.getValidationLengthMin("WEB_LINK")
-          ),
-          Validators.maxLength(
-            this.utilityService.getValidationLengthMax("WEB_LINK")
-          ),
-          Validators.pattern(
-            this.utilityService.getValidationPattern("WEB_LINK")
-          ),
-        ]
-      ),
-      videoLink: new FormControl(
-        {
-          value: this.task ? this.task.videoLink : "",
-          disabled: this.isDataFetching,
-        },
-        [
-          Validators.minLength(
-            this.utilityService.getValidationLengthMin("WEB_LINK")
-          ),
-          Validators.maxLength(
-            this.utilityService.getValidationLengthMax("WEB_LINK")
-          ),
-          Validators.pattern(
-            this.utilityService.getValidationPattern("WEB_LINK")
-          ),
-        ]
-      ),
-      voiceLink: new FormControl(
-        {
-          value: this.task ? this.task.voiceLink : "",
-          disabled: this.isDataFetching,
-        },
-        [
-          Validators.minLength(
-            this.utilityService.getValidationLengthMin("WEB_LINK")
-          ),
-          Validators.maxLength(
-            this.utilityService.getValidationLengthMax("WEB_LINK")
-          ),
-          Validators.pattern(
-            this.utilityService.getValidationPattern("WEB_LINK")
-          ),
-        ]
-      ),
-    });
   }
 
   public onClickSubmit() {
@@ -191,57 +67,19 @@ export class TaskAddEditComponent {
     this.logService.logToConsole(new Log(this.formGroupEl.value));
 
     if (this.task) {
-      this.databaseService
-        .updateUserTask(this.userId, taskSubmitted)
-        .subscribe({
-          next: (response: any) => {
-            this.dataFlowService.updateUserTask(taskSubmitted);
-            this.handleClosing();
-
-            this.logService.logToConsole(
-              new Log("User data synced successfully!", "INFO")
-            );
-            this.logService.logToConsole(new Log(response));
-            this.logService.showNotification(
-              new Notification("Task Updated", "SUCCESS")
-            );
-          },
-          error: (error: any) => {
-            this.logService.logToConsole(
-              new Log("Task could not get updated!" + error.message, "ERROR")
-            );
-            this.logService.showNotification(
-              new Notification(error.message, "ERROR")
-            );
-
-            this.appMonitoringService.setIsDataFetchingStatus(false);
-          },
-        });
+      // Handle the task editing process
+      this.taskAddEditService.handleEditTask(
+        this.userId,
+        taskSubmitted,
+        this.handleClosing
+      );
     } else {
-      this.databaseService.addUserTask(this.userId, taskSubmitted).subscribe({
-        next: (response: any) => {
-          this.dataFlowService.addUserTask(taskSubmitted);
-          this.handleClosing();
-
-          this.logService.logToConsole(
-            new Log("User data synced successfully!", "INFO")
-          );
-          this.logService.logToConsole(new Log(response));
-          this.logService.showNotification(
-            new Notification("Task Added", "SUCCESS")
-          );
-        },
-        error: (error: any) => {
-          this.logService.logToConsole(
-            new Log("Task could not get added!" + error.message, "ERROR")
-          );
-          this.logService.showNotification(
-            new Notification(error.message, "ERROR")
-          );
-
-          this.appMonitoringService.setIsDataFetchingStatus(false);
-        },
-      });
+      // Handle the task adding process
+      this.taskAddEditService.handleAddTask(
+        this.userId,
+        taskSubmitted,
+        this.handleClosing
+      );
     }
   }
 

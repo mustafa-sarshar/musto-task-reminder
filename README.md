@@ -93,6 +93,14 @@
 
 ## CODE SCAFFOLDING
 
+- During **development** phase as well as prior to **production** phase, you may set the environmental variables based on your **Firebase Read Time Database configurations**. Please create a **.env.ts** file in the root directory and add the following environment variables into it as follow:
+
+  ```
+  export const FIREBASE_URL = "BACKEND_URL_OF_YOUR_FIREBASE_REAL_TIME_DATABASE";
+  export const FIREBASE_API_KEY = "YOUR_FIREBASE_API_KEY_FOR_YOUR_APP";
+  export const FIREBASE_COLLECTION_USERS = "USER_COLLECTION_NAME_IN_FIREBASE_REAL_TIME_DATABASE";
+  ```
+
 - Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## BUILD

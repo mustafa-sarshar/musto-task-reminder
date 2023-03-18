@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MatAccordion } from "@angular/material/expansion";
+import { MatDialog } from "@angular/material/dialog";
 import { Subscription } from "rxjs";
 
-import { LogService } from "src/app/shared/services";
-import { Log, User } from "src/app/shared/models";
-import { DataFlowService } from "src/app/shared/services/data-flow/data-flow.service";
-import { MatDialog } from "@angular/material/dialog";
-import { TASK_ADD_FORM_STYLE } from "src/configs";
 import { TaskAddEditComponent } from "./task-add-edit/task-add-edit.component";
+
+import { LogService } from "src/app/shared/services";
+import { DataFlowService } from "src/app/shared/services/data-flow/data-flow.service";
+
+import { Log, User } from "src/app/shared/models";
+import { TASK_ADD_FORM_STYLE } from "src/configs";
 
 @Component({
   selector: "app-tasks",
