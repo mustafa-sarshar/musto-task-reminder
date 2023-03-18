@@ -8,6 +8,7 @@ import {
   AppMonitoringService,
   AuthService,
   LogService,
+  UtilityService,
 } from "src/app/shared/services";
 import {
   AuthResponsePayload,
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private appMonitoringService: AppMonitoringService,
     private authService: AuthService,
     private logService: LogService,
+    public utilityService: UtilityService,
     private dialogRef: MatDialogRef<LoginComponent>,
     private router: Router
   ) {}
@@ -59,7 +61,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       ),
       password: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(
+          this.utilityService.getValidationLengthMin("PASSWORD")
+        ),
+        Validators.maxLength(
+          this.utilityService.getValidationLengthMax("PASSWORD")
+        ),
       ]),
     });
   }

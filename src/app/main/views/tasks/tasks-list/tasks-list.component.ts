@@ -52,6 +52,9 @@ export class TasksListComponent implements OnInit, OnDestroy {
           disabled: this.tasks && this.tasks.length === 0,
         },
         [
+          Validators.maxLength(
+            this.utilityService.getValidationLengthMax("TASK_TITLE")
+          ),
           Validators.pattern(
             this.utilityService.getValidationPattern("TASK_TITLE")
           ),

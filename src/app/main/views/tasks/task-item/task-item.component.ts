@@ -28,6 +28,7 @@ import { TaskAddEditComponent } from "../task-add-edit/task-add-edit.component";
 export class TaskItemComponent implements OnInit, OnDestroy {
   @Input("userId") userId: string | null = null;
   @Input("task") task: Task | null = null;
+  public taskItemMode: number = 0;
   private dataFlowServiceSubscription: Subscription = new Subscription();
   private logServiceSubscription: Subscription = new Subscription();
 
@@ -46,11 +47,20 @@ export class TaskItemComponent implements OnInit, OnDestroy {
     this.logServiceSubscription.unsubscribe();
   }
 
+  public onClickMore(): void {
+    this.taskItemMode = 1;
+  }
+
+  public onClickLess(): void {
+    this.taskItemMode = 0;
+  }
+
   public onClickDetails(): void {
     this.dialog.open(
       TaskDetailsComponent,
       TASK_DETAILS_FORM_STYLE
     ).componentInstance.task = this.task;
+    this.taskItemMode = 0;
   }
 
   public onClickDelete(): void {
@@ -96,6 +106,7 @@ export class TaskItemComponent implements OnInit, OnDestroy {
           });
       }
     });
+    this.taskItemMode = 0;
   }
 
   public onClickToggleDone(): void {
@@ -146,6 +157,7 @@ export class TaskItemComponent implements OnInit, OnDestroy {
         });
       }
     });
+    this.taskItemMode = 0;
   }
 
   public onClickEdit(): void {
@@ -155,5 +167,6 @@ export class TaskItemComponent implements OnInit, OnDestroy {
     );
     dialogRef.componentInstance.task = this.task;
     dialogRef.componentInstance.userId = this.userId;
+    this.taskItemMode = 0;
   }
 }

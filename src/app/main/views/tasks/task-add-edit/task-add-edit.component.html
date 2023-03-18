@@ -73,18 +73,19 @@
       <ul>
         <li
           *ngIf="!formGroupEl.controls['title'].valid && formGroupEl.controls['title'].touched && formGroupEl.controls['title'].dirty">
-          Title must be at least 3 characters long and start with an alphabet! Only parentheses and spaces are allowed!
+          {{utilityService.getValidationMessage("TASK_TITLE")}}
         </li>
         <li
           *ngIf="!formGroupEl.controls['deadline'].valid && formGroupEl.controls['deadline'].touched && formGroupEl.controls['deadline'].dirty">
-          Deadline date must be valid!</li>
+          {{utilityService.getValidationMessage("TASK_DEADLINE")}}
+        </li>
         <li
           *ngIf="!formGroupEl.controls['description'].valid && formGroupEl.controls['description'].touched && formGroupEl.controls['description'].dirty">
-          Description must be at least 5 characters long and alphanumeric! Moreover, parentheses and spaces are allowed!
+          {{utilityService.getValidationMessage("TASK_DESCRIPTION")}}
         </li>
         <li
           *ngIf="(!formGroupEl.controls['webLink'].valid && formGroupEl.controls['webLink'].touched && formGroupEl.controls['webLink'].dirty) || (!formGroupEl.controls['imageLink'].valid && formGroupEl.controls['imageLink'].touched && formGroupEl.controls['imageLink'].dirty) || (!formGroupEl.controls['videoLink'].valid && formGroupEl.controls['videoLink'].touched && formGroupEl.controls['videoLink'].dirty) || (!formGroupEl.controls['voiceLink'].valid && formGroupEl.controls['voiceLink'].touched && formGroupEl.controls['voiceLink'].dirty)">
-          Please enter a valid link! (e.g. http://www... or https://www...)
+          {{utilityService.getValidationMessage("WEB_LINK")}}
         </li>
       </ul>
     </div>

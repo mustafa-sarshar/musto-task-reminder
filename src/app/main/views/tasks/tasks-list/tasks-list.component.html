@@ -7,8 +7,8 @@
     </mat-form-field>
   </mat-card-content>
   <mat-card-actions class="search-box__actions">
-    <button mat-icon-button (click)="onClickClearSearchBox()"
-      [disabled]="tasks.length === 0 || formGroupEl.controls['title'].value.trim().length === 0" matTooltip="clear">
+    <button mat-icon-button type="button" (click)="onClickClearSearchBox()"
+      [disabled]="tasks.length === 0 || formGroupEl.controls['title'].value.trim().length === 0" matTooltip="Clear">
       <mat-icon
         [color]="tasks.length === 0 || formGroupEl.controls['title'].value.trim().length === 0 ? 'default' : 'warn'">backspace</mat-icon>
     </button>

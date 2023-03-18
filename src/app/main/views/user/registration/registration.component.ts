@@ -10,6 +10,7 @@ import {
   DatabaseService,
   LocalStorageService,
   LogService,
+  UtilityService,
 } from "src/app/shared/services";
 
 import { LoginComponent } from "../login/login.component";
@@ -40,6 +41,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private databaseService: DatabaseService,
     private localStorageService: LocalStorageService,
     private logService: LogService,
+    public utilityService: UtilityService,
     private dialogRef: MatDialogRef<RegistrationComponent>,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
@@ -61,8 +63,15 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.formGroupEl = new FormGroup({
       username: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
-        Validators.minLength(5),
-        Validators.pattern("[a-zA-Z0-9-]+"),
+        Validators.minLength(
+          this.utilityService.getValidationLengthMin("USERNAME")
+        ),
+        Validators.maxLength(
+          this.utilityService.getValidationLengthMax("USERNAME")
+        ),
+        Validators.pattern(
+          this.utilityService.getValidationPattern("USERNAME")
+        ),
       ]),
       email: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
@@ -70,10 +79,16 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       ]),
       birthDate: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
+        this.utilityService.validateAge,
       ]),
       password: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(
+          this.utilityService.getValidationLengthMin("PASSWORD")
+        ),
+        Validators.maxLength(
+          this.utilityService.getValidationLengthMax("PASSWORD")
+        ),
       ]),
     });
   }

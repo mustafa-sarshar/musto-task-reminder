@@ -3,11 +3,16 @@ import { Injectable } from "@angular/core";
 import { throwError } from "rxjs";
 
 import { User, UserDataFromLocalStorage } from "../../models";
+import { FormControl } from "@angular/forms";
 
-type ValidationPatterns =
+type ValidationFields =
   | "USERNAME"
+  | "EMAIL"
+  | "BIRTH_DATE"
+  | "PASSWORD"
   | "TASK_TITLE"
   | "TASK_DESCRIPTION"
+  | "TASK_DEADLINE"
   | "WEB_LINK";
 
 @Injectable({
@@ -130,11 +135,63 @@ export class UtilityService {
     return randomId;
   }
 
-  public getValidationPattern(patternName: ValidationPatterns): string {
-    let pattern = "";
-    switch (patternName) {
+  public getValidationLengthMin(fieldName: ValidationFields): number {
+    let fieldLength: number = 0;
+    switch (fieldName) {
       case "USERNAME":
-        pattern = "";
+        fieldLength = 5;
+        break;
+      case "PASSWORD":
+        fieldLength = 8;
+        break;
+      case "TASK_TITLE":
+        fieldLength = 3;
+        break;
+      case "TASK_DESCRIPTION":
+        fieldLength = 0;
+        break;
+      case "WEB_LINK":
+        fieldLength = 10;
+        break;
+      default:
+        break;
+    }
+    return fieldLength;
+  }
+
+  public getValidationLengthMax(fieldName: ValidationFields): number {
+    let fieldLength: number = 0;
+    switch (fieldName) {
+      case "USERNAME":
+        fieldLength = 10;
+        break;
+      case "PASSWORD":
+        fieldLength = 256;
+        break;
+      case "TASK_TITLE":
+        fieldLength = 20;
+        break;
+      case "TASK_DESCRIPTION":
+        fieldLength = 256;
+        break;
+      case "WEB_LINK":
+        fieldLength = 2048;
+        break;
+      default:
+        break;
+    }
+    return fieldLength;
+  }
+
+  public getValidationPattern(fieldName: ValidationFields): string {
+    let pattern: string = "";
+    switch (fieldName) {
+      case "USERNAME":
+        pattern = "[a-zA-Z0-9-]+";
+        break;
+      case "PASSWORD":
+        pattern =
+          "(?=^.{8,}$)(?=.*d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$";
         break;
       case "TASK_TITLE":
         pattern = "^[a-zA-Z]*[a-zA-Z][-a-zA-Z0-9,/() ]*$";
@@ -150,6 +207,79 @@ export class UtilityService {
         break;
     }
     return pattern;
+  }
+
+  public getValidationMessage(fieldName: ValidationFields): string {
+    let message: string = "";
+    switch (fieldName) {
+      case "USERNAME":
+        message = "Username must be 5-10 characters long and alphanumeric!";
+        break;
+      case "EMAIL":
+        message = "Email must be valid!";
+        break;
+      case "BIRTH_DATE":
+        message = "Birth date must be valid!";
+        break;
+      case "PASSWORD":
+        message =
+          "Password length must be at least 8 characters, contain one or more uppercase characters, and one or more lowercase characters, and one or more numeric values, and one or more special characters";
+        break;
+      case "TASK_TITLE":
+        message =
+          "Title must be 3-20 characters and start with an alphabet! Only parentheses and spaces are allowed!";
+        break;
+      case "TASK_DESCRIPTION":
+        message =
+          "Description must be at least 5 characters long and alphanumeric! Moreover, parentheses and spaces are allowed!";
+        break;
+      case "TASK_DEADLINE":
+        message = "Deadline date must be valid!";
+        break;
+      case "WEB_LINK":
+        message =
+          "Please enter a valid link! (e.g. http://www... or https://www...)";
+        break;
+      default:
+        break;
+    }
+    return message;
+  }
+
+  public validateDateMin(dateInput: FormControl) {
+    const dateNow = new Date().toISOString().slice(0, 10);
+    return dateInput.value >= dateNow
+      ? null
+      : {
+          validateDate: {
+            valid: false,
+          },
+        };
+  }
+
+  public validateAge(dateInput: FormControl) {
+    const minAge = 3;
+    const maxAge = 120;
+    const dateNow = new Date();
+    const dateInputTime = new Date(dateInput.value).getTime();
+    const minAgeTime = new Date(
+      dateNow.getFullYear() - minAge,
+      dateNow.getMonth(),
+      dateNow.getDate()
+    ).getTime();
+    const maxAgeTime = new Date(
+      dateNow.getFullYear() - maxAge,
+      dateNow.getMonth(),
+      dateNow.getDate()
+    ).getTime();
+
+    return dateInputTime <= minAgeTime && dateInputTime >= maxAgeTime
+      ? null
+      : {
+          validateDate: {
+            valid: false,
+          },
+        };
   }
 
   public handleError(errorRes: HttpErrorResponse) {

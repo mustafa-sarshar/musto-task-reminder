@@ -45,16 +45,20 @@
       <ul>
         <li
           *ngIf="!formGroupEl.controls['username'].valid && formGroupEl.controls['username'].touched && formGroupEl.controls['username'].dirty">
-          Username must be at least 5 characters long and alphanumeric!</li>
+          {{utilityService.getValidationMessage("USERNAME")}}
+        </li>
         <li
           *ngIf="!formGroupEl.controls['email'].valid && formGroupEl.controls['email'].touched && formGroupEl.controls['email'].dirty">
-          Email must be valid!</li>
+          {{utilityService.getValidationMessage("EMAIL")}}
+        </li>
         <li
           *ngIf="!formGroupEl.controls['birthDate'].valid && formGroupEl.controls['birthDate'].touched && formGroupEl.controls['birthDate'].dirty">
-          Birth date must be valid!</li>
+          {{utilityService.getValidationMessage("BIRTH_DATE")}}
+        </li>
         <li
           *ngIf="!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty">
-          Password must be at least 5 characters long!</li>
+          {{utilityService.getValidationMessage("PASSWORD")}}
+        </li>
       </ul>
     </div>
   </mat-card>

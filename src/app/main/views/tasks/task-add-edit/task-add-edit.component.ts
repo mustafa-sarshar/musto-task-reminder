@@ -30,7 +30,7 @@ export class TaskAddEditComponent {
     private logService: LogService,
     private appMonitoringService: AppMonitoringService,
     private dataFlowService: DataFlowService,
-    private utilityService: UtilityService,
+    public utilityService: UtilityService,
     private databaseService: DatabaseService,
     private dialogRef: DialogRef<TaskAddEditComponent>
   ) {}
@@ -56,7 +56,12 @@ export class TaskAddEditComponent {
         },
         [
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(
+            this.utilityService.getValidationLengthMin("TASK_TITLE")
+          ),
+          Validators.maxLength(
+            this.utilityService.getValidationLengthMax("TASK_TITLE")
+          ),
           Validators.pattern(
             this.utilityService.getValidationPattern("TASK_TITLE")
           ),
@@ -74,7 +79,7 @@ export class TaskAddEditComponent {
           value: this.task ? this.task.deadline : "",
           disabled: this.isDataFetching,
         },
-        [Validators.required]
+        [Validators.required, this.utilityService.validateDateMin]
       ),
       description: new FormControl(
         {
@@ -82,7 +87,12 @@ export class TaskAddEditComponent {
           disabled: this.isDataFetching,
         },
         [
-          Validators.minLength(5),
+          Validators.minLength(
+            this.utilityService.getValidationLengthMin("TASK_DESCRIPTION")
+          ),
+          Validators.maxLength(
+            this.utilityService.getValidationLengthMax("TASK_DESCRIPTION")
+          ),
           Validators.pattern(
             this.utilityService.getValidationPattern("TASK_DESCRIPTION")
           ),
@@ -94,8 +104,12 @@ export class TaskAddEditComponent {
           disabled: this.isDataFetching,
         },
         [
-          Validators.minLength(10),
-          Validators.maxLength(2048),
+          Validators.minLength(
+            this.utilityService.getValidationLengthMin("WEB_LINK")
+          ),
+          Validators.maxLength(
+            this.utilityService.getValidationLengthMax("WEB_LINK")
+          ),
           Validators.pattern(
             this.utilityService.getValidationPattern("WEB_LINK")
           ),
@@ -107,8 +121,12 @@ export class TaskAddEditComponent {
           disabled: this.isDataFetching,
         },
         [
-          Validators.minLength(10),
-          Validators.maxLength(2048),
+          Validators.minLength(
+            this.utilityService.getValidationLengthMin("WEB_LINK")
+          ),
+          Validators.maxLength(
+            this.utilityService.getValidationLengthMax("WEB_LINK")
+          ),
           Validators.pattern(
             this.utilityService.getValidationPattern("WEB_LINK")
           ),
@@ -120,8 +138,12 @@ export class TaskAddEditComponent {
           disabled: this.isDataFetching,
         },
         [
-          Validators.minLength(10),
-          Validators.maxLength(2048),
+          Validators.minLength(
+            this.utilityService.getValidationLengthMin("WEB_LINK")
+          ),
+          Validators.maxLength(
+            this.utilityService.getValidationLengthMax("WEB_LINK")
+          ),
           Validators.pattern(
             this.utilityService.getValidationPattern("WEB_LINK")
           ),
@@ -133,8 +155,12 @@ export class TaskAddEditComponent {
           disabled: this.isDataFetching,
         },
         [
-          Validators.minLength(10),
-          Validators.maxLength(2048),
+          Validators.minLength(
+            this.utilityService.getValidationLengthMin("WEB_LINK")
+          ),
+          Validators.maxLength(
+            this.utilityService.getValidationLengthMax("WEB_LINK")
+          ),
           Validators.pattern(
             this.utilityService.getValidationPattern("WEB_LINK")
           ),
