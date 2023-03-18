@@ -20,12 +20,41 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
-    "types": ["node", "jest", "mocha"]
+    "types": ["node", "jest"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
+  },
+  "typedocOptions": {
+    "darkHighlightTheme": "dark-plus",
+    "includeVersion": true,
+    "exclude": "**/*+(.spec|.e2e).ts",
+    "entryPoints": ["src"],
+    "entryPointStrategy": "expand",
+    "out": "docs",
+    "excludeNotDocumentedKinds": [
+      "Module",
+      "Namespace",
+      "Enum",
+      // "EnumMember", // Not enabled by default
+      "Variable",
+      "Function",
+      "Class",
+      "Interface",
+      "Constructor",
+      "Property",
+      "Method",
+      "CallSignature",
+      "IndexSignature",
+      "ConstructorSignature",
+      "Accessor",
+      "GetSignature",
+      "SetSignature",
+      "TypeAlias",
+      "Reference"
+    ]
   }
 }

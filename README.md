@@ -13,12 +13,13 @@
 <table width="100%" style="overflow:auto">
   <tr>
     <th width="16.6%" style="text-align:center;">Welcome Page</th>
-    <th width="16.6%" style="text-align:center;">Registration</th>
+    <th width="16.6%" style="text-align:center;">Sign up</th>
     <th width="16.6%" style="text-align:center;">Login</th>
-    <th width="16.6%" style="text-align:center;">Task Cards</th>
     <th width="16.6%" style="text-align:center;">Add/edit task</th>
+    <th width="16.6%" style="text-align:center;">Task Cards</th>
     <th width="16.6%" style="text-align:center;">Task Details</th>
     <th width="16.6%" style="text-align:center;">User Profile</th>
+    <th width="16.6%" style="text-align:center;">Side Menu</th>
   </tr>
   <tr>
     <td width="16.6%"><img src=""/></td>
