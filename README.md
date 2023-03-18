@@ -12,23 +12,24 @@
 
 <table width="100%" style="overflow:auto">
   <tr>
-    <th width="16.6%" style="text-align:center;">Welcome Page</th>
-    <th width="16.6%" style="text-align:center;">Sign up</th>
-    <th width="16.6%" style="text-align:center;">Login</th>
-    <th width="16.6%" style="text-align:center;">Add/edit task</th>
-    <th width="16.6%" style="text-align:center;">Task Cards</th>
-    <th width="16.6%" style="text-align:center;">Task Details</th>
-    <th width="16.6%" style="text-align:center;">User Profile</th>
-    <th width="16.6%" style="text-align:center;">Side Menu</th>
+    <th width="12.5%" style="text-align:center;">Welcome Page</th>
+    <th width="12.5%" style="text-align:center;">Sign up</th>
+    <th width="12.5%" style="text-align:center;">Login</th>
+    <th width="12.5%" style="text-align:center;">Add/edit task</th>
+    <th width="12.5%" style="text-align:center;">Task Cards</th>
+    <th width="12.5%" style="text-align:center;">Task Details</th>
+    <th width="12.5%" style="text-align:center;">User Profile</th>
+    <th width="12.5%" style="text-align:center;">Side Menu</th>
   </tr>
   <tr>
-    <td width="16.6%"><img src=""/></td>
-    <td width="16.6%"><img src=""/></td>
-    <td width="16.6%"><img src=""/></td>
-    <td width="16.6%"><img src=""/></td>
-    <td width="16.6%"><img src=""/></td>
-    <td width="16.6%"><img src=""/></td>
-    <td width="16.6%"><img src=""/></td>
+    <td width="12.5%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-1.png?raw=true"/></td>
+    <td width="12.5%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-2.png?raw=true"/></td>
+    <td width="12.5%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-3.png?raw=true"/></td>
+    <td width="12.5%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-4.png?raw=true"/></td>
+    <td width="12.5%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-5.png?raw=true"/></td>
+    <td width="12.5%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-6.png?raw=true"/></td>
+    <td width="12.5%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-7.png?raw=true"/></td>
+    <td width="12.5%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-8.png?raw=true"/></td>
   </tr>
 </table>
 
