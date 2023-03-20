@@ -16,6 +16,7 @@ import {
   NotificationType,
   NotificationActionType,
 } from "./log/log.model";
+import { SortBy, SortByOptions, SortByType } from "./array/array/array.model";
 
 export {
   User,
@@ -32,4 +33,7 @@ export {
   Notification,
   NotificationType,
   NotificationActionType,
+  SortBy,
+  SortByOptions,
+  SortByType,
 };

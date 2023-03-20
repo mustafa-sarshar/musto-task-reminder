@@ -7,10 +7,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 
-/**
- * @constant
- * @description - It holds all necessary Material Design components needed for the component.
- */
 const materials = [
   MatCardModule,
   MatFormFieldModule,

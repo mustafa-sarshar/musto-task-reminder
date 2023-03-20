@@ -6,16 +6,50 @@
   <mat-card class="tasks-content__tasks" *ngIf="userData['tasks']">
     <mat-card-header>
       <mat-label>
-        No. of Tasks: {{userData.tasks.length}}
+        Number of Tasks: {{userData.tasks.length}}
       </mat-label>
       <mat-card-content class="space-flex"></mat-card-content>
-      <button mat-icon-button color="default" aria-label="to finish the task" (click)="onClickAddTask()"
-        matTooltip="Add a new task">
-        <mat-icon color="default">add_box</mat-icon>
-      </button>
-    </mat-card-header>    
+      <mat-card-actions>
+        <button mat-icon-button color="default" aria-label="to sort tasks" [matMenuTriggerFor]="menuSortBy"
+          matTooltip="Sort the tasks">
+          <mat-icon>sort_by_alpha</mat-icon>
+        </button>
+        <!-- Sort by Menu -->
+        <mat-menu #menuSortBy="matMenu">
+          <!-- Sort by title -->
+          <button mat-menu-item color="default" aria-label="to sort tasks by title"
+            [matMenuTriggerFor]="menuSortBy__title" matTooltip="Sort the tasks by title">Sort by title</button>
+          <mat-menu #menuSortBy__title="matMenu">
+            <button mat-menu-item (click)="onClickSortBy('TITLE', 'ASC')">Ascending</button>
+            <button mat-menu-item (click)="onClickSortBy('TITLE', 'DES')">Descending</button>
+          </mat-menu>
+          <!-- Sort by deadline -->
+          <button mat-menu-item color="default" aria-label="to sort tasks by deadline"
+            [matMenuTriggerFor]="menuSortBy__deadline" matTooltip="Sort the tasks by deadline">Sort by
+            deadline</button>
+          <mat-menu #menuSortBy__deadline="matMenu">
+            <button mat-menu-item (click)="onClickSortBy('DEADLINE', 'ASC')">Ascending</button>
+            <button mat-menu-item (click)="onClickSortBy('DEADLINE', 'DES')">Descending</button>
+          </mat-menu>
+          <!-- Sort by done -->
+          <button mat-menu-item color="default" aria-label="to sort tasks by done"
+            [matMenuTriggerFor]="menuSortBy__done" matTooltip="Sort the tasks by done">Sort by done</button>
+          <mat-menu #menuSortBy__done="matMenu">
+            <button mat-menu-item (click)="onClickSortBy('DONE_AT_DATE', 'ASC')">Ascending</button>
+            <button mat-menu-item (click)="onClickSortBy('DONE_AT_DATE', 'DES')">Descending</button>
+          </mat-menu>
+          <!-- No sorting -->
+          <button mat-menu-item (click)="onClickSortBy('NO_SORTING')" color="default" aria-label="to not sort"
+            matTooltip="No sorting">No sorting</button>
+        </mat-menu>
+        <button mat-icon-button color="default" aria-label="to finish the task" (click)="onClickAddTask()"
+          matTooltip="Add a new task">
+          <mat-icon color="default">add_box</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card-header>
     <mat-card-content>
-      <app-tasks-list></app-tasks-list>
+      <app-tasks-list [userId]="userData.uid" [tasks]="userData.tasks | sortArray:sortBy"></app-tasks-list>
     </mat-card-content>
     <mat-card-content class="space-flex"></mat-card-content>
     <mat-card-footer>

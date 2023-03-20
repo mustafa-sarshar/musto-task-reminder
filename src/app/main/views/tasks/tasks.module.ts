@@ -2,7 +2,11 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 
-import { FilterArrayPipe, StringShortenerPipe } from "src/app/shared/pipes";
+import {
+  FilterArrayPipe,
+  SortArrayPipe,
+  StringShortenerPipe,
+} from "src/app/shared/pipes";
 import { TasksRoutingModule } from "./tasks-routing.module";
 import { TasksMaterialModule } from "./tasks-material.module";
 
@@ -22,7 +26,12 @@ const taskComponents = [
 ];
 
 @NgModule({
-  declarations: [taskComponents, StringShortenerPipe, FilterArrayPipe],
+  declarations: [
+    taskComponents,
+    StringShortenerPipe,
+    FilterArrayPipe,
+    SortArrayPipe,
+  ],
   imports: [
     CommonModule,
     FormsModule,

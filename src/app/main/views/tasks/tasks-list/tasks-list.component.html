@@ -7,8 +7,11 @@
     </mat-form-field>
   </mat-card-content>
   <mat-card-actions class="search-box__actions">
-    <button mat-icon-button type="button" (click)="onClickClearSearchBox()"
-      [disabled]="tasks.length === 0 || formGroupEl.controls['title'].value.trim().length === 0" matTooltip="Clear">
+    <button mat-icon-button type="button"
+      *ngIf="tasks.length > 0 && formGroupEl.controls['title'].value.trim().length > 0"
+      (click)="onClickClearSearchBox()"
+      [disabled]="tasks.length === 0 || formGroupEl.controls['title'].value.trim().length === 0"
+      matTooltip="Clear the search box">
       <mat-icon
         [color]="tasks.length === 0 || formGroupEl.controls['title'].value.trim().length === 0 ? 'default' : 'warn'">backspace</mat-icon>
     </button>

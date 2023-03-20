@@ -10,11 +10,10 @@ import { MatListModule } from "@angular/material/list";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatMenuModule } from "@angular/material/menu";
 
-/**
- * @constant
- * @description - It holds all necessary Material Design components needed for the component.
- */
 const materials = [
   MatButtonModule,
   MatCardModule,
@@ -26,6 +25,9 @@ const materials = [
   MatPaginatorModule,
   MatSelectModule,
   MatTooltipModule,
+  MatAutocompleteModule,
+  MatDialogModule,
+  MatMenuModule,
 ];
 
 @NgModule({
