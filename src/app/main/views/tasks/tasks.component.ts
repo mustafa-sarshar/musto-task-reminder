@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { UrlTree } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
-import { PageEvent } from "@angular/material/paginator";
 import { Observable, Subscription } from "rxjs";
 
 import { TaskAddEditComponent } from "./task-add-edit/task-add-edit.component";
@@ -25,7 +24,6 @@ import {
   SortByOptions,
   SortByType,
   TasksVisibilityFilterType,
-  Task,
 } from "src/app/shared/models";
 
 @Component({
@@ -159,5 +157,11 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
     visibilityFilterType: TasksVisibilityFilterType
   ): void {
     this.tasksVisibilityFilter = visibilityFilterType;
+    this.logService.showNotification(
+      new Notification(
+        `Visibility filtered changed! (${this.tasksVisibilityFilter.toLowerCase()} tasks)`,
+        "WARN"
+      )
+    );
   }
 }

@@ -1,1 +1,1 @@
-export type TasksVisibilityFilterType = "ALL" | "COMPLETED" | "UNCOMPLETED";
+export type TasksVisibilityFilterType = "ALL" | "OPEN" | "FINISHED";

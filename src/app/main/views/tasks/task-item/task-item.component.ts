@@ -83,14 +83,19 @@ export class TaskItemComponent implements OnInit, OnDestroy {
       );
     dialogRef.afterClosed().subscribe((answer) => {
       if (answer) {
-        if (this.task.done) {
-          this.task.done = false;
-          this.task.doneAtDate = null;
+        const taskUpdate: Task = Object.create(
+          Object.getPrototypeOf(this.task),
+          Object.getOwnPropertyDescriptors(this.task)
+        );
+
+        if (taskUpdate.done) {
+          taskUpdate.done = false;
+          taskUpdate.doneAtDate = null;
         } else {
-          this.task.done = true;
-          this.task.doneAtDate = new Date();
+          taskUpdate.done = true;
+          taskUpdate.doneAtDate = new Date();
         }
-        this.taskItemService.handleToggleDone(this.userId, this.task);
+        this.taskItemService.handleToggleDone(this.userId, taskUpdate);
       }
     });
     this.taskItemMode = 0;
