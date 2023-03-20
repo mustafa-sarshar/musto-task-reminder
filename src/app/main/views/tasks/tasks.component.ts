@@ -1,13 +1,18 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { UrlTree } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
+import { PageEvent } from "@angular/material/paginator";
 import { Observable, Subscription } from "rxjs";
 
 import { TaskAddEditComponent } from "./task-add-edit/task-add-edit.component";
 import { ConfirmationDialogComponent } from "src/app/shared/views/confirmation-dialog/confirmation-dialog.component";
 
-import { AppMonitoringService, LogService } from "src/app/shared/services";
-import { DataFlowService } from "src/app/shared/services/data-flow/data-flow.service";
+import {
+  AppMonitoringService,
+  LogService,
+  DataFlowService,
+} from "src/app/shared/services";
+import { TasksService } from "./tasks.service";
 import { onCanDeactivate } from "src/app/shared/guards";
 
 import { CONFIRMATION_POPUP_STYLE, TASK_ADD_FORM_STYLE } from "src/configs";
@@ -19,17 +24,21 @@ import {
   SortBy,
   SortByOptions,
   SortByType,
+  TasksVisibilityFilterType,
+  Task,
 } from "src/app/shared/models";
 
 @Component({
   selector: "app-tasks",
   templateUrl: "./tasks.component.html",
   styleUrls: ["./tasks.component.scss"],
+  providers: [TasksService],
 })
 export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
   public isDataFetching: boolean = false;
   public userData: User | null = null;
   public sortBy: SortBy = new SortBy("TITLE", "ASC");
+  public tasksVisibilityFilter: TasksVisibilityFilterType = "ALL";
   private dataFlowServiceSubscription: Subscription = new Subscription();
   private databaseServiceSubscription: Subscription = new Subscription();
   private appMonitoringServiceSubscription: Subscription = new Subscription();
@@ -38,6 +47,7 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
     private dataFlowService: DataFlowService,
     private logService: LogService,
     private appMonitoringService: AppMonitoringService,
+    private tasksService: TasksService,
     private dialog: MatDialog
   ) {}
 
@@ -45,6 +55,9 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
     this.dataFlowServiceSubscription = this.dataFlowService.userData.subscribe(
       (userData: User | null) => {
         this.userData = userData;
+        if (userData.tasks) {
+          this.userData.tasks = [...userData.tasks];
+        }
         this.logService.logToConsole(
           new Log("User Data loaded @Tasks", "INFO")
         );
@@ -94,16 +107,57 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
     ).componentInstance.userId = this.userData.uid;
   }
 
+  public onClickDeleteAllTasks(): void {
+    const dialogRef = this.dialog.open(
+      ConfirmationDialogComponent,
+      CONFIRMATION_POPUP_STYLE
+    );
+    dialogRef.componentInstance.confirmationDialogBox =
+      new ConfirmationDialogBox(
+        "Be careful!",
+        "Do you really want to delete all your tasks?",
+        "YES/NO"
+      );
+    dialogRef.afterClosed().subscribe((answer) => {
+      if (answer) {
+        this.tasksService.handleDeleteAllTasks(this.userData.uid);
+      }
+    });
+  }
+
   public onClickSortBy(
     sortByOption: SortByOptions,
     sortByType?: SortByType
   ): void {
     this.sortBy = new SortBy(sortByOption, sortByType);
     this.logService.logToConsole(
-      new Log(`Sort by ${sortByOption} (${sortByType})`)
+      new Log(`Sorted by ${sortByOption} (${sortByType})`)
     );
-    this.logService.showNotification(
-      new Notification(`Sort by ${sortByOption} (${sortByType})`, "WARN")
-    );
+    const sortingOption =
+      sortByOption === "TITLE"
+        ? "title"
+        : sortByOption === "DEADLINE"
+        ? "date of deadline"
+        : sortByOption === "DONE_AT_DATE"
+        ? "date of completion"
+        : "";
+    if (sortingOption !== "") {
+      this.logService.showNotification(
+        new Notification(
+          `Sorted by ${sortingOption} (${sortByType.toLowerCase()})`,
+          "WARN"
+        )
+      );
+    } else {
+      this.logService.showNotification(
+        new Notification(`Tasks are not sorted`, "WARN")
+      );
+    }
+  }
+
+  public onClickChangeTasksVisibilityFilter(
+    visibilityFilterType: TasksVisibilityFilterType
+  ): void {
+    this.tasksVisibilityFilter = visibilityFilterType;
   }
 }

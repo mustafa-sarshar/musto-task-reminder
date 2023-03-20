@@ -64,6 +64,14 @@ export class DataFlowService {
     this.setUserData(userData);
   }
 
+  public deleteUserTasksAll(): void {
+    const userData = this.getUserData();
+    userData.tasks = undefined;
+
+    this.logService.logToConsole(new Log("All Tasks Deleted", "INFO"));
+    this.setUserData(userData);
+  }
+
   public updateUserTask(userTask: Task): void {
     const userData = this.getUserData();
     if (userData.tasks) {

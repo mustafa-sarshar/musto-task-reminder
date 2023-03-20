@@ -3,9 +3,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { SortBy, Task } from "../../models";
 
 @Pipe({
-  name: "sortArray",
+  name: "tasksSort",
 })
-export class SortArrayPipe implements PipeTransform {
+export class TasksSortPipe implements PipeTransform {
   transform(tasks: Task[], sortBy: SortBy): Task[] {
     let tasksSorted: Task[] = [...tasks];
 
@@ -32,13 +32,17 @@ export class SortArrayPipe implements PipeTransform {
   }
 
   private compareTitles(t1: Task, t2: Task) {
-    if (t1.title < t2.title) {
-      return -1;
-    }
-    if (t1.title > t2.title) {
-      return 1;
-    }
-    return 0;
+    return t1.title.localeCompare(t2.title, undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
+    // if (t1.title < t2.title) {
+    //   return -1;
+    // }
+    // if (t1.title > t2.title) {
+    //   return 1;
+    // }
+    // return 0;
   }
 
   private compareDeadlines(t1: Task, t2: Task) {
@@ -52,13 +56,10 @@ export class SortArrayPipe implements PipeTransform {
   }
 
   private compareDoneAtDate(t1: Task, t2: Task) {
-    if (!t1.doneAtDate || !t2.doneAtDate) {
-      console.log(t1.doneAtDate, t2.doneAtDate);
-    }
-    if (t1.doneAtDate < t2.doneAtDate || !t1.doneAtDate) {
+    if (t1.doneAtDate > t2.doneAtDate || !t2.doneAtDate) {
       return -1;
     }
-    if (t1.doneAtDate > t2.doneAtDate || !t2.doneAtDate) {
+    if (t1.doneAtDate < t2.doneAtDate || !t1.doneAtDate) {
       return 1;
     }
     return 0;

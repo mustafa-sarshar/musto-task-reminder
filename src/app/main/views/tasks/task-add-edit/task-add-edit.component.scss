@@ -7,6 +7,7 @@ mat {
     flex-direction: column;
     overflow: scroll;
     height: 75vh;
+    padding-bottom: 2rem;
 
     @media all and (max-height: $break-point__vertical--xs) {
       height: 95vh;

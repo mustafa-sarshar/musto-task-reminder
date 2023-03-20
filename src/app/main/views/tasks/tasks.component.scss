@@ -28,14 +28,5 @@ mat {
       justify-content: flex-end;
       align-items: center;
     }
-
-    &-footer {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      align-items: center;
-      border-top: 1px solid gray;
-    }
   }
 }

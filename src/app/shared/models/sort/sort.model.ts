@@ -12,3 +12,4 @@ export class SortBy {
     public sortByType: SortByType
   ) {}
 }
+

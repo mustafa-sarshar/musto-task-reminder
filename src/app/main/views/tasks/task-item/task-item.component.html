@@ -12,12 +12,11 @@
   </div>
   <div *ngIf="taskItemMode === 1" class="task-content__modes">
     <div class="task-content__actions---options">
-      <button mat-icon-button color="default" aria-label="to finish the task" (click)="onClickLess()"
-        matTooltip="See less">
+      <button mat-icon-button color="default" aria-label="to show less" (click)="onClickLess()" matTooltip="See less">
         <mat-icon color="primary">arrow_back_ios</mat-icon>
       </button>
-      <button mat-icon-button color="default" aria-label="to finish the task" (click)="onClickToggleDone()"
-        [matTooltip]="task.done ? 'Done at: ' + (task.doneAtDate | date) : 'Deadline: ' + (task.deadline | date)">
+      <button mat-icon-button color="default" aria-label="to complete the task" (click)="onClickToggleDone()"
+        [matTooltip]="task.done ? 'Completed at: ' + (task.doneAtDate | date) : 'Deadline: ' + (task.deadline | date)">
         <mat-icon color="{{task.done ? 'accent' : 'warn'}}">{{task.done ? 'done' : 'timer'}}</mat-icon>
       </button>
       <button mat-icon-button color="default" aria-label="to see task's details" (click)="onClickDetails()"
@@ -28,7 +27,7 @@
         matTooltip="Edit the task">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="default" aria-label="to delete the task" (click)="onClickDelete()"
+      <button mat-icon-button color="warn" aria-label="to delete the task" (click)="onClickDelete()"
         matTooltip="Delete the task">
         <mat-icon>delete</mat-icon>
       </button>

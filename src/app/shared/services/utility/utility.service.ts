@@ -227,7 +227,7 @@ export class UtilityService {
         break;
       case "PASSWORD":
         message =
-          "Password length must be at least 8 characters, contain one or more uppercase characters, and one or more lowercase characters, and one or more numeric values, and one or more special characters";
+          "Password length must be 8-256 characters long and/or contain one or more uppercase characters, and/or one or more lowercase characters, and/or one or more numeric values, and/or one or more special characters";
         break;
       case "TASK_TITLE":
         message =
@@ -235,7 +235,7 @@ export class UtilityService {
         break;
       case "TASK_DESCRIPTION":
         message =
-          "Description must be at least 5 characters long and alphanumeric! Moreover, parentheses and spaces are allowed!";
+          "Description must be 5-256 characters long and alphanumeric! Moreover, parentheses and spaces are allowed!";
         break;
       case "TASK_DEADLINE":
         message = "Deadline date must be valid!";

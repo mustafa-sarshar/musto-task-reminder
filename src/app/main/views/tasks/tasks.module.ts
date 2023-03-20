@@ -3,9 +3,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 
 import {
-  FilterArrayPipe,
-  SortArrayPipe,
+  ApplyPaginationPipe,
   StringShortenerPipe,
+  TasksFilterPipe,
+  TasksSortPipe,
+  TasksVisibilityFilterPipe,
 } from "src/app/shared/pipes";
 import { TasksRoutingModule } from "./tasks-routing.module";
 import { TasksMaterialModule } from "./tasks-material.module";
@@ -29,8 +31,10 @@ const taskComponents = [
   declarations: [
     taskComponents,
     StringShortenerPipe,
-    FilterArrayPipe,
-    SortArrayPipe,
+    TasksFilterPipe,
+    TasksSortPipe,
+    TasksVisibilityFilterPipe,
+    ApplyPaginationPipe,
   ],
   imports: [
     CommonModule,

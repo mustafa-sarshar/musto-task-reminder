@@ -1,4 +1,4 @@
-import { FilterArrayPipe } from "./filter-array.pipe";
+import { FilterArrayPipe } from "./tasks-filter.pipe";
 
 describe("FilterArrayPipe", () => {
   it("create an instance", () => {

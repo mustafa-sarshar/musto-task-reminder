@@ -16,7 +16,8 @@ import {
   NotificationType,
   NotificationActionType,
 } from "./log/log.model";
-import { SortBy, SortByOptions, SortByType } from "./array/array/array.model";
+import { SortBy, SortByOptions, SortByType } from "./sort/sort.model";
+import { TasksVisibilityFilterType } from "./filter/filter.model";
 
 export {
   User,
@@ -36,4 +37,5 @@ export {
   SortBy,
   SortByOptions,
   SortByType,
+  TasksVisibilityFilterType,
 };

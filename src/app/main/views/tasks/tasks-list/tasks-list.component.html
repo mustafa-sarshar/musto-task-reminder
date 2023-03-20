@@ -19,7 +19,13 @@
 </form>
 <mat-list role="list" *ngIf="tasks && userId">
   <mat-list-item class="task-item" role="listitem"
-    *ngFor="let task of tasks | filterArray:formGroupEl.controls['title'].value:'title'">
+    *ngFor="let task of tasks | applyPagination:pagination.pageSize:pagination.pageIndex | tasksFilter:formGroupEl.controls['title'].value:'title'">
     <app-task-item [task]="task" [userId]="userId"></app-task-item>
   </mat-list-item>
 </mat-list>
+
+<mat-paginator (page)="handlePaginationEvent($event)" [length]="pagination.length" [pageSize]="pagination.pageSize"
+  [disabled]="pagination.disabled" [showFirstLastButtons]="pagination.showFirstLastButtons"
+  [pageSizeOptions]="pagination.showPageSizeOptions ? pagination.pageSizeOptions : []"
+  [hidePageSize]="pagination.hidePageSize" [pageIndex]="pagination.pageIndex" aria-label="Select page">
+</mat-paginator>

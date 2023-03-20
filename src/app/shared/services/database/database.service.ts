@@ -81,4 +81,12 @@ export class DatabaseService {
       )
       .pipe(catchError(this.utilityService.handleError));
   }
+
+  public deleteUserTasksAll(uid: string): Observable<Object> {
+    return this.http
+      .delete<Task>(
+        `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}/tasks.json`
+      )
+      .pipe(catchError(this.utilityService.handleError));
+  }
 }

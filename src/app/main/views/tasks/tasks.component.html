@@ -1,42 +1,83 @@
 <div class="tasks-container" *ngIf="userData">
   <p class="tasks-content__title">
-    All Tasks of <br>
-    <i>{{userData.username}}</i>
+    <u><i>{{userData.username}}</i></u> 's Tasks <br>
   </p>
   <mat-card class="tasks-content__tasks" *ngIf="userData['tasks']">
     <mat-card-header>
-      <mat-label>
-        Number of Tasks: {{userData.tasks.length}}
-      </mat-label>
+      <mat-label>You see now all <u>{{tasksVisibilityFilter !== 'ALL' ? (tasksVisibilityFilter | lowercase) : ''}}</u>
+        tasks</mat-label>
       <mat-card-content class="space-flex"></mat-card-content>
       <mat-card-actions>
+        <!-- Visibility Menu -->
+        <button mat-icon-button color="default" aria-label="to change the visibility filter"
+          [matMenuTriggerFor]="menuVisibility" matTooltip="Change the visibility filter">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <!-- Visibility Menu Items -->
+        <mat-menu #menuVisibility="matMenu">
+          <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('COMPLETED')" color="default"
+            aria-label="to see only completed tasks" matTooltip="Only completed tasks">
+            <mat-icon color="accent">done</mat-icon>
+            Only completed tasks
+          </button>
+          <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('UNCOMPLETED')" color="default"
+            aria-label="to see only uncompleted tasks" matTooltip="Only uncompleted tasks">
+            <mat-icon color="warn">timer</mat-icon>
+            Only uncompleted tasks
+          </button>
+          <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('ALL')" color="default"
+            aria-label="to disable visibility filter" matTooltip="Disable visibility filter">
+            <mat-icon color="default">visibility</mat-icon>
+            No visibility filter
+          </button>
+        </mat-menu>
+
+        <!-- Sort by Menu -->
         <button mat-icon-button color="default" aria-label="to sort tasks" [matMenuTriggerFor]="menuSortBy"
           matTooltip="Sort the tasks">
-          <mat-icon>sort_by_alpha</mat-icon>
+          <mat-icon color="default">sort_by_alpha</mat-icon>
         </button>
-        <!-- Sort by Menu -->
+        <!-- Sort by Menu Items -->
         <mat-menu #menuSortBy="matMenu">
           <!-- Sort by title -->
           <button mat-menu-item color="default" aria-label="to sort tasks by title"
             [matMenuTriggerFor]="menuSortBy__title" matTooltip="Sort the tasks by title">Sort by title</button>
           <mat-menu #menuSortBy__title="matMenu">
-            <button mat-menu-item (click)="onClickSortBy('TITLE', 'ASC')">Ascending</button>
-            <button mat-menu-item (click)="onClickSortBy('TITLE', 'DES')">Descending</button>
+            <button mat-menu-item (click)="onClickSortBy('TITLE', 'ASC')">
+              <mat-icon color="accent">arrow_upward</mat-icon>
+              Ascending
+            </button>
+            <button mat-menu-item (click)="onClickSortBy('TITLE', 'DES')">
+              <mat-icon color="warn">arrow_downward</mat-icon>
+              Descending
+            </button>
           </mat-menu>
           <!-- Sort by deadline -->
           <button mat-menu-item color="default" aria-label="to sort tasks by deadline"
             [matMenuTriggerFor]="menuSortBy__deadline" matTooltip="Sort the tasks by deadline">Sort by
             deadline</button>
           <mat-menu #menuSortBy__deadline="matMenu">
-            <button mat-menu-item (click)="onClickSortBy('DEADLINE', 'ASC')">Ascending</button>
-            <button mat-menu-item (click)="onClickSortBy('DEADLINE', 'DES')">Descending</button>
+            <button mat-menu-item (click)="onClickSortBy('DEADLINE', 'ASC')">
+              <mat-icon color="accent">arrow_upward</mat-icon>
+              Ascending
+            </button>
+            <button mat-menu-item (click)="onClickSortBy('DEADLINE', 'DES')">
+              <mat-icon color="warn">arrow_downward</mat-icon>
+              Descending
+            </button>
           </mat-menu>
           <!-- Sort by done -->
           <button mat-menu-item color="default" aria-label="to sort tasks by done"
-            [matMenuTriggerFor]="menuSortBy__done" matTooltip="Sort the tasks by done">Sort by done</button>
+            [matMenuTriggerFor]="menuSortBy__done" matTooltip="Sort the tasks by done">Sort by completion</button>
           <mat-menu #menuSortBy__done="matMenu">
-            <button mat-menu-item (click)="onClickSortBy('DONE_AT_DATE', 'ASC')">Ascending</button>
-            <button mat-menu-item (click)="onClickSortBy('DONE_AT_DATE', 'DES')">Descending</button>
+            <button mat-menu-item (click)="onClickSortBy('DONE_AT_DATE', 'ASC')">
+              <mat-icon color="accent">arrow_upward</mat-icon>
+              Ascending
+            </button>
+            <button mat-menu-item (click)="onClickSortBy('DONE_AT_DATE', 'DES')">
+              <mat-icon color="warn">arrow_downward</mat-icon>
+              Descending
+            </button>
           </mat-menu>
           <!-- No sorting -->
           <button mat-menu-item (click)="onClickSortBy('NO_SORTING')" color="default" aria-label="to not sort"
@@ -46,20 +87,21 @@
           matTooltip="Add a new task">
           <mat-icon color="default">add_box</mat-icon>
         </button>
+        <button mat-icon-button color="default" aria-label="to delete all tasks" (click)="onClickDeleteAllTasks()"
+          matTooltip="Delete all tasks">
+          <mat-icon color="warn">delete_forever</mat-icon>
+        </button>
       </mat-card-actions>
     </mat-card-header>
     <mat-card-content>
-      <app-tasks-list [userId]="userData.uid" [tasks]="userData.tasks | sortArray:sortBy"></app-tasks-list>
+      <app-tasks-list [userId]="userData.uid"
+        [tasks]="userData['tasks'] | tasksSort:sortBy  | tasksVisibilityFilter:tasksVisibilityFilter"></app-tasks-list>
     </mat-card-content>
     <mat-card-content class="space-flex"></mat-card-content>
-    <mat-card-footer>
-      <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
-      </mat-paginator>
-    </mat-card-footer>
   </mat-card>
   <mat-card *ngIf="!userData['tasks']">
     <mat-card-header>
-      <h3>No Tasks</h3>
+      <p>You have no tasks!!!</p>
       <mat-card-content class="space-flex"></mat-card-content>
       <button mat-icon-button color="default" aria-label="to finish the task" (click)="onClickAddTask()"
         matTooltip="Add a new task">
