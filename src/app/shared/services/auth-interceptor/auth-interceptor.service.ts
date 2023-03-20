@@ -1,5 +1,4 @@
 import {
-  HTTP_INTERCEPTORS,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
@@ -12,9 +11,7 @@ import { Observable, exhaustMap, take } from "rxjs";
 import { DataFlowService } from "../data-flow/data-flow.service";
 import { User } from "../../models";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable({ providedIn: "root" })
 export class AuthInterceptorService implements HttpInterceptor {
   constructor(private dataFlowService: DataFlowService) {}
 
@@ -37,8 +34,3 @@ export class AuthInterceptorService implements HttpInterceptor {
     );
   }
 }
-
-/** Http interceptor providers in outside-in order */
-export const httpInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
-];

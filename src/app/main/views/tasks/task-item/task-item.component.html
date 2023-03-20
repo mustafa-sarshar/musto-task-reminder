@@ -2,7 +2,7 @@
   <div *ngIf="taskItemMode === 0" class="task-content__modes">
     <div class="task-content__title" [matTooltip]="task.description">
       <p *ngIf="task.done" class="task-content__title---done"><s>{{task.title}}</s></p>
-      <p *ngIf="!task.done">{{task.title}}</p>
+      <p *ngIf="!task.done">{{task.title | stringShortener:20 }}</p>
     </div>
     <div class="task-content__actions---more">
       <button mat-button color="default" aria-label="to finish the task" (click)="onClickMore()" matTooltip="See more">

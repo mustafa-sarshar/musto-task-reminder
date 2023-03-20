@@ -14,10 +14,9 @@ import {
   UserDataFromDatabase,
   UserDataFromLocalStorage,
 } from "../../models";
+import { AppMonitoringService } from "../app-monitoring/app-monitoring.service";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable({ providedIn: "root" })
 export class DataFlowService {
   public userData: BehaviorSubject<User | null> =
     new BehaviorSubject<User | null>(null);
@@ -26,7 +25,8 @@ export class DataFlowService {
     private localStorageService: LocalStorageService,
     private utilityService: UtilityService,
     private logService: LogService,
-    private databaseService: DatabaseService
+    private databaseService: DatabaseService,
+    private appMonitoringService: AppMonitoringService
   ) {}
 
   public setUserData(userData: User | null): void {
@@ -89,10 +89,12 @@ export class DataFlowService {
   }
 
   public initUserProfileData(userData: User, syncData: boolean = false) {
+    this.appMonitoringService.setIsDataFetchingStatus(true);
     this.databaseService
       .getUserProfileDataFromDatabase(userData.uid)
       .subscribe({
         next: (response: UserDataFromDatabase) => {
+          this.appMonitoringService.setIsDataFetchingStatus(false);
           this.logService.logToConsole(
             new Log(
               "User profile data loaded from database successfully!",
@@ -119,6 +121,7 @@ export class DataFlowService {
           this.setUserData(userData);
         },
         error: (error) => {
+          this.appMonitoringService.setIsDataFetchingStatus(false);
           this.logService.logToConsole(
             new Log("getUserProfileDataFromDatabase" + error.message, "ERROR")
           );

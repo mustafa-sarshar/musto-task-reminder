@@ -17,10 +17,8 @@ import {
   UserDataFromDatabase,
 } from "src/app/shared/models";
 
-@Injectable({
-  providedIn: "root",
-})
-export class UserProfileService implements OnInit, OnDestroy {
+@Injectable()
+export class ProfileService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
   private appMonitoringServiceSubscription: Subscription = new Subscription();
 
@@ -65,6 +63,18 @@ export class UserProfileService implements OnInit, OnDestroy {
       ]),
     });
     return formGroupEl;
+  }
+
+  public stillEnteringForm(formGroupEl: FormGroup): boolean {
+    let stillEditing: boolean = false;
+
+    Object.keys(formGroupEl.value).forEach((key) => {
+      if (formGroupEl.controls[key].value.length > 0) {
+        stillEditing = true;
+      }
+    });
+
+    return stillEditing;
   }
 
   public handleDeleteAccount(

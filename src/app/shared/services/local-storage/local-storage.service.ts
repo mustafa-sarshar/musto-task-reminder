@@ -3,9 +3,7 @@ import { Injectable } from "@angular/core";
 import { LogService } from "../log/log.service";
 import { Log, User, UserDataFromLocalStorage } from "../../models";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable({ providedIn: "root" })
 export class LocalStorageService {
   constructor(private logService: LogService) {}
 

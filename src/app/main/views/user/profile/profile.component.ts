@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 
 import { ConfirmationDialogComponent } from "src/app/shared/views/confirmation-dialog/confirmation-dialog.component";
 
@@ -11,17 +11,21 @@ import {
   DataFlowService,
   UtilityService,
 } from "src/app/shared/services";
-import { UserProfileService } from "./user-profile.service";
+import { ProfileService } from "./profile.service";
+import { onCanDeactivate } from "src/app/shared/guards";
 
 import { ConfirmationDialogBox, Log, User } from "src/app/shared/models";
 import { CONFIRMATION_POPUP_STYLE } from "src/configs";
+import { UrlTree } from "@angular/router";
 
 @Component({
-  selector: "app-user-profile",
-  templateUrl: "./user-profile.component.html",
-  styleUrls: ["./user-profile.component.scss"],
+  selector: "app-profile",
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.scss"],
+  providers: [ProfileService],
 })
-export class UserProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnInit, OnDestroy, onCanDeactivate {
+  @ViewChild("btnApplyChanges") btnApplyChangesEl: HTMLButtonElement;
   public formGroupEl: FormGroup;
   public userData: User | null = null;
   public isDataFetching: boolean = false;
@@ -33,14 +37,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private appMonitoringService: AppMonitoringService,
     private logService: LogService,
     private dataFlowService: DataFlowService,
-    private userProfileService: UserProfileService,
+    private profileService: ProfileService,
     public utilityService: UtilityService,
     private dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
     this.appMonitoringService.setIsDataFetchingStatus(true);
-    this.formGroupEl = this.userProfileService.initForm();
+    this.formGroupEl = this.profileService.initForm();
     this.appMonitoringServiceSubscription =
       this.appMonitoringService.isDataFetching.subscribe((status: boolean) => {
         this.isDataFetching = status;
@@ -64,7 +68,32 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.dataFlowServiceSubscription.unsubscribe();
   }
 
-  onClickDeleteAccount(): void {
+  public onCanDeactivate():
+    | boolean
+    | UrlTree
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree> {
+    if (
+      this.profileService.stillEnteringForm(this.formGroupEl) ||
+      this.isDataFetching
+    ) {
+      const dialogRef = this.dialog.open(
+        ConfirmationDialogComponent,
+        CONFIRMATION_POPUP_STYLE
+      );
+      dialogRef.componentInstance.confirmationDialogBox =
+        new ConfirmationDialogBox(
+          "Be careful!",
+          "If you leave the page now, you will discard the changes!",
+          "YES/NO"
+        );
+      return dialogRef.afterClosed();
+    } else {
+      return true;
+    }
+  }
+
+  public onClickDeleteAccount(): void {
     if (this.userData.username) {
       const dialogRef = this.dialog.open(
         ConfirmationDialogComponent,
@@ -78,14 +107,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         );
       dialogRef.afterClosed().subscribe((answer) => {
         if (answer) {
-          this.userProfileService.handleDeleteAccount(this.userData);
+          this.profileService.handleDeleteAccount(this.userData);
         }
       });
     }
   }
 
   public onClickReset(): void {
-    this.formGroupEl.reset();
+    this.formGroupEl.reset({ username: "", birthDate: "" });
   }
 
   public onClickApplyChanges(): void {
@@ -96,8 +125,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     if (this.formGroupEl.controls["birthDate"].value) {
       dataToPatch["birthDate"] = this.formGroupEl.controls["birthDate"].value;
     }
-    this.userProfileService.handleApplyChanges(this.userData, dataToPatch, () =>
-      this.formGroupEl.reset()
+    this.profileService.handleApplyChanges(this.userData, dataToPatch, () =>
+      this.formGroupEl.reset({ username: "", birthDate: "" })
     );
   }
 }

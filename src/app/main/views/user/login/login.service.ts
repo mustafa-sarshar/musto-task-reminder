@@ -16,9 +16,7 @@ import {
   UserLoginCredentials,
 } from "src/app/shared/models";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class LoginService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
   private appMonitoringServiceSubscription: Subscription = new Subscription();

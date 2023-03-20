@@ -4,9 +4,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UtilityService } from "src/app/shared/services";
 import { Task } from "src/app/shared/models";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class TasksListService implements OnInit {
   constructor(private utilityService: UtilityService) {}
 

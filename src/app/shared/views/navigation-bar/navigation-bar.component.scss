@@ -1,5 +1,5 @@
 $size-toolbar: 56px;
-$size-footer: 113px;
+$size-footer: 102px;
 
 .sidenav {
   width: 200px;
@@ -64,6 +64,6 @@ $size-footer: 113px;
   &-footer {
     position: sticky;
     bottom: 0;
-    height: 113px;
+    height: $size-footer;
   }
 }

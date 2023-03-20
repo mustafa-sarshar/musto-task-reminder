@@ -14,6 +14,7 @@ import { CONFIRMATION_POPUP_STYLE, TASK_DETAILS_FORM_STYLE } from "src/configs";
   selector: "app-task-item",
   templateUrl: "./task-item.component.html",
   styleUrls: ["./task-item.component.scss"],
+  providers: [TaskItemService],
 })
 export class TaskItemComponent implements OnInit, OnDestroy {
   @Input("userId") userId: string | null = null;

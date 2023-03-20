@@ -18,9 +18,7 @@ import {
   UserRegistrationCredentials,
 } from "src/app/shared/models";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class RegistrationService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
   private appMonitoringServiceSubscription: Subscription = new Subscription();
@@ -122,7 +120,7 @@ export class RegistrationService implements OnInit, OnDestroy {
                 new Notification(error.message, "ERROR")
               );
 
-              // Delete the user account if the was an error while storing user-profile data on database
+              // Delete the user account if the was an error while storing profile data on database
               this.authService
                 .handleDeleteUserAccount(authResponse.idToken)
                 .subscribe({

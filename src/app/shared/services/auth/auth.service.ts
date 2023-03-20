@@ -16,9 +16,7 @@ import {
 } from "../../models";
 import { environment } from "src/environments/environment";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable({ providedIn: "root" })
 export class AuthService {
   private tokenExpirationTimer = null;
 

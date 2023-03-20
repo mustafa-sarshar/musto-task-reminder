@@ -6,9 +6,7 @@ import { UtilityService } from "../utility/utility.service";
 import { environment } from "src/environments/environment";
 import { Task, User } from "../../models";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable({ providedIn: "root" })
 export class DatabaseService {
   constructor(
     private utilityService: UtilityService,

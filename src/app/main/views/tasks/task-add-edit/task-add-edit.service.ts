@@ -11,9 +11,7 @@ import {
 import { Log, Notification, Task } from "src/app/shared/models";
 import { Subscription } from "rxjs";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class TaskAddEditService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
   private appMonitoringServiceSubscription: Subscription = new Subscription();

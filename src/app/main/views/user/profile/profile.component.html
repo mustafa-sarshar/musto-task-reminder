@@ -1,10 +1,10 @@
-<div class="user-profile__container">
-  <mat-card class="user-profile__item">
+<div class="profile__container">
+  <mat-card class="profile__item">
     <mat-card-header>
-      <mat-card-title class="user-profile__title">User Info</mat-card-title>
+      <mat-card-title class="profile__title">User Info</mat-card-title>
     </mat-card-header>
-    <mat-card-content class="user-profile__body">
-      <mat-card-subtitle class="user-profile__userInfo">
+    <mat-card-content class="profile__body">
+      <mat-card-subtitle class="profile__userInfo">
         <span>Username:</span>
         <p>
           <strong>{{userData.username}}</strong>
@@ -28,10 +28,10 @@
       </mat-card-actions>
     </mat-card-footer>
   </mat-card>
-  <mat-card class="user-profile__item">
+  <mat-card class="profile__item">
     <form autoComplete="off" [formGroup]="formGroupEl">
       <mat-card-header>
-        <mat-card-title class="user-profile__title">Update Form</mat-card-title>
+        <mat-card-title class="profile__title">Update Form</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <mat-form-field appearance="outline" color="accent">

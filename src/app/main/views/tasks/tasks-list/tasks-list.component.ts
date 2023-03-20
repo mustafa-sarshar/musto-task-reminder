@@ -9,6 +9,7 @@ import { TasksListService } from "./tasks-list.service";
   selector: "app-tasks-list",
   templateUrl: "./tasks-list.component.html",
   styleUrls: ["./tasks-list.component.scss"],
+  providers: [TasksListService],
 })
 export class TasksListComponent implements OnInit, OnDestroy {
   public userId: string | null = null;
@@ -42,6 +43,6 @@ export class TasksListComponent implements OnInit, OnDestroy {
   }
 
   public onClickClearSearchBox(): void {
-    this.formGroupEl.setValue({ title: "" });
+    this.formGroupEl.reset({ title: "" });
   }
 }

@@ -12,6 +12,7 @@ import { UserLoginCredentials } from "src/app/shared/models";
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
+  providers: [LoginService],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public isDataFetching: boolean = false;

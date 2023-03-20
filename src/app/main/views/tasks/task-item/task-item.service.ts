@@ -8,9 +8,7 @@ import {
 } from "src/app/shared/services";
 import { Log, Notification, Task } from "src/app/shared/models";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class TaskItemService implements OnInit {
   private isDataFetching: boolean = false;
 

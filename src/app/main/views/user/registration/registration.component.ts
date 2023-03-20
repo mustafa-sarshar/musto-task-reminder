@@ -15,6 +15,7 @@ import { RegistrationService } from "./registration.service";
   selector: "app-registration",
   templateUrl: "./registration.component.html",
   styleUrls: ["./registration.component.scss"],
+  providers: [RegistrationService],
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
   public formGroupEl: FormGroup;

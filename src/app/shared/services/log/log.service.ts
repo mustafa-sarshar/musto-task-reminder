@@ -4,9 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { environment } from "src/environments/environment";
 import { Log, Notification } from "../../models";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable({ providedIn: "root" })
 export class LogService {
   constructor(private snackBar: MatSnackBar) {}
 

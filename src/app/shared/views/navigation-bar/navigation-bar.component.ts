@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
+import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { MatDrawer } from "@angular/material/sidenav";
-import { Router } from "@angular/router";
 import { map, shareReplay } from "rxjs/operators";
 import { Observable, Subscription } from "rxjs";
 
@@ -67,8 +67,8 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     this.drawerEl.close();
   }
 
-  public onClickUserProfile(): void {
-    this.router.navigate(["/user-profile"]);
+  public onClickProfile(): void {
+    this.router.navigate(["/profile"]);
     this.drawerEl.close();
   }
 

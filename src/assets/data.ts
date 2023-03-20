@@ -8,4 +8,5 @@ export const userTasksGroups: TaskGroup[] = [
   new TaskGroup("0004", "Work"),
   new TaskGroup("0005", "Family"),
   new TaskGroup("0006", "Friends"),
+  new TaskGroup("0007", "Personal"),
 ];

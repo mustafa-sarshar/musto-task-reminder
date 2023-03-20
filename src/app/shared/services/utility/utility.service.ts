@@ -5,6 +5,12 @@ import { throwError } from "rxjs";
 import { User, UserDataFromLocalStorage } from "../../models";
 import { FormControl } from "@angular/forms";
 
+type dateValidation = {
+  validateDate: {
+    valid: boolean;
+  };
+};
+
 type ValidationFields =
   | "USERNAME"
   | "EMAIL"
@@ -15,9 +21,7 @@ type ValidationFields =
   | "TASK_DEADLINE"
   | "WEB_LINK";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable({ providedIn: "root" })
 export class UtilityService {
   constructor() {}
 
@@ -246,9 +250,9 @@ export class UtilityService {
     return message;
   }
 
-  public validateDateMin(dateInput: FormControl) {
+  public validateDateMin(controlEl: FormControl): dateValidation | null {
     const dateNow = new Date().toISOString().slice(0, 10);
-    return dateInput.value >= dateNow
+    return controlEl.value >= dateNow
       ? null
       : {
           validateDate: {
@@ -257,7 +261,7 @@ export class UtilityService {
         };
   }
 
-  public validateAge(dateInput: FormControl) {
+  public validateAge(dateInput: FormControl): dateValidation | null {
     const minAge = 3;
     const maxAge = 120;
     const dateNow = new Date();

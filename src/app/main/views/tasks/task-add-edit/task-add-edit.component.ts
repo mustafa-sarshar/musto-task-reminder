@@ -16,6 +16,7 @@ import { userTasksGroups } from "src/assets/data";
   selector: "app-task-add-edit",
   templateUrl: "./task-add-edit.component.html",
   styleUrls: ["./task-add-edit.component.scss"],
+  providers: [TaskAddEditService],
 })
 export class TaskAddEditComponent {
   @Input() public userId: string = "";

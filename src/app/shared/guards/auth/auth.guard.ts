@@ -11,9 +11,7 @@ import { Observable, map, take } from "rxjs";
 import { DataFlowService } from "../../services/data-flow/data-flow.service";
 import { User } from "../../models";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable({ providedIn: "root" })
 export class AuthGuard implements CanActivate {
   constructor(
     private dataFlowService: DataFlowService,

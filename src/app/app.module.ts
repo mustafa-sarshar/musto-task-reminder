@@ -1,56 +1,21 @@
 import { NgModule, isDevMode } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { ServiceWorkerModule } from "@angular/service-worker";
-import { LayoutModule } from "@angular/cdk/layout";
-import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AppMaterialModule } from "./app-material.module";
+import { AppCoreModule } from "./app-core.module";
 
-import { httpInterceptorProviders } from "./shared/services/auth-interceptor/auth-interceptor.service";
-import { FilterArrayPipe } from "./shared/pipes";
-
-import { WelcomePageComponent } from "./main/views/welcome-page/welcome-page.component";
-import { ConfirmationDialogComponent } from "./shared/views/confirmation-dialog/confirmation-dialog.component";
-import { LoadingSpinnerComponent } from "./shared/views/loading-spinner/loading-spinner.component";
-import { NavigationBarComponent } from "./shared/views/navigation-bar/navigation-bar.component";
-import { FooterComponent } from "./shared/views/footer/footer.component";
-import { LanguageComponent } from "./shared/views/language/language.component";
-import { RegistrationComponent } from "./main/views/user/registration/registration.component";
-import { LoginComponent } from "./main/views/user/login/login.component";
-
-import { TasksComponent } from "./main/views/tasks/tasks.component";
-import { UserProfileComponent } from "./main/views/user/user-profile/user-profile.component";
-import { TasksListComponent } from "./main/views/tasks/tasks-list/tasks-list.component";
-import { TaskItemComponent } from "./main/views/tasks/task-item/task-item.component";
-import { TaskDetailsComponent } from "./main/views/tasks/task-details/task-details.component";
-import { TaskAddEditComponent } from "./main/views/tasks/task-add-edit/task-add-edit.component";
+import { SharedViewsModule } from "./shared/views/shared-views.module";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    WelcomePageComponent,
-    ConfirmationDialogComponent,
-    LoadingSpinnerComponent,
-    NavigationBarComponent,
-    FooterComponent,
-    LanguageComponent,
-    RegistrationComponent,
-    LoginComponent,
-    TasksComponent,
-    UserProfileComponent,
-    TasksListComponent,
-    TaskItemComponent,
-    TaskAddEditComponent,
-    TaskDetailsComponent,
-    TaskAddEditComponent,
-    FilterArrayPipe,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
+    AppCoreModule,
     AppRoutingModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: !isDevMode(),
@@ -58,13 +23,13 @@ import { TaskAddEditComponent } from "./main/views/tasks/task-add-edit/task-add-
       // or after 30 seconds (whichever comes first).
       registrationStrategy: "registerWhenStable:30000",
     }),
+    // BrowserAnimationsModule,
+    // LayoutModule,
     BrowserAnimationsModule,
-    AppMaterialModule,
-    LayoutModule,
-    ReactiveFormsModule,
+    MatSnackBarModule,
     HttpClientModule,
+    SharedViewsModule,
   ],
-  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
