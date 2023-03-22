@@ -1,18 +1,44 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { MatDialogRef } from "@angular/material/dialog";
+
+import { DataFlowService } from "../../services";
+import { LanguageCode } from "../../models";
 
 @Component({
   selector: "app-language",
   templateUrl: "./language.component.html",
   styleUrls: ["./language.component.scss"],
 })
-export class LanguageComponent {
-  constructor() {}
+export class LanguageComponent implements OnInit {
+  public currentAppLanguage: LanguageCode = "en-US";
 
-  onClickEnglish(): void {}
+  constructor(
+    private dataFlowService: DataFlowService,
+    private dialogRef: MatDialogRef<LanguageComponent>
+  ) {}
 
-  onClickGerman(): void {}
+  public ngOnInit(): void {
+    this.currentAppLanguage = this.dataFlowService.getAppLanguage();
+  }
 
-  onClickTurkish(): void {}
+  onClickEnglish(): void {
+    this.dataFlowService.setAppLanguage("en-US");
+    this.dialogRef.close();
+  }
 
-  onClickPersian(): void {}
+  onClickGerman(): void {
+    this.dataFlowService.setAppLanguage("de-DE");
+
+    this.dialogRef.close();
+  }
+
+  onClickTurkish(): void {
+    this.dataFlowService.setAppLanguage("tr-TR");
+    this.dialogRef.close();
+  }
+
+  onClickPersian(): void {
+    this.dataFlowService.setAppLanguage("fa-IR");
+    this.dialogRef.close();
+  }
 }

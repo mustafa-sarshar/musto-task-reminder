@@ -7,11 +7,12 @@ import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
 
-import { NavigationBarComponent } from "./navigation-bar.component";
+import { TranslateForChildModule } from "../../modules";
 import { FooterModule } from "../footer/footer.module";
 import { AuthService, DataFlowService } from "../../services";
-import { MatDialogModule } from "@angular/material/dialog";
+import { NavigationBarComponent } from "./navigation-bar.component";
 
 @NgModule({
   declarations: [NavigationBarComponent],
@@ -25,6 +26,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatButtonModule,
     MatDialogModule,
     FooterModule,
+    TranslateForChildModule,
   ],
   providers: [AuthService, DataFlowService],
 

@@ -7,26 +7,36 @@ import { LogService } from "../log/log.service";
 import { DatabaseService } from "../database/database.service";
 
 import {
+  LanguageCode,
   Log,
   Notification,
   Task,
+  TaskGroup,
   User,
   UserDataFromDatabase,
   UserDataFromLocalStorage,
 } from "../../models";
 import { AppMonitoringService } from "../app-monitoring/app-monitoring.service";
+import { CookieServiceService } from "../cookie-service/cookie-service.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({ providedIn: "root" })
 export class DataFlowService {
-  public userData: BehaviorSubject<User | null> =
-    new BehaviorSubject<User | null>(null);
+  public userData: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  public appLanguage: BehaviorSubject<LanguageCode> =
+    new BehaviorSubject<LanguageCode>("en-US");
+  public taskGroups: BehaviorSubject<TaskGroup[]> = new BehaviorSubject<
+    TaskGroup[]
+  >(null);
 
   constructor(
     private localStorageService: LocalStorageService,
     private utilityService: UtilityService,
     private logService: LogService,
     private databaseService: DatabaseService,
-    private appMonitoringService: AppMonitoringService
+    private appMonitoringService: AppMonitoringService,
+    private translateService: TranslateService,
+    private cookieService: CookieServiceService
   ) {}
 
   public setUserData(userData: User | null): void {
@@ -112,7 +122,7 @@ export class DataFlowService {
           this.logService.logToConsole(new Log(response));
           if (syncData) {
             this.logService.showNotification(
-              new Notification("Data got synced successfully!", "SUCCESS")
+              new Notification("SYNC_DATA", "SUCCESS")
             );
           }
 
@@ -135,7 +145,7 @@ export class DataFlowService {
           );
           if (syncData) {
             this.logService.showNotification(
-              new Notification("Data could not get synced!", "WARN")
+              new Notification("SYNC_DATA", "ERROR")
             );
           }
 
@@ -149,5 +159,47 @@ export class DataFlowService {
     if (userData) {
       this.initUserProfileData(userData, true);
     }
+  }
+
+  public initAppLanguage(): void {
+    this.setAppLanguage(this.getAppLanguage());
+
+    this.logService.logToConsole(
+      new Log("App Language initialized: " + this.appLanguage.getValue())
+    );
+  }
+
+  public setAppLanguage(selectedLanguage: LanguageCode): void {
+    this.appLanguage.next(selectedLanguage);
+    this.cookieService.setCookie("appLanguage", selectedLanguage, 10);
+    this.localStorageService.storeAppLanguageOnLocalStorage(selectedLanguage);
+  }
+
+  public getAppLanguage(): LanguageCode {
+    const appLanguage = this.cookieService.getCookie(
+      "appLanguage"
+    ) as LanguageCode;
+    if (appLanguage) {
+      return appLanguage;
+    } else {
+      return this.localStorageService.getAppLanguageFromLocalStorage();
+    }
+  }
+
+  public applyAppLanguage(): void {
+    this.translateService.use(this.getAppLanguage());
+  }
+
+  public initTaskGroups(): void {
+    let taskGroupsList: TaskGroup[] = [];
+
+    this.translateService.get("TASK_GROUPS").subscribe((taskGroups) => {
+      if (taskGroups) {
+        for (let key in taskGroups) {
+          taskGroupsList.push(new TaskGroup(key, taskGroups[key]));
+        }
+        this.taskGroups.next(taskGroupsList);
+      }
+    });
   }
 }

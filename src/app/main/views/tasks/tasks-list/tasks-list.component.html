@@ -1,8 +1,11 @@
 <form class="search-container" autoComplete="off" [formGroup]="formGroupEl">
   <mat-card-content *ngIf="tasks && userId" class="search-box__content">
     <mat-form-field appearance="outline" color="accent">
-      <mat-label>Title</mat-label>
-      <input matInput type="text" formControlName="title" placeholder="title" id="title">
+      <mat-label>
+        {{"FORM_FIELDS.task.searchByTitle.label" | translate}}
+      </mat-label>
+      <input matInput type="text" formControlName="title"
+        [placeholder]="'FORM_FIELDS.task.searchByTitle.placeholder' | translate" id="title">
       <mat-icon color="default" matSuffix>search</mat-icon>
     </mat-form-field>
   </mat-card-content>
@@ -11,7 +14,7 @@
       *ngIf="tasks.length > 0 && formGroupEl.controls['title'].value.trim().length > 0"
       (click)="onClickClearSearchBox()"
       [disabled]="tasks.length === 0 || formGroupEl.controls['title'].value.trim().length === 0"
-      matTooltip="Clear the search box">
+      [matTooltip]="'TASKS_TASKS_LIST.actionButtons.clear.toolTip' | translate">
       <mat-icon
         [color]="tasks.length === 0 || formGroupEl.controls['title'].value.trim().length === 0 ? 'default' : 'warn'">backspace</mat-icon>
     </button>
@@ -19,13 +22,58 @@
 </form>
 <mat-list role="list" *ngIf="tasks && userId">
   <mat-list-item class="task-item" role="listitem"
-    *ngFor="let task of tasks | applyPagination:pagination.pageSize:pagination.pageIndex | tasksFilter:formGroupEl.controls['title'].value:'title'">
+    *ngFor="let task of tasks | applyPagination:paginationSettings.pageSize:paginationSettings.pageIndex | tasksFilter:formGroupEl.controls['title'].value:'title'">
     <app-task-item [task]="task" [userId]="userId"></app-task-item>
   </mat-list-item>
 </mat-list>
 
-<mat-paginator (page)="handlePaginationEvent($event)" [length]="pagination.length" [pageSize]="pagination.pageSize"
-  [disabled]="pagination.disabled" [showFirstLastButtons]="pagination.showFirstLastButtons"
-  [pageSizeOptions]="pagination.showPageSizeOptions ? pagination.pageSizeOptions : []"
-  [hidePageSize]="pagination.hidePageSize" [pageIndex]="pagination.pageIndex" aria-label="Select page">
+<mat-paginator #pagePaginator (page)="handlePaginationEvent($event)" [length]="paginationSettings.length"
+  [pageSize]="paginationSettings.pageSize" [disabled]="paginationSettings.disabled"
+  [showFirstLastButtons]="paginationSettings.showFirstLastButtons"
+  [pageSizeOptions]="paginationSettings.showPageSizeOptions ? paginationSettings.pageSizeOptions : []"
+  [hidePageSize]="paginationSettings.hidePageSize" [pageIndex]="paginationSettings.pageIndex"
+  [ariaLabel]="'TASKS_TASKS_LIST.actionButtons.paginator.ariaLabel' | translate">
 </mat-paginator>
+<div class="paginator-container">
+  <!-- Paginator Prev -->
+  <button mat-mini-fab color="primary" [matTooltip]="'TASKS_TASKS_LIST.actionButtons.paginatorPrev.toolTip' | translate"
+    [ariaLabel]="'TASKS_TASKS_LIST.actionButtons.paginatorPrev.ariaLabel' | translate"
+    [disabled]="paginationSettings.disabledPrev" (click)="pagePaginator.previousPage()">
+    <mat-icon class="paginator-actions__prev">play_arrow</mat-icon>
+  </button>
+  <div class="paginator__page-size">
+    <mat-label class="paginator__page-size__label">
+      {{"TASKS_TASKS_LIST.actionButtons.pageSize.label" | translate}}
+    </mat-label>
+    <button mat-icon-button color="default"
+      [ariaLabel]="'TASKS_TASKS_LIST.actionButtons.pageSize.ariaLabel' | translate" [matMenuTriggerFor]="menuVisibility"
+      [matTooltip]="'TASKS_TASKS_LIST.actionButtons.pageSize.toolTip' | translate">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <!-- Visibility Menu Items -->
+    <mat-menu #menuVisibility="matMenu">
+      <button mat-menu-item (click)="onClickChangePageSize(5)" color="default"
+        [disabled]="pagePaginator.pageSize === 5">
+        {{"TASKS_TASKS_LIST.actionButtons.pageSize_5.label" | translate}}
+      </button>
+      <button mat-menu-item (click)="onClickChangePageSize(10)" color="default"
+        [disabled]="pagePaginator.pageSize === 10">
+        {{"TASKS_TASKS_LIST.actionButtons.pageSize_10.label" | translate}}
+      </button>
+      <button mat-menu-item (click)="onClickChangePageSize(50)" color="default"
+        [disabled]="pagePaginator.pageSize === 50">
+        {{"TASKS_TASKS_LIST.actionButtons.pageSize_50.label" | translate}}
+      </button>
+      <button mat-menu-item (click)="onClickChangePageSize(100)" color="default"
+        [disabled]="pagePaginator.pageSize === 100">
+        {{"TASKS_TASKS_LIST.actionButtons.pageSize_100.label" | translate}}
+      </button>
+    </mat-menu>
+  </div>
+  <!-- Paginator Next -->
+  <button mat-mini-fab color="primary" [matTooltip]="'TASKS_TASKS_LIST.actionButtons.paginatorNext.toolTip' | translate"
+    [ariaLabel]="'TASKS_TASKS_LIST.actionButtons.paginatorNext.ariaLabel' | translate"
+    [disabled]="paginationSettings.disabledNext" (click)="pagePaginator.nextPage()">
+    <mat-icon>play_arrow</mat-icon>
+  </button>
+</div>

@@ -6,6 +6,7 @@ import { LocalStorageService } from "./local-storage/local-storage.service";
 import { UtilityService } from "./utility/utility.service";
 import { LogService } from "./log/log.service";
 import { DataFlowService } from "./data-flow/data-flow.service";
+import { CookieServiceService } from "./cookie-service/cookie-service.service";
 
 export {
   AppMonitoringService,
@@ -16,4 +17,5 @@ export {
   UtilityService,
   LogService,
   DataFlowService,
+  CookieServiceService,
 };

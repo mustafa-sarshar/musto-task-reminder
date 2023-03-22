@@ -19,7 +19,7 @@ import {
 @Injectable()
 export class LoginService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
-  private appMonitoringServiceSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription: Subscription = new Subscription();
 
   constructor(
     private appMonitoringService: AppMonitoringService,
@@ -30,7 +30,7 @@ export class LoginService implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.appMonitoringServiceSubscription =
+    this.isDataFetchingSubscription =
       this.appMonitoringService.isDataFetching.subscribe(
         (isDataFetching: boolean) => {
           this.isDataFetching = isDataFetching;
@@ -39,7 +39,7 @@ export class LoginService implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.appMonitoringServiceSubscription.unsubscribe();
+    this.isDataFetchingSubscription.unsubscribe();
   }
 
   public initForm(userEmail: string): FormGroup {
@@ -73,9 +73,7 @@ export class LoginService implements OnInit, OnDestroy {
       next: (response: AuthResponsePayload) => {
         this.logService.logToConsole(new Log("Login was successful!", "INFO"));
         this.logService.logToConsole(new Log(response));
-        this.logService.showNotification(
-          new Notification("Login was successful!", "SUCCESS")
-        );
+        this.logService.showNotification(new Notification("LOGIN", "SUCCESS"));
 
         this.authService.activateUserAutoLogout(+response.expiresIn * 1000);
         callbackSuccess();
@@ -85,9 +83,7 @@ export class LoginService implements OnInit, OnDestroy {
         this.logService.logToConsole(
           new Log("Login Error: " + error.message, "ERROR")
         );
-        this.logService.showNotification(
-          new Notification(error.message, "ERROR")
-        );
+        this.logService.showNotification(new Notification("LOGIN", "ERROR"));
 
         this.appMonitoringService.setIsDataFetchingStatus(false);
       },

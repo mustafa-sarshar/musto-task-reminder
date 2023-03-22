@@ -24,7 +24,7 @@ export class TasksListComponent implements OnInit, OnDestroy, OnChanges {
   @Input() tasks: Task[] | null = null;
   public formGroupEl: FormGroup;
   public paginationPageEvent: PageEvent;
-  public pagination = {
+  public paginationSettings = {
     length: 0,
     pageIndex: 0,
     pageSize: 5,
@@ -33,6 +33,8 @@ export class TasksListComponent implements OnInit, OnDestroy, OnChanges {
     showFirstLastButtons: false,
     showPageSizeOptions: true,
     disabled: false,
+    disabledNext: false,
+    disabledPrev: true,
   };
 
   constructor(
@@ -42,13 +44,13 @@ export class TasksListComponent implements OnInit, OnDestroy, OnChanges {
 
   public ngOnInit(): void {
     this.formGroupEl = this.tasksListService.initForm(this.tasks);
-    this.pagination.length = this.tasks.length;
+    this.paginationSettings.length = this.tasks.length;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (Object.keys(changes).indexOf("tasks") > -1) {
-      this.pagination.length = this.tasks.length;
-      this.pagination.pageIndex = 0;
+      this.paginationSettings.length = this.tasks.length;
+      this.paginationSettings.pageIndex = 0;
     }
   }
 
@@ -58,13 +60,20 @@ export class TasksListComponent implements OnInit, OnDestroy, OnChanges {
     this.formGroupEl.reset({ title: "" });
   }
 
+  public onClickChangePageSize(pageSize: number): void {
+    this.paginationSettings.pageSize = pageSize;
+    this.paginationSettings.pageIndex = 0;
+    this.tasksListService.updatePaginatorButtons(this.paginationSettings);
+  }
+
   public handlePaginationEvent(pageEvent: PageEvent) {
     this.paginationPageEvent = pageEvent;
-    this.pagination.length = pageEvent.length;
-    this.pagination.pageSize = pageEvent.pageSize;
-    this.pagination.pageIndex = pageEvent.pageIndex;
+    this.paginationSettings.length = pageEvent.length;
+    this.paginationSettings.pageSize = pageEvent.pageSize;
+    this.paginationSettings.pageIndex = pageEvent.pageIndex;
+    this.tasksListService.updatePaginatorButtons(this.paginationSettings);
 
     this.logService.logToConsole(new Log("Pagination Changed!", "INFO"));
-    this.logService.logToConsole(new Log(this.pagination));
+    this.logService.logToConsole(new Log(pageEvent));
   }
 }

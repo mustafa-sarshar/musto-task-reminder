@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Log, Notification } from "src/app/shared/models";
 import {
   AppMonitoringService,
@@ -8,15 +8,13 @@ import {
 } from "src/app/shared/services";
 
 @Injectable()
-export class TasksService implements OnInit {
+export class TasksService {
   constructor(
     private appMonitoringService: AppMonitoringService,
     private databaseService: DatabaseService,
     private dataFlowService: DataFlowService,
     private logService: LogService
   ) {}
-
-  public ngOnInit(): void {}
 
   public handleDeleteAllTasks(
     userId: string,
@@ -32,7 +30,7 @@ export class TasksService implements OnInit {
         );
         this.logService.logToConsole(new Log(response));
         this.logService.showNotification(
-          new Notification("All Tasks deleted successfully!", "SUCCESS")
+          new Notification("DELETE_ALL_TASKS", "SUCCESS")
         );
 
         this.dataFlowService.deleteUserTasksAll();
@@ -43,7 +41,7 @@ export class TasksService implements OnInit {
           new Log("The task couldn't get deleted!", "ERROR")
         );
         this.logService.showNotification(
-          new Notification(error.message, "ERROR")
+          new Notification("DELETE_ALL_TASKS", "ERROR")
         );
 
         this.appMonitoringService.setIsDataFetchingStatus(false);

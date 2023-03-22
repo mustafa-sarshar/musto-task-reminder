@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { UrlTree } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable, Subscription } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
 
 import { TaskAddEditComponent } from "./task-add-edit/task-add-edit.component";
 import { ConfirmationDialogComponent } from "src/app/shared/views/confirmation-dialog/confirmation-dialog.component";
@@ -24,6 +25,7 @@ import {
   SortByOptions,
   SortByType,
   TasksVisibilityFilterType,
+  LanguageCode,
 } from "src/app/shared/models";
 
 @Component({
@@ -37,20 +39,28 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
   public userData: User | null = null;
   public sortBy: SortBy = new SortBy("TITLE", "ASC");
   public tasksVisibilityFilter: TasksVisibilityFilterType = "ALL";
-  private dataFlowServiceSubscription: Subscription = new Subscription();
-  private databaseServiceSubscription: Subscription = new Subscription();
-  private appMonitoringServiceSubscription: Subscription = new Subscription();
+  private userDataSubscription: Subscription = new Subscription();
+  private appLanguageSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription: Subscription = new Subscription();
 
   constructor(
     private dataFlowService: DataFlowService,
     private logService: LogService,
     private appMonitoringService: AppMonitoringService,
     private tasksService: TasksService,
+    private translateService: TranslateService,
     private dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
-    this.dataFlowServiceSubscription = this.dataFlowService.userData.subscribe(
+    this.dataFlowService.applyAppLanguage();
+    this.appLanguageSubscription = this.dataFlowService.appLanguage.subscribe(
+      (selectedLanguage: LanguageCode) => {
+        this.translateService.use(selectedLanguage);
+      }
+    );
+
+    this.userDataSubscription = this.dataFlowService.userData.subscribe(
       (userData: User | null) => {
         this.userData = userData;
         if (userData.tasks) {
@@ -65,16 +75,16 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
       }
     );
 
-    this.appMonitoringServiceSubscription =
+    this.isDataFetchingSubscription =
       this.appMonitoringService.isDataFetching.subscribe((status) => {
         this.isDataFetching = status;
       });
   }
 
   public ngOnDestroy(): void {
-    this.dataFlowServiceSubscription.unsubscribe();
-    this.databaseServiceSubscription.unsubscribe();
-    this.appMonitoringServiceSubscription.unsubscribe();
+    this.userDataSubscription.unsubscribe();
+    this.appLanguageSubscription.unsubscribe();
+    this.isDataFetchingSubscription.unsubscribe();
   }
 
   public onCanDeactivate():
@@ -90,7 +100,8 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
       dialogRef.componentInstance.confirmationDialogBox =
         new ConfirmationDialogBox(
           "Please wait!",
-          "If you leave the page now, you will discard the changes!"
+          "If you leave the page now, you will discard the changes!",
+          "OK/CANCEL"
         );
       return dialogRef.afterClosed();
     } else {
@@ -140,16 +151,16 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
         ? "date of completion"
         : "";
     if (sortingOption !== "") {
-      this.logService.showNotification(
-        new Notification(
-          `Sorted by ${sortingOption} (${sortByType.toLowerCase()})`,
-          "WARN"
-        )
-      );
+      // this.logService.showNotification(
+      //   new Notification(
+      //     `Sorted by ${sortingOption} (${sortByType.toLowerCase()})`,
+      //     "WARN"
+      //   )
+      // );
     } else {
-      this.logService.showNotification(
-        new Notification(`Tasks are not sorted`, "WARN")
-      );
+      // this.logService.showNotification(
+      //   new Notification(`Tasks are not sorted`, "WARN")
+      // );
     }
   }
 
@@ -157,11 +168,11 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
     visibilityFilterType: TasksVisibilityFilterType
   ): void {
     this.tasksVisibilityFilter = visibilityFilterType;
-    this.logService.showNotification(
-      new Notification(
-        `Visibility filtered changed! (${this.tasksVisibilityFilter.toLowerCase()} tasks)`,
-        "WARN"
-      )
-    );
+    // this.logService.showNotification(
+    //   new Notification(
+    //     `Visibility filtered changed! (${this.tasksVisibilityFilter.toLowerCase()} tasks)`,
+    //     "WARN"
+    //   )
+    // );
   }
 }

@@ -4,10 +4,6 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
-/**
- * @constant
- * @description - It holds all necessary Material Design components needed for the app.
- */
 const materials = [MatDialogModule, MatSnackBarModule, MatTooltipModule];
 
 @NgModule({

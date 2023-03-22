@@ -11,6 +11,7 @@ import {
 } from "src/app/shared/pipes";
 import { TasksRoutingModule } from "./tasks-routing.module";
 import { TasksMaterialModule } from "./tasks-material.module";
+import { TranslateForChildModule } from "src/app/shared/modules";
 
 import { TasksComponent } from "./tasks.component";
 import { TasksListComponent } from "./tasks-list/tasks-list.component";
@@ -42,6 +43,7 @@ const taskComponents = [
     ReactiveFormsModule,
     TasksRoutingModule,
     TasksMaterialModule,
+    TranslateForChildModule,
   ],
 })
 export class TasksModule {}

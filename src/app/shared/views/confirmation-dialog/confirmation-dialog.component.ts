@@ -1,39 +1,44 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 
 import { ConfirmationDialogBox } from "../../models/dialog/dialog.model";
+import { TranslateService } from "@ngx-translate/core";
+import { Subscription } from "rxjs";
 
-/**
- * @class
- * @description - It acts as a popup dialog for interacting with user.
- */
 @Component({
   selector: "app-confirmation-dialog",
   templateUrl: "./confirmation-dialog.component.html",
   styleUrls: ["./confirmation-dialog.component.scss"],
 })
-export class ConfirmationDialogComponent {
-  confirmationDialogBox = new ConfirmationDialogBox("", "");
+export class ConfirmationDialogComponent implements OnInit, OnDestroy {
+  public confirmationDialogBox = new ConfirmationDialogBox("", "");
+  private translateSubscription: Subscription = new Subscription();
 
-  /**
-   * @constructor
-   * @param dialogRef
-   */
-  constructor(public dialogRef: MatDialogRef<ConfirmationDialogComponent>) {}
+  constructor(
+    private translateService: TranslateService,
+    public dialogRef: MatDialogRef<ConfirmationDialogComponent>
+  ) {}
 
-  /**
-   * @method
-   * @description - It closes the dialog by return 'false' to the dialog opener, representing the user's decline
-   */
-  onClickDecline(): void {
+  public ngOnInit(): void {
+    this.translateSubscription = this.translateService
+      .get("CONFIRMATION")
+      .subscribe((translation) => {
+        console.log(translation);
+        if (translation.header) {
+          // this.confirmationDialogBox.title = translation.header.title;
+        }
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.translateSubscription.unsubscribe();
+  }
+
+  public onClickDecline(): void {
     this.dialogRef.close(false);
   }
 
-  /**
-   * @method
-   * @description - It closes the dialog by return 'true' to the dialog opener, representing the user's acceptance
-   */
-  onClickAccept(): void {
+  public onClickAccept(): void {
     this.dialogRef.close(true);
   }
 }

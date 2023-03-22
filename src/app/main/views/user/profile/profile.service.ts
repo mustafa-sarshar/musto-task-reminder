@@ -20,7 +20,7 @@ import {
 @Injectable()
 export class ProfileService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
-  private appMonitoringServiceSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription: Subscription = new Subscription();
 
   constructor(
     private appMonitoringService: AppMonitoringService,
@@ -32,7 +32,7 @@ export class ProfileService implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.appMonitoringServiceSubscription =
+    this.isDataFetchingSubscription =
       this.appMonitoringService.isDataFetching.subscribe(
         (isDataFetching: boolean) => {
           this.isDataFetching = isDataFetching;
@@ -42,7 +42,7 @@ export class ProfileService implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.appMonitoringService.setIsDataFetchingStatus(false);
-    this.appMonitoringServiceSubscription.unsubscribe();
+    this.isDataFetchingSubscription.unsubscribe();
   }
 
   public initForm(): FormGroup {
@@ -96,10 +96,7 @@ export class ProfileService implements OnInit, OnDestroy {
                 new Log("User profile is deleted successfully!", "INFO")
               );
               this.logService.showNotification(
-                new Notification(
-                  "The account is deleted successfully!",
-                  "SUCCESS"
-                )
+                new Notification("DELETE_ACCOUNT", "SUCCESS")
               );
 
               this.authService.handleUserLogout();
@@ -107,10 +104,10 @@ export class ProfileService implements OnInit, OnDestroy {
             },
             error: (error: any) => {
               this.logService.logToConsole(
-                new Log("User profile could not be deleted!", "ERROR")
+                new Log("User data could not be deleted!", "ERROR")
               );
               this.logService.showNotification(
-                new Notification(error.message, "ERROR")
+                new Notification("DELETE_USER_DATA", "ERROR")
               );
 
               this.authService.handleUserLogout();
@@ -123,7 +120,7 @@ export class ProfileService implements OnInit, OnDestroy {
           new Log("Deletion error:" + error.message, "ERROR")
         );
         this.logService.showNotification(
-          new Notification(error.message, "ERROR")
+          new Notification("DELETE_ACCOUNT", "ERROR")
         );
 
         this.appMonitoringService.setIsDataFetchingStatus(false);
@@ -142,11 +139,11 @@ export class ProfileService implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           this.logService.logToConsole(
-            new Log("User profile is updated successfully!", "INFO")
+            new Log("User account is updated successfully!", "INFO")
           );
           this.logService.logToConsole(new Log(response));
           this.logService.showNotification(
-            new Notification("User profile is updated successfully!", "SUCCESS")
+            new Notification("UPDATE_ACCOUNT", "SUCCESS")
           );
 
           this.databaseService
@@ -160,25 +157,22 @@ export class ProfileService implements OnInit, OnDestroy {
                 callbackSuccess();
 
                 this.logService.logToConsole(
-                  new Log("User data synced successfully!", "INFO")
+                  new Log("User data updated successfully!", "INFO")
                 );
                 this.logService.logToConsole(new Log(userData));
                 this.logService.showNotification(
-                  new Notification(
-                    "User profile is updated successfully!",
-                    "SUCCESS"
-                  )
+                  new Notification("UPDATE_USER_DATA", "SUCCESS")
                 );
               },
               error: (error: any) => {
                 this.logService.logToConsole(
                   new Log(
-                    "Update data could not get retrieved!" + error.message,
+                    "User data could not get retrieved!" + error.message,
                     "ERROR"
                   )
                 );
                 this.logService.showNotification(
-                  new Notification(error.message, "ERROR")
+                  new Notification("UPDATE_USER_DATA", "ERROR")
                 );
 
                 this.appMonitoringService.setIsDataFetchingStatus(false);
@@ -190,12 +184,12 @@ export class ProfileService implements OnInit, OnDestroy {
         error: (error: any) => {
           this.logService.logToConsole(
             new Log(
-              "User profile could not be updated!" + error.message,
+              "User account could not be updated!" + error.message,
               "ERROR"
             )
           );
           this.logService.showNotification(
-            new Notification(error.message, "ERROR")
+            new Notification("UPDATE_ACCOUNT", "ERROR")
           );
 
           this.appMonitoringService.setIsDataFetchingStatus(false);

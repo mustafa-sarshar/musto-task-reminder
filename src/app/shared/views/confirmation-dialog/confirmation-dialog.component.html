@@ -9,10 +9,14 @@
   </mat-card-content>
   <mat-card-footer>
     <mat-card-actions align="end" *ngIf="confirmationDialogBox.dialogType">
+      <!-- Cancel/No button -->
       <button mat-stroked-button (click)="onClickDecline()"
-        cdkFocusInitial>{{confirmationDialogBox.dialogType == "OK/CANCEL" ? 'Cancel' : 'No'}}</button>
+        cdkFocusInitial>{{confirmationDialogBox.dialogType == "OK/CANCEL" ? ('CONFIRMATION.actionButtons.cancel.label' | translate) : ('CONFIRMATION.actionButtons.no.label' | translate)}}
+      </button>
+      <!-- OK/Yes button -->
       <button mat-button color="warn"
-        (click)="onClickAccept()">{{confirmationDialogBox.dialogType == "OK/CANCEL" ? 'OK' : 'Yes'}}</button>
+        (click)="onClickAccept()">{{confirmationDialogBox.dialogType == "OK/CANCEL" ? ('CONFIRMATION.actionButtons.ok.label' | translate) : ('CONFIRMATION.actionButtons.yes.label' | translate)}}
+      </button>
     </mat-card-actions>
   </mat-card-footer>
 </mat-card>

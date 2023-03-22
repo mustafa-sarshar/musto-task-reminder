@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable, Subscription } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
 
 import { ConfirmationDialogComponent } from "src/app/shared/views/confirmation-dialog/confirmation-dialog.component";
 
@@ -14,7 +15,12 @@ import {
 import { ProfileService } from "./profile.service";
 import { onCanDeactivate } from "src/app/shared/guards";
 
-import { ConfirmationDialogBox, Log, User } from "src/app/shared/models";
+import {
+  ConfirmationDialogBox,
+  LanguageCode,
+  Log,
+  User,
+} from "src/app/shared/models";
 import { CONFIRMATION_POPUP_STYLE } from "src/configs";
 import { UrlTree } from "@angular/router";
 
@@ -30,8 +36,8 @@ export class ProfileComponent implements OnInit, OnDestroy, onCanDeactivate {
   public userData: User | null = null;
   public isDataFetching: boolean = false;
   public hidePasswordValue: boolean = true;
-  private appMonitoringServiceSubscription: Subscription = new Subscription();
-  private dataFlowServiceSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription: Subscription = new Subscription();
+  private appLanguageSubscription: Subscription = new Subscription();
 
   constructor(
     private appMonitoringService: AppMonitoringService,
@@ -39,18 +45,27 @@ export class ProfileComponent implements OnInit, OnDestroy, onCanDeactivate {
     private dataFlowService: DataFlowService,
     private profileService: ProfileService,
     public utilityService: UtilityService,
+    private translateService: TranslateService,
     private dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
     this.appMonitoringService.setIsDataFetchingStatus(true);
+    this.dataFlowService.applyAppLanguage();
+
+    this.appLanguageSubscription = this.dataFlowService.appLanguage.subscribe(
+      (selectedLanguage: LanguageCode) => {
+        this.translateService.use(selectedLanguage);
+      }
+    );
+
     this.formGroupEl = this.profileService.initForm();
-    this.appMonitoringServiceSubscription =
+    this.isDataFetchingSubscription =
       this.appMonitoringService.isDataFetching.subscribe((status: boolean) => {
         this.isDataFetching = status;
       });
 
-    this.dataFlowServiceSubscription = this.dataFlowService.userData.subscribe(
+    this.appLanguageSubscription = this.dataFlowService.userData.subscribe(
       (userData: User) => {
         this.userData = userData;
         this.logService.logToConsole(
@@ -64,8 +79,8 @@ export class ProfileComponent implements OnInit, OnDestroy, onCanDeactivate {
 
   public ngOnDestroy(): void {
     this.appMonitoringService.setIsDataFetchingStatus(false);
-    this.appMonitoringServiceSubscription.unsubscribe();
-    this.dataFlowServiceSubscription.unsubscribe();
+    this.isDataFetchingSubscription.unsubscribe();
+    this.appLanguageSubscription.unsubscribe();
   }
 
   public onCanDeactivate():
@@ -85,7 +100,7 @@ export class ProfileComponent implements OnInit, OnDestroy, onCanDeactivate {
         new ConfirmationDialogBox(
           "Be careful!",
           "If you leave the page now, you will discard the changes!",
-          "YES/NO"
+          "OK/CANCEL"
         );
       return dialogRef.afterClosed();
     } else {

@@ -2,17 +2,24 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        {{task ? 'Edit the task' : 'Add a new Task'}}
+        {{task ? ('TASKS_TASK_ADD_EDIT.header.titleEditTask' | translate) : ('TASKS_TASK_ADD_EDIT.header.titleAddTask' | translate)}}
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <!-- Task Title Field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Title</mat-label>
-        <input matInput type="text" formControlName="title" placeholder="title" id="title">
+        <mat-label>
+          {{"FORM_FIELDS.task.title.label" | translate}}
+        </mat-label>
+        <input matInput type="text" formControlName="title" id="title"
+          [placeholder]="'FORM_FIELDS.task.title.placeholder' | translate">
         <mat-icon color="default" matSuffix>task</mat-icon>
       </mat-form-field>
+      <!-- Task Group Field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Group</mat-label>
+        <mat-label>
+          {{"FORM_FIELDS.task.group.label" | translate}}
+        </mat-label>
         <mat-select formControlName="group">
           <mat-option *ngFor="let group of taskGroups" [value]="group.title">
             {{group.title}}
@@ -20,72 +27,112 @@
         </mat-select>
         <mat-icon color="default" matSuffix>group_work</mat-icon>
       </mat-form-field>
+      <!-- Task Deadline Field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Deadline</mat-label>
-        <input matInput type="date" formControlName="deadline" placeholder="deadline" id="deadline">
+        <mat-label>
+          {{"FORM_FIELDS.task.deadline.label" | translate}}
+        </mat-label>
+        <input matInput type="date" formControlName="deadline" id="deadline"
+          [placeholder]="'FORM_FIELDS.task.deadline.placeholder' | translate">
         <mat-icon color="default" matSuffix>calendar_month</mat-icon>
       </mat-form-field>
+      <!-- Task Description Field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Description</mat-label>
-        <input matInput type="text" formControlName="description" placeholder="description" id="description">
+        <mat-label>
+          {{"FORM_FIELDS.task.description.label" | translate}}
+        </mat-label>
+        <input matInput type="text" formControlName="description" id="description"
+          [placeholder]="'FORM_FIELDS.task.description.placeholder' | translate">
         <mat-icon color="default" matSuffix>description</mat-icon>
       </mat-form-field>
+      <!-- Task Web Link Field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Web Link</mat-label>
-        <input matInput type="text" formControlName="webLink" placeholder="https://..." id="webLink">
-        <mat-icon color="default" matSuffix>link</mat-icon>
-        <a *ngIf="task && task.webLink" [href]="task.webLink" target="_blank" rel="noopener noreferrer"><mat-icon
-            color="default" matSuffix matTooltip="Check the current web link">link</mat-icon></a>
+        <mat-label>
+          {{"FORM_FIELDS.task.webLink.label" | translate}}
+        </mat-label>
+        <input matInput type="text" formControlName="webLink"
+          [placeholder]="'FORM_FIELDS.task.webLink.placeholder' | translate" id="webLink">
+        <mat-icon matSuffix color="default">link</mat-icon>
+        <a *ngIf="task && task.webLink" [href]="task.webLink" target="_blank" rel="noopener noreferrer">
+          <mat-icon matSuffix color="default"
+            [matTooltip]="'FORM_FIELDS.task.webLink.toolTip' | translate">link</mat-icon>
+        </a>
       </mat-form-field>
+      <!-- Task Image Link Field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Image Link</mat-label>
-        <input matInput type="text" formControlName="imageLink" placeholder="https://..." id="imageLink">
-        <mat-icon color="default" matSuffix>image</mat-icon>
-        <a *ngIf="task && task.imageLink" [href]="task.imageLink" target="_blank" rel="noopener noreferrer"><mat-icon
-            color="default" matSuffix matTooltip="Check the current image link">image</mat-icon></a>
+        <mat-label>
+          {{"FORM_FIELDS.task.imageLink.label" | translate}}
+        </mat-label>
+        <input matInput type="text" formControlName="imageLink"
+          [placeholder]="'FORM_FIELDS.task.imageLink.placeholder' | translate" id="imageLink">
+        <mat-icon matSuffix color="default">image</mat-icon>
+        <a *ngIf="task && task.imageLink" [href]="task.imageLink" target="_blank" rel="noopener noreferrer">
+          <mat-icon matSuffix color="default"
+            [matTooltip]="'FORM_FIELDS.task.imageLink.toolTip' | translate">image</mat-icon>
+        </a>
       </mat-form-field>
+      <!-- Task Video Link field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Video Link</mat-label>
-        <input matInput type="text" formControlName="videoLink" placeholder="https://..." id="videoLink">
-        <mat-icon color="default" matSuffix>videocam</mat-icon>
-        <a *ngIf="task && task.videoLink" [href]="task.videoLink" target="_blank" rel="noopener noreferrer"><mat-icon
-            color="default" matSuffix matTooltip="Check the current video link">videocam</mat-icon></a>
+        <mat-label>
+          {{"FORM_FIELDS.task.videoLink.label" | translate}}
+        </mat-label>
+        <input matInput type="text" formControlName="videoLink"
+          [placeholder]="'FORM_FIELDS.task.videoLink.placeholder' | translate" id="videoLink">
+        <mat-icon matSuffix color="default">videocam</mat-icon>
+        <a *ngIf="task && task.videoLink" [href]="task.videoLink" target="_blank" rel="noopener noreferrer">
+          <mat-icon matSuffix color="default"
+            [matTooltip]="'FORM_FIELDS.task.videoLink.toolTip' | translate">videocam</mat-icon>
+        </a>
       </mat-form-field>
+      <!-- Task Voice Link field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Voice Link</mat-label>
-        <input matInput type="text" formControlName="voiceLink" placeholder="https://..." id="voiceLink">
-        <mat-icon color="default" matSuffix>record_voice_over</mat-icon>
-        <a *ngIf="task && task.voiceLink" [href]="task.voiceLink" target="_blank" rel="noopener noreferrer"><mat-icon
-            color="default" matSuffix matTooltip="Check the current voice link">record_voice_over</mat-icon></a>
+        <mat-label>
+          {{"FORM_FIELDS.task.voiceLink.label" | translate}}
+        </mat-label>
+        <input matInput type="text" formControlName="voiceLink"
+          [placeholder]="'FORM_FIELDS.task.voiceLink.placeholder' | translate" id="voiceLink">
+        <mat-icon matSuffix color="default">record_voice_over</mat-icon>
+        <a *ngIf="task && task.voiceLink" [href]="task.voiceLink" target="_blank" rel="noopener noreferrer">
+          <mat-icon matSuffix color="default"
+            [matTooltip]="'FORM_FIELDS.task.voiceLink.toolTip' | translate">record_voice_over</mat-icon>
+        </a>
       </mat-form-field>
     </mat-card-content>
     <mat-card-content class="space-flex"></mat-card-content>
     <mat-card-footer>
       <mat-card-actions align="end">
+        <!-- Button Apply Changes / Add -->
         <button mat-stroked-button type="button" (click)="onClickSubmit()"
-          [disabled]="!formGroupEl.valid || isDataFetching">{{task ? 'Apply Changes': 'Add'}}</button>
-        <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">Cancel</button>
+          [disabled]="!formGroupEl.valid || isDataFetching">
+          {{task ? ('TASKS_TASK_ADD_EDIT.actionButtons.applyChanges.label' | translate): ('TASKS_TASK_ADD_EDIT.actionButtons.add.label' | translate)}}
+        </button>
+        <!-- Button Cancel -->
+        <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">
+          {{"TASKS_TASK_ADD_EDIT.actionButtons.cancel.label" | translate}}
+        </button>
       </mat-card-actions>
     </mat-card-footer>
+    <!-- Help Box -->
     <div class="help-box"
       *ngIf="!formGroupEl.valid && formGroupEl.touched && formGroupEl.dirty && ((!formGroupEl.controls['title'].valid && formGroupEl.controls['title'].touched && formGroupEl.controls['title'].dirty) || (!formGroupEl.controls['description'].valid && formGroupEl.controls['description'].touched && formGroupEl.controls['description'].dirty) || (!formGroupEl.controls['deadline'].valid && formGroupEl.controls['deadline'].touched && formGroupEl.controls['deadline'].dirty) || (!formGroupEl.controls['webLink'].valid && formGroupEl.controls['webLink'].touched && formGroupEl.controls['webLink'].dirty) || (!formGroupEl.controls['imageLink'].valid && formGroupEl.controls['imageLink'].touched && formGroupEl.controls['imageLink'].dirty) || (!formGroupEl.controls['videoLink'].valid && formGroupEl.controls['videoLink'].touched && formGroupEl.controls['videoLink'].dirty) || (!formGroupEl.controls['voiceLink'].valid && formGroupEl.controls['voiceLink'].touched && formGroupEl.controls['voiceLink'].dirty))">
       <span class="help-box__title">Help:</span>
       <ul>
+        <!-- Task Title Help -->
         <li
           *ngIf="!formGroupEl.controls['title'].valid && formGroupEl.controls['title'].touched && formGroupEl.controls['title'].dirty">
-          {{utilityService.getValidationMessage("TASK_TITLE")}}
+          {{"MESSAGES.formValidation.task.title" | translate}}
         </li>
         <li
           *ngIf="!formGroupEl.controls['deadline'].valid && formGroupEl.controls['deadline'].touched && formGroupEl.controls['deadline'].dirty">
-          {{utilityService.getValidationMessage("TASK_DEADLINE")}}
+          {{"MESSAGES.formValidation.task.deadline" | translate}}
         </li>
         <li
           *ngIf="!formGroupEl.controls['description'].valid && formGroupEl.controls['description'].touched && formGroupEl.controls['description'].dirty">
-          {{utilityService.getValidationMessage("TASK_DESCRIPTION")}}
+          {{"MESSAGES.formValidation.task.description" | translate}}
         </li>
         <li
           *ngIf="(!formGroupEl.controls['webLink'].valid && formGroupEl.controls['webLink'].touched && formGroupEl.controls['webLink'].dirty) || (!formGroupEl.controls['imageLink'].valid && formGroupEl.controls['imageLink'].touched && formGroupEl.controls['imageLink'].dirty) || (!formGroupEl.controls['videoLink'].valid && formGroupEl.controls['videoLink'].touched && formGroupEl.controls['videoLink'].dirty) || (!formGroupEl.controls['voiceLink'].valid && formGroupEl.controls['voiceLink'].touched && formGroupEl.controls['voiceLink'].dirty)">
-          {{utilityService.getValidationMessage("WEB_LINK")}}
+          {{"MESSAGES.formValidation.task.webLink" | translate}}
         </li>
       </ul>
     </div>

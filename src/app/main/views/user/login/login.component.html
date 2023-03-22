@@ -2,19 +2,26 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        Login!
+        {{"USER_LOGIN.header.title" | translate}}
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <!-- Email field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" placeholder="Email" id="email" email>
+        <mat-label>
+          {{"FORM_FIELDS.user.email.label" | translate}}
+        </mat-label>
+        <input matInput type="email" formControlName="email"
+          [placeholder]="'FORM_FIELDS.user.email.placeholder' | translate" id="email" email>
         <mat-icon color="default" matSuffix>mail</mat-icon>
       </mat-form-field>
+      <!-- Password field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Enter your password</mat-label>
-        <input matInput formControlName="password" placeholder="" id="password" autoComplete="off"
-          [type]="hidePasswordValue ? 'password' : 'text'">
+        <mat-label>
+          {{"FORM_FIELDS.user.password.label" | translate}}
+        </mat-label>
+        <input matInput formControlName="password" [placeholder]="'FORM_FIELDS.user.password.placeholder' | translate"
+          id="password" autoComplete="off" [type]="hidePasswordValue ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hidePasswordValue = !hidePasswordValue"
           [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordValue">
           <mat-icon color="default">{{hidePasswordValue ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -24,22 +31,31 @@
     <mat-card-content class="space-flex"></mat-card-content>
     <mat-card-footer>
       <mat-card-actions align="end">
+        <!-- Login Button -->
         <button mat-stroked-button type="button" (click)="onClickSubmit()"
-          [disabled]="!formGroupEl.valid || isDataFetching">Login</button>
-        <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">Cancel</button>
+          [disabled]="!formGroupEl.valid || isDataFetching">
+          {{"USER_LOGIN.actionButtons.login.label" | translate}}
+        </button>
+        <!-- Cancel Button -->
+        <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">
+          {{"USER_LOGIN.actionButtons.cancel.label" | translate}}
+        </button>
       </mat-card-actions>
     </mat-card-footer>
+    <!-- Help Messages -->
     <div class="help-box"
       *ngIf="!formGroupEl.valid && formGroupEl.touched && formGroupEl.dirty && ((!formGroupEl.controls['email'].valid && formGroupEl.controls['email'].touched && formGroupEl.controls['email'].dirty) || (!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty))">
       <span class="help-box__title">Help:</span>
       <ul>
+        <!-- Email help message -->
         <li
           *ngIf="!formGroupEl.controls['email'].valid && formGroupEl.controls['email'].touched && formGroupEl.controls['email'].dirty">
-          {{utilityService.getValidationMessage("EMAIL")}}
+          {{"MESSAGES.formValidation.user.email" | translate}}
         </li>
+        <!-- Password help message -->
         <li
           *ngIf="!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty">
-          {{utilityService.getValidationMessage("PASSWORD")}}
+          {{"MESSAGES.formValidation.user.password" | translate}}
         </li>
       </ul>
     </div>

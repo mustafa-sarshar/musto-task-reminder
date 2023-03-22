@@ -1,4 +1,5 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable, OnDestroy, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
 
 import {
   AppMonitoringService,
@@ -9,8 +10,9 @@ import {
 import { Log, Notification, Task } from "src/app/shared/models";
 
 @Injectable()
-export class TaskItemService implements OnInit {
+export class TaskItemService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
+  private isDataFetchingSubscription: Subscription = new Subscription();
 
   constructor(
     private appMonitoringService: AppMonitoringService,
@@ -20,11 +22,16 @@ export class TaskItemService implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.appMonitoringService.isDataFetching.subscribe(
-      (isDataFetching: boolean) => {
-        this.isDataFetching = isDataFetching;
-      }
-    );
+    this.isDataFetchingSubscription =
+      this.appMonitoringService.isDataFetching.subscribe(
+        (isDataFetching: boolean) => {
+          this.isDataFetching = isDataFetching;
+        }
+      );
+  }
+
+  public ngOnDestroy(): void {
+    this.isDataFetchingSubscription.unsubscribe();
   }
 
   public handleDeleteTask(
@@ -42,7 +49,7 @@ export class TaskItemService implements OnInit {
         );
         this.logService.logToConsole(new Log(response));
         this.logService.showNotification(
-          new Notification("Task deleted successfully!", "SUCCESS")
+          new Notification("DELETE_TASK", "SUCCESS")
         );
 
         this.dataFlowService.deleteUserTask(taskId);
@@ -53,7 +60,7 @@ export class TaskItemService implements OnInit {
           new Log("The task couldn't get deleted!", "ERROR")
         );
         this.logService.showNotification(
-          new Notification(error.message, "ERROR")
+          new Notification("DELETE_TASK", "ERROR")
         );
 
         this.appMonitoringService.setIsDataFetchingStatus(false);
@@ -71,7 +78,7 @@ export class TaskItemService implements OnInit {
         );
         this.logService.logToConsole(new Log(response));
         this.logService.showNotification(
-          new Notification("Task updated successfully!", "SUCCESS")
+          new Notification("UPDATE_TASK", "SUCCESS")
         );
 
         this.dataFlowService.updateUserTask(task);
@@ -82,7 +89,7 @@ export class TaskItemService implements OnInit {
           new Log("The task couldn't get updated!", "ERROR")
         );
         this.logService.showNotification(
-          new Notification(error.message, "ERROR")
+          new Notification("UPDATE_TASK", "ERROR")
         );
 
         this.appMonitoringService.setIsDataFetchingStatus(false);

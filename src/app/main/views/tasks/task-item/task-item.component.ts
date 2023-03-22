@@ -1,6 +1,5 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Subscription } from "rxjs";
 
 import { TaskDetailsComponent } from "../task-details/task-details.component";
 import { TaskAddEditComponent } from "../task-add-edit/task-add-edit.component";
@@ -16,24 +15,15 @@ import { CONFIRMATION_POPUP_STYLE, TASK_DETAILS_FORM_STYLE } from "src/configs";
   styleUrls: ["./task-item.component.scss"],
   providers: [TaskItemService],
 })
-export class TaskItemComponent implements OnInit, OnDestroy {
+export class TaskItemComponent {
   @Input("userId") userId: string | null = null;
   @Input("task") task: Task | null = null;
   public taskItemMode: number = 0;
-  private dataFlowServiceSubscription: Subscription = new Subscription();
-  private logServiceSubscription: Subscription = new Subscription();
 
   constructor(
     private taskItemService: TaskItemService,
     private dialog: MatDialog
   ) {}
-
-  public ngOnInit(): void {}
-
-  public ngOnDestroy(): void {
-    this.dataFlowServiceSubscription.unsubscribe();
-    this.logServiceSubscription.unsubscribe();
-  }
 
   public onClickMore(): void {
     this.taskItemMode = 1;

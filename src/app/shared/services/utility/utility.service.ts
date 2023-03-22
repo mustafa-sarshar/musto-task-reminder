@@ -1,9 +1,9 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { FormControl } from "@angular/forms";
 import { throwError } from "rxjs";
 
 import { User, UserDataFromLocalStorage } from "../../models";
-import { FormControl } from "@angular/forms";
 
 type dateValidation = {
   validateDate: {
@@ -211,43 +211,6 @@ export class UtilityService {
         break;
     }
     return pattern;
-  }
-
-  public getValidationMessage(fieldName: ValidationFields): string {
-    let message: string = "";
-    switch (fieldName) {
-      case "USERNAME":
-        message = "Username must be 5-10 characters long and alphanumeric!";
-        break;
-      case "EMAIL":
-        message = "Email must be valid!";
-        break;
-      case "BIRTH_DATE":
-        message = "Birth date must be valid!";
-        break;
-      case "PASSWORD":
-        message =
-          "Password length must be 8-256 characters long and/or contain one or more uppercase characters, and/or one or more lowercase characters, and/or one or more numeric values, and/or one or more special characters";
-        break;
-      case "TASK_TITLE":
-        message =
-          "Title must be 3-20 characters and start with an alphabet! Only parentheses and spaces are allowed!";
-        break;
-      case "TASK_DESCRIPTION":
-        message =
-          "Description must be 5-256 characters long and alphanumeric! Moreover, parentheses and spaces are allowed!";
-        break;
-      case "TASK_DEADLINE":
-        message = "Deadline date must be valid!";
-        break;
-      case "WEB_LINK":
-        message =
-          "Please enter a valid link! (e.g. http://www... or https://www...)";
-        break;
-      default:
-        break;
-    }
-    return message;
   }
 
   public validateDateMin(controlEl: FormControl): dateValidation | null {

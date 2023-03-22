@@ -1,15 +1,48 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <strong>Language</strong>
+      <strong>{{"LANGUAGE.header.title" | translate}}</strong>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-card-actions>
-      <button mat-stroked-button (click)="onClickEnglish()" cdkFocusInitial>EN</button>
-      <button mat-button color="warn" (click)="onClickGerman()">DE</button>
-      <button mat-button color="warn" (click)="onClickTurkish()">TR</button>
-      <button mat-button color="warn" (click)="onClickPersian()">FA</button>
+      <!-- English -->
+      <button mat-stroked-button *ngIf="currentAppLanguage === 'en-US'" color="accent"
+        [matTooltip]="'LANGUAGE.actionButtons.en.toolTip' | translate" (click)="onClickEnglish()"
+        cdkFocusInitial>{{"LANGUAGE.actionButtons.en.label" | translate}}
+      </button>
+      <button mat-button *ngIf="currentAppLanguage !== 'en-US'" color="default"
+        [matTooltip]="'LANGUAGE.actionButtons.en.toolTip' | translate"
+        (click)="onClickEnglish()">{{"LANGUAGE.actionButtons.en.label" | translate}}
+      </button>
+      <!-- German -->
+      <button mat-stroked-button *ngIf="currentAppLanguage === 'de-DE'" color="accent"
+        [matTooltip]="'LANGUAGE.actionButtons.de.toolTip' | translate" (click)="onClickGerman()"
+        cdkFocusInitial>{{"LANGUAGE.actionButtons.de.label" | translate}}
+      </button>
+      <button mat-button *ngIf="currentAppLanguage !== 'de-DE'" color="default"
+        [matTooltip]="'LANGUAGE.actionButtons.de.toolTip' | translate"
+        (click)="onClickGerman()">{{"LANGUAGE.actionButtons.de.label" | translate}}
+      </button>
+      <!-- Turkish -->
+      <button mat-stroked-button *ngIf="currentAppLanguage === 'tr-TR'" color="accent"
+        [matTooltip]="'LANGUAGE.actionButtons.tr.toolTip' | translate" (click)="onClickTurkish()"
+        cdkFocusInitial>{{"LANGUAGE.actionButtons.tr.label" | translate}}
+      </button>
+      <button mat-button *ngIf="currentAppLanguage !== 'tr-TR'" color="default"
+        [matTooltip]="'LANGUAGE.actionButtons.tr.toolTip' | translate"
+        (click)="onClickTurkish()">{{"LANGUAGE.actionButtons.tr.label" | translate}}
+      </button>
+      <!-- Persian -->
+      <button mat-stroked-button *ngIf="currentAppLanguage === 'fa-IR'" color="accent"
+        [matTooltip]="'LANGUAGE.actionButtons.fa.toolTip' | translate" (click)="onClickPersian()"
+        cdkFocusInitial>{{"LANGUAGE.actionButtons.fa.label" | translate}}
+      </button>
+      <button mat-button *ngIf="currentAppLanguage !== 'fa-IR'" color="default"
+        [matTooltip]="'LANGUAGE.actionButtons.fa.toolTip' | translate"
+        (click)="onClickPersian()">{{"LANGUAGE.actionButtons.fa.label" | translate}}
+      </button>
+
     </mat-card-actions>
   </mat-card-content>
 </mat-card>

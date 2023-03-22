@@ -6,8 +6,8 @@ import {
   UserDataFromDatabase,
 } from "./user/user.model";
 import { ConfirmationDialogBox } from "./dialog/dialog.model";
-import { Task } from "./task/task.model";
-import { Language } from "./language/language.model";
+import { Task, TaskGroup } from "./task/task.model";
+import { Language, LanguageCode } from "./language/language.model";
 import { AuthResponsePayload } from "./auth/auth.model";
 import {
   Log,
@@ -27,7 +27,9 @@ export {
   UserDataFromDatabase,
   ConfirmationDialogBox,
   Task,
+  TaskGroup,
   Language,
+  LanguageCode,
   AuthResponsePayload,
   Log,
   LogType,

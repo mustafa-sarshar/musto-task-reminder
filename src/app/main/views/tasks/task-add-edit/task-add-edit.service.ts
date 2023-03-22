@@ -14,7 +14,7 @@ import { Subscription } from "rxjs";
 @Injectable()
 export class TaskAddEditService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
-  private appMonitoringServiceSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription: Subscription = new Subscription();
 
   constructor(
     private utilityService: UtilityService,
@@ -25,7 +25,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.appMonitoringServiceSubscription =
+    this.isDataFetchingSubscription =
       this.appMonitoringService.isDataFetching.subscribe(
         (isDataFetching: boolean) => {
           this.isDataFetching = isDataFetching;
@@ -34,7 +34,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.appMonitoringServiceSubscription.unsubscribe();
+    this.isDataFetchingSubscription.unsubscribe();
   }
 
   public initForm(task: Task): FormGroup {
@@ -176,7 +176,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
         );
         this.logService.logToConsole(new Log(response));
         this.logService.showNotification(
-          new Notification("Task Updated", "SUCCESS")
+          new Notification("UPDATE_TASK", "SUCCESS")
         );
       },
       error: (error: any) => {
@@ -184,7 +184,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
           new Log("Task could not get updated!" + error.message, "ERROR")
         );
         this.logService.showNotification(
-          new Notification(error.message, "ERROR")
+          new Notification("UPDATE_TASK", "ERROR")
         );
 
         this.appMonitoringService.setIsDataFetchingStatus(false);
@@ -208,7 +208,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
         );
         this.logService.logToConsole(new Log(response));
         this.logService.showNotification(
-          new Notification("Task Added", "SUCCESS")
+          new Notification("ADD_TASK", "SUCCESS")
         );
       },
       error: (error: any) => {
@@ -217,9 +217,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
         this.logService.logToConsole(
           new Log("Task could not get added!" + error.message, "ERROR")
         );
-        this.logService.showNotification(
-          new Notification(error.message, "ERROR")
-        );
+        this.logService.showNotification(new Notification("ADD_TASK", "ERROR"));
       },
     });
   }

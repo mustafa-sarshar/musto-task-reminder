@@ -6,11 +6,11 @@ import { Log } from "src/app/shared/models";
 import { Task, TaskGroup } from "src/app/shared/models/task/task.model";
 import {
   AppMonitoringService,
+  DataFlowService,
   LogService,
   UtilityService,
 } from "src/app/shared/services";
 import { TaskAddEditService } from "./task-add-edit.service";
-import { userTasksGroups } from "src/assets/data";
 
 @Component({
   selector: "app-task-add-edit",
@@ -23,28 +23,37 @@ export class TaskAddEditComponent {
   @Input() public task: Task | null = null;
   public formGroupEl: FormGroup;
   public isDataFetching: boolean = false;
-  private appMonitoringSubscription: Subscription = new Subscription();
-  public taskGroups: TaskGroup[] = userTasksGroups;
+  public taskGroups: TaskGroup[] = [];
+  private isDataFetchingServiceSubscription: Subscription = new Subscription();
+  private taskGroupsSubscription: Subscription = new Subscription();
 
   constructor(
     private logService: LogService,
     private appMonitoringService: AppMonitoringService,
-    public utilityService: UtilityService,
+    private dataFlowService: DataFlowService,
     private taskAddEditService: TaskAddEditService,
+    public utilityService: UtilityService,
     private dialogRef: DialogRef<TaskAddEditComponent>
   ) {}
 
   public ngOnInit(): void {
     this.formGroupEl = this.taskAddEditService.initForm(this.task);
-    this.appMonitoringSubscription =
+    this.isDataFetchingServiceSubscription =
       this.appMonitoringService.isDataFetching.subscribe((status: boolean) => {
         this.isDataFetching = status;
       });
+    this.taskGroupsSubscription = this.dataFlowService.taskGroups.subscribe(
+      (taskGroups: TaskGroup[]) => {
+        this.taskGroups = taskGroups;
+        console.log("taskGroups", taskGroups);
+      }
+    );
   }
 
   public ngOnDestroy(): void {
     this.appMonitoringService.setIsDataFetchingStatus(false);
-    this.appMonitoringSubscription.unsubscribe();
+    this.taskGroupsSubscription.unsubscribe();
+    this.isDataFetchingServiceSubscription.unsubscribe();
   }
 
   public onClickSubmit() {

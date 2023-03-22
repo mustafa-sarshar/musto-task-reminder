@@ -30,3 +30,9 @@ mat {
     }
   }
 }
+
+.sort {
+  &-ascending {
+    transform: rotate(180deg);
+  }
+}

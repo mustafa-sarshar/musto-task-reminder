@@ -1,105 +1,117 @@
 <div class="tasks-container" *ngIf="userData">
   <p class="tasks-content__title">
-    <u><i>{{userData.username}}</i></u> 's Tasks <br>
+    <u>
+      <i>{{userData.username}}</i>
+    </u> {{"TASKS.header.title" | translate}} <br>
   </p>
   <mat-card class="tasks-content__tasks" *ngIf="userData['tasks']">
     <mat-card-header>
-      <mat-label>You see now all <u>{{tasksVisibilityFilter !== 'ALL' ? (tasksVisibilityFilter | lowercase) : ''}}</u>
-        tasks</mat-label>
+      <mat-label>
+        {{"TASKS.header.info_1_1" | translate}}
+        <u>
+          {{tasksVisibilityFilter === 'ALL' ? ("MESSAGES.filters.visibilityFilter.all.label" | translate) : tasksVisibilityFilter === 'OPEN' ? ("MESSAGES.filters.visibilityFilter.open.label" | translate): ("MESSAGES.filters.visibilityFilter.finished.label" | translate)}}
+        </u>
+        {{"TASKS.header.info_1_2" | translate}}
+      </mat-label>
       <mat-card-content class="space-flex"></mat-card-content>
       <mat-card-actions>
         <!-- Visibility Menu -->
-        <button mat-icon-button color="default" aria-label="to change the visibility filter"
-          [matMenuTriggerFor]="menuVisibility" matTooltip="Change the visibility filter">
+        <button mat-icon-button color="default" [matMenuTriggerFor]="menuVisibility"
+          [matTooltip]="'TASKS.actionButtons.visibilityFilter.toolTip' | translate"
+          [ariaLabel]="'TASKS.actionButtons.visibilityFilter.ariaLabel' | translate">
           <mat-icon>visibility</mat-icon>
         </button>
         <!-- Visibility Menu Items -->
         <mat-menu #menuVisibility="matMenu">
           <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('FINISHED')" color="default"
-            aria-label="to see only finished tasks" matTooltip="Only finished tasks">
+            [matTooltip]="'TASKS.actionButtons.visibilityFilter._finished.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.visibilityFilter._finished.ariaLabel' | translate">
             <mat-icon color="accent">done</mat-icon>
-            Only finished tasks
+            {{"TASKS.actionButtons.visibilityFilter._finished.label" | translate}}
           </button>
           <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('OPEN')" color="default"
-            aria-label="to see only open tasks" matTooltip="Only open tasks">
+            [matTooltip]="'TASKS.actionButtons.visibilityFilter._open.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.visibilityFilter._open.ariaLabel' | translate">
             <mat-icon color="warn">timer</mat-icon>
-            Only open tasks
+            {{"TASKS.actionButtons.visibilityFilter._open.label" | translate}}
           </button>
           <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('ALL')" color="default"
-            aria-label="to disable visibility filter" matTooltip="Disable visibility filter">
+            [matTooltip]="'TASKS.actionButtons.visibilityFilter._all.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.visibilityFilter._all.ariaLabel' | translate">
             <mat-icon color="default">visibility_off</mat-icon>
-            No visibility filter
+            {{"TASKS.actionButtons.visibilityFilter._all.label" | translate}}
           </button>
         </mat-menu>
 
         <!-- Sort by Menu -->
-        <button mat-icon-button color="default" aria-label="to sort tasks" [matMenuTriggerFor]="menuSortBy"
-          matTooltip="Sort the tasks">
+        <button mat-icon-button color="default" [matMenuTriggerFor]="menuSortBy"
+          [matTooltip]="'TASKS.actionButtons.sortBy.toolTip' | translate"
+          [ariaLabel]="'TASKS.actionButtons.sortBy.ariaLabel' | translate">
           <mat-icon color="default">sort_by_alpha</mat-icon>
         </button>
         <!-- Sort by Menu Items -->
         <mat-menu #menuSortBy="matMenu">
           <!-- Sort by title -->
-          <button mat-menu-item color="default" aria-label="to sort tasks by title"
-            [matMenuTriggerFor]="menuSortBy__title" matTooltip="Sort the tasks by title">
+          <button mat-menu-item color="default" [matMenuTriggerFor]="menuSortBy__title"
+            [matTooltip]="'TASKS.actionButtons.sortBy._byTitle.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.sortBy._byTitle.ariaLabel' | translate">
             <mat-icon color="default">task</mat-icon>
-            Sort by title
+            {{"TASKS.actionButtons.sortBy._byTitle.label" | translate}}
           </button>
           <mat-menu #menuSortBy__title="matMenu">
             <button mat-menu-item (click)="onClickSortBy('TITLE', 'ASC')">
-              <mat-icon color="accent">arrow_upward</mat-icon>
-              Ascending
+              <mat-icon class="sort-ascending" color="accent">filter_list</mat-icon>
             </button>
             <button mat-menu-item (click)="onClickSortBy('TITLE', 'DES')">
-              <mat-icon color="warn">arrow_downward</mat-icon>
-              Descending
+              <mat-icon color="warn">filter_list</mat-icon>
             </button>
           </mat-menu>
           <!-- Sort by deadline -->
-          <button mat-menu-item color="default" aria-label="to sort tasks by deadline"
-            [matMenuTriggerFor]="menuSortBy__deadline" matTooltip="Sort the tasks by deadline">
+          <button mat-menu-item color="default" [matMenuTriggerFor]="menuSortBy__deadline"
+            [matTooltip]="'TASKS.actionButtons.sortBy._byDeadline.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.sortBy._byDeadline.ariaLabel' | translate">
             <mat-icon color="default">calendar_month</mat-icon>
-            Sort by deadline
+            {{"TASKS.actionButtons.sortBy._byDeadline.label" | translate}}
           </button>
           <mat-menu #menuSortBy__deadline="matMenu">
             <button mat-menu-item (click)="onClickSortBy('DEADLINE', 'ASC')">
-              <mat-icon color="accent">arrow_upward</mat-icon>
-              Ascending
+              <mat-icon class="sort-ascending" color="accent">filter_list</mat-icon>
             </button>
             <button mat-menu-item (click)="onClickSortBy('DEADLINE', 'DES')">
-              <mat-icon color="warn">arrow_downward</mat-icon>
-              Descending
+              <mat-icon color="warn">filter_list</mat-icon>
             </button>
           </mat-menu>
           <!-- Sort by done -->
-          <button mat-menu-item color="default" aria-label="to sort tasks by done"
-            [matMenuTriggerFor]="menuSortBy__done" matTooltip="Sort the tasks by done">
+          <button mat-menu-item color="default" [matMenuTriggerFor]="menuSortBy__done"
+            [matTooltip]="'TASKS.actionButtons.sortBy._byDone.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.sortBy._byDone.ariaLabel' | translate">
             <mat-icon color="default">calendar_month</mat-icon>
-            Sort by completion date
+            {{"TASKS.actionButtons.sortBy._byDone.label" | translate}}
           </button>
           <mat-menu #menuSortBy__done="matMenu">
             <button mat-menu-item (click)="onClickSortBy('DONE_AT_DATE', 'ASC')">
-              <mat-icon color="accent">arrow_upward</mat-icon>
-              Ascending
+              <mat-icon class="sort-ascending" color="accent">filter_list</mat-icon>
             </button>
             <button mat-menu-item (click)="onClickSortBy('DONE_AT_DATE', 'DES')">
-              <mat-icon color="warn">arrow_downward</mat-icon>
-              Descending
+              <mat-icon color="warn">filter_list</mat-icon>
             </button>
           </mat-menu>
           <!-- No sorting -->
-          <button mat-menu-item (click)="onClickSortBy('NO_SORTING')" color="default" aria-label="to not sort"
-            matTooltip="No sorting">
+          <button mat-menu-item (click)="onClickSortBy('NO_SORTING')" color="default"
+            [matTooltip]="'TASKS.actionButtons.sortBy._noSorting.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.sortBy._noSorting.ariaLabel' | translate">
             <mat-icon color="accent">cancel</mat-icon>
-            No sorting
+            {{"TASKS.actionButtons.sortBy._noSorting.label" | translate}}
           </button>
         </mat-menu>
-        <button mat-icon-button color="default" aria-label="to finish the task" (click)="onClickAddTask()"
-          matTooltip="Add a new task">
+        <button mat-icon-button color="default" (click)="onClickAddTask()"
+          [matTooltip]="'TASKS.actionButtons.addTask.toolTip' | translate"
+          [ariaLabel]="'TASKS.actionButtons.addTask.ariaLabel' | translate">
           <mat-icon color="default">add_box</mat-icon>
         </button>
-        <button mat-icon-button color="default" aria-label="to delete all tasks" (click)="onClickDeleteAllTasks()"
-          matTooltip="Delete all tasks">
+        <button mat-icon-button color="default" (click)="onClickDeleteAllTasks()"
+          [matTooltip]="'TASKS.actionButtons.deleteAll.toolTip' | translate"
+          [ariaLabel]="'TASKS.actionButtons.deleteAll.ariaLabel' | translate">
           <mat-icon color="warn">delete_forever</mat-icon>
         </button>
       </mat-card-actions>
@@ -112,10 +124,11 @@
   </mat-card>
   <mat-card *ngIf="!userData['tasks']">
     <mat-card-header>
-      <p>You have no tasks!!!</p>
+      <p>{{"TASKS.header.noTasks" | translate}}</p>
       <mat-card-content class="space-flex"></mat-card-content>
-      <button mat-icon-button color="default" aria-label="to finish the task" (click)="onClickAddTask()"
-        matTooltip="Add a new task">
+      <button mat-icon-button color="default" (click)="onClickAddTask()"
+        [matTooltip]="'TASKS.actionButtons.addTask.toolTip' | translate"
+        [ariaLabel]="'TASKS.actionButtons.addTask.ariaLabel' | translate">
         <mat-icon color="default">add_box</mat-icon>
       </button>
     </mat-card-header>

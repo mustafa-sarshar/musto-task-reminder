@@ -1,14 +1,12 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { UtilityService } from "src/app/shared/services";
 import { Task } from "src/app/shared/models";
 
 @Injectable()
-export class TasksListService implements OnInit {
+export class TasksListService {
   constructor(private utilityService: UtilityService) {}
-
-  public ngOnInit(): void {}
 
   public initForm(tasks: Task[]): FormGroup {
     const formGroupEl = new FormGroup({
@@ -28,5 +26,21 @@ export class TasksListService implements OnInit {
       ),
     });
     return formGroupEl;
+  }
+
+  public updatePaginatorButtons(paginationSettings: any): void {
+    if (paginationSettings.pageIndex > 0) {
+      paginationSettings.disabledPrev = false;
+    } else {
+      paginationSettings.disabledPrev = true;
+    }
+    if (
+      paginationSettings.pageIndex >=
+      Math.round(paginationSettings.length / paginationSettings.pageSize)
+    ) {
+      paginationSettings.disabledNext = true;
+    } else {
+      paginationSettings.disabledNext = false;
+    }
   }
 }

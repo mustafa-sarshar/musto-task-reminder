@@ -6,6 +6,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 
+import { TranslateForChildModule } from "../../modules";
 import { ConfirmationDialogComponent } from "./confirmation-dialog.component";
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ConfirmationDialogComponent } from "./confirmation-dialog.component";
     MatFormFieldModule,
     MatButtonModule,
     MatDialogModule,
+    TranslateForChildModule,
   ],
   exports: [ConfirmationDialogComponent],
 })

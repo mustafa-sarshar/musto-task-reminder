@@ -1,67 +1,91 @@
 <mat-card *ngIf="task" class="details-container">
   <mat-card-header class="details-content__title">
     <mat-card-title>
-      Task Details
+      {{"TASKS_TASK_DETAILS.header.title" | translate}}
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <div class="details-content__infos">
       <mat-icon color="default" matSuffix>task</mat-icon>
-      <mat-label>Title</mat-label>
+      <mat-label>
+        {{"FORM_FIELDS.task.title.label" | translate}}
+      </mat-label>
       <p>
         {{task.title}}
       </p>
     </div>
     <div class="details-content__infos">
       <mat-icon color="default" matSuffix>group_work</mat-icon>
-      <mat-label>Group</mat-label>
+      <mat-label>
+        {{"FORM_FIELDS.task.group.label" | translate}}
+      </mat-label>
       <p>
         {{task.group}}
       </p>
     </div>
     <div class="details-content__infos">
       <mat-icon color="default" matSuffix>calendar_month</mat-icon>
-      <mat-label>Deadline</mat-label>
+      <mat-label>
+        {{"FORM_FIELDS.task.deadline.label" | translate}}
+      </mat-label>
       <p>
         {{task.deadline | date:'fullDate'}}
       </p>
     </div>
     <div class="details-content__infos">
       <mat-icon color="default" matSuffix>description</mat-icon>
-      <mat-label>Description</mat-label>
+      <mat-label>
+        {{"FORM_FIELDS.task.description.label" | translate}}
+      </mat-label>
       <p>
         {{task.description}}
       </p>
     </div>
     <div class="details-content__infos">
       <mat-icon color="{{task.done ? 'accent' : 'warn'}}" matSuffix>{{task.done ? 'done' : 'timer'}}</mat-icon>
-      <mat-label>Completion</mat-label>
+      <mat-label>
+        {{"FORM_FIELDS.task.doneAtDate.label" | translate}}
+      </mat-label>
       <p>
         {{task.done ? (task.doneAtDate | date:'fullDate') : 'It is not completed yet!'}}
       </p>
     </div>
     <div class="details-content__actions">
-      <button type="button" aria-label="Open the web link" mat-icon-button (click)="onClickLink(task.webLink)"
-        [disabled]="!task.webLink">
+      <!-- Button WebLink -->
+      <button mat-icon-button type="button"
+        [ariaLabel]="'TASKS_TASK_DETAILS.actionButtons.webLink.ariaLabel' | translate"
+        (click)="onClickLink(task.webLink)"
+        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.webLink.toolTip' | translate" [disabled]="!task.webLink">
         <mat-icon aria-label="web link icon">link</mat-icon>
       </button>
-      <button type="button" aria-label="Open the web link" mat-icon-button (click)="onClickLink(task.imageLink)"
-        [disabled]="!task.imageLink">
+      <!-- Button ImageLink -->
+      <button mat-icon-button type="button"
+        [ariaLabel]="'TASKS_TASK_DETAILS.actionButtons.imageLink.ariaLabel' | translate"
+        (click)="onClickLink(task.imageLink)"
+        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.imageLink.toolTip' | translate" [disabled]="!task.imageLink">
         <mat-icon aria-label="web link icon">image</mat-icon>
       </button>
-      <button type="button" aria-label="Open the web link" mat-icon-button (click)="onClickLink(task.videoLink)"
-        [disabled]="!task.videoLink">
+      <!-- Button VideoLink -->
+      <button mat-icon-button type="button"
+        [ariaLabel]="'TASKS_TASK_DETAILS.actionButtons.videoLink.ariaLabel' | translate"
+        (click)="onClickLink(task.videoLink)"
+        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.videoLink.toolTip' | translate" [disabled]="!task.videoLink">
         <mat-icon aria-label="web link icon">videocam</mat-icon>
       </button>
-      <button type="button" aria-label="Open the web link" mat-icon-button (click)="onClickLink(task.voiceLink)"
-        [disabled]="!task.voiceLink">
+      <!-- Button VoiceLink -->
+      <button mat-icon-button type="button"
+        [ariaLabel]="'TASKS_TASK_DETAILS.actionButtons.voiceLink.ariaLabel' | translate"
+        (click)="onClickLink(task.voiceLink)"
+        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.voiceLink.toolTip' | translate" [disabled]="!task.voiceLink">
         <mat-icon aria-label="web link icon">record_voice_over</mat-icon>
       </button>
     </div>
   </mat-card-content>
   <mat-card-footer>
     <mat-card-actions align="end">
-      <button mat-stroked-button type="button" (click)="onClickOk()" color="warn">Cancel</button>
+      <button mat-stroked-button type="button" (click)="onClickOk()" color="warn">
+        {{"TASKS_TASK_DETAILS.actionButtons.cancel.label" | translate}}
+      </button>
     </mat-card-actions>
   </mat-card-footer>
 </mat-card>

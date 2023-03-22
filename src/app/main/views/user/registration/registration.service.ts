@@ -21,7 +21,7 @@ import {
 @Injectable()
 export class RegistrationService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
-  private appMonitoringServiceSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription: Subscription = new Subscription();
 
   constructor(
     private appMonitoringService: AppMonitoringService,
@@ -33,7 +33,7 @@ export class RegistrationService implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.appMonitoringServiceSubscription =
+    this.isDataFetchingSubscription =
       this.appMonitoringService.isDataFetching.subscribe(
         (isDataFetching: boolean) => {
           this.isDataFetching = isDataFetching;
@@ -42,7 +42,7 @@ export class RegistrationService implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.appMonitoringServiceSubscription.unsubscribe();
+    this.isDataFetchingSubscription.unsubscribe();
   }
 
   public initForm(): FormGroup {
@@ -106,7 +106,7 @@ export class RegistrationService implements OnInit, OnDestroy {
               );
               this.logService.logToConsole(new Log(userProfileCredentials));
               this.logService.showNotification(
-                new Notification("Registration was successful!", "SUCCESS")
+                new Notification("REGISTRATION", "SUCCESS")
               );
 
               callbackSuccess(authResponse.email);
@@ -117,7 +117,7 @@ export class RegistrationService implements OnInit, OnDestroy {
                 new Log("Registration error:" + error.message, "ERROR")
               );
               this.logService.showNotification(
-                new Notification(error.message, "ERROR")
+                new Notification("REGISTRATION", "ERROR")
               );
 
               // Delete the user account if the was an error while storing profile data on database
@@ -129,7 +129,7 @@ export class RegistrationService implements OnInit, OnDestroy {
                       new Log("User account deleted successfully!", "INFO")
                     );
                     this.logService.showNotification(
-                      new Notification("Please try again!", "WARN")
+                      new Notification("REGISTRATION", "WARN")
                     );
 
                     this.localStorageService.resetUserDataFromLocalStorage();
@@ -140,7 +140,7 @@ export class RegistrationService implements OnInit, OnDestroy {
                       new Log("Deletion error:" + error.message, "ERROR")
                     );
                     this.logService.showNotification(
-                      new Notification(error.message, "ERROR")
+                      new Notification("REGISTRATION", "WARN")
                     );
 
                     this.localStorageService.resetUserDataFromLocalStorage();
@@ -155,7 +155,7 @@ export class RegistrationService implements OnInit, OnDestroy {
           new Log("Registration error:" + error.message, "ERROR")
         );
         this.logService.showNotification(
-          new Notification(error.message, "ERROR")
+          new Notification("REGISTRATION", "ERROR")
         );
 
         this.appMonitoringService.setIsDataFetchingStatus(false);

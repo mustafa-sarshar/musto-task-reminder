@@ -10,11 +10,11 @@ import { Task, User } from "../../models";
 export class DatabaseService {
   constructor(
     private utilityService: UtilityService,
-    private http: HttpClient
+    private httpClient: HttpClient
   ) {}
 
   public setUserProfileInDatabase(userData: User): Observable<Object> {
-    return this.http
+    return this.httpClient
       .put<User>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${userData.uid}.json`,
         {
@@ -29,7 +29,7 @@ export class DatabaseService {
   }
 
   public getUserProfileDataFromDatabase(uid: string): Observable<Object> {
-    return this.http
+    return this.httpClient
       .get<User>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}.json`
       )
@@ -40,7 +40,7 @@ export class DatabaseService {
     uid: string,
     dataToPath: any
   ): Observable<Object> {
-    return this.http
+    return this.httpClient
       .patch<any>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}.json`,
         dataToPath
@@ -49,7 +49,7 @@ export class DatabaseService {
   }
 
   public deleteUserProfileFromDatabase(uid: string): Observable<Object> {
-    return this.http
+    return this.httpClient
       .delete<User>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}.json`
       )
@@ -57,7 +57,7 @@ export class DatabaseService {
   }
 
   public addUserTask(uid: string, task: Task): Observable<Object> {
-    return this.http
+    return this.httpClient
       .patch<Task>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}/tasks/${task.tid}.json`,
         task
@@ -66,7 +66,7 @@ export class DatabaseService {
   }
 
   public updateUserTask(uid: string, task: Task): Observable<Object> {
-    return this.http
+    return this.httpClient
       .patch<Task>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}/tasks/${task.tid}.json`,
         task
@@ -75,7 +75,7 @@ export class DatabaseService {
   }
 
   public deleteUserTask(uid: string, taskId: string): Observable<Object> {
-    return this.http
+    return this.httpClient
       .delete<Task>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}/tasks/${taskId}.json`
       )
@@ -83,7 +83,7 @@ export class DatabaseService {
   }
 
   public deleteUserTasksAll(uid: string): Observable<Object> {
-    return this.http
+    return this.httpClient
       .delete<Task>(
         `${environment.firebaseUrl}/${environment.firebaseCollections.collectionUsers}/${uid}/tasks.json`
       )

@@ -30,7 +30,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   public isUserAuthenticated: boolean = false;
   public username: string = "";
   public language: Language = "EN";
-  private dataFlowServiceSubscription: Subscription = new Subscription();
+  private userDataSubscription: Subscription = new Subscription();
 
   constructor(
     private dataFlowService: DataFlowService,
@@ -41,7 +41,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.dataFlowServiceSubscription = this.dataFlowService.userData.subscribe(
+    this.userDataSubscription = this.dataFlowService.userData.subscribe(
       (userData: User | null) => {
         if (userData && userData.token) {
           this.isUserAuthenticated = true;
@@ -55,7 +55,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.dataFlowServiceSubscription.unsubscribe();
+    this.userDataSubscription.unsubscribe();
   }
 
   public onClickAppBrand(): void {

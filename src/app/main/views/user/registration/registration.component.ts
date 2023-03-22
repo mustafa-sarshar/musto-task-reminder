@@ -21,7 +21,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   public formGroupEl: FormGroup;
   public isDataFetching: boolean = false;
   public hidePasswordValue: boolean = true;
-  private appMonitoringSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription: Subscription = new Subscription();
 
   constructor(
     private appMonitoringService: AppMonitoringService,
@@ -33,7 +33,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.formGroupEl = this.registrationService.initForm();
-    this.appMonitoringSubscription =
+    this.isDataFetchingSubscription =
       this.appMonitoringService.isDataFetching.subscribe((status: boolean) => {
         this.isDataFetching = status;
       });
@@ -71,7 +71,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   private handleClosing(): void {
     this.appMonitoringService.setIsDataFetchingStatus(false); // Reset the isDataFetching variable in AppMonitoringService to false.
-    this.appMonitoringSubscription.unsubscribe();
+    this.isDataFetchingSubscription.unsubscribe();
     this.dialogRef.close();
   }
 }

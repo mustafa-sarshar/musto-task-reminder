@@ -2,27 +2,42 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        Sign Up!
+        {{"USER_REGISTRATION.header.title" | translate}}
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <!-- Username field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Username</mat-label>
-        <input matInput type="text" formControlName="username" placeholder="username" id="username">
+        <mat-label>
+          {{"FORM_FIELDS.user.username.label" | translate}}
+        </mat-label>
+        <input matInput type="text" formControlName="username"
+          [placeholder]="'FORM_FIELDS.user.username.placeholder' | translate" id="username">
         <mat-icon color="default" matSuffix>person</mat-icon>
       </mat-form-field>
+      <!-- Email Field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" placeholder="Email" id="email" email>
+        <mat-label>
+          {{"FORM_FIELDS.user.email.label" | translate}}
+        </mat-label>
+        <input matInput type="email" formControlName="email"
+          [placeholder]="'FORM_FIELDS.user.email.placeholder' | translate" id="email" email>
         <mat-icon color="default" matSuffix>mail</mat-icon>
       </mat-form-field>
+      <!-- Birth date -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Birth date</mat-label>
-        <input matInput type="date" formControlName="birthDate" placeholder="birth date" id="birthDate">
+        <mat-label>
+          {{"FORM_FIELDS.user.birthDate.label" | translate}}
+        </mat-label>
+        <input matInput type="date" formControlName="birthDate"
+          [placeholder]="'FORM_FIELDS.user.birthDate.placeholder' | translate" id="birthDate">
         <mat-icon color="default" matSuffix>calendar_month</mat-icon>
       </mat-form-field>
+      <!-- Password field -->
       <mat-form-field appearance="outline" color="accent">
-        <mat-label>Enter your password</mat-label>
+        <mat-label>
+          {{"FORM_FIELDS.user.password.label" | translate}}
+        </mat-label>
         <input matInput formControlName="password" placeholder="" id="password" autoComplete="off"
           [type]="hidePasswordValue ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hidePasswordValue = !hidePasswordValue"
@@ -34,30 +49,41 @@
     <mat-card-content class="space-flex"></mat-card-content>
     <mat-card-footer>
       <mat-card-actions align="end">
+        <!-- Sign Up button -->
         <button mat-stroked-button type="button" (click)="onClickSubmit()"
-          [disabled]="!formGroupEl.valid || isDataFetching">Sign Up</button>
-        <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">Cancel</button>
+          [disabled]="!formGroupEl.valid || isDataFetching">
+          {{"USER_REGISTRATION.actionButtons.signUp.label" | translate}}
+        </button>
+        <!-- Cancel Button -->
+        <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">
+          {{"USER_REGISTRATION.actionButtons.cancel.label" | translate}}
+        </button>
       </mat-card-actions>
     </mat-card-footer>
+    <!-- Help Messages -->
     <div class="help-box"
       *ngIf="!formGroupEl.valid && formGroupEl.touched && formGroupEl.dirty && ((!formGroupEl.controls['username'].valid && formGroupEl.controls['username'].touched && formGroupEl.controls['username'].dirty) || (!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty) || (!formGroupEl.controls['email'].valid && formGroupEl.controls['email'].touched && formGroupEl.controls['email'].dirty) || (!formGroupEl.controls['birthDate'].valid && formGroupEl.controls['birthDate'].touched && formGroupEl.controls['birthDate'].dirty))">
       <span class="help-box__title">Help:</span>
       <ul>
+        <!-- Username help message -->
         <li
           *ngIf="!formGroupEl.controls['username'].valid && formGroupEl.controls['username'].touched && formGroupEl.controls['username'].dirty">
-          {{utilityService.getValidationMessage("USERNAME")}}
+          {{"MESSAGES.formValidation.user.username" | translate}}
         </li>
+        <!-- Email help message -->
         <li
           *ngIf="!formGroupEl.controls['email'].valid && formGroupEl.controls['email'].touched && formGroupEl.controls['email'].dirty">
-          {{utilityService.getValidationMessage("EMAIL")}}
+          {{"MESSAGES.formValidation.user.email" | translate}}
         </li>
+        <!-- Birth date help message -->
         <li
           *ngIf="!formGroupEl.controls['birthDate'].valid && formGroupEl.controls['birthDate'].touched && formGroupEl.controls['birthDate'].dirty">
-          {{utilityService.getValidationMessage("BIRTH_DATE")}}
+          {{"MESSAGES.formValidation.user.birthDate" | translate}}
         </li>
+        <!-- Password help message -->
         <li
           *ngIf="!formGroupEl.controls['password'].valid && formGroupEl.controls['password'].touched && formGroupEl.controls['password'].dirty">
-          {{utilityService.getValidationMessage("PASSWORD")}}
+          {{"MESSAGES.formValidation.user.password" | translate}}
         </li>
       </ul>
     </div>
