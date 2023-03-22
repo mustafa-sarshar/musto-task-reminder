@@ -6,6 +6,7 @@ import {
 
 export const environment = {
   production: false,
+  translationUrl: "./assets/i18n/",
   firebaseUrl: FIREBASE_URL,
   firebaseApiKey: FIREBASE_API_KEY,
   authEndpointSignUp:

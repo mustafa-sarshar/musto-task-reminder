@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 
 import { AuthInterceptorService } from "./shared/services";
+import { environment } from "src/environments/environment";
 
 const modules = [
   BrowserAnimationsModule,
@@ -26,8 +27,11 @@ const modules = [
 ];
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
-  // return new TranslateHttpLoader(httpClient, "./assets/i18n/", ".json");
-  return new TranslateHttpLoader(httpClient);
+  return new TranslateHttpLoader(
+    httpClient,
+    environment.translationUrl,
+    ".json"
+  );
 }
 
 @NgModule({
