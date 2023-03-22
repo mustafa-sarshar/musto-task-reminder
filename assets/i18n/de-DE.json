@@ -1,0 +1,464 @@
+{
+  "WELCOME_PAGE": {
+    "header": {
+      "title": "Alle Aufgaben sind wichtig",
+      "titleIconAriaLabel": "Sentiment sehr zufrieden Ikone"
+    },
+    "animation": {
+      "imageTitle": "I Love You Heart GIF von Chippy The Dog von GIPHY",
+      "imageAlt": "I Love You Heart GIF von Chippy The Dog",
+      "animationLink": "von GIPHY"
+    },
+    "actionButtons": {
+      "login": "Einloggen",
+      "signUp": "Registrieren"
+    }
+  },
+  "USER_LOGIN": {
+    "header": {
+      "title": "Einloggen!"
+    },
+    "actionButtons": {
+      "login": {
+        "label": "Einloggen",
+        "toolTip": ""
+      },
+      "cancel": {
+        "label": "Abbrechen",
+        "toolTip": ""
+      }
+    }
+  },
+  "USER_REGISTRATION": {
+    "header": {
+      "title": "Registrieren!"
+    },
+    "actionButtons": {
+      "signUp": {
+        "label": "Registrieren",
+        "toolTip": ""
+      },
+      "cancel": {
+        "label": "Abbrechen",
+        "toolTip": ""
+      }
+    }
+  },
+  "USER_PROFILE": {
+    "header": {
+      "titleUserInfo": "Benutzerinfo",
+      "titleUpdateForm": "Formular der Aktualisierung"
+    },
+    "actionButtons": {
+      "deleteAccount": {
+        "label": "Konto löschen",
+        "toolTip": ""
+      },
+      "applyChanges": {
+        "label": "Aktualisieren",
+        "toolTip": ""
+      },
+      "reset": {
+        "label": "Reset",
+        "toolTip": ""
+      }
+    }
+  },
+  "TASKS": {
+    "header": {
+      "title": " s Aufgaben",
+      "info_1_1": "Du siehst jetzt alle ",
+      "info_1_2": " Aufgaben.",
+      "noTasks": "Du hast noch keine Aufgaben gespeichert!!!"
+    },
+    "actionButtons": {
+      "visibilityFilter": {
+        "label": "",
+        "toolTip": "Ändere den Aufgabenfilter",
+        "ariaLabel": "um den Aufgabenfilter zu ändern",
+        "_finished": {
+          "label": "Nur fertiggestellte Aufgaben",
+          "toolTip": "Nur fertiggestellte Aufgaben",
+          "ariaLabel": "um nur die fertiggestellte Aufgaben zu sehen"
+        },
+        "_open": {
+          "label": "Nur ofene Aufgaben",
+          "toolTip": "Nur ofene Aufgaben",
+          "ariaLabel": "um nur die ofene Aufgaben zu sehen"
+        },
+        "_all": {
+          "label": "Kein Aufgabenfilter",
+          "toolTip": "Dieaktiviere den Aufgabenfilter",
+          "ariaLabel": "um den Aufgabenfilter zu deaktivieren"
+        }
+      },
+      "sortBy": {
+        "label": "",
+        "toolTip": "Sortiere die Aufgaben",
+        "ariaLabel": "um die Aufgaben zu sortieren",
+        "_byTitle": {
+          "label": "Sortieren nach Titel",
+          "toolTip": "Sortiere die Aufgaben nach Titel",
+          "ariaLabel": "um die Aufgaben nach Titel zu sortieren"
+        },
+        "_byDeadline": {
+          "label": "Sortiere nach Frist",
+          "toolTip": "Sortiere die Aufgaben nach Frist",
+          "ariaLabel": "um die Aufgaben nach Frist zu sortieren"
+        },
+        "_byDone": {
+          "label": "Sortieren nach Fertigstellungstermin",
+          "toolTip": "Sortiere die Aufgaben nach Fertigstellungstermin",
+          "ariaLabel": "um die Aufgaben nach Fertigstellungstermin zu sortieren"
+        },
+        "_noSorting": {
+          "label": "Keine Sortierung",
+          "toolTip": "Keine Sortierung",
+          "ariaLabel": "um die Aufgaben nicht zu sortieren"
+        }
+      },
+      "addTask": {
+        "label": "",
+        "toolTip": "Neue Aufgabe zu erstellen",
+        "ariaLabel": "um eine neue Aufgabe zu erstellen"
+      },
+      "deleteAll": {
+        "label": "",
+        "toolTip": "Alle Aufgaben zu löschen",
+        "ariaLabel": "um alle Aufgaben zu löschen"
+      }
+    }
+  },
+  "TASKS_TASK_ITEM": {
+    "actionButtons": {
+      "more": {
+        "label": "",
+        "toolTip": "Mehrere Optionen",
+        "ariaLabel": "um mehrere Optionen zu sehen"
+      },
+      "less": {
+        "label": "",
+        "toolTip": "Weniger Optionen",
+        "ariaLabel": "um weniger Optionen zu sehen"
+      },
+      "toggleDone": {
+        "label": "",
+        "toolTips": {
+          "open": "Frist: ",
+          "finished": "Geschlossen am: "
+        },
+        "ariaLabel": "um den Aufgabenstatus ändern"
+      },
+      "details": {
+        "label": "",
+        "toolTip": "die Details sehen",
+        "ariaLabel": "um die Details der Aufgabe zu sehen"
+      },
+      "edit": {
+        "label": "",
+        "toolTip": "die Aufgabe ändern",
+        "ariaLabel": "um die Aufgabe zu ändern"
+      },
+      "delete": {
+        "label": "",
+        "toolTip": "die Aufgabe löschen",
+        "ariaLabel": "um die Aufgabe zu löschen"
+      }
+    }
+  },
+  "TASKS_TASK_DETAILS": {
+    "header": {
+      "title": "Details der Aufgabe"
+    },
+    "actionButtons": {
+      "webLink": {
+        "label": "",
+        "toolTip": "Öffne den Web-Link",
+        "ariaLabel": "um den Web-Link zu öffnen"
+      },
+      "imageLink": {
+        "label": "",
+        "toolTip": "Öffne den Foto-Link",
+        "ariaLabel": "um den Foto-Link zu öffnen"
+      },
+      "videoLink": {
+        "label": "",
+        "toolTip": "Öffne den Video-Link",
+        "ariaLabel": "um den Video-Link zu öffnen"
+      },
+      "voiceLink": {
+        "label": "",
+        "toolTip": "Öffne den Sprach-Link",
+        "ariaLabel": "um den Sprach-Link zu öffnen"
+      },
+      "cancel": {
+        "label": "Abbrechen",
+        "toolTip": "",
+        "ariaLabel": ""
+      }
+    }
+  },
+  "TASKS_TASK_ADD_EDIT": {
+    "header": {
+      "titleAddTask": "Erstellung einer neuen Aufgaben",
+      "titleEditTask": "Ändern die Aufgabenangaben"
+    },
+    "actionButtons": {
+      "cancel": {
+        "label": "Abbrechen"
+      },
+      "applyChanges": {
+        "label": "Änderungen einsetzen"
+      },
+      "add": {
+        "label": "Erstellen"
+      }
+    }
+  },
+  "TASKS_TASKS_LIST": {
+    "actionButtons": {
+      "clear": {
+        "label": "Räumen",
+        "toolTip": "das Suchfeld zu räumen"
+      },
+      "paginator": {
+        "ariaLabel": "um die Seite auszuwählen"
+      },
+      "paginatorPrev": {
+        "toolTip": "Vorherige Seite",
+        "ariaLabel": "um auf die vorherige Seite zu wechseln"
+      },
+      "paginatorNext": {
+        "toolTip": "Nächste Seite",
+        "ariaLabel": "um auf die nächste Seite zu wechseln"
+      },
+      "pageSize": {
+        "label": "Ändere die Seitengröße",
+        "toolTip": "die Seitengröße zu ändern",
+        "ariaLabel": "um die Seitengröße zu ändern"
+      },
+      "pageSize_5": {
+        "label": "5"
+      },
+      "pageSize_10": {
+        "label": "10"
+      },
+      "pageSize_50": {
+        "label": "50"
+      },
+      "pageSize_100": {
+        "label": "100"
+      }
+    }
+  },
+  "LOADING_SPINNER": {
+    "message": "Bitte warte ..."
+  },
+  "NAVIGATION_BAR": {
+    "links": {
+      "menu": {
+        "label": "Menü",
+        "toolTip": "das Menü öffnen",
+        "ariaLabel": "das Menü umschalten"
+      },
+      "tasks": {
+        "label": "Aufgaben",
+        "toolTip": "die Aufgaben kontrollieren",
+        "ariaLabel": "um alle gespeicherten Aufgaben zu kontrollieren"
+      },
+      "userProfile": {
+        "label": "Benutzerprofil",
+        "toolTip": "das Benutzerprofil zu kontrollieren",
+        "ariaLabel": "um das Benutzerprofil zu kontrollieren oder zu aktualisieren"
+      },
+      "syncData": {
+        "label": "Daten synchronisieren",
+        "toolTip": "Alle Daten zu synchronisieren",
+        "ariaLabel": "um alle Daten zu synchronisieren"
+      },
+      "logout": {
+        "label": "Ausloggen",
+        "toolTip": "Von der App ausloggen",
+        "ariaLabel": "um von der App auszuloggen"
+      },
+      "language": {
+        "label": "Sprache",
+        "toolTip": "Wähle eine andere Sprache aus",
+        "ariaLabel": "um eine andere Sprache auszuwählen"
+      }
+    }
+  },
+  "FOOTER": {
+    "developedMessage": {
+      "by": "Entwickelt von",
+      "year": "2023"
+    }
+  },
+  "CONFIRMATION": {
+    "header": {
+      "title": ""
+    },
+    "actionButtons": {
+      "ok": {
+        "label": "OK",
+        "toolTip": ""
+      },
+      "cancel": {
+        "label": "Abbrechen",
+        "toolTip": ""
+      },
+      "yes": {
+        "label": "Ja",
+        "toolTip": ""
+      },
+      "no": {
+        "label": "Nein",
+        "toolTip": ""
+      }
+    }
+  },
+  "LANGUAGE": {
+    "header": {
+      "title": "Sprache"
+    },
+    "actionButtons": {
+      "en": {
+        "label": "EN",
+        "toolTip": "Englisch"
+      },
+      "de": {
+        "label": "GE",
+        "toolTip": "Deutsch"
+      },
+      "tr": {
+        "label": "TR",
+        "toolTip": "Türkisch"
+      },
+      "fa": {
+        "label": "FA",
+        "toolTip": "Persisch"
+      }
+    }
+  },
+  "FORM_FIELDS": {
+    "user": {
+      "email": {
+        "label": "Emailaddresse",
+        "placeholder": "Gib deine Emailaddresse"
+      },
+      "password": {
+        "label": "Passwort",
+        "placeholder": "Gib dein Passwort"
+      },
+      "username": {
+        "label": "Benutzername",
+        "placeholder": "Gib deinen Benutzername"
+      },
+      "birthDate": {
+        "label": "Geburtsdatum",
+        "placeholder": ""
+      }
+    },
+    "task": {
+      "title": {
+        "label": "Titel",
+        "placeholder": "der Titel der Aufgabe"
+      },
+      "searchByTitle": {
+        "label": "Suche die Aufgabe",
+        "placeholder": "suche die Aufgaben nach ihrem Titel"
+      },
+      "group": {
+        "label": "Gruppe",
+        "placeholder": ""
+      },
+      "deadline": {
+        "label": "Frist",
+        "placeholder": ""
+      },
+      "description": {
+        "label": "Beschreibung",
+        "placeholder": "beschreibe die Aufgabe"
+      },
+      "doneAtDate": {
+        "label": "Fertigstellungstermin",
+        "placeholder": ""
+      },
+      "webLink": {
+        "label": "Web-Link",
+        "placeholder": "https://...",
+        "toolTip": "Kontrolliere den jetzigen Link von web"
+      },
+      "imageLink": {
+        "label": "Foto-Link",
+        "placeholder": "https://...",
+        "toolTip": "Kontrolliere den jetzigen Link vom Foto"
+      },
+      "videoLink": {
+        "label": "Video-Link",
+        "placeholder": "https://...",
+        "toolTip": "Kontrolliere den jetzigen Link vom Video"
+      },
+      "voiceLink": {
+        "label": "Sprach-Link",
+        "placeholder": "https://...",
+        "toolTip": "Kontrolliere den jetzigen Link von Sprachakte"
+      }
+    }
+  },
+  "MESSAGES": {
+    "formValidation": {
+      "user": {
+        "username": "Benutzername muss 5-20 Zeichen haben und alphanumerisch sein!",
+        "email": "Emailaddresse muss gültig sein",
+        "birthDate": "Geburtsdatum muss gültig sein!",
+        "password": "Passwort muss 8-256 Zeichen, und/oder einen oder mehrere Großbuchstaben, und/oder einen oder mehrere Kleinbuchstaben, und/oder ein oder mehrere numerische Werte, und/oder einen oder mehrere Sonderzeichen haben"
+      },
+      "task": {
+        "title": "Titel muss 3-20 Zeichen haben und mit einem alphabetischen Zeichen (Buchstabe) anfangen! Als Sonderzeichen, sind nur Klammerzeichen und Leerzeichen erlaubt!",
+        "description": "Beschreibung muss 5-256 Zeichen haben und alphanumerisch sein! Als Sonderzeichen, sind nur Klammerzeichen und Leerzeichen erlaubt!",
+        "deadline": "Frist muss gültig sein!",
+        "webLink": "Bitte gib einen gültigen Link! (e.g. http://www... or https://www...)"
+      }
+    },
+    "errors": {
+      "http": {
+        "emailExists": "Die Emailaddresse ist nicht verfügbar!",
+        "emailNotFound": "Die Emailaddresse existiert nicht!",
+        "invalidPassword": "Das Passwort ist ungültig!",
+        "userDisabled": "Das Benutzerkonto ist von Admin deaktiviert!",
+        "invalidIdToken": "Die Benutzerangaben sind nicht mehr gültig!",
+        "userNotFound": "Es konnte keinen Benutzer nach diesen Angaben gefunden werden!"
+      }
+    },
+    "filters": {
+      "visibilityFilter": {
+        "all": {
+          "label": ""
+        },
+        "open": {
+          "label": "öffene"
+        },
+        "finished": {
+          "label": "fertiggestellte"
+        }
+      }
+    },
+    "dialogBox": {}
+  },
+  "NOTIFICATIONS": {
+    "user": {
+      "login": ""
+    }
+  },
+  "TASK_GROUPS": {
+    "tg0": "Algemein",
+    "tg1": "Sport/Gesundheit",
+    "tg2": "Bildung",
+    "tg3": "Hobby",
+    "tg4": "Arbeit",
+    "tg5": "Familie",
+    "tg6": "Freunden",
+    "tg7": "Persönlich"
+  }
+}

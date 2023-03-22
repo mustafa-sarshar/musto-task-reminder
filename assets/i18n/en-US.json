@@ -1,0 +1,519 @@
+{
+  "WELCOME_PAGE": {
+    "header": {
+      "title": "All Tasks Matter",
+      "titleIconAriaLabel": "sentiment very satisfied icon"
+    },
+    "animation": {
+      "imageTitle": "I Love You Heart GIF By Chippy The Dog via GIPHY",
+      "imageAlt": "I Love You Heart GIF By Chippy The Dog",
+      "animationLink": "via GIPHY"
+    },
+    "actionButtons": {
+      "login": "Login",
+      "signUp": "Sign Up"
+    }
+  },
+  "USER_LOGIN": {
+    "header": {
+      "title": "Login!"
+    },
+    "actionButtons": {
+      "login": {
+        "label": "Login",
+        "toolTip": ""
+      },
+      "cancel": {
+        "label": "Cancel",
+        "toolTip": ""
+      }
+    }
+  },
+  "USER_REGISTRATION": {
+    "header": {
+      "title": "Sign Up!"
+    },
+    "actionButtons": {
+      "signUp": {
+        "label": "Sign Up",
+        "toolTip": ""
+      },
+      "cancel": {
+        "label": "Cancel",
+        "toolTip": ""
+      }
+    }
+  },
+  "USER_PROFILE": {
+    "header": {
+      "titleUserInfo": "User Info",
+      "titleUpdateForm": "Update Form"
+    },
+    "actionButtons": {
+      "deleteAccount": {
+        "label": "Delete Account",
+        "toolTip": ""
+      },
+      "applyChanges": {
+        "label": "Apply Changes",
+        "toolTip": ""
+      },
+      "reset": {
+        "label": "Reset",
+        "toolTip": ""
+      }
+    }
+  },
+  "TASKS": {
+    "header": {
+      "title": "'s Tasks",
+      "info_1_1": "You see now all ",
+      "info_1_2": " tasks.",
+      "noTasks": "You have no tasks!!!"
+    },
+    "actionButtons": {
+      "visibilityFilter": {
+        "label": "",
+        "toolTip": "Change the visibility filter",
+        "ariaLabel": "to change the visibility filter",
+        "_finished": {
+          "label": "Only finished tasks",
+          "toolTip": "Only finished tasks",
+          "ariaLabel": "to see only finished tasks"
+        },
+        "_open": {
+          "label": "Only open tasks",
+          "toolTip": "Only open tasks",
+          "ariaLabel": "to see only open tasks"
+        },
+        "_all": {
+          "label": "No visibility filter",
+          "toolTip": "Disable visibility filter",
+          "ariaLabel": "to disable visibility filter"
+        }
+      },
+      "sortBy": {
+        "label": "",
+        "toolTip": "Sort the tasks",
+        "ariaLabel": "to sort tasks",
+        "_byTitle": {
+          "label": "Sort by title",
+          "toolTip": "Sort the tasks by title",
+          "ariaLabel": "to sort tasks by title"
+        },
+        "_byDeadline": {
+          "label": "Sort by deadline",
+          "toolTip": "Sort the tasks by deadline",
+          "ariaLabel": "to sort tasks by deadline"
+        },
+        "_byDone": {
+          "label": "Sort by completion date",
+          "toolTip": "Sort the tasks by date of completion",
+          "ariaLabel": "to sort tasks by date of completion"
+        },
+        "_noSorting": {
+          "label": "No sorting",
+          "toolTip": "No sorting",
+          "ariaLabel": "to not sort"
+        }
+      },
+      "addTask": {
+        "label": "",
+        "toolTip": "Add a new task",
+        "ariaLabel": "to add a new task"
+      },
+      "deleteAll": {
+        "label": "",
+        "toolTip": "Delete all tasks",
+        "ariaLabel": "to delete all tasks"
+      }
+    }
+  },
+  "TASKS_TASK_ITEM": {
+    "actionButtons": {
+      "more": {
+        "label": "",
+        "toolTip": "See more",
+        "ariaLabel": "to see more"
+      },
+      "less": {
+        "label": "",
+        "toolTip": "See less",
+        "ariaLabel": "to see less"
+      },
+      "toggleDone": {
+        "label": "",
+        "toolTips": {
+          "open": "Deadline: ",
+          "finished": "Finished at: "
+        },
+        "ariaLabel": "to change the task's status"
+      },
+      "details": {
+        "label": "",
+        "toolTip": "See the details",
+        "ariaLabel": "to see task's details"
+      },
+      "edit": {
+        "label": "",
+        "toolTip": "Edit the task",
+        "ariaLabel": "to edit the task"
+      },
+      "delete": {
+        "label": "",
+        "toolTip": "Delete the task",
+        "ariaLabel": "to delete the task"
+      }
+    }
+  },
+  "TASKS_TASK_DETAILS": {
+    "header": {
+      "title": "Task Details"
+    },
+    "actionButtons": {
+      "webLink": {
+        "label": "",
+        "toolTip": "Open the web link",
+        "ariaLabel": "to open the web link"
+      },
+      "imageLink": {
+        "label": "",
+        "toolTip": "Open the image link",
+        "ariaLabel": "to open the image link"
+      },
+      "videoLink": {
+        "label": "",
+        "toolTip": "Open the video link",
+        "ariaLabel": "to open the video link"
+      },
+      "voiceLink": {
+        "label": "",
+        "toolTip": "Open the voice link",
+        "ariaLabel": "to open the voice link"
+      },
+      "cancel": {
+        "label": "Cancel",
+        "toolTip": "",
+        "ariaLabel": ""
+      }
+    }
+  },
+  "TASKS_TASK_ADD_EDIT": {
+    "header": {
+      "titleAddTask": "Add a new Task",
+      "titleEditTask": "Edit the task"
+    },
+    "actionButtons": {
+      "cancel": {
+        "label": "Cancel"
+      },
+      "applyChanges": {
+        "label": "Apply Changes"
+      },
+      "add": {
+        "label": "Add"
+      }
+    }
+  },
+  "TASKS_TASKS_LIST": {
+    "actionButtons": {
+      "clear": {
+        "label": "Clear",
+        "toolTip": "Clear the search box"
+      },
+      "paginator": {
+        "ariaLabel": "to select a page"
+      },
+      "paginatorPrev": {
+        "toolTip": "Previous page",
+        "ariaLabel": "to go to the previous page"
+      },
+      "paginatorNext": {
+        "toolTip": "Next page",
+        "ariaLabel": "to go to the next page"
+      },
+      "pageSize": {
+        "label": "Set page size",
+        "toolTip": "Change the page size",
+        "ariaLabel": "to change the page size"
+      },
+      "pageSize_5": {
+        "label": "5"
+      },
+      "pageSize_10": {
+        "label": "10"
+      },
+      "pageSize_50": {
+        "label": "50"
+      },
+      "pageSize_100": {
+        "label": "100"
+      }
+    }
+  },
+  "LOADING_SPINNER": {
+    "message": "Please wait ..."
+  },
+  "NAVIGATION_BAR": {
+    "links": {
+      "menu": {
+        "label": "Menu",
+        "toolTip": "Open the menu",
+        "ariaLabel": "to toggle menu"
+      },
+      "tasks": {
+        "label": "Tasks",
+        "toolTip": "Check the tasks",
+        "ariaLabel": "to check all tasks saved"
+      },
+      "userProfile": {
+        "label": "User profile",
+        "toolTip": "Check the user profile",
+        "ariaLabel": "to see and update user profile data"
+      },
+      "syncData": {
+        "label": "Sync Data",
+        "toolTip": "Sync all user data",
+        "ariaLabel": "to synchronize all user data"
+      },
+      "logout": {
+        "label": "Logout",
+        "toolTip": "Logout from the app",
+        "ariaLabel": "to logout from the app"
+      },
+      "language": {
+        "label": "Language",
+        "toolTip": "Select another language",
+        "ariaLabel": "to select your desired language"
+      }
+    }
+  },
+  "FOOTER": {
+    "developedMessage": {
+      "by": "Developed by",
+      "year": "2023"
+    }
+  },
+  "CONFIRMATION": {
+    "header": {
+      "title": ""
+    },
+    "actionButtons": {
+      "ok": {
+        "label": "OK",
+        "toolTip": ""
+      },
+      "cancel": {
+        "label": "Cancel",
+        "toolTip": ""
+      },
+      "yes": {
+        "label": "Yes",
+        "toolTip": ""
+      },
+      "no": {
+        "label": "No",
+        "toolTip": ""
+      }
+    }
+  },
+  "LANGUAGE": {
+    "header": {
+      "title": "Language"
+    },
+    "actionButtons": {
+      "en": {
+        "label": "EN",
+        "toolTip": "English"
+      },
+      "de": {
+        "label": "GE",
+        "toolTip": "German"
+      },
+      "tr": {
+        "label": "TR",
+        "toolTip": "Turkish"
+      },
+      "fa": {
+        "label": "FA",
+        "toolTip": "Persian/Farsi"
+      }
+    }
+  },
+  "FORM_FIELDS": {
+    "user": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "username": {
+        "label": "Username",
+        "placeholder": "Enter your username"
+      },
+      "birthDate": {
+        "label": "Birth date",
+        "placeholder": ""
+      }
+    },
+    "task": {
+      "title": {
+        "label": "Title",
+        "placeholder": "title of the task"
+      },
+      "searchByTitle": {
+        "label": "Search by Title",
+        "placeholder": "search a task by its title"
+      },
+      "group": {
+        "label": "Group",
+        "placeholder": ""
+      },
+      "deadline": {
+        "label": "Deadline",
+        "placeholder": ""
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "describe the task"
+      },
+      "doneAtDate": {
+        "label": "Completion",
+        "placeholder": ""
+      },
+      "webLink": {
+        "label": "Web Link",
+        "placeholder": "https://...",
+        "toolTip": "Check the current web link"
+      },
+      "imageLink": {
+        "label": "Image Link",
+        "placeholder": "https://...",
+        "toolTip": "Check the current image link"
+      },
+      "videoLink": {
+        "label": "Video Link",
+        "placeholder": "https://...",
+        "toolTip": "Check the current video link"
+      },
+      "voiceLink": {
+        "label": "Voice Link",
+        "placeholder": "https://...",
+        "toolTip": "Check the current voice link"
+      }
+    }
+  },
+  "MESSAGES": {
+    "formValidation": {
+      "user": {
+        "username": "Username must be 5-20 characters long and alphanumeric!",
+        "email": "Email must be valid!",
+        "birthDate": "Birth date must be valid!",
+        "password": "Password length must be 8-256 characters long and/or contain one or more uppercase characters, and/or one or more lowercase characters, and/or one or more numeric values, and/or one or more special characters"
+      },
+      "task": {
+        "title": "Title must be 3-20 characters and start with an alphabet! From special characters, only parentheses and spaces are allowed!",
+        "description": "Description must be 5-256 characters long and alphanumeric! From special characters, only parentheses and spaces are allowed!",
+        "deadline": "Deadline date must be valid!",
+        "webLink": "Please enter a valid link! (e.g. http://www... or https://www...)"
+      }
+    },
+    "errors": {
+      "http": {
+        "emailExists": "This email already exists!",
+        "emailNotFound": "This email does not exists!",
+        "invalidPassword": "The password is invalid!",
+        "userDisabled": "The user account has been disabled by an administrator!",
+        "invalidIdToken": "The user's credential is no longer valid!",
+        "userNotFound": "There is no user record corresponding to this identifier!"
+      }
+    },
+    "filters": {
+      "visibilityFilter": {
+        "all": {
+          "label": ""
+        },
+        "open": {
+          "label": "open"
+        },
+        "finished": {
+          "label": "completed"
+        }
+      }
+    },
+    "dialogBox": {}
+  },
+  "NOTIFICATIONS": {
+    "user": {
+      "login": {
+        "success": "Login was successful!",
+        "error": "Something went wrong! Please try again!"
+      },
+      "registration": {
+        "success": "Registration was successful!",
+        "error": "Something went wrong! Please try again!",
+        "warn": "Something went wrong! Please try again!"
+      },
+      "sync_data": {
+        "success": "Data got synced successfully!",
+        "error": "Data could not get synced!",
+        "warn": ""
+      },
+      "delete_account": {
+        "success": "The account is deleted successfully!",
+        "error": "",
+        "warn": ""
+      },
+      "update_account": {
+        "success": "User account is updated successfully!",
+        "error": "User account could not get updated!",
+        "warn": ""
+      },
+      "delete_user_data": {
+        "success": "",
+        "error": "User data could not be deleted!",
+        "warn": ""
+      },
+      "update_user_data": {
+        "success": "User data is updated successfully!",
+        "error": "User data could not get updated!",
+        "warn": ""
+      },
+      "delete_all_tasks": {
+        "success": "All Tasks deleted successfully!",
+        "error": "Something went wrong! Please try again!"
+      },
+      "delete_task": {
+        "success": "Task deleted successfully!",
+        "error": "Task could not get deleted",
+        "warn": ""
+      },
+      "update_task": {
+        "success": "Task updated successfully!",
+        "error": "Task could not get updated",
+        "warn": ""
+      },
+      "add_task": {
+        "success": "Task added successfully!",
+        "error": "Task could not get added",
+        "warn": ""
+      },
+      "set_app_language": {
+        "success": "App language is set successfully"
+      }
+    }
+  },
+  "TASK_GROUPS": {
+    "tg0": "General",
+    "tg1": "Sport/Health",
+    "tg2": "Education",
+    "tg3": "Hobby",
+    "tg4": "Work",
+    "tg5": "Family",
+    "tg6": "Friends",
+    "tg7": "Personal"
+  }
+}
