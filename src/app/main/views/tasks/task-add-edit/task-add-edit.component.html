@@ -27,14 +27,50 @@
         </mat-select>
         <mat-icon color="default" matSuffix>group_work</mat-icon>
       </mat-form-field>
-      <!-- Task Deadline Field -->
+      <!-- Task Deadline Date Field -->
       <mat-form-field appearance="outline" color="accent">
         <mat-label>
-          {{"FORM_FIELDS.task.deadline.label" | translate}}
+          {{"FORM_FIELDS.task.deadlineDate.label" | translate}}
         </mat-label>
-        <input matInput type="date" formControlName="deadline" id="deadline"
-          [placeholder]="'FORM_FIELDS.task.deadline.placeholder' | translate">
+        <input matInput type="date" formControlName="deadlineDate" id="deadlineDate"
+          [placeholder]="'FORM_FIELDS.task.deadlineDate.placeholder' | translate">
         <mat-icon color="default" matSuffix>calendar_month</mat-icon>
+      </mat-form-field>
+      <!-- Task Deadline Time Field -->
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>
+          {{"FORM_FIELDS.task.deadlineTime.label" | translate}}
+        </mat-label>
+        <input matInput type="date" formControlName="deadlineTime" id="deadlineTime"
+          [placeholder]="'FORM_FIELDS.task.deadlineTime.placeholder' | translate">
+        <mat-icon color="default" matSuffix>schedule</mat-icon>
+      </mat-form-field>
+      <!-- Task RemindMe Field -->
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>
+          {{"FORM_FIELDS.task.remindMe.label" | translate}}
+        </mat-label>
+        <input matInput type="checkbox" formControlName="remindMe" id="remindMe"
+          [placeholder]="'FORM_FIELDS.task.remindMe.placeholder' | translate">
+        <mat-icon color="default" matSuffix>notifications</mat-icon>
+      </mat-form-field>
+      <!-- Task Reminder Days Field -->
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>
+          {{"FORM_FIELDS.task.reminderDays.label" | translate}}
+        </mat-label>
+        <input matInput type="number" formControlName="reminderDays" id="reminderDays"
+          [placeholder]="'FORM_FIELDS.task.reminderDays.placeholder' | translate">
+        <mat-icon color="default" matSuffix>calendar_today</mat-icon>
+      </mat-form-field>
+      <!-- Task Reminder Minutes Field -->
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>
+          {{"FORM_FIELDS.task.reminderMinutes.label" | translate}}
+        </mat-label>
+        <input matInput type="number" formControlName="reminderMinutes" id="reminderMinutes"
+          [placeholder]="'FORM_FIELDS.task.reminderMinutes.placeholder' | translate">
+        <mat-icon color="default" matSuffix>av_timer</mat-icon>
       </mat-form-field>
       <!-- Task Description Field -->
       <mat-form-field appearance="outline" color="accent">

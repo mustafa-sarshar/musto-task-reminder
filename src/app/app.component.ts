@@ -12,7 +12,7 @@ import { LanguageCode } from "./shared/models";
 })
 export class AppComponent implements OnInit, OnDestroy {
   public title: string = "Musto Task Reminder";
-  public currentAppLanguage: LanguageCode = "en-US";
+  public defaultAppLanguage: LanguageCode = "en-US";
 
   constructor(
     private titleService: Title,
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Init the current app language
     this.translateService.addLangs(["en-US", "de-DE", "tr-TR", "fa-IR"]);
-    this.translateService.setDefaultLang(this.currentAppLanguage);
+    this.translateService.setDefaultLang(this.defaultAppLanguage);
     this.dataFlowService.initAppLanguage();
   }
 

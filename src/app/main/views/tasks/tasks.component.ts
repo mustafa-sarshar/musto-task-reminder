@@ -139,7 +139,7 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
         ? "title"
         : sortByOption === "DEADLINE"
         ? "date of deadline"
-        : sortByOption === "DONE_AT_DATE"
+        : sortByOption === "COMPLETED"
         ? "date of completion"
         : "";
     if (sortingOption !== "") {

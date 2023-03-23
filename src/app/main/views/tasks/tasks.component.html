@@ -89,10 +89,10 @@
             {{"TASKS.actionButtons.sortBy._byDone.label" | translate}}
           </button>
           <mat-menu #menuSortBy__done="matMenu">
-            <button mat-menu-item (click)="onClickSortBy('DONE_AT_DATE', 'ASC')">
+            <button mat-menu-item (click)="onClickSortBy('COMPLETED', 'ASC')">
               <mat-icon class="sort-ascending" color="accent">filter_list</mat-icon>
             </button>
-            <button mat-menu-item (click)="onClickSortBy('DONE_AT_DATE', 'DES')">
+            <button mat-menu-item (click)="onClickSortBy('COMPLETED', 'DES')">
               <mat-icon color="warn">filter_list</mat-icon>
             </button>
           </mat-menu>

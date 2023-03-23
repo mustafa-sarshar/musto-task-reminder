@@ -22,7 +22,7 @@
       <!-- Button Toggle Done -->
       <button mat-icon-button color="default"
         [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.toggleDone.ariaLabel' | translate" (click)="onClickToggleDone()"
-        [matTooltip]="task.done ? ('TASKS_TASK_ITEM.actionButtons.toggleDone.toolTips.finished' | translate) + (task.doneAtDate | date) : ('TASKS_TASK_ITEM.actionButtons.toggleDone.toolTips.open' | translate) + (task.deadline | date)">
+        [matTooltip]="task.done ? ('TASKS_TASK_ITEM.actionButtons.toggleDone.toolTips.finished' | translate) + (task.completedDate | date) : ('TASKS_TASK_ITEM.actionButtons.toggleDone.toolTips.open' | translate) + (task.deadlineDate | date)">
         <mat-icon color="{{task.done ? 'accent' : 'warn'}}">{{task.done ? 'done' : 'timer'}}</mat-icon>
       </button>
       <!-- Button Details -->

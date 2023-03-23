@@ -75,10 +75,10 @@ export class TaskItemComponent {
 
         if (taskUpdate.done) {
           taskUpdate.done = false;
-          taskUpdate.doneAtDate = null;
+          taskUpdate.completedDate = null;
         } else {
           taskUpdate.done = true;
-          taskUpdate.doneAtDate = new Date();
+          taskUpdate.completedDate = new Date();
         }
         this.taskItemService.handleToggleDone(this.userId, taskUpdate);
       }

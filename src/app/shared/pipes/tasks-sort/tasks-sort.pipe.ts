@@ -15,10 +15,10 @@ export class TasksSortPipe implements PipeTransform {
           tasksSorted.sort(this.compareTitles);
           break;
         case "DEADLINE":
-          tasksSorted.sort(this.compareDeadlines);
+          tasksSorted.sort(this.compareDeadlineDates);
           break;
-        case "DONE_AT_DATE":
-          tasksSorted.sort(this.compareDoneAtDate);
+        case "COMPLETED":
+          tasksSorted.sort(this.compareCompletedDate);
           break;
         default:
           break;
@@ -45,21 +45,21 @@ export class TasksSortPipe implements PipeTransform {
     // return 0;
   }
 
-  private compareDeadlines(t1: Task, t2: Task) {
-    if (t1.deadline < t2.deadline) {
+  private compareDeadlineDates(t1: Task, t2: Task) {
+    if (t1.deadlineDate < t2.deadlineDate) {
       return -1;
     }
-    if (t1.deadline > t2.deadline) {
+    if (t1.deadlineDate > t2.deadlineDate) {
       return 1;
     }
     return 0;
   }
 
-  private compareDoneAtDate(t1: Task, t2: Task) {
-    if (t1.doneAtDate > t2.doneAtDate || !t2.doneAtDate) {
+  private compareCompletedDate(t1: Task, t2: Task) {
+    if (t1.completedDate > t2.completedDate || !t2.completedDate) {
       return -1;
     }
-    if (t1.doneAtDate < t2.doneAtDate || !t1.doneAtDate) {
+    if (t1.completedDate < t2.completedDate || !t1.completedDate) {
       return 1;
     }
     return 0;
