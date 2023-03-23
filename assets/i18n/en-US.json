@@ -294,7 +294,7 @@
       "year": "2023"
     }
   },
-  "CONFIRMATION": {
+  "CONFIRMATION_DIALOG": {
     "header": {
       "title": ""
     },
@@ -315,6 +315,36 @@
         "label": "No",
         "toolTip": ""
       }
+    },
+    "mode": {
+      "logout": {
+        "title": "Really?!",
+        "message": "Are you sure you want to quit?"
+      },
+      "delete_account": {
+        "title": "Be careful!",
+        "message": "Do you really want to delete your account?"
+      },
+      "delete_all_tasks": {
+        "title": "Be careful!",
+        "message": "Do you really want to delete all your tasks?"
+      },
+      "delete_task": {
+        "title": "Be careful!",
+        "message": "Do you really want to delete this task?"
+      },
+      "leave_page": {
+        "title": "Be careful!",
+        "message": "If you leave the page now, you will discard the changes!"
+      },
+      "finish_the_task": {
+        "title": "Congratulations!",
+        "message": "Is the task done?"
+      },
+      "open_the_task": {
+        "title": "Be careful!",
+        "message": "Is the task not done yet?"
+      }
     }
   },
   "LANGUAGE": {
@@ -327,7 +357,7 @@
         "toolTip": "English"
       },
       "de": {
-        "label": "GE",
+        "label": "DE",
         "toolTip": "German"
       },
       "tr": {
@@ -443,67 +473,65 @@
           "label": "completed"
         }
       }
-    },
-    "dialogBox": {}
+    }
   },
   "NOTIFICATIONS": {
-    "user": {
-      "login": {
-        "success": "Login was successful!",
-        "error": "Something went wrong! Please try again!"
-      },
-      "registration": {
-        "success": "Registration was successful!",
-        "error": "Something went wrong! Please try again!",
-        "warn": "Something went wrong! Please try again!"
-      },
-      "sync_data": {
-        "success": "Data got synced successfully!",
-        "error": "Data could not get synced!",
-        "warn": ""
-      },
-      "delete_account": {
-        "success": "The account is deleted successfully!",
-        "error": "",
-        "warn": ""
-      },
-      "update_account": {
-        "success": "User account is updated successfully!",
-        "error": "User account could not get updated!",
-        "warn": ""
-      },
-      "delete_user_data": {
-        "success": "",
-        "error": "User data could not be deleted!",
-        "warn": ""
-      },
-      "update_user_data": {
-        "success": "User data is updated successfully!",
-        "error": "User data could not get updated!",
-        "warn": ""
-      },
-      "delete_all_tasks": {
-        "success": "All Tasks deleted successfully!",
-        "error": "Something went wrong! Please try again!"
-      },
-      "delete_task": {
-        "success": "Task deleted successfully!",
-        "error": "Task could not get deleted",
-        "warn": ""
-      },
-      "update_task": {
-        "success": "Task updated successfully!",
-        "error": "Task could not get updated",
-        "warn": ""
-      },
-      "add_task": {
-        "success": "Task added successfully!",
-        "error": "Task could not get added",
-        "warn": ""
-      },
-      "set_app_language": {
-        "success": "App language is set successfully"
-      }
+    "login": {
+      "success": "Login was successful!",
+      "error": "Something went wrong! Please try again!"
+    },
+    "registration": {
+      "success": "Registration was successful!",
+      "error": "Something went wrong! Please try again!",
+      "warn": "Something went wrong! Please try again!"
+    },
+    "sync_data": {
+      "success": "Data got synced successfully!",
+      "error": "Data could not get synced!",
+      "warn": ""
+    },
+    "delete_account": {
+      "success": "The account is deleted successfully!",
+      "error": "The account couldn't get deleted!",
+      "warn": ""
+    },
+    "update_account": {
+      "success": "User account is updated successfully!",
+      "error": "User account could not get updated!",
+      "warn": ""
+    },
+    "delete_user_data": {
+      "success": "User data is deleted successfully!",
+      "error": "User data could not be deleted!",
+      "warn": ""
+    },
+    "update_user_data": {
+      "success": "User data is updated successfully!",
+      "error": "User data could not get updated!",
+      "warn": ""
+    },
+    "delete_all_tasks": {
+      "success": "All Tasks deleted successfully!",
+      "error": "Something went wrong! Please try again!"
+    },
+    "delete_task": {
+      "success": "Task deleted successfully!",
+      "error": "Task could not get deleted!",
+      "warn": ""
+    },
+    "update_task": {
+      "success": "Task updated successfully!",
+      "error": "Task could not get updated!",
+      "warn": ""
+    },
+    "add_task": {
+      "success": "Task added successfully!",
+      "error": "Task could not get added!",
+      "warn": ""
+    },
+    "set_app_language": {
+      "success": "App language is set successfully!",
+      "error": "The App language could get set!"
     }
   },
   "TASK_GROUPS": {
