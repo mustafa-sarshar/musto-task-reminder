@@ -9,8 +9,7 @@ export class Task {
     public tid: string,
     public title: string,
     public group: TaskGroup,
-    public deadlineDate: Date,
-    public deadlineTime?: Time,
+    public deadline: Date,
     public remindMe?: boolean,
     public reminderDays?: number,
     public reminderMinutes?: number,
@@ -20,24 +19,20 @@ export class Task {
     public videoLink?: string,
     public voiceLink?: string,
     public done?: boolean,
-    public completedDate?: Date,
-    public completedTime?: Time,
-    public completedBy?: string
+    public completion?: Date
   ) {}
 
   public report() {
     if (this.done) {
-      if (this.completedDate && this.completedBy) {
-        return `Done at ${this.completedDate.toUTCString()} by ${
-          this.completedBy
-        }`;
-      } else if (this.completedDate && !this.done) {
-        return `Done at ${this.completedDate.toUTCString()}`;
+      if (this.completion) {
+        return `Done at ${this.completion.toUTCString()}`;
+      } else if (this.completion && !this.done) {
+        return `Done at ${this.completion.toUTCString()}`;
       } else {
-        return `Done at ${this.deadlineDate.toUTCString()}`;
+        return `Done at ${this.deadline.toUTCString()}`;
       }
     } else {
-      return `May be done till ${this.deadlineDate.toUTCString()}`;
+      return `May be done till ${this.deadline.toUTCString()}`;
     }
   }
 }

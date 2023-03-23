@@ -106,7 +106,7 @@
           "toolTip": "Sortiere die Aufgaben nach Frist",
           "ariaLabel": "um die Aufgaben nach Frist zu sortieren"
         },
-        "_byDone": {
+        "_byCompletion": {
           "label": "Sortieren nach Fertigstellungstermin",
           "toolTip": "Sortiere die Aufgaben nach Fertigstellungstermin",
           "ariaLabel": "um die Aufgaben nach Fertigstellungstermin zu sortieren"
@@ -410,7 +410,7 @@
         "label": "Beschreibung",
         "placeholder": "beschreibe die Aufgabe"
       },
-      "doneAtDate": {
+      "completion": {
         "label": "Fertigstellungstermin",
         "placeholder": ""
       },

@@ -106,7 +106,7 @@
           "toolTip": "Sort the tasks by deadline",
           "ariaLabel": "to sort tasks by deadline"
         },
-        "_byDone": {
+        "_byCompletion": {
           "label": "Sort by completion date",
           "toolTip": "Sort the tasks by date of completion",
           "ariaLabel": "to sort tasks by date of completion"
@@ -410,7 +410,7 @@
         "label": "Description",
         "placeholder": "describe the task"
       },
-      "doneAtDate": {
+      "completion": {
         "label": "Completion",
         "placeholder": ""
       },

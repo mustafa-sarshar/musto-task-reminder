@@ -47,7 +47,7 @@
         {{"FORM_FIELDS.task.doneAtDate.label" | translate}}
       </mat-label>
       <p>
-        {{task.done ? (task.doneAtDate | date:'fullDate') : 'It is not completed yet!'}}
+        {{task.done ? (task.completion | date:'fullDate') : 'It is not completed yet!'}}
       </p>
     </div>
     <div class="details-content__actions">
