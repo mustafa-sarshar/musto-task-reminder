@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1679531301202,
+  "timestamp": 1679563720770,
   "index": "/musto-task-reminder/index.html",
   "assetGroups": [
     {
@@ -17,7 +17,7 @@
         "/musto-task-reminder/563.f6ecd40fe0ddf9b2.js",
         "/musto-task-reminder/favicon.ico",
         "/musto-task-reminder/index.html",
-        "/musto-task-reminder/main.ee99596c02acf837.js",
+        "/musto-task-reminder/main.22bf9652fdebdea4.js",
         "/musto-task-reminder/manifest.webmanifest",
         "/musto-task-reminder/polyfills.dc9c8b97601c49c6.js",
         "/musto-task-reminder/runtime.a5118ec48f167a4a.js",
@@ -65,7 +65,7 @@
     "/musto-task-reminder/563.f6ecd40fe0ddf9b2.js": "240488a51427bef095e838884e71b46669ec6c8a",
     "/musto-task-reminder/assets/i18n/de-DE.json": "dc7e7d4bbf9a8164877add6466d01efa3ec8fa0a",
     "/musto-task-reminder/assets/i18n/en-US.json": "fd93c5fcee5f78ad22182b133cd453b9c8bf08f5",
-    "/musto-task-reminder/assets/i18n/fa-IR.json": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "/musto-task-reminder/assets/i18n/fa-IR.json": "ee150af4ac93d0d1ee7d7b67ececbbf2da096517",
     "/musto-task-reminder/assets/i18n/tr-TR.json": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "/musto-task-reminder/assets/icons-angular/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "/musto-task-reminder/assets/icons-angular/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
@@ -84,8 +84,8 @@
     "/musto-task-reminder/assets/icons/icon-72x72.png": "e5e79648dab6d62a2953e0bc94d54d43997be257",
     "/musto-task-reminder/assets/icons/icon-96x96.png": "63fe19d3b9f2b232897b8f29d2f42f87dc3c325d",
     "/musto-task-reminder/favicon.ico": "817eda68320b68bc4b33e2de15b2f64287b02bbd",
-    "/musto-task-reminder/index.html": "82cbdf7b0f06713a36751bd73bdb6f7ec544c525",
-    "/musto-task-reminder/main.ee99596c02acf837.js": "fbb569dd347434f2bc329316a492d24ca46334c2",
+    "/musto-task-reminder/index.html": "fa92072df79cf696ee4968d6e07319074a6b1088",
+    "/musto-task-reminder/main.22bf9652fdebdea4.js": "deb612948fce361b63e1ed6adbc87dba2eadda4b",
     "/musto-task-reminder/manifest.webmanifest": "f4fd3855184074abfa0fbfb9a498661a077eb295",
     "/musto-task-reminder/polyfills.dc9c8b97601c49c6.js": "a2a7ddcca12e5c9518d16afb6003f199e2d91696",
     "/musto-task-reminder/runtime.a5118ec48f167a4a.js": "9e065f42a37642f0335724e186b8e14d246b338b",
