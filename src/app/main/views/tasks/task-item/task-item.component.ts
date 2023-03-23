@@ -47,11 +47,7 @@ export class TaskItemComponent {
       CONFIRMATION_POPUP_STYLE
     );
     dialogRef.componentInstance.confirmationDialogBox =
-      new ConfirmationDialogBox(
-        "Be careful!",
-        "Do you really want to delete this task?",
-        "YES/NO"
-      );
+      new ConfirmationDialogBox("DELETE_TASK", "YES/NO");
     dialogRef.afterClosed().subscribe((answer) => {
       if (answer) {
         this.taskItemService.handleDeleteTask(this.userId, this.task.tid);
@@ -67,8 +63,7 @@ export class TaskItemComponent {
     );
     dialogRef.componentInstance.confirmationDialogBox =
       new ConfirmationDialogBox(
-        this.task.done ? "Be Careful!" : "Congratulations!",
-        this.task.done ? "Is the task not done yet?" : "Is the task done?",
+        this.task.done ? "OPEN_THE_TASK" : "FINISH_THE_TASK",
         "YES/NO"
       );
     dialogRef.afterClosed().subscribe((answer) => {

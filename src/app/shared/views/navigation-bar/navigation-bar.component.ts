@@ -83,11 +83,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
       CONFIRMATION_POPUP_STYLE
     );
     dialogRef.componentInstance.confirmationDialogBox =
-      new ConfirmationDialogBox(
-        "Really?!",
-        "Are you sure you want to quit?",
-        "YES/NO"
-      );
+      new ConfirmationDialogBox("LOGOUT", "YES/NO");
     dialogRef.afterClosed().subscribe((answer) => {
       if (answer) {
         this.authService.handleUserLogout();

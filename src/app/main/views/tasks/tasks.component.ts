@@ -98,11 +98,7 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
         CONFIRMATION_POPUP_STYLE
       );
       dialogRef.componentInstance.confirmationDialogBox =
-        new ConfirmationDialogBox(
-          "Please wait!",
-          "If you leave the page now, you will discard the changes!",
-          "OK/CANCEL"
-        );
+        new ConfirmationDialogBox("LEAVE_PAGE", "OK/CANCEL");
       return dialogRef.afterClosed();
     } else {
       return true;
@@ -122,11 +118,7 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
       CONFIRMATION_POPUP_STYLE
     );
     dialogRef.componentInstance.confirmationDialogBox =
-      new ConfirmationDialogBox(
-        "Be careful!",
-        "Do you really want to delete all your tasks?",
-        "YES/NO"
-      );
+      new ConfirmationDialogBox("DELETE_ALL_TASKS", "YES/NO");
     dialogRef.afterClosed().subscribe((answer) => {
       if (answer) {
         this.tasksService.handleDeleteAllTasks(this.userData.uid);

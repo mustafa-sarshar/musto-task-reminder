@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 
-import { ConfirmationDialogBox } from "../../models/dialog/dialog.model";
+import {
+  ConfirmationDialogBox,
+  ConfirmationDialogType,
+} from "../../models/dialog/dialog.model";
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
 
@@ -11,7 +14,10 @@ import { Subscription } from "rxjs";
   styleUrls: ["./confirmation-dialog.component.scss"],
 })
 export class ConfirmationDialogComponent implements OnInit, OnDestroy {
-  public confirmationDialogBox = new ConfirmationDialogBox("", "");
+  public confirmationDialogBox: ConfirmationDialogBox =
+    new ConfirmationDialogBox();
+  public dialogTitle: string = "";
+  public dialogMessage: string = "";
   private translateSubscription: Subscription = new Subscription();
 
   constructor(
@@ -21,11 +27,13 @@ export class ConfirmationDialogComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.translateSubscription = this.translateService
-      .get("CONFIRMATION")
-      .subscribe((translation) => {
-        console.log(translation);
-        if (translation.header) {
-          // this.confirmationDialogBox.title = translation.header.title;
+      .get(
+        `CONFIRMATION_DIALOG.mode.${this.confirmationDialogBox.mode.toLowerCase()}`
+      )
+      .subscribe((modeData) => {
+        if (modeData) {
+          this.dialogTitle = modeData.title;
+          this.dialogMessage = modeData.message;
         }
       });
   }

@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 
-import { AuthService, DataFlowService, LogService } from "./shared/services";
+import { AuthService, DataFlowService } from "./shared/services";
 import { TranslateService } from "@ngx-translate/core";
-import { LanguageCode, Notification } from "./shared/models";
+import { LanguageCode } from "./shared/models";
 
 @Component({
   selector: "app-root",
@@ -18,7 +18,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private titleService: Title,
     private authService: AuthService,
     private dataFlowService: DataFlowService,
-    private logService: LogService,
     private translateService: TranslateService
   ) {
     this.titleService.setTitle(this.title);
@@ -32,11 +31,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translateService.addLangs(["en-US", "de-DE", "tr-TR", "fa-IR"]);
     this.translateService.setDefaultLang(this.currentAppLanguage);
     this.dataFlowService.initAppLanguage();
-    this.dataFlowService.initTaskGroups();
-
-    this.logService.showNotification(
-      new Notification("SET_APP_LANGUAGE", "SUCCESS")
-    );
   }
 
   public ngOnDestroy(): void {}

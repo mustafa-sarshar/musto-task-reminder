@@ -23,22 +23,25 @@ export class LanguageComponent implements OnInit {
 
   onClickEnglish(): void {
     this.dataFlowService.setAppLanguage("en-US");
+    this.dataFlowService.applyAppLanguage();
     this.dialogRef.close();
   }
 
   onClickGerman(): void {
     this.dataFlowService.setAppLanguage("de-DE");
-
+    this.dataFlowService.applyAppLanguage();
     this.dialogRef.close();
   }
 
   onClickTurkish(): void {
     this.dataFlowService.setAppLanguage("tr-TR");
+    this.dataFlowService.applyAppLanguage();
     this.dialogRef.close();
   }
 
   onClickPersian(): void {
     this.dataFlowService.setAppLanguage("fa-IR");
+    this.dataFlowService.applyAppLanguage();
     this.dialogRef.close();
   }
 }

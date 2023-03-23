@@ -69,7 +69,7 @@
       "title": " s Aufgaben",
       "info_1_1": "Du siehst jetzt alle ",
       "info_1_2": " Aufgaben.",
-      "noTasks": "Du hast noch keine Aufgaben gespeichert!!!"
+      "noTasks": "Du hast noch keine Aufgaben erstellt!!!"
     },
     "actionButtons": {
       "visibilityFilter": {
@@ -294,7 +294,7 @@
       "year": "2023"
     }
   },
-  "CONFIRMATION": {
+  "CONFIRMATION_DIALOG": {
     "header": {
       "title": ""
     },
@@ -315,6 +315,36 @@
         "label": "Nein",
         "toolTip": ""
       }
+    },
+    "mode": {
+      "logout": {
+        "title": "Wirklich?!",
+        "message": "Bist du sicher dass du dich ausloggen möchtest?"
+      },
+      "delete_account": {
+        "title": "Achtung!",
+        "message": "Willst du wirklich dein Benutzerkonto löschen lassen?"
+      },
+      "delete_all_tasks": {
+        "title": "Achtung!",
+        "message": "Willst du wirklich deine alle Aufgaben löschen lassen?"
+      },
+      "delete_task": {
+        "title": "Achtung!",
+        "message": "Willst du wirklich diese Aufgabe löschen lassen?"
+      },
+      "leave_page": {
+        "title": "Achtung!",
+        "message": "Wenn du jetzt die Seite verlässt, verwirfst du die Aktualisierung!"
+      },
+      "finish_the_task": {
+        "title": "Glückwünsche!",
+        "message": "Wurde die Aufgabe schon erledigt?"
+      },
+      "open_the_task": {
+        "title": "Achtung!",
+        "message": "Wurde die Aufgabe noch nicht erledigt?"
+      }
     }
   },
   "LANGUAGE": {
@@ -327,7 +357,7 @@
         "toolTip": "Englisch"
       },
       "de": {
-        "label": "GE",
+        "label": "DE",
         "toolTip": "Deutsch"
       },
       "tr": {
@@ -443,12 +473,65 @@
           "label": "fertiggestellte"
         }
       }
-    },
-    "dialogBox": {}
+    }
   },
   "NOTIFICATIONS": {
-    "user": {
-      "login": ""
+    "login": {
+      "success": "Das Einloggen war erfolgreich!",
+      "error": "Es gab ein Problem! Bitte versuche noch mal!"
+    },
+    "registration": {
+      "success": "Die Registrierung war erfolgreich!",
+      "error": "Es gab ein Problem! Bitte versuche noch mal!",
+      "warn": "Es gab ein Problem! Bitte versuche noch mal!"
+    },
+    "sync_data": {
+      "success": "Die Daten wurden synchroniert!",
+      "error": "Die Daten konnten nicht synchroniert werden!",
+      "warn": ""
+    },
+    "delete_account": {
+      "success": "Das Benutzerkonto wurde gelöscht!",
+      "error": "Das Benutzerkonto konnte nicht gelöscht werden!",
+      "warn": ""
+    },
+    "update_account": {
+      "success": "Das Benutzerkonto wurde aktualisiert",
+      "error": "Das Benutzerkonto konnte nicht aktualisiert werden!",
+      "warn": ""
+    },
+    "delete_user_data": {
+      "success": "Die Benutzerangaben wurden gelöscht!",
+      "error": "Die Benutzerangaben konnten nicht gelöscht werden!",
+      "warn": ""
+    },
+    "update_user_data": {
+      "success": "Die Benutzerangaben wurden aktualisiert!",
+      "error": "Die Benutzerangaben konnten nicht aktualisiert werden!",
+      "warn": ""
+    },
+    "delete_all_tasks": {
+      "success": "Alle Aufgaben wurden gelöscht!",
+      "error": "Die Aufgaben konnten nicht gelöscht werden!"
+    },
+    "delete_task": {
+      "success": "Die Aufgabe wurden gelöscht!",
+      "error": "Die Aufgabe konnte nicht gelöscht werden!",
+      "warn": ""
+    },
+    "update_task": {
+      "success": "Die Aufgabe wurde aktualisiert!",
+      "error": "Die Aufgabe konnte nicht aktualisiert werden!",
+      "warn": ""
+    },
+    "add_task": {
+      "success": "Die Aufgabe wurden erstellt!",
+      "error": "Die Aufgabe konnte nicht erstellt werden!",
+      "warn": ""
+    },
+    "set_app_language": {
+      "success": "Die Sprache der App wurde gesetzt!",
+      "error": "Die Sprache der App konnte nicht gesetzt werden!"
     }
   },
   "TASK_GROUPS": {

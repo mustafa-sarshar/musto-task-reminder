@@ -97,11 +97,7 @@ export class ProfileComponent implements OnInit, OnDestroy, onCanDeactivate {
         CONFIRMATION_POPUP_STYLE
       );
       dialogRef.componentInstance.confirmationDialogBox =
-        new ConfirmationDialogBox(
-          "Be careful!",
-          "If you leave the page now, you will discard the changes!",
-          "OK/CANCEL"
-        );
+        new ConfirmationDialogBox("LEAVE_PAGE", "OK/CANCEL");
       return dialogRef.afterClosed();
     } else {
       return true;
@@ -115,11 +111,7 @@ export class ProfileComponent implements OnInit, OnDestroy, onCanDeactivate {
         CONFIRMATION_POPUP_STYLE
       );
       dialogRef.componentInstance.confirmationDialogBox =
-        new ConfirmationDialogBox(
-          "Be careful!",
-          "Do you really want to delete your account?",
-          "YES/NO"
-        );
+        new ConfirmationDialogBox("DELETE_ACCOUNT", "YES/NO");
       dialogRef.afterClosed().subscribe((answer) => {
         if (answer) {
           this.profileService.handleDeleteAccount(this.userData);

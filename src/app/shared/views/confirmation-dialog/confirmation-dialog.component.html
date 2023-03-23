@@ -1,21 +1,21 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <strong class="dialog-title">{{confirmationDialogBox.title}}</strong>
+      <strong class="dialog-title">{{dialogTitle}}</strong>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-label class="dialog-message">{{confirmationDialogBox.message}}</mat-label>
+    <mat-label class="dialog-message">{{dialogMessage}}</mat-label>
   </mat-card-content>
   <mat-card-footer>
-    <mat-card-actions align="end" *ngIf="confirmationDialogBox.dialogType">
+    <mat-card-actions align="end" *ngIf="confirmationDialogBox.type">
       <!-- Cancel/No button -->
       <button mat-stroked-button (click)="onClickDecline()"
-        cdkFocusInitial>{{confirmationDialogBox.dialogType == "OK/CANCEL" ? ('CONFIRMATION.actionButtons.cancel.label' | translate) : ('CONFIRMATION.actionButtons.no.label' | translate)}}
+        cdkFocusInitial>{{confirmationDialogBox.type == "OK/CANCEL" ? ('CONFIRMATION_DIALOG.actionButtons.cancel.label' | translate) : ('CONFIRMATION_DIALOG.actionButtons.no.label' | translate)}}
       </button>
       <!-- OK/Yes button -->
       <button mat-button color="warn"
-        (click)="onClickAccept()">{{confirmationDialogBox.dialogType == "OK/CANCEL" ? ('CONFIRMATION.actionButtons.ok.label' | translate) : ('CONFIRMATION.actionButtons.yes.label' | translate)}}
+        (click)="onClickAccept()">{{confirmationDialogBox.type == "OK/CANCEL" ? ('CONFIRMATION_DIALOG.actionButtons.ok.label' | translate) : ('CONFIRMATION_DIALOG.actionButtons.yes.label' | translate)}}
       </button>
     </mat-card-actions>
   </mat-card-footer>

@@ -1,10 +1,10 @@
 {
   "name": "musto-task-reminder",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href=/musto-task-reminder/",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "docs": "typedoc --tsconfig tsconfig.json",

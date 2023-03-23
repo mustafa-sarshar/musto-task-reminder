@@ -33,7 +33,7 @@ export class TasksListComponent implements OnInit, OnDestroy, OnChanges {
     showFirstLastButtons: false,
     showPageSizeOptions: true,
     disabled: false,
-    disabledNext: false,
+    disabledNext: true,
     disabledPrev: true,
   };
 
@@ -45,6 +45,7 @@ export class TasksListComponent implements OnInit, OnDestroy, OnChanges {
   public ngOnInit(): void {
     this.formGroupEl = this.tasksListService.initForm(this.tasks);
     this.paginationSettings.length = this.tasks.length;
+    this.handlePaginationEvent(this.paginationSettings);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
