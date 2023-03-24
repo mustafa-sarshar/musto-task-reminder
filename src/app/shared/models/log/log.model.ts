@@ -11,7 +11,10 @@ export type NotificationId =
   | "DELETE_ALL_TASKS"
   | "DELETE_USER_DATA"
   | "UPDATE_USER_DATA"
-  | "SET_APP_LANGUAGE";
+  | "DELETE_TASK_REMINDER"
+  | "SET_APP_LANGUAGE"
+  | "DEADLINE"
+  | "REMINDER";
 export type NotificationType = "ERROR" | "SUCCESS" | "WARN";
 export type NotificationActionType = "OK";
 

@@ -16,8 +16,8 @@ import { CONFIRMATION_POPUP_STYLE, TASK_DETAILS_FORM_STYLE } from "src/configs";
   providers: [TaskItemService],
 })
 export class TaskItemComponent {
-  @Input("userId") userId: string | null = null;
-  @Input("task") task: Task | null = null;
+  @Input("userId") userId: string = null;
+  @Input("task") task: Task = null;
   public taskItemMode: number = 0;
 
   constructor(
@@ -34,10 +34,13 @@ export class TaskItemComponent {
   }
 
   public onClickDetails(): void {
-    this.dialog.open(
+    const dialogRef = this.dialog.open(
       TaskDetailsComponent,
       TASK_DETAILS_FORM_STYLE
-    ).componentInstance.task = this.task;
+    );
+    dialogRef.componentInstance.task = this.task;
+    dialogRef.componentInstance.userId = this.userId;
+
     this.taskItemMode = 0;
   }
 
@@ -78,6 +81,7 @@ export class TaskItemComponent {
           taskUpdate.completion = null;
         } else {
           taskUpdate.done = true;
+          taskUpdate.remindMe = false;
           taskUpdate.completion = new Date();
         }
         this.taskItemService.handleToggleDone(this.userId, taskUpdate);

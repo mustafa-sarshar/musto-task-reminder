@@ -1,10 +1,11 @@
 export type ConfirmationDialogType = "OK/CANCEL" | "YES/NO";
 export type ConfirmationDialogModes =
   | "LOGOUT"
+  | "LEAVE_PAGE"
   | "DELETE_ACCOUNT"
   | "DELETE_ALL_TASKS"
   | "DELETE_TASK"
-  | "LEAVE_PAGE"
+  | "DELETE_TASK_REMINDER"
   | "FINISH_THE_TASK"
   | "OPEN_THE_TASK";
 

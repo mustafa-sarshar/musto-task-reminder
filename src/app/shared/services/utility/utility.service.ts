@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
+import { Time } from "@angular/common";
 import { Injectable } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { throwError } from "rxjs";
@@ -11,6 +12,25 @@ type dateValidation = {
   };
 };
 
+type timeParsedLong = {
+  total: number;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
+type timeParsedShort = {
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
+type dateTimeParsed = {
+  date: string;
+  time: string;
+};
+
 type ValidationFields =
   | "USERNAME"
   | "EMAIL"
@@ -19,7 +39,12 @@ type ValidationFields =
   | "TASK_TITLE"
   | "TASK_DESCRIPTION"
   | "TASK_DEADLINE"
-  | "WEB_LINK";
+  | "WEB_LINK"
+  | "NUMBER"
+  | "TIME"
+  | "TIME_DAY"
+  | "TIME_HOUR"
+  | "TIME_MINUTE";
 
 @Injectable({ providedIn: "root" })
 export class UtilityService {
@@ -139,52 +164,70 @@ export class UtilityService {
     return randomId;
   }
 
-  public getValidationLengthMin(fieldName: ValidationFields): number {
-    let fieldLength: number = 0;
+  public getValidationMin(fieldName: ValidationFields): number {
+    let minValue: number = 0;
     switch (fieldName) {
       case "USERNAME":
-        fieldLength = 5;
+        minValue = 5;
         break;
       case "PASSWORD":
-        fieldLength = 8;
+        minValue = 8;
         break;
       case "TASK_TITLE":
-        fieldLength = 3;
+        minValue = 3;
         break;
       case "TASK_DESCRIPTION":
-        fieldLength = 0;
+        minValue = 0;
         break;
       case "WEB_LINK":
-        fieldLength = 10;
+        minValue = 10;
+        break;
+      case "TIME_DAY":
+        minValue = 0;
+        break;
+      case "TIME_HOUR":
+        minValue = 0;
+        break;
+      case "TIME_MINUTE":
+        minValue = 0;
         break;
       default:
         break;
     }
-    return fieldLength;
+    return minValue;
   }
 
-  public getValidationLengthMax(fieldName: ValidationFields): number {
-    let fieldLength: number = 0;
+  public getValidationMax(fieldName: ValidationFields): number {
+    let maxValue: number = 0;
     switch (fieldName) {
       case "USERNAME":
-        fieldLength = 10;
+        maxValue = 10;
         break;
       case "PASSWORD":
-        fieldLength = 256;
+        maxValue = 256;
         break;
       case "TASK_TITLE":
-        fieldLength = 20;
+        maxValue = 20;
         break;
       case "TASK_DESCRIPTION":
-        fieldLength = 256;
+        maxValue = 256;
         break;
       case "WEB_LINK":
-        fieldLength = 2048;
+        maxValue = 2048;
+        break;
+      case "TIME_DAY":
+        maxValue = -1;
+        break;
+      case "TIME_HOUR":
+        maxValue = 23;
+        break;
+      case "TIME_MINUTE":
+        maxValue = 59;
         break;
       default:
         break;
     }
-    return fieldLength;
+    return maxValue;
   }
 
   public getValidationPattern(fieldName: ValidationFields): string {
@@ -207,14 +250,20 @@ export class UtilityService {
         pattern =
           "[Hh][Tt][Tt][Pp][Ss]?://(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::d{2,5})?(?:/[^s]*)?";
         break;
+      case "NUMBER":
+        pattern = "^[0-9]d*$";
+        break;
+      case "TIME":
+        pattern = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
+        break;
       default:
         break;
     }
     return pattern;
   }
 
-  public validateDateMin(controlEl: FormControl): dateValidation | null {
-    const dateNow = new Date().toISOString().slice(0, 10);
+  public validateDeadlineDate(controlEl: FormControl): dateValidation | null {
+    const dateNow: string = new Date().toISOString().slice(0, 10);
     return controlEl.value >= dateNow
       ? null
       : {
@@ -222,6 +271,10 @@ export class UtilityService {
             valid: false,
           },
         };
+  }
+
+  public validateDeadline(deadline: Date): boolean {
+    return deadline.getTime() > new Date().getTime() + 5 + 60 + 1000;
   }
 
   public validateAge(dateInput: FormControl): dateValidation | null {
@@ -247,6 +300,121 @@ export class UtilityService {
             valid: false,
           },
         };
+  }
+
+  public subtractTimeFromDate(
+    deadline: Date,
+    days: number = 0,
+    hours: number = 0,
+    minutes: number = 0,
+    seconds: number = 0
+  ): Date {
+    const dateTimeRemained =
+      deadline.getTime() -
+      days * 24 * 60 * 60 * 1000 -
+      hours * 60 * 60 * 1000 -
+      minutes * 60 * 1000 -
+      seconds * 1000;
+
+    return new Date(dateTimeRemained);
+  }
+
+  public validateReminder(deadline: Date, reminder: Date): boolean {
+    const dateNow = new Date();
+    console.log("validateReminder");
+    console.log(dateNow);
+    console.log(deadline);
+    console.log(reminder);
+
+    if (
+      deadline.getTime() - reminder.getTime() - dateNow.getTime() &&
+      reminder.getTime() !== deadline.getTime()
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public convertTimeStringToNumber(time: string): number {
+    const timeArray = time.split(":");
+
+    let timeNumber =
+      parseInt(timeArray[0], 10) * 60 * 60 + parseInt(timeArray[1], 10) * 60;
+    if (timeArray.length === 3) {
+      timeNumber += parseInt(timeArray[2], 10);
+    }
+
+    return timeNumber;
+  }
+
+  public extractTimeElementsFromTimeString(time: string): timeParsedShort {
+    const timeArray = time.split(":");
+    return {
+      hours: +timeArray[0],
+      minutes: +timeArray[1],
+      seconds: timeArray.length > 2 ? +timeArray[2] : 0,
+    };
+  }
+
+  public parseDateToDateTimeString(date: Date): dateTimeParsed {
+    return {
+      date: date.toISOString().slice(0, 10),
+      time: `${("0" + date.getHours()).slice(-2)}:${(
+        "0" + date.getMinutes()
+      ).slice(-2)}`,
+    };
+  }
+
+  public setTimeForDate(date: string, time: string): Date {
+    const datePart = new Date(Date.parse(date) + 1000 * 60 * 60);
+    const timePart = this.extractTimeElementsFromTimeString(time);
+
+    datePart.setHours(timePart.hours);
+    datePart.setMinutes(timePart.minutes);
+    datePart.setSeconds(timePart.seconds);
+
+    return new Date(datePart);
+  }
+
+  public getTimeReminder(reminder: Date, deadline: Date): timeParsedLong {
+    const total = deadline.getTime() - reminder.getTime();
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+    const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+    console.log("\n\n\n");
+    console.log(total, days, hours, minutes, seconds);
+    console.log("\n\n\n");
+
+    return {
+      total,
+      days,
+      hours,
+      minutes,
+      seconds,
+    };
+  }
+
+  public getTimeLeft(endTime: Date, startTime?: Date): timeParsedLong {
+    let sTime = Date.parse(new Date().toString());
+    if (startTime) {
+      sTime = Date.parse(startTime.toString());
+    }
+    const total = Date.parse(endTime.toString()) - sTime;
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+    const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+    return {
+      total,
+      days,
+      hours,
+      minutes,
+      seconds,
+    };
   }
 
   public handleError(errorRes: HttpErrorResponse) {

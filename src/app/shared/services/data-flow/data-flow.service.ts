@@ -12,6 +12,7 @@ import {
   Notification,
   Task,
   TaskGroup,
+  TaskReminder,
   User,
   UserDataFromDatabase,
   UserDataFromLocalStorage,
@@ -28,9 +29,9 @@ export class DataFlowService implements OnDestroy {
   public taskGroups: BehaviorSubject<TaskGroup[]> = new BehaviorSubject<
     TaskGroup[]
   >(null);
-  public appNotifications: BehaviorSubject<any> = new BehaviorSubject<any>(
-    null
-  );
+  public taskReminders: BehaviorSubject<TaskReminder[]> = new BehaviorSubject<
+    TaskReminder[]
+  >(null);
   private userProfileFromDatabaseSubscription: Subscription =
     new Subscription();
   private taskGroupsTranslateSubscription: Subscription = new Subscription();
@@ -50,9 +51,12 @@ export class DataFlowService implements OnDestroy {
     this.userProfileFromDatabaseSubscription.unsubscribe();
   }
 
-  public setUserData(userData: User | null): void {
+  public setUserData(userData: User): void {
     this.userData.next(userData);
-    this.localStorageService.storeUserDataOnLocalStorage(userData);
+    if (userData) {
+      this.localStorageService.storeUserDataOnLocalStorage(userData);
+      this.initTaskReminders(userData.tasks);
+    }
 
     this.logService.logToConsole(new Log("UserData SET", "INFO"));
     this.logService.logToConsole(new Log(userData));
@@ -123,7 +127,6 @@ export class DataFlowService implements OnDestroy {
       .getUserProfileDataFromDatabase(userData.uid)
       .subscribe({
         next: (response: UserDataFromDatabase) => {
-          this.appMonitoringService.setIsDataFetchingStatus(false);
           this.logService.logToConsole(
             new Log(
               "User profile data loaded from database successfully!",
@@ -145,12 +148,14 @@ export class DataFlowService implements OnDestroy {
               (key) => response.tasks[key]
             );
             userData.tasks = tasksLoaded;
+          } else {
+            userData.tasks = undefined;
           }
 
           this.setUserData(userData);
+          this.appMonitoringService.setIsDataFetchingStatus(false);
         },
         error: (error) => {
-          this.appMonitoringService.setIsDataFetchingStatus(false);
           this.logService.logToConsole(
             new Log("getUserProfileDataFromDatabase" + error.message, "ERROR")
           );
@@ -161,6 +166,7 @@ export class DataFlowService implements OnDestroy {
           }
 
           this.setUserData(userData);
+          this.appMonitoringService.setIsDataFetchingStatus(false);
         },
       });
   }
@@ -229,5 +235,53 @@ export class DataFlowService implements OnDestroy {
           this.logService.logToConsole(new Log(error.message));
         },
       });
+  }
+
+  public getTaskReminders(): TaskReminder[] {
+    return this.taskReminders.getValue().slice();
+  }
+
+  public setTaskReminders(taskReminders: TaskReminder[]): void {
+    this.taskReminders.next([...taskReminders]);
+  }
+
+  public initTaskReminders(tasks: Task[]): void {
+    const taskReminders: TaskReminder[] = [];
+
+    if (tasks) {
+      for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].remindMe) {
+          taskReminders.push(
+            new TaskReminder(
+              this.utilityService.randomIdGenerator(5, "MIXED"),
+              tasks[i]
+            )
+          );
+        }
+      }
+    }
+
+    this.setTaskReminders(taskReminders);
+  }
+
+  public addTaskReminder(taskReminder: TaskReminder): void {
+    let taskReminders = this.getTaskReminders();
+    taskReminders = [...taskReminders, taskReminder];
+
+    this.setTaskReminders(taskReminders);
+  }
+
+  public deleteTaskReminder(tid: string): void {
+    const userData: User = this.getUserData();
+
+    if (userData.tasks) {
+      userData.tasks.forEach((task: Task) => {
+        if (task.tid === tid) {
+          task.remindMe = false;
+        }
+      });
+    }
+
+    this.setUserData(userData);
   }
 }

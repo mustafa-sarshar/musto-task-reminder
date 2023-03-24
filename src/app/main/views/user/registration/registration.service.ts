@@ -49,12 +49,8 @@ export class RegistrationService implements OnInit, OnDestroy {
     const formGroupEl = new FormGroup({
       username: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
-        Validators.minLength(
-          this.utilityService.getValidationLengthMin("USERNAME")
-        ),
-        Validators.maxLength(
-          this.utilityService.getValidationLengthMax("USERNAME")
-        ),
+        Validators.minLength(this.utilityService.getValidationMin("USERNAME")),
+        Validators.maxLength(this.utilityService.getValidationMax("USERNAME")),
         Validators.pattern(
           this.utilityService.getValidationPattern("USERNAME")
         ),
@@ -69,12 +65,8 @@ export class RegistrationService implements OnInit, OnDestroy {
       ]),
       password: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
-        Validators.minLength(
-          this.utilityService.getValidationLengthMin("PASSWORD")
-        ),
-        Validators.maxLength(
-          this.utilityService.getValidationLengthMax("PASSWORD")
-        ),
+        Validators.minLength(this.utilityService.getValidationMin("PASSWORD")),
+        Validators.maxLength(this.utilityService.getValidationMax("PASSWORD")),
       ]),
     });
     return formGroupEl;

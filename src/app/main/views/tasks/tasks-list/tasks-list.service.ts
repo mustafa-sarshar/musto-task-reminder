@@ -17,7 +17,7 @@ export class TasksListService {
         },
         [
           Validators.maxLength(
-            this.utilityService.getValidationLengthMax("TASK_TITLE")
+            this.utilityService.getValidationMax("TASK_TITLE")
           ),
           Validators.pattern(
             this.utilityService.getValidationPattern("TASK_TITLE")
@@ -36,7 +36,7 @@ export class TasksListService {
     }
     if (
       paginationSettings.pageIndex >=
-      Math.round(paginationSettings.length / paginationSettings.pageSize)
+      Math.floor(paginationSettings.length / paginationSettings.pageSize)
     ) {
       paginationSettings.disabledNext = true;
     } else {

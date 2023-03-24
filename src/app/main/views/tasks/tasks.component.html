@@ -9,12 +9,26 @@
       <mat-label>
         {{"TASKS.header.info_1_1" | translate}}
         <u>
-          {{tasksVisibilityFilter === 'ALL' ? ("MESSAGES.filters.visibilityFilter.all.label" | translate) : tasksVisibilityFilter === 'OPEN' ? ("MESSAGES.filters.visibilityFilter.open.label" | translate): ("MESSAGES.filters.visibilityFilter.finished.label" | translate)}}
+          {{tasksVisibilityFilter === 'ALL' ? ("MESSAGES.filters.visibilityFilter.all.label" | translate) : tasksVisibilityFilter === 'OPEN' ? ("MESSAGES.filters.visibilityFilter.open.label" | translate): ("MESSAGES.filters.visibilityFilter.completed.label" | translate)}}
         </u>
         {{"TASKS.header.info_1_2" | translate}}
       </mat-label>
       <mat-card-content class="space-flex"></mat-card-content>
       <mat-card-actions>
+        <!-- Task Reminder Menu -->
+        <button mat-icon-button color="default" [matMenuTriggerFor]="menuTaskReminder"
+          [matTooltip]="taskReminders.length > 0 ? ('TASKS.actionButtons.taskReminder._on.toolTip' | translate) : ('TASKS.actionButtons.taskReminder._off.toolTip' | translate)"
+          [ariaLabel]="taskReminders.length > 0 ? ('TASKS.actionButtons.taskReminder._on.ariaLabel' | translate) :
+          ('TASKS.actionButtons.taskReminder._off.ariaLabel' | translate)">
+          <mat-icon [matBadge]="taskReminders.length"
+            matBadgeColor="warn">{{taskReminders.length > 0 ? "notifications" : "notifications_off"}}</mat-icon>
+        </button>
+        <!-- Task Reminder Menu Items -->
+        <mat-menu #menuTaskReminder="matMenu">
+          <app-task-reminder *ngFor="let taskReminderItem of taskReminders" [taskReminder]="taskReminderItem"
+            [userId]="userData.uid">
+          </app-task-reminder>
+        </mat-menu>
         <!-- Visibility Menu -->
         <button mat-icon-button color="default" [matMenuTriggerFor]="menuVisibility"
           [matTooltip]="'TASKS.actionButtons.visibilityFilter.toolTip' | translate"
@@ -23,11 +37,11 @@
         </button>
         <!-- Visibility Menu Items -->
         <mat-menu #menuVisibility="matMenu">
-          <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('FINISHED')" color="default"
-            [matTooltip]="'TASKS.actionButtons.visibilityFilter._finished.toolTip' | translate"
-            [ariaLabel]="'TASKS.actionButtons.visibilityFilter._finished.ariaLabel' | translate">
+          <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('COMPLETED')" color="default"
+            [matTooltip]="'TASKS.actionButtons.visibilityFilter._completed.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.visibilityFilter._completed.ariaLabel' | translate">
             <mat-icon color="accent">done</mat-icon>
-            {{"TASKS.actionButtons.visibilityFilter._finished.label" | translate}}
+            {{"TASKS.actionButtons.visibilityFilter._completed.label" | translate}}
           </button>
           <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('OPEN')" color="default"
             [matTooltip]="'TASKS.actionButtons.visibilityFilter._open.toolTip' | translate"
@@ -42,7 +56,6 @@
             {{"TASKS.actionButtons.visibilityFilter._all.label" | translate}}
           </button>
         </mat-menu>
-
         <!-- Sort by Menu -->
         <button mat-icon-button color="default" [matMenuTriggerFor]="menuSortBy"
           [matTooltip]="'TASKS.actionButtons.sortBy.toolTip' | translate"

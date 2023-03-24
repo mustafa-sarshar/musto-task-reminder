@@ -6,7 +6,7 @@ import {
   UserDataFromDatabase,
 } from "./user/user.model";
 import { ConfirmationDialogBox } from "./dialog/dialog.model";
-import { Task, TaskGroup } from "./task/task.model";
+import { Task, TaskGroup, TaskReminder } from "./task/task.model";
 import { Language, LanguageCode } from "./language/language.model";
 import { AuthResponsePayload } from "./auth/auth.model";
 import {
@@ -27,6 +27,7 @@ export {
   UserDataFromDatabase,
   ConfirmationDialogBox,
   Task,
+  TaskReminder,
   TaskGroup,
   Language,
   LanguageCode,

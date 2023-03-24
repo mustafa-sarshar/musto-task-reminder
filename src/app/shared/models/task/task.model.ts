@@ -1,5 +1,3 @@
-import { Time } from "@angular/common";
-
 export class TaskGroup {
   constructor(public gid: string, public title: string) {}
 }
@@ -11,8 +9,7 @@ export class Task {
     public group: TaskGroup,
     public deadline: Date,
     public remindMe?: boolean,
-    public reminderDays?: number,
-    public reminderMinutes?: number,
+    public reminder?: Date,
     public description?: string,
     public webLink?: string,
     public imageLink?: string,
@@ -35,4 +32,8 @@ export class Task {
       return `May be done till ${this.deadline.toUTCString()}`;
     }
   }
+}
+
+export class TaskReminder {
+  constructor(public trid: string, public task: Task) {}
 }
