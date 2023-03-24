@@ -72,14 +72,31 @@
       "noTasks": "You have no tasks!!!"
     },
     "actionButtons": {
+      "taskReminder": {
+        "_on": {
+          "label": "",
+          "toolTip": "See all reminders",
+          "ariaLabel": "to see all reminders"
+        },
+        "_off": {
+          "label": "",
+          "toolTip": "You have no reminders at the moment!",
+          "ariaLabel": "task reminders is off"
+        },
+        "_delete": {
+          "label": "",
+          "toolTip": "Delete task reminder!",
+          "ariaLabel": "to delete task reminder"
+        }
+      },
       "visibilityFilter": {
         "label": "",
         "toolTip": "Change the visibility filter",
         "ariaLabel": "to change the visibility filter",
-        "_finished": {
-          "label": "Only finished tasks",
-          "toolTip": "Only finished tasks",
-          "ariaLabel": "to see only finished tasks"
+        "_completed": {
+          "label": "Only completed tasks",
+          "toolTip": "Only completed tasks",
+          "ariaLabel": "to see only completed tasks"
         },
         "_open": {
           "label": "Only open tasks",
@@ -106,7 +123,7 @@
           "toolTip": "Sort the tasks by deadline",
           "ariaLabel": "to sort tasks by deadline"
         },
-        "_byDone": {
+        "_byCompletion": {
           "label": "Sort by completion date",
           "toolTip": "Sort the tasks by date of completion",
           "ariaLabel": "to sort tasks by date of completion"
@@ -145,7 +162,7 @@
         "label": "",
         "toolTips": {
           "open": "Deadline: ",
-          "finished": "Finished at: "
+          "completed": "Completed at: "
         },
         "ariaLabel": "to change the task's status"
       },
@@ -344,6 +361,10 @@
       "open_the_task": {
         "title": "Be careful!",
         "message": "Is the task not done yet?"
+      },
+      "delete_task_reminder": {
+        "title": "Really?!",
+        "message": "Is the task done and/or do you want to delete the task reminder?"
       }
     }
   },
@@ -406,11 +427,23 @@
         "label": "Deadline",
         "placeholder": ""
       },
+      "deadlineDate": {
+        "label": "Deadline date",
+        "placeholder": ""
+      },
+      "deadlineTime": {
+        "label": "Deadline time",
+        "placeholder": ""
+      },
+      "reminder": {
+        "label": "Reminder:"
+      },
+
       "description": {
         "label": "Description",
         "placeholder": "describe the task"
       },
-      "doneAtDate": {
+      "completion": {
         "label": "Completion",
         "placeholder": ""
       },
@@ -469,7 +502,7 @@
         "open": {
           "label": "open"
         },
-        "finished": {
+        "completed": {
           "label": "completed"
         }
       }
@@ -532,6 +565,16 @@
     "set_app_language": {
       "success": "App language is set successfully!",
       "error": "The App language could get set!"
+    },
+    "deadline": {
+      "error": "!تاریخ انجام درست نمی باشد"
+    },
+    "reminder": {
+      "error": "!زمان کافی برای به یادآوری نداریم"
+    },
+    "delete_task_reminder": {
+      "success": "!یادآور پاک شد",
+      "error": "!یادآور نتواست پاک بشود"
     }
   },
   "TASK_GROUPS": {

@@ -72,11 +72,28 @@
       "noTasks": "Du hast noch keine Aufgaben erstellt!!!"
     },
     "actionButtons": {
+      "taskReminder": {
+        "_on": {
+          "label": "",
+          "toolTip": "Sehe alle Erinnerungen",
+          "ariaLabel": "um alle Erinnerung zu sehen"
+        },
+        "_off": {
+          "label": "",
+          "toolTip": "Du hast momentan keine Aufgabenerinnerung!",
+          "ariaLabel": "Erinnerungen sind nicht verfügbar"
+        },
+        "_delete": {
+          "label": "",
+          "toolTip": "Die Erinnerung zu löschen!",
+          "ariaLabel": "um die Erinnerung zu löschen!"
+        }
+      },
       "visibilityFilter": {
         "label": "",
         "toolTip": "Ändere den Aufgabenfilter",
         "ariaLabel": "um den Aufgabenfilter zu ändern",
-        "_finished": {
+        "_completed": {
           "label": "Nur fertiggestellte Aufgaben",
           "toolTip": "Nur fertiggestellte Aufgaben",
           "ariaLabel": "um nur die fertiggestellte Aufgaben zu sehen"
@@ -106,7 +123,7 @@
           "toolTip": "Sortiere die Aufgaben nach Frist",
           "ariaLabel": "um die Aufgaben nach Frist zu sortieren"
         },
-        "_byDone": {
+        "_byCompletion": {
           "label": "Sortieren nach Fertigstellungstermin",
           "toolTip": "Sortiere die Aufgaben nach Fertigstellungstermin",
           "ariaLabel": "um die Aufgaben nach Fertigstellungstermin zu sortieren"
@@ -145,7 +162,7 @@
         "label": "",
         "toolTips": {
           "open": "Frist: ",
-          "finished": "Geschlossen am: "
+          "completed": "Geschlossen am: "
         },
         "ariaLabel": "um den Aufgabenstatus ändern"
       },
@@ -344,6 +361,10 @@
       "open_the_task": {
         "title": "Achtung!",
         "message": "Wurde die Aufgabe noch nicht erledigt?"
+      },
+      "delete_task_reminder": {
+        "title": "Wirklich?!",
+        "message": "Wurde die Aufgabe schon erledigt und/oder willst du wirklich die Aufgabenerinnerung löschen lassen?"
       }
     }
   },
@@ -406,11 +427,38 @@
         "label": "Frist",
         "placeholder": ""
       },
+      "deadlineDate": {
+        "label": "Fristdatum",
+        "placeholder": ""
+      },
+      "deadlineTime": {
+        "label": "Fristzeit",
+        "placeholder": ""
+      },
+      "reminder": {
+        "label": "Errinerung:"
+      },
+      "remindMe": {
+        "label": "Errinere mich daran",
+        "placeholder": ""
+      },
+      "reminderDays": {
+        "label": "Tage davor",
+        "placeholder": "0-∞"
+      },
+      "reminderHours": {
+        "label": "Stunden davor",
+        "placeholder": "0-23"
+      },
+      "reminderMinutes": {
+        "label": "Minuten davor",
+        "placeholder": "0-59"
+      },
       "description": {
         "label": "Beschreibung",
         "placeholder": "beschreibe die Aufgabe"
       },
-      "doneAtDate": {
+      "completion": {
         "label": "Fertigstellungstermin",
         "placeholder": ""
       },
@@ -469,7 +517,7 @@
         "open": {
           "label": "öffene"
         },
-        "finished": {
+        "completed": {
           "label": "fertiggestellte"
         }
       }
@@ -532,6 +580,16 @@
     "set_app_language": {
       "success": "Die Sprache der App wurde gesetzt!",
       "error": "Die Sprache der App konnte nicht gesetzt werden!"
+    },
+    "deadline": {
+      "error": "Die Frist ist nicht gültig!"
+    },
+    "reminder": {
+      "error": "Es gibt keine genüge Zeit für die Errinerung!"
+    },
+    "delete_task_reminder": {
+      "success": "Die Errinerung wurde gelöscht!",
+      "error": "Die Errinerung konnte nicht gelöscht werden!"
     }
   },
   "TASK_GROUPS": {
