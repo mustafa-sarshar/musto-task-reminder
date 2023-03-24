@@ -124,7 +124,7 @@
           "ariaLabel": "to sort tasks by deadline"
         },
         "_byCompletion": {
-          "label": "Sort by completion date",
+          "label": "Sort by completion",
           "toolTip": "Sort the tasks by date of completion",
           "ariaLabel": "to sort tasks by date of completion"
         },
@@ -250,9 +250,9 @@
         "ariaLabel": "to go to the next page"
       },
       "pageSize": {
-        "label": "Set page size",
-        "toolTip": "Change the page size",
-        "ariaLabel": "to change the page size"
+        "label": "Set the page size",
+        "toolTip": "Set the page size",
+        "ariaLabel": "to set the page size"
       },
       "pageSize_5": {
         "label": "5"

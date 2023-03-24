@@ -94,14 +94,14 @@
               <mat-icon color="warn">filter_list</mat-icon>
             </button>
           </mat-menu>
-          <!-- Sort by done -->
-          <button mat-menu-item color="default" [matMenuTriggerFor]="menuSortBy__done"
-            [matTooltip]="'TASKS.actionButtons.sortBy._byDone.toolTip' | translate"
-            [ariaLabel]="'TASKS.actionButtons.sortBy._byDone.ariaLabel' | translate">
+          <!-- Sort by Completion -->
+          <button mat-menu-item color="default" [matMenuTriggerFor]="menuSortBy__completion"
+            [matTooltip]="'TASKS.actionButtons.sortBy._byCompletion.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.sortBy._byCompletion.ariaLabel' | translate">
             <mat-icon color="default">calendar_month</mat-icon>
-            {{"TASKS.actionButtons.sortBy._byDone.label" | translate}}
+            {{"TASKS.actionButtons.sortBy._byCompletion.label" | translate}}
           </button>
-          <mat-menu #menuSortBy__done="matMenu">
+          <mat-menu #menuSortBy__completion="matMenu">
             <button mat-menu-item (click)="onClickSortBy('COMPLETED', 'ASC')">
               <mat-icon class="sort-ascending" color="accent">filter_list</mat-icon>
             </button>

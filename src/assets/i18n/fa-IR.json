@@ -124,7 +124,7 @@
           "ariaLabel": "to sort tasks by deadline"
         },
         "_byCompletion": {
-          "label": "Sort by completion date",
+          "label": "Sort by completion",
           "toolTip": "Sort the tasks by date of completion",
           "ariaLabel": "to sort tasks by date of completion"
         },
