@@ -114,7 +114,7 @@
         "toolTip": "Sortiere die Aufgaben",
         "ariaLabel": "um die Aufgaben zu sortieren",
         "_byTitle": {
-          "label": "Sortieren nach Titel",
+          "label": "Sortiere nach Titel",
           "toolTip": "Sortiere die Aufgaben nach Titel",
           "ariaLabel": "um die Aufgaben nach Titel zu sortieren"
         },
@@ -124,7 +124,7 @@
           "ariaLabel": "um die Aufgaben nach Frist zu sortieren"
         },
         "_byCompletion": {
-          "label": "Sortieren nach Fertigstellungstermin",
+          "label": "Sortiere nach Fertigstellungstermin",
           "toolTip": "Sortiere die Aufgaben nach Fertigstellungstermin",
           "ariaLabel": "um die Aufgaben nach Fertigstellungstermin zu sortieren"
         },
