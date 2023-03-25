@@ -52,9 +52,9 @@ export class TasksListService {
       paginationSettings.disabledNext = true;
     }
 
-    this.logService.logToConsole(
-      new Log("Pagination Setting Changed!", "INFO")
-    );
-    this.logService.logToConsole(new Log(paginationSettings));
+    // this.logService.logToConsole(
+    //   new Log("Pagination Setting Changed!", "INFO")
+    // );
+    // this.logService.logToConsole(new Log(paginationSettings));
   }
 }

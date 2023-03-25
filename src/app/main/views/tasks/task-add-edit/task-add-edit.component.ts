@@ -50,7 +50,6 @@ export class TaskAddEditComponent {
     this.taskGroupsSubscription = this.dataFlowService.taskGroups.subscribe(
       (taskGroups: TaskGroup[]) => {
         this.taskGroups = taskGroups;
-        console.log("taskGroups", taskGroups);
       }
     );
   }

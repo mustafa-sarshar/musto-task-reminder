@@ -74,7 +74,7 @@ export class TasksListComponent implements OnInit, OnChanges {
     this.paginationSettings.pageIndex = pageEvent.pageIndex;
     this.tasksListService.updatePaginatorButtons(this.paginationSettings);
 
-    this.logService.logToConsole(new Log("Page Event Changed!", "INFO"));
-    this.logService.logToConsole(new Log(pageEvent));
+    // this.logService.logToConsole(new Log("Page Event Changed!", "INFO"));
+    // this.logService.logToConsole(new Log(pageEvent));
   }
 }

@@ -86,7 +86,7 @@ export class UtilityService {
     return randomId.join(sep);
   }
 
-  public randomIdGenerator(
+  public getRandomId(
     length: number,
     idType: "NUMBER" | "CHARACTER" | "MIXED",
     sep?: string
@@ -357,7 +357,7 @@ export class UtilityService {
     };
   }
 
-  public parseDateToDateTimeString(date: Date): dateTimeParsed {
+  public parseDateToDateTimeStringObject(date: Date): dateTimeParsed {
     return {
       date: date.toISOString().slice(0, 10),
       time: `${("0" + date.getHours()).slice(-2)}:${(

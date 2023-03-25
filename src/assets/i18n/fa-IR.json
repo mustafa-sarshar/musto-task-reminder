@@ -268,6 +268,28 @@
       }
     }
   },
+  "TASKS_TASK_REMINDER_POPUP": {
+    "header": {
+      "title": "یادآوری"
+    },
+    "actionButtons": {
+      "silent": {
+        "label": "Delete the reminder",
+        "toolTip": "Delete the reminder",
+        "ariaLabel": "to delete the reminder"
+      },
+      "dismiss": {
+        "label": "بی خیال",
+        "toolTip": "بی خیال شو",
+        "ariaLabel": "بی خیال شو"
+      },
+      "details": {
+        "label": "Details",
+        "toolTip": "Check the task details",
+        "ariaLabel": "to check the task details"
+      }
+    }
+  },
   "LOADING_SPINNER": {
     "message": "Please wait ..."
   },

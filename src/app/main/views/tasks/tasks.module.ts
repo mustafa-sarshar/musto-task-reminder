@@ -19,6 +19,7 @@ import { TaskItemComponent } from "./task-item/task-item.component";
 import { TaskAddEditComponent } from "./task-add-edit/task-add-edit.component";
 import { TaskDetailsComponent } from "./task-details/task-details.component";
 import { TaskReminderComponent } from "./task-reminder/task-reminder.component";
+import { TaskReminderPopupComponent } from "./task-reminder-popup/task-reminder-popup.component";
 
 const taskComponents = [
   TasksComponent,
@@ -28,6 +29,7 @@ const taskComponents = [
   TaskDetailsComponent,
   TaskAddEditComponent,
   TaskReminderComponent,
+  TaskReminderPopupComponent,
 ];
 
 @NgModule({

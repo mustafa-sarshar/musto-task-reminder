@@ -44,7 +44,7 @@
         {{"FORM_FIELDS.task.deadline.label" | translate}}
       </mat-label>
       <p>
-        {{task.deadline | date:'dd-MM-yyyy'}}
+        {{task.deadline | date:'MM-dd-yyyy'}}
         <br>
         <i>{{task.deadline | date:'HH:mm:ss'}}</i>
       </p>
@@ -64,7 +64,7 @@
         {{"FORM_FIELDS.task.reminder.label" | translate}}
       </mat-label>
       <p>
-        {{task.reminder | date:"dd-MM-yyyy"}}
+        {{task.reminder | date:"MM-dd-yyyy"}}
         <br>
         <i>{{task.reminder | date:"HH:mm:ss"}}</i>
       </p>
@@ -75,7 +75,7 @@
         {{"FORM_FIELDS.task.completion.label" | translate}}
       </mat-label>
       <p *ngIf="task.done">
-        {{task.completion | date:'dd-MM-yyyy'}}
+        {{task.completion | date:'MM-dd-yyyy'}}
         <br>
         <i>{{task.completion | date:'HH:mm:ss'}}</i>
       </p>

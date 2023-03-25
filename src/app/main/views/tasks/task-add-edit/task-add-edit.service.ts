@@ -67,7 +67,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
       deadlineDate: new FormControl(
         {
           value: task
-            ? this.utilityService.parseDateToDateTimeString(
+            ? this.utilityService.parseDateToDateTimeStringObject(
                 new Date(task.deadline)
               ).date
             : "",
@@ -78,7 +78,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
       deadlineTime: new FormControl(
         {
           value: task
-            ? this.utilityService.parseDateToDateTimeString(
+            ? this.utilityService.parseDateToDateTimeStringObject(
                 new Date(task.deadline)
               ).time
             : "23:59",
@@ -261,7 +261,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
     }
 
     const taskSubmitted: Task = new Task(
-      this.utilityService.randomIdGenerator(25, "MIXED", ""),
+      this.utilityService.getRandomId(25, "MIXED", ""),
       formGroupEl.controls["title"].value,
       formGroupEl.controls["group"].value,
       deadline,
