@@ -27,7 +27,6 @@ import {
   LanguageCode,
   TaskReminder,
 } from "src/app/shared/models";
-import { TaskReminderPopupComponent } from "./task-reminder-popup/task-reminder-popup.component";
 
 @Component({
   selector: "app-tasks",
@@ -67,9 +66,6 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
     this.userDataSubscription = this.dataFlowService.userData.subscribe(
       (userData: User) => {
         this.userData = userData;
-
-        this.dialog.open(TaskReminderPopupComponent).componentInstance.task =
-          this.userData.tasks[0];
 
         this.logService.logToConsole(
           new Log("User Data loaded @Tasks", "INFO")
