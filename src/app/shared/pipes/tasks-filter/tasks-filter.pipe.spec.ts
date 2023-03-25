@@ -1,8 +1,8 @@
-import { FilterArrayPipe } from "./tasks-filter.pipe";
+import { TasksFilterPipe } from "./tasks-filter.pipe";
 
 describe("FilterArrayPipe", () => {
   it("create an instance", () => {
-    const pipe = new FilterArrayPipe();
+    const pipe = new TasksFilterPipe();
     expect(pipe).toBeTruthy();
   });
 });
