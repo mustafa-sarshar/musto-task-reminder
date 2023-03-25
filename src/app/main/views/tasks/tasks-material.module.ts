@@ -13,6 +13,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatBadgeModule } from "@angular/material/badge";
 
 const materials = [
   MatButtonModule,
@@ -28,6 +30,8 @@ const materials = [
   MatAutocompleteModule,
   MatDialogModule,
   MatMenuModule,
+  MatCheckboxModule,
+  MatBadgeModule,
 ];
 
 @NgModule({

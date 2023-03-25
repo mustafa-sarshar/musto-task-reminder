@@ -27,7 +27,7 @@
   </mat-list-item>
 </mat-list>
 
-<mat-paginator #pagePaginator (page)="handlePaginationEvent($event)" [length]="paginationSettings.length"
+<mat-paginator #pagePaginator (page)="handleChangePageEvent($event)" [length]="paginationSettings.length"
   [pageSize]="paginationSettings.pageSize" [disabled]="paginationSettings.disabled"
   [showFirstLastButtons]="paginationSettings.showFirstLastButtons"
   [pageSizeOptions]="paginationSettings.showPageSizeOptions ? paginationSettings.pageSizeOptions : []"

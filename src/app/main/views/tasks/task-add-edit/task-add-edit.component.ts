@@ -2,8 +2,7 @@ import { DialogRef } from "@angular/cdk/dialog";
 import { Component, Input } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { Log } from "src/app/shared/models";
-import { Task, TaskGroup } from "src/app/shared/models/task/task.model";
+
 import {
   AppMonitoringService,
   DataFlowService,
@@ -11,6 +10,8 @@ import {
   UtilityService,
 } from "src/app/shared/services";
 import { TaskAddEditService } from "./task-add-edit.service";
+import { Log, Notification } from "src/app/shared/models";
+import { Task, TaskGroup } from "src/app/shared/models/task/task.model";
 
 @Component({
   selector: "app-task-add-edit",
@@ -24,6 +25,7 @@ export class TaskAddEditComponent {
   public formGroupEl: FormGroup;
   public isDataFetching: boolean = false;
   public taskGroups: TaskGroup[] = [];
+  public remindMeFlag: boolean = false;
   private isDataFetchingServiceSubscription: Subscription = new Subscription();
   private taskGroupsSubscription: Subscription = new Subscription();
 
@@ -38,6 +40,9 @@ export class TaskAddEditComponent {
 
   public ngOnInit(): void {
     this.formGroupEl = this.taskAddEditService.initForm(this.task);
+    if (this.task && this.task.remindMe) {
+      this.remindMeFlag = true;
+    }
     this.isDataFetchingServiceSubscription =
       this.appMonitoringService.isDataFetching.subscribe((status: boolean) => {
         this.isDataFetching = status;
@@ -45,7 +50,6 @@ export class TaskAddEditComponent {
     this.taskGroupsSubscription = this.dataFlowService.taskGroups.subscribe(
       (taskGroups: TaskGroup[]) => {
         this.taskGroups = taskGroups;
-        console.log("taskGroups", taskGroups);
       }
     );
   }
@@ -56,20 +60,24 @@ export class TaskAddEditComponent {
     this.isDataFetchingServiceSubscription.unsubscribe();
   }
 
-  public onClickSubmit() {
-    this.appMonitoringService.setIsDataFetchingStatus(true);
-    const taskSubmitted: Task = new Task(
-      this.utilityService.randomIdGenerator(20, "MIXED", ""),
-      this.formGroupEl.controls["title"].value,
-      this.formGroupEl.controls["group"].value,
-      this.formGroupEl.controls["deadline"].value,
-      this.formGroupEl.controls["description"].value,
-      this.formGroupEl.controls["webLink"].value,
-      this.formGroupEl.controls["imageLink"].value,
-      this.formGroupEl.controls["videoLink"].value,
-      this.formGroupEl.controls["voiceLink"].value
-    );
+  public onChangeRemindMe(): void {
+    this.remindMeFlag = !this.remindMeFlag;
+    this.formGroupEl.patchValue({
+      reminderDays: 0,
+      reminderHours: 0,
+      reminderMinutes: 0,
+    });
+  }
 
+  public onClickSubmit(): void {
+    const taskSubmitted = this.taskAddEditService.handleSubmittedData(
+      this.formGroupEl
+    );
+    if (!taskSubmitted) {
+      return;
+    }
+
+    this.appMonitoringService.setIsDataFetchingStatus(true);
     // Reset the tid to its original if we are in Edit mode
     if (this.task) {
       taskSubmitted.tid = this.task.tid;

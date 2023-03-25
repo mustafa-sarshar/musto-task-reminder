@@ -22,8 +22,8 @@
       <!-- Button Toggle Done -->
       <button mat-icon-button color="default"
         [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.toggleDone.ariaLabel' | translate" (click)="onClickToggleDone()"
-        [matTooltip]="task.done ? ('TASKS_TASK_ITEM.actionButtons.toggleDone.toolTips.finished' | translate) + (task.doneAtDate | date) : ('TASKS_TASK_ITEM.actionButtons.toggleDone.toolTips.open' | translate) + (task.deadline | date)">
-        <mat-icon color="{{task.done ? 'accent' : 'warn'}}">{{task.done ? 'done' : 'timer'}}</mat-icon>
+        [matTooltip]="task.done ? ('TASKS_TASK_ITEM.actionButtons.toggleDone.toolTips.completed' | translate) + (task.completion | date) : ('TASKS_TASK_ITEM.actionButtons.toggleDone.toolTips.open' | translate) + (task.deadline | date)">
+        <mat-icon color="{{task.done ? 'warn' : 'accent'}}">{{task.done ? 'timer' : 'done'}}</mat-icon>
       </button>
       <!-- Button Details -->
       <button mat-icon-button color="default"
@@ -33,7 +33,8 @@
       </button>
       <!-- Button Edit -->
       <button mat-icon-button color="default" [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.edit.ariaLabel' | translate"
-        (click)="onClickEdit()" [matTooltip]="'TASKS_TASK_ITEM.actionButtons.edit.toolTip' | translate">
+        (click)="onClickEdit()" [matTooltip]="'TASKS_TASK_ITEM.actionButtons.edit.toolTip' | translate"
+        [disabled]="task.done">
         <mat-icon>edit</mat-icon>
       </button>
       <!-- Button Delete -->

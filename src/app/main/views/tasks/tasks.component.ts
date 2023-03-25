@@ -19,13 +19,13 @@ import { CONFIRMATION_POPUP_STYLE, TASK_ADD_FORM_STYLE } from "src/configs";
 import {
   ConfirmationDialogBox,
   Log,
-  Notification,
   User,
   SortBy,
   SortByOptions,
   SortByType,
   TasksVisibilityFilterType,
   LanguageCode,
+  TaskReminder,
 } from "src/app/shared/models";
 
 @Component({
@@ -38,8 +38,10 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
   public isDataFetching: boolean = false;
   public userData: User | null = null;
   public sortBy: SortBy = new SortBy("TITLE", "ASC");
+  public taskReminders: TaskReminder[] = [];
   public tasksVisibilityFilter: TasksVisibilityFilterType = "ALL";
   private userDataSubscription: Subscription = new Subscription();
+  private taskRemindersSubscription: Subscription = new Subscription();
   private appLanguageSubscription: Subscription = new Subscription();
   private isDataFetchingSubscription: Subscription = new Subscription();
 
@@ -54,6 +56,7 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
 
   public ngOnInit(): void {
     this.dataFlowService.applyAppLanguage();
+
     this.appLanguageSubscription = this.dataFlowService.appLanguage.subscribe(
       (selectedLanguage: LanguageCode) => {
         this.translateService.use(selectedLanguage);
@@ -61,19 +64,36 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
     );
 
     this.userDataSubscription = this.dataFlowService.userData.subscribe(
-      (userData: User | null) => {
+      (userData: User) => {
         this.userData = userData;
-        if (userData.tasks) {
-          this.userData.tasks = [...userData.tasks];
-        }
+
         this.logService.logToConsole(
           new Log("User Data loaded @Tasks", "INFO")
         );
         this.logService.logToConsole(new Log(userData));
-        this.logService.logToConsole(new Log("Tasks Loaded", "INFO"));
-        this.logService.logToConsole(new Log(userData.tasks));
+
+        if (userData && userData.tasks) {
+          this.userData.tasks = [...userData.tasks];
+
+          this.logService.logToConsole(new Log("Tasks Loaded", "INFO"));
+          this.logService.logToConsole(new Log(userData.tasks));
+        }
       }
     );
+
+    this.taskRemindersSubscription =
+      this.dataFlowService.taskReminders.subscribe(
+        (taskReminders: TaskReminder[]) => {
+          if (taskReminders) {
+            this.taskReminders = taskReminders.slice();
+          }
+
+          this.logService.logToConsole(
+            new Log("Task reminders loaded @Tasks", "INFO")
+          );
+          this.logService.logToConsole(new Log(taskReminders));
+        }
+      );
 
     this.isDataFetchingSubscription =
       this.appMonitoringService.isDataFetching.subscribe((status) => {
@@ -83,6 +103,7 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
 
   public ngOnDestroy(): void {
     this.userDataSubscription.unsubscribe();
+    this.taskRemindersSubscription.unsubscribe();
     this.appLanguageSubscription.unsubscribe();
     this.isDataFetchingSubscription.unsubscribe();
   }
@@ -134,37 +155,11 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
     this.logService.logToConsole(
       new Log(`Sorted by ${sortByOption} (${sortByType})`)
     );
-    const sortingOption =
-      sortByOption === "TITLE"
-        ? "title"
-        : sortByOption === "DEADLINE"
-        ? "date of deadline"
-        : sortByOption === "DONE_AT_DATE"
-        ? "date of completion"
-        : "";
-    if (sortingOption !== "") {
-      // this.logService.showNotification(
-      //   new Notification(
-      //     `Sorted by ${sortingOption} (${sortByType.toLowerCase()})`,
-      //     "WARN"
-      //   )
-      // );
-    } else {
-      // this.logService.showNotification(
-      //   new Notification(`Tasks are not sorted`, "WARN")
-      // );
-    }
   }
 
   public onClickChangeTasksVisibilityFilter(
     visibilityFilterType: TasksVisibilityFilterType
   ): void {
     this.tasksVisibilityFilter = visibilityFilterType;
-    // this.logService.showNotification(
-    //   new Notification(
-    //     `Visibility filtered changed! (${this.tasksVisibilityFilter.toLowerCase()} tasks)`,
-    //     "WARN"
-    //   )
-    // );
   }
 }

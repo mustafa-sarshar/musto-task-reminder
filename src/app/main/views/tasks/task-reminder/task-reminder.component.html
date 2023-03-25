@@ -1,0 +1,24 @@
+<button mat-menu-item class="task-reminder__container" *ngIf="taskReminder"
+  [matTooltip]="taskReminder.task.description">
+  <div class="task-reminder__content">
+    <div mat-button class="task-reminder__info" (click)="onClickTaskReminderDetails()">
+      <span>
+        <strong>
+          {{taskReminder.task.title}}
+        </strong>
+      </span>
+      <span>
+        <small>
+          {{taskReminder.task.deadline | date:"MM-dd-yyyy, HH:mm:ss"}}
+        </small>
+      </span>
+    </div>
+    <div class="task-reminder__actions">
+      <button mat-icon-button color="warn" (click)="onClickTaskReminderDelete()"
+        [matTooltip]="'TASKS.actionButtons.taskReminder._delete.toolTip' | translate"
+        [ariaLabel]="'TASKS.actionButtons.taskReminder._delete.ariaLabel' | translate">
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</button>

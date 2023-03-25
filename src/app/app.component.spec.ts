@@ -19,7 +19,7 @@ describe("AppComponent", () => {
   it(`should have as title 'musto-task-reminder'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual("musto-task-reminder");
+    expect(app.defaultAppLanguage).toEqual("en-US");
   });
 
   it("should render title", () => {

@@ -72,14 +72,31 @@
       "noTasks": "You have no tasks!!!"
     },
     "actionButtons": {
+      "taskReminder": {
+        "_on": {
+          "label": "",
+          "toolTip": "See all reminders",
+          "ariaLabel": "to see all reminders"
+        },
+        "_off": {
+          "label": "",
+          "toolTip": "You have no task reminders at the moment!",
+          "ariaLabel": "task reminders is off"
+        },
+        "_delete": {
+          "label": "",
+          "toolTip": "Delete task reminder!",
+          "ariaLabel": "to delete task reminder"
+        }
+      },
       "visibilityFilter": {
         "label": "",
         "toolTip": "Change the visibility filter",
         "ariaLabel": "to change the visibility filter",
-        "_finished": {
-          "label": "Only finished tasks",
-          "toolTip": "Only finished tasks",
-          "ariaLabel": "to see only finished tasks"
+        "_completed": {
+          "label": "Only completed tasks",
+          "toolTip": "Only completed tasks",
+          "ariaLabel": "to see only completed tasks"
         },
         "_open": {
           "label": "Only open tasks",
@@ -106,8 +123,8 @@
           "toolTip": "Sort the tasks by deadline",
           "ariaLabel": "to sort tasks by deadline"
         },
-        "_byDone": {
-          "label": "Sort by completion date",
+        "_byCompletion": {
+          "label": "Sort by completion",
           "toolTip": "Sort the tasks by date of completion",
           "ariaLabel": "to sort tasks by date of completion"
         },
@@ -145,7 +162,7 @@
         "label": "",
         "toolTips": {
           "open": "Deadline: ",
-          "finished": "Finished at: "
+          "completed": "Completed at: "
         },
         "ariaLabel": "to change the task's status"
       },
@@ -233,9 +250,9 @@
         "ariaLabel": "to go to the next page"
       },
       "pageSize": {
-        "label": "Set page size",
-        "toolTip": "Change the page size",
-        "ariaLabel": "to change the page size"
+        "label": "Set the page size",
+        "toolTip": "Set the page size",
+        "ariaLabel": "to set the page size"
       },
       "pageSize_5": {
         "label": "5"
@@ -248,6 +265,28 @@
       },
       "pageSize_100": {
         "label": "100"
+      }
+    }
+  },
+  "TASKS_TASK_REMINDER_POPUP": {
+    "header": {
+      "title": "Reminder"
+    },
+    "actionButtons": {
+      "silent": {
+        "label": "Delete the reminder",
+        "toolTip": "Delete the reminder",
+        "ariaLabel": "to delete the reminder"
+      },
+      "dismiss": {
+        "label": "Dismiss",
+        "toolTip": "Dismiss the task reminder",
+        "ariaLabel": "to dismiss the task reminder"
+      },
+      "details": {
+        "label": "Details",
+        "toolTip": "Check the task details",
+        "ariaLabel": "to check the task details"
       }
     }
   },
@@ -344,6 +383,10 @@
       "open_the_task": {
         "title": "Be careful!",
         "message": "Is the task not done yet?"
+      },
+      "delete_task_reminder": {
+        "title": "Really?!",
+        "message": "Is the task done and/or do you want to delete the task reminder?"
       }
     }
   },
@@ -406,11 +449,38 @@
         "label": "Deadline",
         "placeholder": ""
       },
+      "deadlineDate": {
+        "label": "Deadline date",
+        "placeholder": ""
+      },
+      "deadlineTime": {
+        "label": "Deadline time",
+        "placeholder": ""
+      },
+      "reminder": {
+        "label": "Reminder:"
+      },
+      "remindMe": {
+        "label": "Remind Me",
+        "placeholder": ""
+      },
+      "reminderDays": {
+        "label": "Days before",
+        "placeholder": "0-∞"
+      },
+      "reminderHours": {
+        "label": "Hours before",
+        "placeholder": "0-23"
+      },
+      "reminderMinutes": {
+        "label": "Minutes before",
+        "placeholder": "0-59"
+      },
       "description": {
         "label": "Description",
         "placeholder": "describe the task"
       },
-      "doneAtDate": {
+      "completion": {
         "label": "Completion",
         "placeholder": ""
       },
@@ -469,7 +539,7 @@
         "open": {
           "label": "open"
         },
-        "finished": {
+        "completed": {
           "label": "completed"
         }
       }
@@ -532,6 +602,16 @@
     "set_app_language": {
       "success": "App language is set successfully!",
       "error": "The App language could get set!"
+    },
+    "deadline": {
+      "error": "The deadline is not valid!"
+    },
+    "reminder": {
+      "error": "There is not enough time left for the reminder!"
+    },
+    "delete_task_reminder": {
+      "success": "The task reminder deleted successfully!",
+      "error": "The task reminder couldn't get deleted!"
     }
   },
   "TASK_GROUPS": {
@@ -542,6 +622,7 @@
     "tg4": "Work",
     "tg5": "Family",
     "tg6": "Friends",
-    "tg7": "Personal"
+    "tg7": "Personal",
+    "tg8": "Social"
   }
 }

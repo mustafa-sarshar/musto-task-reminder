@@ -48,12 +48,8 @@ export class ProfileService implements OnInit, OnDestroy {
   public initForm(): FormGroup {
     const formGroupEl = new FormGroup({
       username: new FormControl({ value: "", disabled: this.isDataFetching }, [
-        Validators.minLength(
-          this.utilityService.getValidationLengthMin("USERNAME")
-        ),
-        Validators.maxLength(
-          this.utilityService.getValidationLengthMax("USERNAME")
-        ),
+        Validators.minLength(this.utilityService.getValidationMin("USERNAME")),
+        Validators.maxLength(this.utilityService.getValidationMax("USERNAME")),
         Validators.pattern(
           this.utilityService.getValidationPattern("USERNAME")
         ),

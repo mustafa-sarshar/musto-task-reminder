@@ -16,7 +16,7 @@ export class TasksVisibilityFilterPipe implements PipeTransform {
       case "ALL":
         tasksFiltered = [...tasks];
         break;
-      case "FINISHED":
+      case "COMPLETED":
         tasksFiltered = tasks.filter((task) => task["done"] === true);
         break;
       case "OPEN":

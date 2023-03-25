@@ -1,5 +1,6 @@
 $break-point__vertical--xs: 750px;
 $break-point__vertical--xxs: 370px;
+$break-point__horizontal--s: 600px;
 
 mat {
   &-card {
@@ -40,4 +41,41 @@ mat {
 form {
   display: flex;
   flex-direction: column;
+}
+
+.form {
+  &-fields {
+    &__reminder {
+      margin-bottom: 0.5rem;
+      color: white;
+
+      &__label {
+        * {
+          vertical-align: middle;
+        }
+      }
+
+      &__date {
+        text-align: center;
+      }
+
+      &-settings {
+        display: flex;
+        flex-direction: row;
+
+        @media all and (max-width: $break-point__horizontal--s) {
+          flex-direction: column;
+        }
+      }
+    }
+
+    &__remindMe {
+      align-self: flex-end;
+      margin-bottom: 0.5rem;
+
+      * {
+        vertical-align: middle;
+      }
+    }
+  }
 }

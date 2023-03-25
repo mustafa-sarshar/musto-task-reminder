@@ -53,12 +53,8 @@ export class LoginService implements OnInit, OnDestroy {
       ),
       password: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
-        Validators.minLength(
-          this.utilityService.getValidationLengthMin("PASSWORD")
-        ),
-        Validators.maxLength(
-          this.utilityService.getValidationLengthMax("PASSWORD")
-        ),
+        Validators.minLength(this.utilityService.getValidationMin("PASSWORD")),
+        Validators.maxLength(this.utilityService.getValidationMax("PASSWORD")),
       ]),
     });
     return formGroupEl;

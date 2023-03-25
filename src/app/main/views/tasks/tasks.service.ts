@@ -37,9 +37,7 @@ export class TasksService {
         this.appMonitoringService.setIsDataFetchingStatus(false);
       },
       error: (error) => {
-        this.logService.logToConsole(
-          new Log("The task couldn't get deleted!", "ERROR")
-        );
+        this.logService.logToConsole(new Log(error.message, "ERROR"));
         this.logService.showNotification(
           new Notification("DELETE_ALL_TASKS", "ERROR")
         );

@@ -15,7 +15,7 @@
     <th width="25%" style="text-align:center;">Welcome Page</th>
     <th width="25%" style="text-align:center;">Sign up</th>
     <th width="25%" style="text-align:center;">Login</th>
-    <th width="25%" style="text-align:center;">Add/edit task</th>
+    <th width="25%" style="text-align:center;">Tasks Page</th>
   </tr>
   <tr>
     <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-1.png?raw=true"/></td>
@@ -27,13 +27,14 @@
 </table>
 
 <table width="100%" style="overflow:auto">
-  <tr>    
-    <th width="25%" style="text-align:center;">Task Cards</th>
-    <th width="25%" style="text-align:center;">Task Details</th>
-    <th width="25%" style="text-align:center;">User Profile</th>
-    <th width="25%" style="text-align:center;">Side Menu</th>
+  <tr>
+    <th width="25%" style="text-align:center;">Task Reminders</th>
+    <th width="25%" style="text-align:center;">View Options</th>
+    <th width="25%" style="text-align:center;">Add Task</th>
+    <th width="25%" style="text-align:center;">Edit Task</th>
+     
   </tr>
-  <tr>    
+  <tr>
     <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-5.png?raw=true"/></td>
     <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-6.png?raw=true"/></td>
     <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-7.png?raw=true"/></td>
@@ -42,9 +43,25 @@
   
 </table>
 
+<table width="100%" style="overflow:auto">
+  <tr>    
+    <th width="25%" style="text-align:center;">Task Features</th>
+    <th width="25%" style="text-align:center;">Task Details</th>
+    <th width="25%" style="text-align:center;">User Profile</th>
+    <th width="25%" style="text-align:center;">Menu Options</th>
+  </tr>
+  <tr>    
+    <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-9.png?raw=true"/></td>
+    <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-10.png?raw=true"/></td>
+    <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-11.png?raw=true"/></td>
+    <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-12.png?raw=true"/></td>
+  </tr>
+  
+</table>
+
 ## THE 5 W’s
 
-- Who — A person who would like to safely document daily tasks and never forget them.
+- Who — A person who would like to safely document daily tasks and never forget them, and get reminded.
 - What — A single-page, responsive movie app built with Angular, with routing and several interface views.
 - When — Users will be able to use the app whenever they want to save, read, edit and check their daily tasks.
 - Where — The app will be hosted online. It is responsive and can therefore be used anywhere and on any device, giving all users an equal experience.
@@ -53,8 +70,10 @@
 ## USER STORIES
 
 - As a user, I want to be able add, edit, update and delete my daily tasks.
-- As a user, I want to be able to see a history of my tasks and learn about how long each took me to finish it.
+- As a user, I want to be able send reminders for each task to get notified about the task based on its deadline.
 - As a user, I want to be able to create a profile so I can save my own daily tasks.
+- As a user, I want to access to my data in all platforms and devices.
+- As a user, I want to install the app on my devices (mobile, tablet, computer, ...), without the need to open the browser each time I want to use it.
 
 ## KEY FEATURES
 
@@ -65,7 +84,9 @@
   - Title
   - Group
   - Deadline
+  - Reminder
   - Description
+  - Completion
   - Some useful links for more clarification, such as a link to a website, or of an image, or video, or even a voice message, available online.
 
 ## TECHNICAL REQUIREMENTS
@@ -75,6 +96,7 @@
 - The application must contain user registration and login forms
 - The application must be designed using Angular Material
 - The application must communicate with Firebase Real Time database via RESFul APIs.
+- The application must be compatible with different languages, such as English and German.
 - The application's codebase must contain comments using Typedoc
 - The project must contain technical documentation using JSDoc
 - The project must be hosted on GitHub Pages
@@ -83,8 +105,10 @@
 
 - Angular +15
 - Angular Material Design
+- Ngx-Translate
 - Google Firebase Real Time Database
 - Google Firebase Authentication (Email/Password)
+- PWA
 
 ## DEVELOPMENT SERVER
 

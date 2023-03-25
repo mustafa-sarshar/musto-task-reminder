@@ -1,8 +1,4 @@
-export type SortByOptions =
-  | "TITLE"
-  | "DEADLINE"
-  | "DONE_AT_DATE"
-  | "NO_SORTING";
+export type SortByOptions = "TITLE" | "DEADLINE" | "COMPLETED" | "NO_SORTING";
 
 export type SortByType = "ASC" | "DES";
 
@@ -12,4 +8,3 @@ export class SortBy {
     public sortByType: SortByType
   ) {}
 }
-
