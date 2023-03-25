@@ -26,35 +26,13 @@
         <i>{{task.deadline | date:'HH:mm:ss'}}</i>
       </p>
     </div>
-    <div class="task-reminder-popup__content__info" *ngIf="task.description">
+    <div class="task-reminder-popup__content__infos" *ngIf="task.description">
       <mat-icon color="default" matSuffix>description</mat-icon>
       <mat-label>
         {{"FORM_FIELDS.task.description.label" | translate}}
       </mat-label>
       <p>
         {{task.description}}
-      </p>
-    </div>
-    <div class="task-reminder-popup__content__info" *ngIf="task.remindMe">
-      <mat-icon color="default" matSuffix>notifications</mat-icon>
-      <mat-label>
-        {{"FORM_FIELDS.task.reminder.label" | translate}}
-      </mat-label>
-      <p>
-        {{task.reminder | date:"MM-dd-yyyy"}}
-        <br>
-        <i>{{task.reminder | date:"HH:mm:ss"}}</i>
-      </p>
-    </div>
-    <div class="task-reminder-popup__content__info" *ngIf="task.done">
-      <mat-icon color="{{task.done ? 'accent' : 'warn'}}" matSuffix>{{task.done ? 'done' : 'timer'}}</mat-icon>
-      <mat-label>
-        {{"FORM_FIELDS.task.completion.label" | translate}}
-      </mat-label>
-      <p *ngIf="task.done">
-        {{task.completion | date:'MM-dd-yyyy'}}
-        <br>
-        <i>{{task.completion | date:'HH:mm:ss'}}</i>
       </p>
     </div>
   </mat-card-content>
