@@ -208,8 +208,8 @@
         "toolTip": "Open the voice link",
         "ariaLabel": "to open the voice link"
       },
-      "cancel": {
-        "label": "Cancel",
+      "ok": {
+        "label": "OK",
         "toolTip": "",
         "ariaLabel": ""
       }
@@ -517,7 +517,8 @@
       "task": {
         "title": "Title must be 3-20 characters and start with an alphabet! From special characters, only parentheses and spaces are allowed!",
         "description": "Description must be 5-256 characters long and alphanumeric! From special characters, only parentheses and spaces are allowed!",
-        "deadline": "Deadline date must be valid!",
+        "deadlineDate": "Deadline date must be valid!",
+        "deadlineTime": "Deadline time must be valid!",
         "webLink": "Please enter a valid link! (e.g. http://www... or https://www...)"
       }
     },
