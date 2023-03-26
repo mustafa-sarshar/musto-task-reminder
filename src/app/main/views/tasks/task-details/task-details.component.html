@@ -1,6 +1,6 @@
 <mat-card *ngIf="task" class="details-container">
   <mat-card-header class="details-content__title">
-    <mat-card-title>
+    <mat-card-title class="dialog__title">
       {{"TASKS_TASK_DETAILS.header.title" | translate}}
       <!-- Button Edit -->
     </mat-card-title>
@@ -113,9 +113,10 @@
   </mat-card-content>
   <mat-card-footer>
     <mat-card-actions align="end">
-      <!-- Button Cancel -->
-      <button mat-stroked-button type="button" (click)="onClickOk()" color="warn">
-        {{"TASKS_TASK_DETAILS.actionButtons.cancel.label" | translate}}
+      <!-- Button Ok -->
+      <button mat-raised-button class="element__color--light element__mr--10" type="button" color="default"
+        (click)="onClickOk()">
+        {{"TASKS_TASK_DETAILS.actionButtons.ok.label" | translate}}
       </button>
     </mat-card-actions>
   </mat-card-footer>

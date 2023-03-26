@@ -208,8 +208,8 @@
         "toolTip": "Öffne den Sprach-Link",
         "ariaLabel": "um den Sprach-Link zu öffnen"
       },
-      "cancel": {
-        "label": "Abbrechen",
+      "ok": {
+        "label": "OK",
         "toolTip": "",
         "ariaLabel": ""
       }
@@ -218,7 +218,7 @@
   "TASKS_TASK_ADD_EDIT": {
     "header": {
       "titleAddTask": "Erstellung einer neuen Aufgaben",
-      "titleEditTask": "Ändern die Aufgabenangaben"
+      "titleEditTask": "Änderung der Aufgabenangaben"
     },
     "actionButtons": {
       "cancel": {
@@ -495,7 +495,8 @@
       "task": {
         "title": "Titel muss 3-20 Zeichen haben und mit einem alphabetischen Zeichen (Buchstabe) anfangen! Als Sonderzeichen, sind nur Klammerzeichen und Leerzeichen erlaubt!",
         "description": "Beschreibung muss 5-256 Zeichen haben und alphanumerisch sein! Als Sonderzeichen, sind nur Klammerzeichen und Leerzeichen erlaubt!",
-        "deadline": "Frist muss gültig sein!",
+        "deadlineDate": "Fristdatum muss gültig sein!",
+        "deadlineTime": "Fristzeit muss gültig sein!",
         "webLink": "Bitte gib einen gültigen Link! (e.g. http://www... or https://www...)"
       }
     },
