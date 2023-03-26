@@ -15,7 +15,7 @@
         cdkFocusInitial>{{confirmationDialogBox.type == "OK/CANCEL" ? ('CONFIRMATION_DIALOG.actionButtons.cancel.label' | translate) : ('CONFIRMATION_DIALOG.actionButtons.no.label' | translate)}}
       </button>
       <!-- OK/Yes button -->
-      <button mat-stroked-button class="element__bg--warn element__color--light" type="button"
+      <button mat-stroked-button class="element__bg--error element__color--light" type="button"
         (click)="onClickAccept()">{{confirmationDialogBox.type == "OK/CANCEL" ? ('CONFIRMATION_DIALOG.actionButtons.ok.label' | translate) : ('CONFIRMATION_DIALOG.actionButtons.yes.label' | translate)}}
       </button>
     </mat-card-actions>

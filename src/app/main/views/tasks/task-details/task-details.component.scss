@@ -1,6 +1,14 @@
+$break-point__vertical--xs: 750px;
+
 .details {
   &-container {
     padding: 0.5rem;
+
+    @media all and (max-height: $break-point__vertical--xs) {
+      justify-content: start;
+      height: 95vh;
+      overflow: auto;
+    }
   }
 
   &-content {

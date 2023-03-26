@@ -30,7 +30,7 @@
     <mat-card-footer>
       <mat-card-actions class="page-actions">
         <!-- Button Delete Account -->
-        <button mat-stroked-button class="element__bg--warn element__color--light" type="button"
+        <button mat-stroked-button class="element__bg--error element__color--light" type="button"
           (click)="onClickDeleteAccount()" [disabled]="isDataFetching  || !userData.username">
           {{"USER_PROFILE.actionButtons.deleteAccount.label" | translate}}
         </button>
@@ -72,7 +72,7 @@
             {{"USER_PROFILE.actionButtons.applyChanges.label" | translate}}
           </button>
           <!-- Button Reset -->
-          <button mat-stroked-button class="element__bg--warn element__color--light" type="button"
+          <button mat-stroked-button class="element__bg--error element__color--light" type="button"
             (click)="onClickReset()">
             {{"USER_PROFILE.actionButtons.reset.label" | translate}}
           </button>

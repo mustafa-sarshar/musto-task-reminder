@@ -1,8 +1,8 @@
-$color__snackbar--success: #1a6b1e;
-$color__snackbar--failure: #6e1610;
+$color__snackbar--success: #144717;
+$color__snackbar--failure: #440000;
 $color__snackbar--warn: #ad7308;
 
-$color__bg--warn: #440000;
+$color__bg--error: #440000;
 $color__border--warn: #d14848;
 
 html,
@@ -87,7 +87,7 @@ body {
 
 .error {
   &-message {
-    color: $color__bg--warn;
+    color: $color__bg--error;
     text-align: center;
   }
 }
@@ -104,7 +104,7 @@ input.ng-invalid.ng-touched {
     // border: 1px solid $color__border--warn;
     border-radius: 0.375rem;
     font-size: small;
-    background-color: $color__bg--warn;
+    background-color: $color__bg--error;
 
     li {
       color: #ffffff;
@@ -134,8 +134,8 @@ input.ng-invalid.ng-touched {
     &--lowdark {
       background-color: darkgray !important;
     }
-    &--warn {
-      background-color: $color__bg--warn !important;
+    &--error {
+      background-color: $color__bg--error !important;
     }
   }
 
@@ -146,8 +146,8 @@ input.ng-invalid.ng-touched {
     &--dark {
       color: black !important;
     }
-    &--warn {
-      color: $color__bg--warn !important;
+    &--error {
+      color: $color__bg--error !important;
     }
   }
 
