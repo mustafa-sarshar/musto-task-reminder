@@ -1,7 +1,7 @@
 <form autoComplete="off" [formGroup]="formGroupEl">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>
+      <mat-card-title class="dialog__title">
         {{"USER_LOGIN.header.title" | translate}}
       </mat-card-title>
     </mat-card-header>
@@ -32,12 +32,13 @@
     <mat-card-footer>
       <mat-card-actions align="end">
         <!-- Login Button -->
-        <button mat-stroked-button type="button" (click)="onClickSubmit()"
-          [disabled]="!formGroupEl.valid || isDataFetching">
+        <button mat-raised-button class="element__color--light element__mr--10" type="button" color="default"
+          (click)="onClickSubmit()" [disabled]="!formGroupEl.valid || isDataFetching">
           {{"USER_LOGIN.actionButtons.login.label" | translate}}
         </button>
         <!-- Cancel Button -->
-        <button mat-stroked-button type="button" (click)="onClickCancel()" color="warn">
+        <button mat-stroked-button class="element__bg--error element__color--light" type="button"
+          (click)="onClickCancel()">
           {{"USER_LOGIN.actionButtons.cancel.label" | translate}}
         </button>
       </mat-card-actions>

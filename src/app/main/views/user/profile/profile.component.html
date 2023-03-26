@@ -29,8 +29,9 @@
     </mat-card-content>
     <mat-card-footer>
       <mat-card-actions class="page-actions">
-        <button mat-stroked-button color="warn" (click)="onClickDeleteAccount()"
-          [disabled]="isDataFetching  || !userData.username">
+        <!-- Button Delete Account -->
+        <button mat-stroked-button class="element__bg--error element__color--light" type="button"
+          (click)="onClickDeleteAccount()" [disabled]="isDataFetching  || !userData.username">
           {{"USER_PROFILE.actionButtons.deleteAccount.label" | translate}}
         </button>
       </mat-card-actions>
@@ -65,11 +66,14 @@
       </mat-card-content>
       <mat-card-footer>
         <mat-card-actions align="end" class="page-actions">
-          <button mat-stroked-button type="button" [disabled]="!formGroupEl.valid || isDataFetching"
-            (click)="onClickApplyChanges()">
+          <!-- Button Apply Changes -->
+          <button mat-raised-button class="element__color--light element__mr--10" type="button" color="default"
+            [disabled]="!formGroupEl.valid || isDataFetching" (click)="onClickApplyChanges()">
             {{"USER_PROFILE.actionButtons.applyChanges.label" | translate}}
           </button>
-          <button mat-stroked-button color="warn" type="button" (click)="onClickReset()">
+          <!-- Button Reset -->
+          <button mat-stroked-button class="element__bg--error element__color--light" type="button"
+            (click)="onClickReset()">
             {{"USER_PROFILE.actionButtons.reset.label" | translate}}
           </button>
         </mat-card-actions>

@@ -1,11 +1,11 @@
 <mat-card *ngIf="task" class="details-container">
   <mat-card-header class="details-content__title">
-    <mat-card-title>
+    <mat-card-title class="dialog__title">
       {{"TASKS_TASK_DETAILS.header.title" | translate}}
       <!-- Button Edit -->
     </mat-card-title>
     <mat-card-actions>
-      <button mat-icon-button color="default" [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.edit.ariaLabel' | translate"
+      <button mat-icon-button *ngIf="!task.done" color="default" [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.edit.ariaLabel' | translate"
         (click)="onClickEdit()" [matTooltip]="'TASKS_TASK_ITEM.actionButtons.edit.toolTip' | translate"
         [disabled]="task.done">
         <mat-icon>edit</mat-icon>
@@ -49,15 +49,6 @@
         <i>{{task.deadline | date:'HH:mm:ss'}}</i>
       </p>
     </div>
-    <div class="details-content__infos" *ngIf="task.description">
-      <mat-icon color="default" matSuffix>description</mat-icon>
-      <mat-label>
-        {{"FORM_FIELDS.task.description.label" | translate}}
-      </mat-label>
-      <p>
-        {{task.description}}
-      </p>
-    </div>
     <div class="details-content__infos" *ngIf="task.remindMe">
       <mat-icon color="default" matSuffix>notifications</mat-icon>
       <mat-label>
@@ -78,6 +69,15 @@
         {{task.completion | date:'MM-dd-yyyy'}}
         <br>
         <i>{{task.completion | date:'HH:mm:ss'}}</i>
+      </p>
+    </div>
+    <div class="details-content__infos" *ngIf="task.description">
+      <mat-icon color="default" matSuffix>description</mat-icon>
+      <mat-label>
+        {{"FORM_FIELDS.task.description.label" | translate}}
+      </mat-label>
+      <p>
+        {{task.description}}
       </p>
     </div>
     <div class="details-content__actions">
@@ -113,9 +113,10 @@
   </mat-card-content>
   <mat-card-footer>
     <mat-card-actions align="end">
-      <!-- Button Cancel -->
-      <button mat-stroked-button type="button" (click)="onClickOk()" color="warn">
-        {{"TASKS_TASK_DETAILS.actionButtons.cancel.label" | translate}}
+      <!-- Button Ok -->
+      <button mat-raised-button class="element__color--light element__mr--10" type="button" color="default"
+        (click)="onClickOk()">
+        {{"TASKS_TASK_DETAILS.actionButtons.ok.label" | translate}}
       </button>
     </mat-card-actions>
   </mat-card-footer>
