@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1679947531971,
+  "timestamp": 1679947917357,
   "index": "/musto-task-reminder/index.html",
   "assetGroups": [
     {
@@ -86,7 +86,7 @@
     "/musto-task-reminder/favicon.ico": "bddad6c698e573e1b67c0b751c18f68bef4dd273",
     "/musto-task-reminder/index.html": "71953c392143cdba5f04373e2a9d431887e024df",
     "/musto-task-reminder/main.379a6a48d92fe4ac.js": "6e3e7eea7c8f0725134802139c30f5aeae46def7",
-    "/musto-task-reminder/manifest.webmanifest": "8450f85040bc36726009cd4ee616de95c0500720",
+    "/musto-task-reminder/manifest.webmanifest": "923826d407496b08231d288bde5c0bc615ac0358",
     "/musto-task-reminder/polyfills.dc9c8b97601c49c6.js": "a2a7ddcca12e5c9518d16afb6003f199e2d91696",
     "/musto-task-reminder/runtime.3efbce66d5bf6ee8.js": "295163cea7b9a0234be2d52b6f12f1bb9e49e404",
     "/musto-task-reminder/styles.6304e1c841145f35.css": "36b250dbaae4f1f01a7546b7edeb0d070bb72a51"

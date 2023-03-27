@@ -1,6 +1,6 @@
 {
   "name": "Musto Task Reminder",
-  "short_name": "Task Reminder",
+  "short_name": "Musto Task Reminder",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
