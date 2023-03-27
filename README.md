@@ -143,3 +143,8 @@
 ## FURTHER HELP
 
 - To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## MATERIALS:
+
+- App icons are downloaded from [flaticon.com](https://www.flaticon.com/free-icons/task) created by Freepik - Flaticon (accessed on 03.27.2023)
+- Welcome page animation is downloaded from [giphy.com](https://giphy.com/gifs/love-i-you-chippythedog-AIPvjOCQ6Gvg9Ll6uR) created by Chippy The Dog (accessed on 03.27.2023)
