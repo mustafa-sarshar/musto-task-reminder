@@ -61,45 +61,46 @@
 
 ## THE 5 W’s
 
-- Who — A person who would like to safely document daily tasks and never forget them, and get reminded.
-- What — A single-page, responsive movie app built with Angular, with routing and several interface views.
+- Who — A person who would like to securely save and document daily tasks and never forget them by getting informed via task reminders.
+- What — A single-page, responsive web application built using Angular, with routing and several interface views.
 - When — Users will be able to use the app whenever they want to save, read, edit and check their daily tasks.
 - Where — The app will be hosted online. It is responsive and can therefore be used anywhere and on any device, giving all users an equal experience.
-- Why — The more our life gets professional, the more vital is to complete our daily tasks on time as well documenting them for further evaluations. The app will demonstrate my Angular skills and my ability to create straightforward documentation for other developers and employers.
+- Why — The more our life gets professional, the more vital it is to complete our daily tasks on time as well as documenting them for further evaluations. The app will demonstrate my Angular skills and my ability to create straightforward documentation for other developers and employers.
 
 ## USER STORIES
 
-- As a user, I want to be able add, edit, update and delete my daily tasks.
-- As a user, I want to be able send reminders for each task to get notified about the task based on its deadline.
+- As a user, I want to be able to add, edit, update and delete my daily tasks.
+- As a user, I want to be able to set reminders for each task to get notified about the task based on its deadline.
 - As a user, I want to be able to create a profile so I can save my own daily tasks.
-- As a user, I want to access to my data in all platforms and devices.
+- As a user, I want to have access to my data in all platforms and devices.
 - As a user, I want to install the app on my devices (mobile, tablet, computer, ...), without the need to open the browser each time I want to use it.
 
 ## KEY FEATURES
 
-- The app should display a welcome view where users will be able to either log in or register an account.
+- The app should display a welcome view where users will be able to either log in to the system or register themselves by creating a user account.
 - Once authenticated, the user should be able to see all the tasks saved as well as use all the features of the app.
-- Upon clicking on a particular task, user can select any of the option, including completing the task, getting details of it, editing it or delete it.
-- Each task my include useful information as follows:
+- Upon clicking on a particular task, user should be able to select any of the options, including completing the task, getting its details, editing it or deleting it.
+- Each task may include useful information as follows:
   - Title
   - Group
   - Deadline
   - Reminder
   - Description
   - Completion
-  - Some useful links for more clarification, such as a link to a website, or of an image, or video, or even a voice message, available online.
+  - Some useful links for more help, such as a link to a website, or to an image, or a video, or even a voice file available online.
 
 ## TECHNICAL REQUIREMENTS
 
-- The application must be written in Angular (version 9 or later)
-- The application requires the latest version of Node.js and npm package
-- The application must contain user registration and login forms
-- The application must be designed using Angular Material
-- The application must communicate with Firebase Real Time database via RESFul APIs.
-- The application must be compatible with different languages, such as English and German.
-- The application's codebase must contain comments using Typedoc
-- The project must contain technical documentation using JSDoc
-- The project must be hosted on GitHub Pages
+- The application must be written in Angular (version 9 or later).
+- The application must contain user registration and login forms.
+- The development requires the latest version of Node.js and npm package.
+- The user interface of the application must be designed using Angular Material.
+- To store the data on cloud, Google Firebase Real Time Database will be used via RESFul APIs.
+- To make the app perform fast and efficiently, it must follow the lazy loading approach and divided into multiple modules.
+- To serve versatile users worldwide, it must be compatible with different languages, such as English and German.
+- To make it accessible globally, it must be hosted on a web-sever, such as GitHub Pages.
+- The application's codebase must contain comments using Typedoc.
+- The project must contain technical documentation using JSDoc.
 
 ## TECHNOLOGIES USED
 
@@ -108,7 +109,7 @@
 - Ngx-Translate
 - Google Firebase Real Time Database
 - Google Firebase Authentication (Email/Password)
-- PWA
+- Progressive Web Application (PWA)
 
 ## DEVELOPMENT SERVER
 
