@@ -1,6 +1,10 @@
+$size-container--max-width: 650px;
+
 .tasks {
   &-container {
     padding-bottom: 1rem;
+    max-width: $size-container--max-width;
+    margin: 0 auto;
   }
 
   &-content {

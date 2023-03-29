@@ -49,15 +49,15 @@
     <mat-card-content class="space-flex"></mat-card-content>
     <mat-card-footer>
       <mat-card-actions align="end">
-        <!-- Sign Up button -->
-        <button mat-raised-button class="element__color--light element__mr--10" type="button" (click)="onClickSubmit()"
-          [disabled]="!formGroupEl.valid || isDataFetching">
-          {{"USER_REGISTRATION.actionButtons.signUp.label" | translate}}
-        </button>
         <!-- Cancel Button -->
-        <button mat-stroked-button class="element__bg--error element__color--light" type="button"
+        <button mat-stroked-button class="element__bg--error element__color--light element__mr--10" type="button"
           (click)="onClickCancel()">
           {{"USER_REGISTRATION.actionButtons.cancel.label" | translate}}
+        </button>
+        <!-- Sign Up button -->
+        <button mat-raised-button class="element__color--light" type="button" color="default" (click)="onClickSubmit()"
+          [disabled]="!formGroupEl.valid || isDataFetching">
+          {{"USER_REGISTRATION.actionButtons.signUp.label" | translate}}
         </button>
       </mat-card-actions>
     </mat-card-footer>

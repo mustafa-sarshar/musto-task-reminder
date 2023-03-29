@@ -66,15 +66,15 @@
       </mat-card-content>
       <mat-card-footer>
         <mat-card-actions align="end" class="page-actions">
-          <!-- Button Apply Changes -->
-          <button mat-raised-button class="element__color--light element__mr--10" type="button" color="default"
-            [disabled]="!formGroupEl.valid || isDataFetching" (click)="onClickApplyChanges()">
-            {{"USER_PROFILE.actionButtons.applyChanges.label" | translate}}
-          </button>
           <!-- Button Reset -->
-          <button mat-stroked-button class="element__bg--error element__color--light" type="button"
+          <button mat-stroked-button class="element__bg--error element__color--light element__mr--10" type="button"
             (click)="onClickReset()">
             {{"USER_PROFILE.actionButtons.reset.label" | translate}}
+          </button>
+          <!-- Button Apply Changes -->
+          <button mat-raised-button class="element__color--light" type="button" color="default"
+            [disabled]="!formGroupEl.valid || isDataFetching" (click)="onClickApplyChanges()">
+            {{"USER_PROFILE.actionButtons.applyChanges.label" | translate}}
           </button>
         </mat-card-actions>
       </mat-card-footer>
