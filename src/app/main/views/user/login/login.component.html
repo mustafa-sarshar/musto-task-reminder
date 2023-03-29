@@ -31,15 +31,15 @@
     <mat-card-content class="space-flex"></mat-card-content>
     <mat-card-footer>
       <mat-card-actions align="end">
-        <!-- Login Button -->
-        <button mat-raised-button class="element__color--light element__mr--10" type="button" color="default"
-          (click)="onClickSubmit()" [disabled]="!formGroupEl.valid || isDataFetching">
-          {{"USER_LOGIN.actionButtons.login.label" | translate}}
-        </button>
         <!-- Cancel Button -->
-        <button mat-stroked-button class="element__bg--error element__color--light" type="button"
+        <button mat-stroked-button class="element__bg--error element__color--light element__mr--10" type="button"
           (click)="onClickCancel()">
           {{"USER_LOGIN.actionButtons.cancel.label" | translate}}
+        </button>
+        <!-- Login Button -->
+        <button mat-raised-button class="element__color--light" type="button" color="default" (click)="onClickSubmit()"
+          [disabled]="!formGroupEl.valid || isDataFetching">
+          {{"USER_LOGIN.actionButtons.login.label" | translate}}
         </button>
       </mat-card-actions>
     </mat-card-footer>
