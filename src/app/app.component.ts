@@ -28,5 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.dataFlowService.initAppLanguage();
   }
 
-  public ngOnDestroy(): void {}
+  public ngOnDestroy(): void {
+    this.authService.handleUserLogout();
+  }
 }

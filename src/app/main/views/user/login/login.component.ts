@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public isDataFetching: boolean = false;
   private appMonitoringSubscription: Subscription = new Subscription();
   public hidePasswordValue: boolean = true;
-  public formGroupEl: FormGroup;
+  public formGroupEl?: FormGroup;
   public userEmail: string = "";
 
   constructor(
@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   public onClickSubmit(): void {
     this.appMonitoringService.setIsDataFetchingStatus(true);
     const userCredentials = new UserLoginCredentials(
-      this.formGroupEl.value["email"],
-      this.formGroupEl.value["password"]
+      this.formGroupEl?.value["email"],
+      this.formGroupEl?.value["password"]
     );
 
     this.loginService.handleLogin(userCredentials, () => {

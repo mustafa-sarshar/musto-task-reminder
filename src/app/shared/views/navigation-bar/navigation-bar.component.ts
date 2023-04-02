@@ -20,8 +20,8 @@ import { CONFIRMATION_POPUP_STYLE } from "src/configs";
   styleUrls: ["./navigation-bar.component.scss"],
 })
 export class NavigationBarComponent implements OnInit, OnDestroy {
-  @ViewChild("drawer") drawerEl: MatDrawer;
-  isHandset$: Observable<boolean> = this.breakpointObserver
+  @ViewChild("drawer") public drawerEl?: MatDrawer;
+  public isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
       map((result) => result.matches),
@@ -30,7 +30,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   public isUserAuthenticated: boolean = false;
   public username: string = "";
   public language: Language = "EN";
-  private userDataSubscription: Subscription = new Subscription();
+  private userDataSubscription?: Subscription;
 
   constructor(
     private dataFlowService: DataFlowService,
@@ -41,9 +41,9 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.userDataSubscription = this.dataFlowService.userData.subscribe(
+    this.userDataSubscription = this.dataFlowService.userData?.subscribe(
       (userData: User | null) => {
-        if (userData && userData.token) {
+        if (userData && userData.token && userData.username) {
           this.isUserAuthenticated = true;
           this.username = userData.username;
         } else {
@@ -55,7 +55,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.userDataSubscription.unsubscribe();
+    this.userDataSubscription?.unsubscribe();
   }
 
   public onClickAppBrand(): void {
@@ -64,17 +64,17 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
 
   public onClickTasks(): void {
     this.router.navigate(["/tasks"]);
-    this.drawerEl.close();
+    this.drawerEl?.close();
   }
 
   public onClickProfile(): void {
     this.router.navigate(["/profile"]);
-    this.drawerEl.close();
+    this.drawerEl?.close();
   }
 
   public onClickSyncData(): void {
     this.dataFlowService.syncUserData();
-    this.drawerEl.close();
+    this.drawerEl?.close();
   }
 
   public onClickLogout(): void {
@@ -87,13 +87,13 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((answer) => {
       if (answer) {
         this.authService.handleUserLogout();
-        this.drawerEl.close();
+        this.drawerEl?.close();
       }
     });
   }
 
   public onClickLanguage(): void {
     this.dialog.open(LanguageComponent);
-    this.drawerEl.close();
+    this.drawerEl?.close();
   }
 }

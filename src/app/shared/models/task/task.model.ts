@@ -18,20 +18,6 @@ export class Task {
     public done?: boolean,
     public completion?: Date
   ) {}
-
-  public report() {
-    if (this.done) {
-      if (this.completion) {
-        return `Done at ${this.completion.toUTCString()}`;
-      } else if (this.completion && !this.done) {
-        return `Done at ${this.completion.toUTCString()}`;
-      } else {
-        return `Done at ${this.deadline.toUTCString()}`;
-      }
-    } else {
-      return `May be done till ${this.deadline.toUTCString()}`;
-    }
-  }
 }
 
 export class TaskReminder {

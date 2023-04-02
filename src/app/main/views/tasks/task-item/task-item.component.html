@@ -1,6 +1,6 @@
 <div class="task-content" *ngIf="task">
   <div *ngIf="taskItemMode === 0" class="task-content__modes">
-    <div class="task-content__title" [matTooltip]="task.description">
+    <div class="task-content__title" [matTooltip]="task.description ? task.description : ''">
       <p *ngIf="task.done" class="task-content__title---done"><s>{{task.title}}</s></p>
       <p *ngIf="!task.done">{{task.title | stringShortener:20 }}</p>
     </div>

@@ -25,3 +25,5 @@ export const TASK_DETAILS_FORM_STYLE = {
   maxWidth: "480px",
   disableClose: false,
 };
+
+export const MAX_TIMEOUT_DURATION = 2147483647;

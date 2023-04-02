@@ -40,10 +40,10 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
   public sortBy: SortBy = new SortBy("TITLE", "ASC");
   public taskReminders: TaskReminder[] = [];
   public tasksVisibilityFilter: TasksVisibilityFilterType = "ALL";
-  private userDataSubscription: Subscription = new Subscription();
-  private taskRemindersSubscription: Subscription = new Subscription();
-  private appLanguageSubscription: Subscription = new Subscription();
-  private isDataFetchingSubscription: Subscription = new Subscription();
+  private userDataSubscription?: Subscription;
+  private taskRemindersSubscription?: Subscription;
+  private appLanguageSubscription?: Subscription;
+  private isDataFetchingSubscription?: Subscription;
 
   constructor(
     private dataFlowService: DataFlowService,
@@ -64,7 +64,7 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
     );
 
     this.userDataSubscription = this.dataFlowService.userData.subscribe(
-      (userData: User) => {
+      (userData: User | null) => {
         this.userData = userData;
 
         this.logService.logToConsole(
@@ -72,7 +72,7 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
         );
         this.logService.logToConsole(new Log(userData));
 
-        if (userData && userData.tasks) {
+        if (userData && userData.tasks && this.userData) {
           this.userData.tasks = [...userData.tasks];
 
           this.logService.logToConsole(new Log("Tasks Loaded", "INFO"));
@@ -83,7 +83,7 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
 
     this.taskRemindersSubscription =
       this.dataFlowService.taskReminders.subscribe(
-        (taskReminders: TaskReminder[]) => {
+        (taskReminders: TaskReminder[] | null) => {
           if (taskReminders) {
             this.taskReminders = taskReminders.slice();
           }
@@ -102,10 +102,10 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
   }
 
   public ngOnDestroy(): void {
-    this.userDataSubscription.unsubscribe();
-    this.taskRemindersSubscription.unsubscribe();
-    this.appLanguageSubscription.unsubscribe();
-    this.isDataFetchingSubscription.unsubscribe();
+    this.userDataSubscription?.unsubscribe();
+    this.taskRemindersSubscription?.unsubscribe();
+    this.appLanguageSubscription?.unsubscribe();
+    this.isDataFetchingSubscription?.unsubscribe();
   }
 
   public onCanDeactivate():
@@ -127,10 +127,12 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
   }
 
   public onClickAddTask(): void {
-    this.dialog.open(
-      TaskAddEditComponent,
-      TASK_ADD_FORM_STYLE
-    ).componentInstance.userId = this.userData.uid;
+    if (this.userData) {
+      this.dialog.open(
+        TaskAddEditComponent,
+        TASK_ADD_FORM_STYLE
+      ).componentInstance.userId = this.userData.uid;
+    }
   }
 
   public onClickDeleteAllTasks(): void {
@@ -142,7 +144,9 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
       new ConfirmationDialogBox("DELETE_ALL_TASKS", "YES/NO");
     dialogRef.afterClosed().subscribe((answer) => {
       if (answer) {
-        this.tasksService.handleDeleteAllTasks(this.userData.uid);
+        if (this.userData) {
+          this.tasksService.handleDeleteAllTasks(this.userData.uid);
+        }
       }
     });
   }
@@ -151,7 +155,12 @@ export class TasksComponent implements OnInit, OnDestroy, onCanDeactivate {
     sortByOption: SortByOptions,
     sortByType?: SortByType
   ): void {
-    this.sortBy = new SortBy(sortByOption, sortByType);
+    if (sortByType) {
+      this.sortBy = new SortBy(sortByOption, sortByType);
+    } else {
+      this.sortBy = new SortBy(sortByOption);
+    }
+
     this.logService.logToConsole(
       new Log(`Sorted by ${sortByOption} (${sortByType})`)
     );

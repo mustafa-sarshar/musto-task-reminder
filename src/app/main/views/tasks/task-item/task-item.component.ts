@@ -16,8 +16,8 @@ import { CONFIRMATION_POPUP_STYLE, TASK_DETAILS_FORM_STYLE } from "src/configs";
   providers: [TaskItemService],
 })
 export class TaskItemComponent {
-  @Input("userId") userId: string = null;
-  @Input("task") task: Task = null;
+  @Input("userId") userId?: string;
+  @Input("task") task?: Task;
   public taskItemMode: number = 0;
 
   constructor(
@@ -34,12 +34,14 @@ export class TaskItemComponent {
   }
 
   public onClickDetails(): void {
-    const dialogRef = this.dialog.open(
-      TaskDetailsComponent,
-      TASK_DETAILS_FORM_STYLE
-    );
-    dialogRef.componentInstance.task = this.task;
-    dialogRef.componentInstance.userId = this.userId;
+    if (this.task && this.userId) {
+      const dialogRef = this.dialog.open(
+        TaskDetailsComponent,
+        TASK_DETAILS_FORM_STYLE
+      );
+      dialogRef.componentInstance.task = this.task;
+      dialogRef.componentInstance.userId = this.userId;
+    }
 
     this.taskItemMode = 0;
   }
@@ -53,7 +55,9 @@ export class TaskItemComponent {
       new ConfirmationDialogBox("DELETE_TASK", "YES/NO");
     dialogRef.afterClosed().subscribe((answer) => {
       if (answer) {
-        this.taskItemService.handleDeleteTask(this.userId, this.task.tid);
+        if (this.task && this.userId) {
+          this.taskItemService.handleDeleteTask(this.userId, this.task.tid);
+        }
       }
     });
     this.taskItemMode = 0;
@@ -66,7 +70,7 @@ export class TaskItemComponent {
     );
     dialogRef.componentInstance.confirmationDialogBox =
       new ConfirmationDialogBox(
-        this.task.done ? "OPEN_THE_TASK" : "FINISH_THE_TASK",
+        this.task?.done ? "OPEN_THE_TASK" : "FINISH_THE_TASK",
         "YES/NO"
       );
     dialogRef.afterClosed().subscribe((answer) => {
@@ -78,25 +82,29 @@ export class TaskItemComponent {
 
         if (taskUpdate.done) {
           taskUpdate.done = false;
-          taskUpdate.completion = null;
+          taskUpdate.completion = undefined;
         } else {
           taskUpdate.done = true;
           taskUpdate.remindMe = false;
           taskUpdate.completion = new Date();
         }
-        this.taskItemService.handleToggleDone(this.userId, taskUpdate);
+        if (this.userId) {
+          this.taskItemService.handleToggleDone(this.userId, taskUpdate);
+        }
       }
     });
     this.taskItemMode = 0;
   }
 
   public onClickEdit(): void {
-    const dialogRef = this.dialog.open(
-      TaskAddEditComponent,
-      TASK_DETAILS_FORM_STYLE
-    );
-    dialogRef.componentInstance.task = this.task;
-    dialogRef.componentInstance.userId = this.userId;
-    this.taskItemMode = 0;
+    if (this.task && this.userId) {
+      const dialogRef = this.dialog.open(
+        TaskAddEditComponent,
+        TASK_DETAILS_FORM_STYLE
+      );
+      dialogRef.componentInstance.task = this.task;
+      dialogRef.componentInstance.userId = this.userId;
+      this.taskItemMode = 0;
+    }
   }
 }

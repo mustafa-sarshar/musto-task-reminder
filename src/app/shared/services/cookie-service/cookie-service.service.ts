@@ -18,7 +18,7 @@ export class CookieServiceService {
     expirationDate.setTime(
       expirationDate.getTime() + expiresIn * 24 * 60 * 60 * 1000
     );
-    const cookieObj = `${cid}=${data}; expires=${expirationDate.toUTCString()}; path=${path}`;
+    const cookieObj = `musto-task-reminder__${cid}=${data}; expires=${expirationDate.toUTCString()}; path=${path}`;
     document.cookie = cookieObj;
 
     this.logService.logToConsole(new Log("COOKIE SET:", "INFO"));
@@ -27,7 +27,7 @@ export class CookieServiceService {
 
   public deleteCookie(cid: string, path: string = "/"): void {
     // Retrieved from https://www.w3schools.com/js/js_cookies.asp (accessed on 22.03.2023)
-    const cookieObj = `${cid}=; expires=${new Date(
+    const cookieObj = `musto-task-reminder__${cid}=; expires=${new Date(
       "01-01-1000"
     ).toUTCString()}; path=${path}`;
     document.cookie = cookieObj;
@@ -38,7 +38,7 @@ export class CookieServiceService {
 
   public getCookie(cid: string): string {
     // Retrieved from https://www.w3schools.com/js/js_cookies.asp (accessed on 22.03.2023)
-    const cookieId = cid + "=";
+    const cookieId = `musto-task-reminder__${cid}=`;
     const decodedCookie = decodeURIComponent(document.cookie);
     const cookies = decodedCookie.split(";");
     for (let i = 0; i < cookies.length; i++) {

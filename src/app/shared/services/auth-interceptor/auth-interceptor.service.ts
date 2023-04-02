@@ -19,18 +19,15 @@ export class AuthInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return this.dataFlowService.userData.pipe(
-      take(1),
-      exhaustMap((userData: User) => {
-        if (!userData) {
-          return next.handle(req);
-        }
-        const reqModified = req.clone({
-          params: new HttpParams().set("auth", userData.token),
-        });
+    const userData = this.dataFlowService.userData.getValue();
+    if (!userData) {
+      return next.handle(req);
+    } else {
+      const reqModified = req.clone({
+        params: new HttpParams().set("auth", userData.token),
+      });
 
-        return next.handle(reqModified);
-      })
-    );
+      return next.handle(reqModified);
+    }
   }
 }

@@ -3,7 +3,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from "rxjs";
 
-import { environment } from "src/environments/environment";
+import { environment } from "src/environments/environment.development";
 import { Log, Notification } from "../../models";
 
 @Injectable({ providedIn: "root" })

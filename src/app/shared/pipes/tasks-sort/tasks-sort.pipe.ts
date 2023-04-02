@@ -31,21 +31,14 @@ export class TasksSortPipe implements PipeTransform {
     return tasksSorted;
   }
 
-  private compareTitles(t1: Task, t2: Task) {
+  private compareTitles(t1: Task, t2: Task): number {
     return t1.title.localeCompare(t2.title, undefined, {
       numeric: true,
       sensitivity: "base",
     });
-    // if (t1.title < t2.title) {
-    //   return -1;
-    // }
-    // if (t1.title > t2.title) {
-    //   return 1;
-    // }
-    // return 0;
   }
 
-  private compareDeadline(t1: Task, t2: Task) {
+  private compareDeadline(t1: Task, t2: Task): number {
     if (t1.deadline < t2.deadline) {
       return -1;
     }
@@ -55,12 +48,15 @@ export class TasksSortPipe implements PipeTransform {
     return 0;
   }
 
-  private compareCompletion(t1: Task, t2: Task) {
-    if (t1.completion > t2.completion || !t2.completion) {
-      return -1;
-    }
-    if (t1.completion < t2.completion || !t1.completion) {
-      return 1;
+  private compareCompletion(t1: Task, t2: Task): number {
+    if (t1.completion && t2.completion) {
+      if (t1.completion > t2.completion || !t2.completion) {
+        return -1;
+      }
+      if (t1.completion < t2.completion || !t1.completion) {
+        return 1;
+      }
+      return 0;
     }
     return 0;
   }

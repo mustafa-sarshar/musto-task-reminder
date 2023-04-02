@@ -9,7 +9,6 @@ import { FormGroup } from "@angular/forms";
 import { PageEvent } from "@angular/material/paginator";
 
 import { TasksListService } from "./tasks-list.service";
-import { LogService } from "src/app/shared/services";
 import { Log, Task } from "src/app/shared/models";
 
 @Component({
@@ -21,8 +20,8 @@ import { Log, Task } from "src/app/shared/models";
 export class TasksListComponent implements OnInit, OnChanges {
   @Input() userId: string | null = null;
   @Input() tasks: Task[] | null = null;
-  public formGroupEl: FormGroup;
-  public paginationPageEvent: PageEvent;
+  public formGroupEl?: FormGroup;
+  public paginationPageEvent?: PageEvent;
   public paginationSettings = {
     length: 0,
     pageIndex: 0,
@@ -36,29 +35,27 @@ export class TasksListComponent implements OnInit, OnChanges {
     disabledPrev: false,
   };
 
-  constructor(
-    private tasksListService: TasksListService,
-    private logService: LogService
-  ) {}
+  constructor(private tasksListService: TasksListService) {}
 
   public ngOnInit(): void {
-    this.formGroupEl = this.tasksListService.initForm(this.tasks);
-
-    this.paginationSettings.length = this.tasks.length;
-    this.paginationSettings.pageIndex = 0;
+    if (this.tasks) {
+      this.formGroupEl = this.tasksListService.initForm(this.tasks);
+      this.paginationSettings.length = this.tasks.length;
+      this.paginationSettings.pageIndex = 0;
+    }
     this.handleChangePageEvent(this.paginationSettings);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (Object.keys(changes).indexOf("tasks") > -1) {
+    if (Object.keys(changes).indexOf("tasks") > -1 && this.tasks) {
       this.paginationSettings.length = this.tasks.length;
       this.paginationSettings.pageIndex = 0;
-      this.handleChangePageEvent(this.paginationSettings);
     }
+    this.handleChangePageEvent(this.paginationSettings);
   }
 
   public onClickClearSearchBox(): void {
-    this.formGroupEl.reset({ title: "" });
+    this.formGroupEl?.setValue({ title: "" });
   }
 
   public onClickChangePageSize(pageSize: number): void {

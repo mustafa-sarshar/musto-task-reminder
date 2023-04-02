@@ -1,4 +1,4 @@
-<div class="profile__container">
+<div class="profile__container" *ngIf="userData">
   <mat-card class="profile__item">
     <mat-card-header>
       <mat-card-title class="profile__title">
@@ -37,7 +37,7 @@
       </mat-card-actions>
     </mat-card-footer>
   </mat-card>
-  <mat-card class="profile__item">
+  <mat-card class="profile__item" *ngIf="formGroupEl">
     <form autoComplete="off" [formGroup]="formGroupEl">
       <mat-card-header>
         <mat-card-title class="profile__title">
