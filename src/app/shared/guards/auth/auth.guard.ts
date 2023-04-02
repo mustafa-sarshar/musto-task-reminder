@@ -26,20 +26,24 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.dataFlowService.userData.pipe(
-      take(1),
-      map((userData: User | null) => {
-        if (userData) {
-          const isAuthenticated = userData.token;
-          if (isAuthenticated) {
-            return true;
+    if (this.dataFlowService.userData) {
+      return this.dataFlowService.userData.pipe(
+        take(1),
+        map((userData: User | null) => {
+          if (userData) {
+            const isAuthenticated = userData.token;
+            if (isAuthenticated) {
+              return true;
+            } else {
+              return this.router.createUrlTree(["/welcome"]);
+            }
           } else {
             return this.router.createUrlTree(["/welcome"]);
           }
-        } else {
-          return this.router.createUrlTree(["/welcome"]);
-        }
-      })
-    );
+        })
+      );
+    } else {
+      return this.router.createUrlTree(["/welcome"]);
+    }
   }
 }

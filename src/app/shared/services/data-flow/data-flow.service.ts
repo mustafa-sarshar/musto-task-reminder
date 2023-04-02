@@ -20,25 +20,24 @@ import {
   TaskGroup,
   TaskReminder,
   User,
-  UserDataFromDatabase,
   UserDataFromLocalStorage,
 } from "../../models";
+import { MAX_TIMEOUT_DURATION } from "src/configs";
 
 @Injectable({ providedIn: "root" })
 export class DataFlowService implements OnDestroy {
-  public userData: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  public userData: BehaviorSubject<User | null> =
+    new BehaviorSubject<User | null>(null);
   public appLanguage: BehaviorSubject<LanguageCode> =
     new BehaviorSubject<LanguageCode>("en-US");
-  public taskGroups: BehaviorSubject<TaskGroup[]> = new BehaviorSubject<
-    TaskGroup[]
+  public taskGroups?: BehaviorSubject<TaskGroup[] | null> = new BehaviorSubject<
+    TaskGroup[] | null
   >(null);
-  public taskReminders: BehaviorSubject<TaskReminder[]> = new BehaviorSubject<
-    TaskReminder[]
-  >(null);
-  public taskReminderPopupTimeoutsRefs: {} = {};
-  private userProfileFromDatabaseSubscription: Subscription =
-    new Subscription();
-  private taskGroupsTranslateSubscription: Subscription = new Subscription();
+  public taskReminders: BehaviorSubject<TaskReminder[] | null> =
+    new BehaviorSubject<TaskReminder[] | null>(null);
+  public taskReminderPopupTimeoutsRefs: any = {};
+  private userProfileFromDatabaseSubscription?: Subscription;
+  private taskGroupsTranslateSubscription?: Subscription;
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -52,15 +51,17 @@ export class DataFlowService implements OnDestroy {
   ) {}
 
   public ngOnDestroy(): void {
-    this.taskGroupsTranslateSubscription.unsubscribe();
-    this.userProfileFromDatabaseSubscription.unsubscribe();
+    this.taskGroupsTranslateSubscription?.unsubscribe();
+    this.userProfileFromDatabaseSubscription?.unsubscribe();
   }
 
-  public setUserData(userData: User): void {
-    this.userData.next(userData);
+  public setUserData(userData: User | null): void {
+    this.userData?.next(userData);
     if (userData) {
       this.localStorageService.storeUserDataOnLocalStorage(userData);
-      this.initTaskReminders(userData.tasks);
+      if (userData.tasks) {
+        this.initTaskReminders(userData.tasks);
+      }
     }
 
     this.logService.logToConsole(new Log("UserData SET", "INFO"));
@@ -69,56 +70,65 @@ export class DataFlowService implements OnDestroy {
 
   public addUserTask(task: Task): void {
     const userData = this.getUserData();
-    if (userData.tasks) {
-      userData.tasks = [...userData.tasks, task];
-    } else {
-      userData.tasks = [task];
+    if (userData) {
+      if (userData.tasks) {
+        userData.tasks = [...userData.tasks, task];
+      } else {
+        userData.tasks = [task];
+      }
+
+      this.setUserData(userData);
     }
 
     this.logService.logToConsole(new Log("Task Added", "INFO"));
     this.logService.logToConsole(new Log(task));
-    this.setUserData(userData);
   }
 
   public deleteUserTask(taskId: string): void {
     const userData = this.getUserData();
-    if (userData.tasks) {
+    if (userData && userData.tasks) {
       const tasksFiltered = userData.tasks.filter(
         (task: Task) => task.tid !== taskId
       );
       userData.tasks = [...tasksFiltered];
+      this.setUserData(userData);
     }
 
     this.logService.logToConsole(new Log("Task Deleted", "INFO"));
     this.logService.logToConsole(new Log(taskId));
-    this.setUserData(userData);
   }
 
   public deleteUserTasksAll(): void {
     const userData = this.getUserData();
-    userData.tasks = undefined;
+    if (userData) {
+      userData.tasks = undefined;
 
-    this.logService.logToConsole(new Log("All Tasks Deleted", "INFO"));
-    this.setUserData(userData);
+      this.logService.logToConsole(new Log("All Tasks Deleted", "INFO"));
+      this.setUserData(userData);
+    } else {
+      this.logService.logToConsole(
+        new Log("There are no tasks to delete!", "WARN")
+      );
+    }
   }
 
   public updateUserTask(userTask: Task): void {
     const userData = this.getUserData();
-    if (userData.tasks) {
+    if (userData && userData.tasks) {
       const userDataFiltered = userData.tasks.filter(
         (task: Task) => task.tid !== userTask.tid
       );
       userData.tasks = [...userDataFiltered, userTask];
       this.deleteTaskReminderPopupTimeout(userTask.tid);
+      this.setUserData(userData);
     }
 
     this.logService.logToConsole(new Log("Task updated", "INFO"));
     this.logService.logToConsole(new Log(userTask.tid));
-    this.setUserData(userData);
   }
 
   public getUserData(): User | null {
-    const userData: UserDataFromLocalStorage =
+    const userData: UserDataFromLocalStorage | null =
       this.localStorageService.getUserDataFromLocalStorage();
     if (userData) {
       return this.utilityService.convertUserDataFormat(userData);
@@ -132,7 +142,7 @@ export class DataFlowService implements OnDestroy {
     this.userProfileFromDatabaseSubscription = this.databaseService
       .getUserProfileDataFromDatabase(userData.uid)
       .subscribe({
-        next: (response: UserDataFromDatabase) => {
+        next: (response: any) => {
           this.logService.logToConsole(
             new Log(
               "User profile data loaded from database successfully!",
@@ -226,7 +236,7 @@ export class DataFlowService implements OnDestroy {
             for (let key in taskGroups) {
               taskGroupsList.push(new TaskGroup(key, taskGroups[key]));
             }
-            this.taskGroups.next(taskGroupsList);
+            this.taskGroups?.next(taskGroupsList);
 
             this.logService.logToConsole(
               new Log("TaskGroups got initialized!", "INFO")
@@ -243,8 +253,13 @@ export class DataFlowService implements OnDestroy {
       });
   }
 
-  public getTaskReminders(): TaskReminder[] {
-    return this.taskReminders.getValue().slice();
+  public getTaskReminders(): TaskReminder[] | null {
+    const taskReminders: TaskReminder[] | null = this.taskReminders.getValue();
+    if (taskReminders) {
+      return taskReminders.slice();
+    } else {
+      return null;
+    }
   }
 
   public setTaskReminders(taskReminders: TaskReminder[]): void {
@@ -255,16 +270,14 @@ export class DataFlowService implements OnDestroy {
   public initTaskReminders(tasks: Task[]): void {
     let taskReminders: TaskReminder[] = [];
 
-    if (tasks) {
-      for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].remindMe) {
-          taskReminders.push(
-            new TaskReminder(
-              this.utilityService.getRandomId(20, "MIXED"),
-              tasks[i]
-            )
-          );
-        }
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].remindMe) {
+        taskReminders.push(
+          new TaskReminder(
+            this.utilityService.getRandomId(20, "MIXED"),
+            tasks[i]
+          )
+        );
       }
     }
 
@@ -273,23 +286,27 @@ export class DataFlowService implements OnDestroy {
 
   public addTaskReminder(taskReminder: TaskReminder): void {
     let taskReminders = this.getTaskReminders();
-    taskReminders.push(taskReminder);
 
-    this.setTaskReminders([...taskReminders]);
+    if (taskReminders) {
+      taskReminders.push(taskReminder);
+      this.setTaskReminders([...taskReminders]);
+    }
   }
 
   public removeReminderFromTask(task: Task): void {
-    const userData: User = this.getUserData();
+    const userData: User | null = this.getUserData();
 
-    if (userData.tasks) {
-      userData.tasks.forEach((t: Task) => {
-        if (t.tid === task.tid) {
-          t.remindMe = false;
-        }
-      });
+    if (userData) {
+      if (userData.tasks) {
+        userData.tasks.forEach((t: Task) => {
+          if (t.tid === task.tid) {
+            t.remindMe = false;
+          }
+        });
+      }
+
+      this.setUserData(userData);
     }
-
-    this.setUserData(userData);
   }
 
   public deleteTaskReminder(task: Task, userId: string): void {
@@ -307,9 +324,6 @@ export class DataFlowService implements OnDestroy {
           )
         );
         this.logService.logToConsole(new Log(response));
-        // this.logService.showNotification(
-        //   new Notification("DELETE_TASK_REMINDER", "SUCCESS")
-        // );
 
         this.removeReminderFromTask(task);
         this.deleteTaskReminderPopupTimeout(task.tid);
@@ -328,8 +342,11 @@ export class DataFlowService implements OnDestroy {
   }
 
   public setTaskReminderPopups(taskReminders: TaskReminder[]): void {
-    for (let i = 0; i < taskReminders.length; i++) {
-      this.addTaskReminderPopupTimeout(taskReminders[i]);
+    const userData = this.userData?.getValue();
+    if (userData && userData.uid) {
+      for (let i = 0; i < taskReminders.length; i++) {
+        this.addTaskReminderPopupTimeout(taskReminders[i], userData.uid);
+      }
     }
   }
 
@@ -337,22 +354,49 @@ export class DataFlowService implements OnDestroy {
     return this.taskReminderPopupTimeoutsRefs[taskId];
   }
 
-  public addTaskReminderPopupTimeout(taskReminder: TaskReminder): void {
+  public addTaskReminderPopupTimeout(
+    taskReminder: TaskReminder,
+    userId: string
+  ): void {
     if (!this.taskReminderPopupTimeoutsRefs[taskReminder.task.tid]) {
-      const timeOutRef = setTimeout(() => {
-        console.log(taskReminder.task.title + "POPUP");
-        this.deleteTaskReminder(
-          taskReminder.task,
-          this.userData.getValue().uid
+      if (taskReminder.task.reminder) {
+        const timeoutDuration = this.utilityService.getTimeLeft(
+          taskReminder.task.reminder
         );
-        this.dialog.open(TaskReminderPopupComponent).componentInstance.task =
-          taskReminder.task;
-      }, this.utilityService.getTimeLeft(new Date(taskReminder.task.reminder)).total);
-      this.taskReminderPopupTimeoutsRefs[taskReminder.task.tid] = timeOutRef;
-      this.logService.logToConsole(
-        new Log("Task Reminder Timeout added!", "INFO")
-      );
-      this.logService.logToConsole(new Log(this.taskReminderPopupTimeoutsRefs));
+        if (timeoutDuration.total < MAX_TIMEOUT_DURATION) {
+          const timeOutRef = setTimeout(() => {
+            this.logService.logToConsole(
+              new Log(
+                `${taskReminder.task.title} popped up after ${timeoutDuration.total} ms!!!`,
+                "INFO"
+              )
+            );
+            this.deleteTaskReminder(taskReminder.task, userId);
+            this.dialog.open(
+              TaskReminderPopupComponent
+            ).componentInstance.task = taskReminder.task;
+          }, timeoutDuration.total);
+
+          this.taskReminderPopupTimeoutsRefs[taskReminder.task.tid] =
+            timeOutRef;
+          this.logService.logToConsole(
+            new Log(
+              `Task Reminder Timeout added! It will last after ${timeoutDuration.total} ms!!!`,
+              "INFO"
+            )
+          );
+          this.logService.logToConsole(
+            new Log(this.taskReminderPopupTimeoutsRefs)
+          );
+        } else {
+          this.logService.logToConsole(
+            new Log(
+              `Task Reminder Timeout passed the threshold ${MAX_TIMEOUT_DURATION} ms! ${timeoutDuration.total} ms!!!`,
+              "WARN"
+            )
+          );
+        }
+      }
     } else {
       this.logService.logToConsole(
         new Log("Task Reminder Timeout was added before!", "INFO")

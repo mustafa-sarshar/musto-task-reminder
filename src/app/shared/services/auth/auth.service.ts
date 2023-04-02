@@ -14,11 +14,11 @@ import {
   UserLoginCredentials,
   UserRegistrationCredentials,
 } from "../../models";
-import { environment } from "src/environments/environment";
+import { environment } from "src/environments/environment.development";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
-  private tokenExpirationTimer = null;
+  private tokenExpirationTimer: any = null;
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -69,7 +69,7 @@ export class AuthService {
   }
 
   public activateUserAutoLogin(): void {
-    const userData: UserDataFromLocalStorage =
+    const userData: UserDataFromLocalStorage | null =
       this.localStorageService.getUserDataFromLocalStorage();
     if (userData) {
       const userDataLoaded =
@@ -114,17 +114,22 @@ export class AuthService {
   }
 
   private handleAuthentication(
-    { localId, email, idToken, expiresIn },
+    resData: AuthResponsePayload,
     login: boolean = false
   ) {
     const expirationDate = this.utilityService.calculateExpirationDate(
-      +expiresIn
+      +resData.expiresIn
     );
-    const userData = new User(localId, email, idToken, expirationDate);
+    const userData = new User(
+      resData.localId,
+      resData.email,
+      resData.idToken,
+      expirationDate
+    );
     this.dataFlowService.setUserData(userData);
 
     if (login) {
-      this.activateUserAutoLogout(+expiresIn * 1000);
+      this.activateUserAutoLogout(+resData.expiresIn * 1000);
       this.dataFlowService.initUserProfileData(userData);
     }
   }

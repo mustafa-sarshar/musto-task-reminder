@@ -1,5 +1,4 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Time } from "@angular/common";
 import { Injectable } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { throwError } from "rxjs";
@@ -65,7 +64,7 @@ export class UtilityService {
       userData._token,
       new Date(userData._tokenExpirationDate),
       userData.username,
-      new Date(userData.birthDate),
+      new Date(userData.birthDate ? userData.birthDate : new Date(0)),
       userData.tasks
     );
     return userDataLoaded;
@@ -277,7 +276,7 @@ export class UtilityService {
     return deadline.getTime() > new Date().getTime() + 5 + 60 + 1000;
   }
 
-  public validateAge(dateInput: FormControl): dateValidation | null {
+  public validateAge(dateInput: FormControl<Date>): dateValidation | null {
     const minAge = 3;
     const maxAge = 120;
     const dateNow = new Date();
@@ -398,11 +397,11 @@ export class UtilityService {
   }
 
   public getTimeLeft(endTime: Date, startTime?: Date): timeParsedLong {
-    let sTime = Date.parse(new Date().toString());
+    let sTime = new Date().getTime();
     if (startTime) {
-      sTime = Date.parse(startTime.toString());
+      sTime = startTime.getTime();
     }
-    const total = Date.parse(endTime.toString()) - sTime;
+    const total = new Date(endTime).getTime() - sTime;
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);
     const hours = Math.floor((total / (1000 * 60 * 60)) % 24);

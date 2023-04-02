@@ -14,13 +14,12 @@ import {
   Log,
   Notification,
   User,
-  UserDataFromDatabase,
 } from "src/app/shared/models";
 
 @Injectable()
 export class ProfileService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
-  private isDataFetchingSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription?: Subscription;
 
   constructor(
     private appMonitoringService: AppMonitoringService,
@@ -42,7 +41,7 @@ export class ProfileService implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.appMonitoringService.setIsDataFetchingStatus(false);
-    this.isDataFetchingSubscription.unsubscribe();
+    this.isDataFetchingSubscription?.unsubscribe();
   }
 
   public initForm(): FormGroup {
@@ -55,13 +54,13 @@ export class ProfileService implements OnInit, OnDestroy {
         ),
       ]),
       birthDate: new FormControl({ value: "", disabled: this.isDataFetching }, [
-        this.utilityService.validateAge,
+        // this.utilityService.validateAge,
       ]),
     });
     return formGroupEl;
   }
 
-  public stillEnteringForm(formGroupEl: FormGroup): boolean {
+  public stillEditingForm(formGroupEl: FormGroup): boolean {
     let stillEditing: boolean = false;
 
     Object.keys(formGroupEl.value).forEach((key) => {
@@ -145,12 +144,18 @@ export class ProfileService implements OnInit, OnDestroy {
           this.databaseService
             .getUserProfileDataFromDatabase(userData.uid)
             .subscribe({
-              next: (response: UserDataFromDatabase) => {
+              next: (response: any) => {
                 const userData = this.dataFlowService.getUserData();
-                userData.username = response.username;
-                userData.birthDate = new Date(response.birthDate);
-                this.dataFlowService.setUserData(userData);
-                callbackSuccess();
+
+                if (userData) {
+                  userData.username = response.username;
+                  userData.birthDate = new Date(response.birthDate);
+                  this.dataFlowService.setUserData(userData);
+                }
+
+                if (callbackSuccess) {
+                  callbackSuccess();
+                }
 
                 this.logService.logToConsole(
                   new Log("User data updated successfully!", "INFO")

@@ -18,10 +18,10 @@ import { RegistrationService } from "./registration.service";
   providers: [RegistrationService],
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
-  public formGroupEl: FormGroup;
+  public formGroupEl?: FormGroup;
   public isDataFetching: boolean = false;
   public hidePasswordValue: boolean = true;
-  private isDataFetchingSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription?: Subscription;
 
   constructor(
     private appMonitoringService: AppMonitoringService,
@@ -47,10 +47,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.appMonitoringService.setIsDataFetchingStatus(true);
     const userCredentials: UserRegistrationCredentials =
       new UserRegistrationCredentials(
-        this.formGroupEl.value["username"],
-        this.formGroupEl.value["email"],
-        this.formGroupEl.value["birthDate"],
-        this.formGroupEl.value["password"]
+        this.formGroupEl?.value["username"],
+        this.formGroupEl?.value["email"],
+        this.formGroupEl?.value["birthDate"],
+        this.formGroupEl?.value["password"]
       );
 
     this.registrationService.handleRegistration(
@@ -71,7 +71,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   private handleClosing(): void {
     this.appMonitoringService.setIsDataFetchingStatus(false); // Reset the isDataFetching variable in AppMonitoringService to false.
-    this.isDataFetchingSubscription.unsubscribe();
+    this.isDataFetchingSubscription?.unsubscribe();
     this.dialogRef.close();
   }
 }

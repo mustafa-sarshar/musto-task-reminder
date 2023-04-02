@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable, catchError } from "rxjs";
 
 import { UtilityService } from "../utility/utility.service";
-import { environment } from "src/environments/environment";
+import { environment } from "src/environments/environment.development";
 import { Task, User } from "../../models";
 
 @Injectable({ providedIn: "root" })

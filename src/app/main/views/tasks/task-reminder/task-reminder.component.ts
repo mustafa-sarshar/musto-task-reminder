@@ -13,8 +13,8 @@ import { AppMonitoringService, DataFlowService } from "src/app/shared/services";
   styleUrls: ["./task-reminder.component.scss"],
 })
 export class TaskReminderComponent {
-  @Input() taskReminder: TaskReminder = null;
-  @Input() userId: string = null;
+  @Input() taskReminder?: TaskReminder;
+  @Input() userId?: string;
   public popupReminderRef: any = null;
 
   constructor(
@@ -24,12 +24,14 @@ export class TaskReminderComponent {
   ) {}
 
   public onClickTaskReminderDetails(): void {
-    const dialogRef = this.dialog.open(
-      TaskDetailsComponent,
-      TASK_DETAILS_FORM_STYLE
-    );
-    dialogRef.componentInstance.task = this.taskReminder.task;
-    dialogRef.componentInstance.userId = this.userId;
+    if (this.userId && this.taskReminder) {
+      const dialogRef = this.dialog.open(
+        TaskDetailsComponent,
+        TASK_DETAILS_FORM_STYLE
+      );
+      dialogRef.componentInstance.task = this.taskReminder.task;
+      dialogRef.componentInstance.userId = this.userId;
+    }
   }
 
   public onClickTaskReminderDelete(): void {
@@ -41,11 +43,13 @@ export class TaskReminderComponent {
       new ConfirmationDialogBox("DELETE_TASK_REMINDER", "YES/NO");
     dialogRef.afterClosed().subscribe((answer) => {
       if (answer) {
-        this.appMonitoringService.setIsDataFetchingStatus(true);
-        this.dataFlowService.deleteTaskReminder(
-          this.taskReminder.task,
-          this.userId
-        );
+        if (this.userId && this.taskReminder) {
+          this.appMonitoringService.setIsDataFetchingStatus(true);
+          this.dataFlowService.deleteTaskReminder(
+            this.taskReminder.task,
+            this.userId
+          );
+        }
       }
     });
   }

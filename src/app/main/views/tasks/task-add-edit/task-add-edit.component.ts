@@ -10,7 +10,7 @@ import {
   UtilityService,
 } from "src/app/shared/services";
 import { TaskAddEditService } from "./task-add-edit.service";
-import { Log, Notification } from "src/app/shared/models";
+import { Log } from "src/app/shared/models";
 import { Task, TaskGroup } from "src/app/shared/models/task/task.model";
 
 @Component({
@@ -20,14 +20,14 @@ import { Task, TaskGroup } from "src/app/shared/models/task/task.model";
   providers: [TaskAddEditService],
 })
 export class TaskAddEditComponent {
-  @Input() public userId: string = "";
-  @Input() public task: Task | null = null;
-  public formGroupEl: FormGroup;
+  @Input() public userId?: string;
+  @Input() public task?: Task;
+  public formGroupEl?: FormGroup;
   public isDataFetching: boolean = false;
   public taskGroups: TaskGroup[] = [];
   public remindMeFlag: boolean = false;
-  private isDataFetchingServiceSubscription: Subscription = new Subscription();
-  private taskGroupsSubscription: Subscription = new Subscription();
+  private isDataFetchingServiceSubscription?: Subscription;
+  private taskGroupsSubscription?: Subscription;
 
   constructor(
     private logService: LogService,
@@ -39,7 +39,11 @@ export class TaskAddEditComponent {
   ) {}
 
   public ngOnInit(): void {
-    this.formGroupEl = this.taskAddEditService.initForm(this.task);
+    if (this.task) {
+      this.formGroupEl = this.taskAddEditService.initForm(this.task);
+    } else {
+      this.formGroupEl = this.taskAddEditService.initForm(null);
+    }
     if (this.task && this.task.remindMe) {
       this.remindMeFlag = true;
     }
@@ -47,22 +51,24 @@ export class TaskAddEditComponent {
       this.appMonitoringService.isDataFetching.subscribe((status: boolean) => {
         this.isDataFetching = status;
       });
-    this.taskGroupsSubscription = this.dataFlowService.taskGroups.subscribe(
-      (taskGroups: TaskGroup[]) => {
-        this.taskGroups = taskGroups;
+    this.taskGroupsSubscription = this.dataFlowService.taskGroups?.subscribe(
+      (taskGroups: TaskGroup[] | null) => {
+        if (taskGroups) {
+          this.taskGroups = taskGroups;
+        }
       }
     );
   }
 
   public ngOnDestroy(): void {
     this.appMonitoringService.setIsDataFetchingStatus(false);
-    this.taskGroupsSubscription.unsubscribe();
-    this.isDataFetchingServiceSubscription.unsubscribe();
+    this.taskGroupsSubscription?.unsubscribe();
+    this.isDataFetchingServiceSubscription?.unsubscribe();
   }
 
   public onChangeRemindMe(): void {
     this.remindMeFlag = !this.remindMeFlag;
-    this.formGroupEl.patchValue({
+    this.formGroupEl?.patchValue({
       reminderDays: 0,
       reminderHours: 0,
       reminderMinutes: 0,
@@ -70,32 +76,38 @@ export class TaskAddEditComponent {
   }
 
   public onClickSubmit(): void {
-    const taskSubmitted = this.taskAddEditService.handleSubmittedData(
-      this.formGroupEl
-    );
-    if (!taskSubmitted) {
-      return;
-    }
-
-    this.appMonitoringService.setIsDataFetchingStatus(true);
-    // Reset the tid to its original if we are in Edit mode
-    if (this.task) {
-      taskSubmitted.tid = this.task.tid;
-    }
-
-    this.logService.logToConsole(new Log("SUBMITTED", "INFO"));
-    this.logService.logToConsole(new Log(this.formGroupEl.value));
-
-    if (this.task) {
-      // Handle the task editing process
-      this.taskAddEditService.handleEditTask(this.userId, taskSubmitted, () =>
-        this.dialogRef.close()
+    if (this.formGroupEl) {
+      const taskSubmitted = this.taskAddEditService.handleSubmittedData(
+        this.formGroupEl
       );
-    } else {
-      // Handle the task adding process
-      this.taskAddEditService.handleAddTask(this.userId, taskSubmitted, () =>
-        this.dialogRef.close()
-      );
+      if (!taskSubmitted) {
+        return;
+      }
+
+      this.appMonitoringService.setIsDataFetchingStatus(true);
+      // Reset the tid to its original if we are in Edit mode
+      if (this.task) {
+        taskSubmitted.tid = this.task.tid;
+      }
+
+      this.logService.logToConsole(new Log("SUBMITTED", "INFO"));
+      this.logService.logToConsole(new Log(this.formGroupEl.value));
+
+      if (this.task && this.userId) {
+        // Handle the task editing process
+        this.taskAddEditService.handleEditTask(this.userId, taskSubmitted, () =>
+          this.dialogRef.close()
+        );
+      } else {
+        // Handle the task adding process
+        if (this.userId) {
+          this.taskAddEditService.handleAddTask(
+            this.userId,
+            taskSubmitted,
+            () => this.dialogRef.close()
+          );
+        }
+      }
     }
   }
 

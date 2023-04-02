@@ -72,7 +72,10 @@ export class LoginService implements OnInit, OnDestroy {
         this.logService.showNotification(new Notification("LOGIN", "SUCCESS"));
 
         this.authService.activateUserAutoLogout(+response.expiresIn * 1000);
-        callbackSuccess();
+
+        if (callbackSuccess) {
+          callbackSuccess();
+        }
         this.router.navigate(["/tasks"]);
       },
       error: (error: any) => {

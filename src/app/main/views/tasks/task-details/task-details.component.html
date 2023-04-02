@@ -5,9 +5,9 @@
       <!-- Button Edit -->
     </mat-card-title>
     <mat-card-actions>
-      <button mat-icon-button *ngIf="!task.done" color="default" [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.edit.ariaLabel' | translate"
-        (click)="onClickEdit()" [matTooltip]="'TASKS_TASK_ITEM.actionButtons.edit.toolTip' | translate"
-        [disabled]="task.done">
+      <button mat-icon-button *ngIf="!task.done" color="default"
+        [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.edit.ariaLabel' | translate" (click)="onClickEdit()"
+        [matTooltip]="'TASKS_TASK_ITEM.actionButtons.edit.toolTip' | translate" [disabled]="task.done">
         <mat-icon>edit</mat-icon>
       </button>
       <!-- Button Done -->
@@ -85,28 +85,32 @@
       <button mat-icon-button type="button"
         [ariaLabel]="'TASKS_TASK_DETAILS.actionButtons.webLink.ariaLabel' | translate"
         (click)="onClickLink(task.webLink)"
-        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.webLink.toolTip' | translate" [disabled]="!task.webLink">
+        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.webLink.toolTip' | translate" [disabled]="!task.webLink"
+        *ngIf="task.webLink">
         <mat-icon aria-label="web link icon">link</mat-icon>
       </button>
       <!-- Button ImageLink -->
       <button mat-icon-button type="button"
         [ariaLabel]="'TASKS_TASK_DETAILS.actionButtons.imageLink.ariaLabel' | translate"
         (click)="onClickLink(task.imageLink)"
-        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.imageLink.toolTip' | translate" [disabled]="!task.imageLink">
+        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.imageLink.toolTip' | translate" [disabled]="!task.imageLink"
+        *ngIf="task.imageLink">
         <mat-icon aria-label="web link icon">image</mat-icon>
       </button>
       <!-- Button VideoLink -->
       <button mat-icon-button type="button"
         [ariaLabel]="'TASKS_TASK_DETAILS.actionButtons.videoLink.ariaLabel' | translate"
         (click)="onClickLink(task.videoLink)"
-        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.videoLink.toolTip' | translate" [disabled]="!task.videoLink">
+        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.videoLink.toolTip' | translate" [disabled]="!task.videoLink"
+        *ngIf="task.videoLink">
         <mat-icon aria-label="web link icon">videocam</mat-icon>
       </button>
       <!-- Button VoiceLink -->
       <button mat-icon-button type="button"
         [ariaLabel]="'TASKS_TASK_DETAILS.actionButtons.voiceLink.ariaLabel' | translate"
         (click)="onClickLink(task.voiceLink)"
-        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.voiceLink.toolTip' | translate" [disabled]="!task.voiceLink">
+        [matTooltip]="'TASKS_TASK_DETAILS.actionButtons.voiceLink.toolTip' | translate" [disabled]="!task.voiceLink"
+        *ngIf="task.voiceLink">
         <mat-icon aria-label="web link icon">record_voice_over</mat-icon>
       </button>
     </div>

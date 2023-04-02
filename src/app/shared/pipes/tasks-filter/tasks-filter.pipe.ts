@@ -9,7 +9,7 @@ export class TasksFilterPipe implements PipeTransform {
   transform(tasks: Task[], filterCriteria: string, propName: string): Task[] {
     const _filterString = filterCriteria.trim().toLowerCase();
 
-    const tasksFiltered = tasks.filter((task) =>
+    const tasksFiltered = tasks.filter((task: any) =>
       task[propName].trim().toLowerCase().includes(_filterString)
     );
 

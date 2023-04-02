@@ -16,8 +16,8 @@ import { CONFIRMATION_POPUP_STYLE, TASK_DETAILS_FORM_STYLE } from "src/configs";
   providers: [TaskDetailsService],
 })
 export class TaskDetailsComponent {
-  @Input() public task: Task = null;
-  @Input() public userId: string = null;
+  @Input() public task?: Task;
+  @Input() public userId?: string;
 
   constructor(
     private taskDetailsService: TaskDetailsService,
@@ -34,13 +34,15 @@ export class TaskDetailsComponent {
   }
 
   public onClickEdit(): void {
-    const dialogRef = this.dialog.open(
-      TaskAddEditComponent,
-      TASK_DETAILS_FORM_STYLE
-    );
-    dialogRef.componentInstance.task = this.task;
-    dialogRef.componentInstance.userId = this.userId;
-    this.dialogRef.close();
+    if (this.task && this.userId) {
+      const dialogRef = this.dialog.open(
+        TaskAddEditComponent,
+        TASK_DETAILS_FORM_STYLE
+      );
+      dialogRef.componentInstance.task = this.task;
+      dialogRef.componentInstance.userId = this.userId;
+      this.dialogRef.close();
+    }
   }
 
   public onClickDone() {
@@ -62,7 +64,9 @@ export class TaskDetailsComponent {
         taskUpdate.remindMe = false;
         taskUpdate.completion = new Date();
 
-        this.taskDetailsService.handleDone(this.userId, taskUpdate);
+        if (this.userId) {
+          this.taskDetailsService.handleDone(this.userId, taskUpdate);
+        }
       }
     });
   }

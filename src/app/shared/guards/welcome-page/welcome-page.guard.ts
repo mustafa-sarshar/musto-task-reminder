@@ -25,15 +25,19 @@ export class WelcomePageGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.dataFlowService.userData.pipe(
-      take(1),
-      map((userData: User | null) => {
-        if (userData) {
-          return this.router.createUrlTree(["/tasks"]);
-        } else {
-          return true;
-        }
-      })
-    );
+    if (this.dataFlowService.userData) {
+      return this.dataFlowService.userData.pipe(
+        take(1),
+        map((userData: User | null) => {
+          if (userData) {
+            return this.router.createUrlTree(["/tasks"]);
+          } else {
+            return true;
+          }
+        })
+      );
+    } else {
+      return true;
+    }
   }
 }

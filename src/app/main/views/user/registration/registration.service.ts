@@ -61,7 +61,7 @@ export class RegistrationService implements OnInit, OnDestroy {
       ]),
       birthDate: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
-        this.utilityService.validateAge,
+        // this.utilityService.validateAge,
       ]),
       password: new FormControl({ value: "", disabled: this.isDataFetching }, [
         Validators.required,
@@ -79,12 +79,15 @@ export class RegistrationService implements OnInit, OnDestroy {
   ): void {
     this.authService.handleUserRegistration(userCredentials).subscribe({
       next: (authResponse: AuthResponsePayload) => {
+        this.logService.logToConsole(new Log("Registration Response", "INFO"));
+        this.logService.logToConsole(new Log(authResponse));
+
         // Init a user profile after a successful user registration via Email & Password
         const userProfileCredentials = new User(
           authResponse.localId,
           userCredentials.email,
           "",
-          new Date(""),
+          new Date(0),
           userCredentials.username,
           userCredentials.birthDate
         );
@@ -101,7 +104,10 @@ export class RegistrationService implements OnInit, OnDestroy {
                 new Notification("REGISTRATION", "SUCCESS")
               );
 
-              callbackSuccess(authResponse.email);
+              if (callbackSuccess) {
+                this.localStorageService.resetUserDataFromLocalStorage();
+                callbackSuccess(authResponse.email);
+              }
               this.appMonitoringService.setIsDataFetchingStatus(false);
             },
             error: (error: any) => {

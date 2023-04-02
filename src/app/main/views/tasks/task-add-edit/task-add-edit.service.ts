@@ -14,7 +14,7 @@ import { Subscription } from "rxjs";
 @Injectable()
 export class TaskAddEditService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
-  private isDataFetchingSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription?: Subscription;
 
   constructor(
     private utilityService: UtilityService,
@@ -34,10 +34,10 @@ export class TaskAddEditService implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.isDataFetchingSubscription.unsubscribe();
+    this.isDataFetchingSubscription?.unsubscribe();
   }
 
-  public initForm(task: Task): FormGroup {
+  public initForm(task: Task | null): FormGroup {
     const formGroupEl = new FormGroup({
       title: new FormControl(
         {
@@ -73,7 +73,10 @@ export class TaskAddEditService implements OnInit, OnDestroy {
             : "",
           disabled: this.isDataFetching,
         },
-        [Validators.required, this.utilityService.validateDeadlineDate]
+        [
+          Validators.required,
+          // this.utilityService.validateDeadlineDate
+        ]
       ),
       deadlineTime: new FormControl(
         {
@@ -99,7 +102,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
       reminderDays: new FormControl(
         {
           value:
-            task && task.remindMe
+            task && task.remindMe && task.reminder
               ? this.utilityService.getTimeReminder(
                   new Date(task.reminder),
                   new Date(task.deadline)
@@ -112,7 +115,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
       reminderHours: new FormControl(
         {
           value:
-            task && task.remindMe
+            task && task.remindMe && task.reminder
               ? this.utilityService.getTimeReminder(
                   new Date(task.reminder),
                   new Date(task.deadline)
@@ -128,7 +131,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
       reminderMinutes: new FormControl(
         {
           value:
-            task && task.remindMe
+            task && task.remindMe && task.reminder
               ? this.utilityService.getTimeReminder(
                   new Date(task.reminder),
                   new Date(task.deadline)
@@ -230,7 +233,7 @@ export class TaskAddEditService implements OnInit, OnDestroy {
     return formGroupEl;
   }
 
-  public handleSubmittedData(formGroupEl: FormGroup): Task {
+  public handleSubmittedData(formGroupEl: FormGroup): Task | null {
     const deadline: Date = this.utilityService.setTimeForDate(
       formGroupEl.controls["deadlineDate"].value,
       formGroupEl.controls["deadlineTime"].value
@@ -288,7 +291,10 @@ export class TaskAddEditService implements OnInit, OnDestroy {
     this.databaseService.updateUserTask(userId, task).subscribe({
       next: (response: any) => {
         this.dataFlowService.updateUserTask(task);
-        callbackSuccess();
+
+        if (callbackSuccess) {
+          callbackSuccess();
+        }
 
         this.logService.logToConsole(
           new Log("User data synced successfully!", "INFO")
@@ -320,7 +326,10 @@ export class TaskAddEditService implements OnInit, OnDestroy {
     this.databaseService.addUserTask(userId, task).subscribe({
       next: (response: any) => {
         this.dataFlowService.addUserTask(task);
-        callbackSuccess();
+
+        if (callbackSuccess) {
+          callbackSuccess();
+        }
 
         this.logService.logToConsole(
           new Log("User data synced successfully!", "INFO")

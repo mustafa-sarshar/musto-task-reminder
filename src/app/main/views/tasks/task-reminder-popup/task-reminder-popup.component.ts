@@ -8,7 +8,7 @@ import { Task } from "src/app/shared/models";
   styleUrls: ["./task-reminder-popup.component.scss"],
 })
 export class TaskReminderPopupComponent {
-  public task: Task = null;
+  public task?: Task;
 
   constructor(private dialogRef: DialogRef<TaskReminderPopupComponent>) {}
 
