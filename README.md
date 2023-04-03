@@ -13,9 +13,9 @@
 <table width="100%" style="overflow:auto">
   <tr>
     <th width="25%" style="text-align:center;">Welcome Page</th>
-    <th width="25%" style="text-align:center;">Sign up</th>
-    <th width="25%" style="text-align:center;">Login</th>
-    <th width="25%" style="text-align:center;">Tasks Page</th>
+    <th width="25%" style="text-align:center;">Sign Up</th>
+    <th width="25%" style="text-align:center;">Tasks</th>
+    <th width="25%" style="text-align:center;">View Options</th>
   </tr>
   <tr>
     <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-1.png?raw=true"/></td>
@@ -28,10 +28,10 @@
 
 <table width="100%" style="overflow:auto">
   <tr>
-    <th width="25%" style="text-align:center;">Task Reminders</th>
-    <th width="25%" style="text-align:center;">View Options</th>
     <th width="25%" style="text-align:center;">Add Task</th>
-    <th width="25%" style="text-align:center;">Edit Task</th>
+    <th width="25%" style="text-align:center;">User Profile</th>
+    <th width="25%" style="text-align:center;">Select Language</th>
+    <th width="25%" style="text-align:center;">App Menu</th>
      
   </tr>
   <tr>
@@ -39,22 +39,6 @@
     <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-6.png?raw=true"/></td>
     <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-7.png?raw=true"/></td>
     <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-8.png?raw=true"/></td>
-  </tr>
-  
-</table>
-
-<table width="100%" style="overflow:auto">
-  <tr>    
-    <th width="25%" style="text-align:center;">Task Features</th>
-    <th width="25%" style="text-align:center;">Task Details</th>
-    <th width="25%" style="text-align:center;">User Profile</th>
-    <th width="25%" style="text-align:center;">Menu Options</th>
-  </tr>
-  <tr>    
-    <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-9.png?raw=true"/></td>
-    <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-10.png?raw=true"/></td>
-    <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-11.png?raw=true"/></td>
-    <td width="25%"><img src="https://github.com/mustafa-sarshar/musto-task-reminder/blob/main/docs/assets/images/musto-task-reminder-12.png?raw=true"/></td>
   </tr>
   
 </table>
