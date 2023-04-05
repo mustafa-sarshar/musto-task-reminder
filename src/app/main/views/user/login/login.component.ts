@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { FormGroup } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 import { Subscription } from "rxjs";
@@ -16,7 +15,7 @@ import { UserLoginCredentials } from "src/app/shared/models";
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public isDataFetching: boolean = false;
-  private appMonitoringSubscription: Subscription = new Subscription();
+  private appMonitoringSubscription?: Subscription;
   public hidePasswordValue: boolean = true;
   public formGroupEl?: FormGroup;
   public userEmail: string = "";
@@ -25,8 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private appMonitoringService: AppMonitoringService,
     public utilityService: UtilityService,
     private loginService: LoginService,
-    public dialogRef: MatDialogRef<LoginComponent>,
-    private router: Router
+    public dialogRef: MatDialogRef<LoginComponent>
   ) {}
 
   public ngOnInit(): void {
@@ -59,6 +57,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public handleClosing(): void {
     this.appMonitoringService.setIsDataFetchingStatus(false); // Reset the isDataFetching variable in AppMonitoringService to false.
-    this.appMonitoringSubscription.unsubscribe();
+    this.appMonitoringSubscription?.unsubscribe();
   }
 }

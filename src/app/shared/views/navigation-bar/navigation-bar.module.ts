@@ -29,7 +29,6 @@ import { NavigationBarComponent } from "./navigation-bar.component";
     TranslateForChildModule,
   ],
   providers: [AuthService, DataFlowService],
-
   exports: [NavigationBarComponent],
 })
 export class NavigationBarModule {}
