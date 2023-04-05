@@ -16,7 +16,7 @@ import { LanguageCode } from "src/app/shared/models";
   styleUrls: ["./welcome-page.component.scss"],
 })
 export class WelcomePageComponent implements OnInit, OnDestroy {
-  private appLanguageSubscription: Subscription = new Subscription();
+  private appLanguageSubscription?: Subscription;
 
   constructor(
     private dialog: MatDialog,
@@ -35,7 +35,7 @@ export class WelcomePageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.appLanguageSubscription.unsubscribe();
+    this.appLanguageSubscription?.unsubscribe();
   }
 
   public onOpenUserLoginDialog(): void {

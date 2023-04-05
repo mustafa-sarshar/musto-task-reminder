@@ -5,7 +5,6 @@ import { ConfirmationDialogModule } from "./confirmation-dialog/confirmation-dia
 import { FooterModule } from "./footer/footer.module";
 import { LanguageModule } from "./language/language.module";
 import { NavigationBarModule } from "./navigation-bar/navigation-bar.module";
-import { TranslateForChildModule } from "../modules";
 
 const sharedViews = [
   ConfirmationDialogModule,

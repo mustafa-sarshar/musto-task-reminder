@@ -118,7 +118,7 @@ export class ProfileComponent implements OnInit, OnDestroy, onCanDeactivate {
       dialogRef.afterClosed().subscribe((answer) => {
         if (answer) {
           if (this.userData) {
-            
+
             this.profileService.handleDeleteAccount(this.userData);
           }
         }
