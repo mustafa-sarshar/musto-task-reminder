@@ -14,7 +14,7 @@ import {
   UserLoginCredentials,
   UserRegistrationCredentials,
 } from "../../models";
-import { environment } from "src/environments/environment.development";
+import { environment } from "src/environments/environment";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
