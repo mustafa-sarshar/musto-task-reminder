@@ -4,7 +4,7 @@
       <i>{{userData.username}}</i>
     </u> {{"TASKS.header.title" | translate}} <br>
   </p>
-  <mat-card class="tasks-content__tasks" *ngIf="userData['tasks']">
+  <mat-card class="tasks-content__tasks" *ngIf="userData.tasks && userData.tasks.length > 0">
     <mat-card-header>
       <mat-label>
         {{"TASKS.header.info_1_1" | translate}}
@@ -131,11 +131,11 @@
     </mat-card-header>
     <mat-card-content>
       <app-tasks-list [userId]="userData.uid"
-        [tasks]="userData['tasks'] | tasksSort:sortBy  | tasksVisibilityFilter:tasksVisibilityFilter"></app-tasks-list>
+        [tasks]="userData.tasks | tasksSort:sortBy  | tasksVisibilityFilter:tasksVisibilityFilter"></app-tasks-list>
     </mat-card-content>
     <mat-card-content class="space-flex"></mat-card-content>
   </mat-card>
-  <mat-card *ngIf="!userData['tasks']">
+  <mat-card *ngIf="!userData.tasks || userData.tasks.length === 0">
     <mat-card-header>
       <p>{{"TASKS.header.noTasks" | translate}}</p>
       <mat-card-content class="space-flex"></mat-card-content>

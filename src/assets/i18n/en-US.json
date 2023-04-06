@@ -509,13 +509,13 @@
   "MESSAGES": {
     "formValidation": {
       "user": {
-        "username": "Username must be 5-20 characters long and alphanumeric!",
+        "username": "Username must be 5-20 characters long and alphanumeric! It must start with a letter! Space character, dot and underscore are allowed!",
         "email": "Email must be valid!",
         "birthDate": "Birth date must be valid!",
         "password": "Password length must be 8-256 characters long and/or contain one or more uppercase characters, and/or one or more lowercase characters, and/or one or more numeric values, and/or one or more special characters"
       },
       "task": {
-        "title": "Title must be 3-20 characters and start with an alphabet! From special characters, only parentheses and spaces are allowed!",
+        "title": "Title must be 3-20 characters and start with a letter! From special characters, only parentheses and spaces are allowed!",
         "description": "Description must be 5-256 characters long and alphanumeric! From special characters, only parentheses and spaces are allowed!",
         "deadlineDate": "Deadline date must be valid!",
         "deadlineTime": "Deadline time must be valid!",
