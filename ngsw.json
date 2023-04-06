@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1680695434995,
+  "timestamp": 1680793119850,
   "index": "/musto-task-reminder/index.html",
   "assetGroups": [
     {
@@ -13,14 +13,14 @@
       "urls": [
         "/musto-task-reminder/33.89b6c100d50f0677.js",
         "/musto-task-reminder/492.5d689d654f4dac36.js",
-        "/musto-task-reminder/530.bbaff4820bdd8340.js",
+        "/musto-task-reminder/530.960e4f5cb2c30c55.js",
         "/musto-task-reminder/563.bcc1f0e37d02f4f2.js",
         "/musto-task-reminder/favicon.ico",
         "/musto-task-reminder/index.html",
-        "/musto-task-reminder/main.522a68e9d1b6582a.js",
+        "/musto-task-reminder/main.189e016270b01966.js",
         "/musto-task-reminder/manifest.webmanifest",
         "/musto-task-reminder/polyfills.dc9c8b97601c49c6.js",
-        "/musto-task-reminder/runtime.0eb3a6e375ed9a8c.js",
+        "/musto-task-reminder/runtime.a3649f45c5e49a08.js",
         "/musto-task-reminder/styles.6304e1c841145f35.css"
       ],
       "patterns": [
@@ -64,10 +64,10 @@
   "hashTable": {
     "/musto-task-reminder/33.89b6c100d50f0677.js": "facaf8f29e830940258a9bb5f493b2d710ad1a40",
     "/musto-task-reminder/492.5d689d654f4dac36.js": "a823a68711602842892fb87f12030919d35bcde4",
-    "/musto-task-reminder/530.bbaff4820bdd8340.js": "63ecadef69ce5bd2c71f2cf8491a26a2c4660e23",
+    "/musto-task-reminder/530.960e4f5cb2c30c55.js": "7b70454f9a648c16feda1dc0a11bf6f3381ad59c",
     "/musto-task-reminder/563.bcc1f0e37d02f4f2.js": "bb4f5d73118c5ba0155ac5e745397ac906583906",
-    "/musto-task-reminder/assets/i18n/de-DE.json": "351fdd28a2313ffa340a83af35953a3272e6764c",
-    "/musto-task-reminder/assets/i18n/en-US.json": "67dbdcec1d6fff04a3ee5fe20afdf0ed6a9343b2",
+    "/musto-task-reminder/assets/i18n/de-DE.json": "d74c219c4fd6a52e0b251acd3d1eaad10c19c753",
+    "/musto-task-reminder/assets/i18n/en-US.json": "3a11c4bf432a69352fa7da54ef45924d5f9bc138",
     "/musto-task-reminder/assets/i18n/fa-IR.json": "b19d90fb6411d9019c12b0e2c4b5c8d4123986c8",
     "/musto-task-reminder/assets/i18n/tr-TR.json": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "/musto-task-reminder/assets/icons-angular/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
@@ -87,11 +87,11 @@
     "/musto-task-reminder/assets/icons/icon-72x72-0001.png": "e99ca62816567da608bbd926eeae51b7dfecaa8c",
     "/musto-task-reminder/assets/icons/icon-96x96-0001.png": "603a72c51190ca83b9922a591477ba628bfe2060",
     "/musto-task-reminder/favicon.ico": "bddad6c698e573e1b67c0b751c18f68bef4dd273",
-    "/musto-task-reminder/index.html": "a26599dae892806658e3183018d1d527cca45295",
-    "/musto-task-reminder/main.522a68e9d1b6582a.js": "e39e28c36a52a709c04fbb3b3b22f26cc8d27ec4",
+    "/musto-task-reminder/index.html": "3fd10c591bc8b377b77902084384d6de76acf698",
+    "/musto-task-reminder/main.189e016270b01966.js": "2b2b8badada53930a76a093b226b87195600c16c",
     "/musto-task-reminder/manifest.webmanifest": "923826d407496b08231d288bde5c0bc615ac0358",
     "/musto-task-reminder/polyfills.dc9c8b97601c49c6.js": "a2a7ddcca12e5c9518d16afb6003f199e2d91696",
-    "/musto-task-reminder/runtime.0eb3a6e375ed9a8c.js": "56276c91745d19a27412c687e14b0a70d28f8785",
+    "/musto-task-reminder/runtime.a3649f45c5e49a08.js": "f54b9b65ccd78d1336f61ab132ed76035f2ff7fd",
     "/musto-task-reminder/styles.6304e1c841145f35.css": "36b250dbaae4f1f01a7546b7edeb0d070bb72a51"
   },
   "navigationUrls": [
