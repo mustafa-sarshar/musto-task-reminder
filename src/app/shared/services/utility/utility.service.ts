@@ -200,7 +200,7 @@ export class UtilityService {
     let maxValue: number = 0;
     switch (fieldName) {
       case "USERNAME":
-        maxValue = 10;
+        maxValue = 20;
         break;
       case "PASSWORD":
         maxValue = 256;
@@ -229,31 +229,34 @@ export class UtilityService {
     return maxValue;
   }
 
-  public getValidationPattern(fieldName: ValidationFields): string {
-    let pattern: string = "";
+  public getValidationPattern(fieldName: ValidationFields): RegExp {
+    let pattern: RegExp = /\w\d/gi;
     switch (fieldName) {
       case "USERNAME":
-        pattern = "[a-zA-Z0-9-]+";
+        // source: https://stackoverflow.com/questions/12018245/regular-expression-to-validate-username
+        pattern =
+          /^(?=.{5,20}$)(?![_.0-9])(?!.*[_.]{2})[a-z0-9öäüß._ ]+(?<![_.])$/i;
         break;
       case "PASSWORD":
         pattern =
-          "(?=^.{8,}$)(?=.*d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$";
+          /(?=^.{8,256}$)(?=.*d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
         break;
       case "TASK_TITLE":
-        pattern = "^[a-zA-Z]*[a-zA-Z][-a-zA-Z0-9,/() ]*$";
+        pattern = /^[a-zöäüß]*[a-zöäüß][-a-zöäüß0-9,/() ]*$/i;
         break;
       case "TASK_DESCRIPTION":
-        pattern = "^[a-zA-Z0-9]*[a-zA-Z0-9][-a-zA-Z0-9,/() ]*$";
+        pattern = /^[a-zöäüß0-9]*[a-zöäüß0-9][-a-zöäüß0-9,/() ]*$/i;
         break;
       case "WEB_LINK":
+        // source: https://snyk.io/blog/secure-javascript-url-validation/
         pattern =
-          "[Hh][Tt][Tt][Pp][Ss]?://(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::d{2,5})?(?:/[^s]*)?";
+          /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/i;
         break;
       case "NUMBER":
-        pattern = "^[0-9]d*$";
+        pattern = /^[0-9]d*$/;
         break;
       case "TIME":
-        pattern = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
+        pattern = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
         break;
       default:
         break;

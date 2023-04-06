@@ -61,6 +61,8 @@ export class DataFlowService implements OnDestroy {
       this.localStorageService.storeUserDataOnLocalStorage(userData);
       if (userData.tasks) {
         this.initTaskReminders(userData.tasks);
+      } else {
+        this.resetAllTaskReminderPopupTimeouts();
       }
     }
 
@@ -87,10 +89,21 @@ export class DataFlowService implements OnDestroy {
   public deleteUserTask(taskId: string): void {
     const userData = this.getUserData();
     if (userData && userData.tasks) {
-      const tasksFiltered = userData.tasks.filter(
-        (task: Task) => task.tid !== taskId
-      );
-      userData.tasks = [...tasksFiltered];
+      const tasksFiltered = userData.tasks.filter((task: Task) => {
+        if (task.tid !== taskId) {
+          return true;
+        } else {
+          if (task.remindMe) {
+            this.deleteTaskReminder(task, userData.uid);
+          }
+          return false;
+        }
+      });
+      if (tasksFiltered.length > 0) {
+        userData.tasks = [...tasksFiltered];
+      } else {
+        userData.tasks = undefined;
+      }
       this.setUserData(userData);
     }
 
@@ -413,9 +426,14 @@ export class DataFlowService implements OnDestroy {
   }
 
   public resetAllTaskReminderPopupTimeouts(): void {
-    // for (let i = 0; i < this.taskReminderPopupTimeoutsRefs.length; i++) {
-    //   clearTimeout(this.taskReminderPopupTimeoutsRefs[i]);
-    //   this.taskReminderPopupTimeoutsRefs = null;
-    // }
+    for (const key of Object.keys(this.taskReminderPopupTimeoutsRefs)) {
+      clearTimeout(this.taskReminderPopupTimeoutsRefs[key]);
+      delete this.taskReminderPopupTimeoutsRefs[key];
+    }
+
+    this.logService.logToConsole(
+      new Log("All Task Reminder Timeouts were deleted!", "INFO")
+    );
+    this.logService.logToConsole(new Log(this.taskReminderPopupTimeoutsRefs));
   }
 }
