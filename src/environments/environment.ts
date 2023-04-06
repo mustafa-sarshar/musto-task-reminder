@@ -6,7 +6,7 @@ import {
 
 export const environment = {
   production: true,
-  translationUrl: "./musto-task-reminder/assets/i18n/",
+  translationUrl: "./assets/i18n/",
   firebaseUrl: FIREBASE_URL,
   firebaseApiKey: FIREBASE_API_KEY,
   authEndpointSignUp:
