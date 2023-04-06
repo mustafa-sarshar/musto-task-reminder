@@ -323,10 +323,6 @@ export class UtilityService {
 
   public validateReminder(deadline: Date, reminder: Date): boolean {
     const dateNow = new Date();
-    console.log("validateReminder");
-    console.log(dateNow);
-    console.log(deadline);
-    console.log(reminder);
 
     if (
       deadline.getTime() - reminder.getTime() - dateNow.getTime() &&
@@ -385,10 +381,6 @@ export class UtilityService {
     const minutes = Math.floor((total / 1000 / 60) % 60);
     const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
     const days = Math.floor(total / (1000 * 60 * 60 * 24));
-
-    console.log("\n\n\n");
-    console.log(total, days, hours, minutes, seconds);
-    console.log("\n\n\n");
 
     return {
       total,
