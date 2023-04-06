@@ -10,7 +10,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 
 import { AuthInterceptorService } from "./shared/services";
-import { environment } from "src/environments/environment.development";
+import { environment } from "src/environments/environment";
 
 const modules = [
   BrowserAnimationsModule,
