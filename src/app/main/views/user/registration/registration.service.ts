@@ -21,7 +21,7 @@ import {
 @Injectable()
 export class RegistrationService implements OnInit, OnDestroy {
   private isDataFetching: boolean = false;
-  private isDataFetchingSubscription: Subscription = new Subscription();
+  private isDataFetchingSubscription?: Subscription;
 
   constructor(
     private appMonitoringService: AppMonitoringService,
@@ -42,7 +42,7 @@ export class RegistrationService implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.isDataFetchingSubscription.unsubscribe();
+    this.isDataFetchingSubscription?.unsubscribe();
   }
 
   public initForm(): FormGroup {
