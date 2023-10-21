@@ -1,0 +1,42 @@
+$size-container--max-width: 650px;
+
+.tasks {
+  &-container {
+    padding-bottom: 1rem;
+    max-width: $size-container--max-width;
+    margin: 0 auto;
+  }
+
+  &-content {
+    &__title {
+      font-size: 1.5rem;
+      border-bottom: 1px solid black;
+      padding-bottom: 1rem;
+      text-align: center;
+      word-break: break-all;
+      vertical-align: middle;
+    }
+
+    &__tasks {
+      padding-bottom: 1rem;
+    }
+  }
+}
+
+mat {
+  &-card {
+    &-header {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+}
+
+.sort {
+  &-ascending {
+    transform: rotate(180deg);
+  }
+}

@@ -1,0 +1,50 @@
+$break-point__vertical--xs: 750px;
+
+.details {
+  &-container {
+    padding: 0.5rem;
+
+    @media all and (max-height: $break-point__vertical--xs) {
+      justify-content: start;
+      height: 95vh;
+      overflow: auto;
+    }
+  }
+
+  &-content {
+    &__title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    &__infos {
+      border-bottom: 1px solid gray;
+      margin-bottom: 0.5rem;
+      color: darkgray;
+
+      mat {
+        &-label {
+          margin-left: 0.5rem;
+        }
+      }
+
+      * {
+        vertical-align: middle;
+      }
+
+      p {
+        text-align: center;
+        color: white;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+    }
+  }
+}

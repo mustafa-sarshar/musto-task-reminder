@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="dialog__title">
+      <strong class="dialog-title">{{dialogTitle}}</strong>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-label class="dialog-message">{{dialogMessage}}</mat-label>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-card-actions align="end" *ngIf="confirmationDialogBox.type">
+      <!-- Cancel/No button -->
+      <button mat-stroked-button class="element__bg--error element__color--light element__mr--10" type="button"
+        (click)="onClickDecline()"
+        cdkFocusInitial>{{confirmationDialogBox.type == "OK/CANCEL" ? ('CONFIRMATION_DIALOG.actionButtons.cancel.label' | translate) : ('CONFIRMATION_DIALOG.actionButtons.no.label' | translate)}}
+      </button>
+      <!-- OK/Yes button -->
+      <button mat-raised-button class="element__color--light" type="button" color="default"
+        (click)="onClickAccept()">{{confirmationDialogBox.type == "OK/CANCEL" ? ('CONFIRMATION_DIALOG.actionButtons.ok.label' | translate) : ('CONFIRMATION_DIALOG.actionButtons.yes.label' | translate)}}
+      </button>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card>

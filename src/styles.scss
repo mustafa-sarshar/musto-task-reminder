@@ -1,0 +1,168 @@
+$color__snackbar--success: #144717;
+$color__snackbar--failure: #440000;
+$color__snackbar--warn: #ad7308;
+
+$color__bg--error: #440000;
+$color__border--warn: #d14848;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  * {
+    &::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+    }
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+.hyper {
+  &-links {
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 10px white, -1px -1px 10px white;
+    color: black;
+
+    &:link,
+    &:visited {
+      color: black;
+    }
+
+    &:hover,
+    &:focus {
+      color: #303030;
+    }
+
+    &:active {
+      color: white;
+      text-shadow: none;
+    }
+  }
+}
+
+.green {
+  &-snackbar {
+    background: $color__snackbar--success !important;
+    color: white !important;
+
+    button {
+      background-color: $color__snackbar--success !important;
+      color: white !important;
+      border: none !important;
+    }
+  }
+}
+
+.red {
+  &-snackbar {
+    background: $color__snackbar--failure !important;
+    color: white !important;
+
+    button {
+      background-color: $color__snackbar--failure !important;
+      color: white !important;
+      border: none !important;
+    }
+  }
+}
+
+.orange {
+  &-snackbar {
+    background: $color__snackbar--warn !important;
+    color: white !important;
+
+    button {
+      background-color: $color__snackbar--warn !important;
+      color: white !important;
+      border: none !important;
+    }
+  }
+}
+
+.error {
+  &-message {
+    color: $color__bg--error;
+    text-align: center;
+  }
+}
+
+input.ng-invalid.ng-touched {
+  // border: 1px solid $color__border--warn;
+}
+
+.help {
+  &-box {
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+    width: 85%;
+    // border: 1px solid $color__border--warn;
+    border-radius: 0.375rem;
+    font-size: small;
+    background-color: $color__bg--error;
+
+    li {
+      color: #ffffff;
+    }
+
+    &__title {
+      color: #ffffff;
+      font-weight: bold;
+    }
+  }
+}
+
+.space {
+  &-flex {
+    flex: 1 !important;
+  }
+}
+
+.element {
+  &__bg {
+    &--light {
+      background-color: #ffffffbf !important;
+    }
+    &--dark {
+      background-color: black !important;
+    }
+    &--lowdark {
+      background-color: darkgray !important;
+    }
+    &--error {
+      background-color: $color__bg--error !important;
+    }
+  }
+
+  &__color {
+    &--light {
+      color: white !important;
+    }
+    &--dark {
+      color: black !important;
+    }
+    &--error {
+      color: $color__bg--error !important;
+    }
+  }
+
+  &__mr {
+    &--10 {
+      margin-right: 10px !important;
+    }
+  }
+}
+
+.dialog {
+  &__title {
+    color: white !important;
+    margin-bottom: 2rem !important;
+    border-bottom: 0.5px solid white !important;
+    width: 100% !important;
+  }
+}

@@ -1,0 +1,48 @@
+<mat-card *ngIf="task" class="task-reminder-popup__container">
+  <mat-card-header class="task-reminder-popup__content__header">
+    <mat-card-title class="task-reminder-popup__content__title">
+      {{"TASKS_TASK_REMINDER_POPUP.header.title" | translate}}
+      <mat-icon color="default" matSuffix>notifications</mat-icon>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="task-reminder-popup__content__infos">
+      <mat-icon color="default" matSuffix>task</mat-icon>
+      <mat-label>
+        {{"FORM_FIELDS.task.title.label" | translate}}
+      </mat-label>
+      <p>
+        {{task.title}}
+      </p>
+    </div>
+    <div class="task-reminder-popup__content__infos">
+      <mat-icon color="default" matSuffix>calendar_month</mat-icon>
+      <mat-label>
+        {{"FORM_FIELDS.task.deadline.label" | translate}}
+      </mat-label>
+      <p>
+        {{task.deadline | date:'MM-dd-yyyy'}}
+        <br>
+        <i>{{task.deadline | date:'HH:mm:ss'}}</i>
+      </p>
+    </div>
+    <div class="task-reminder-popup__content__infos" *ngIf="task.description">
+      <mat-icon color="default" matSuffix>description</mat-icon>
+      <mat-label>
+        {{"FORM_FIELDS.task.description.label" | translate}}
+      </mat-label>
+      <p>
+        {{task.description}}
+      </p>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-card-actions align="end">
+      <!-- Button Dismiss -->
+      <button mat-raised-button class="element__color--light element__mr--10" type="button" color="default"
+        (click)="onClickDismiss()">
+        {{"TASKS_TASK_REMINDER_POPUP.actionButtons.dismiss.label" | translate}}
+      </button>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card>

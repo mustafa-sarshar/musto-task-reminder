@@ -1,0 +1,109 @@
+<mat-sidenav-container fullscreen class="sidenav-container">
+  <mat-sidenav fixedInViewport #drawer class="sidenav" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false"
+    [ngClass]="{hidden: (isHandset$ | async) === false}">
+    <mat-toolbar [matTooltip]="'NAVIGATION_BAR.links.menu.toolTip' | translate"
+      [ariaLabel]="'NAVIGATION_BAR.links.menu.ariaLabel' | translate" color="default">
+      {{"NAVIGATION_BAR.links.menu.label" | translate}}
+    </mat-toolbar>
+    <mat-nav-list>
+      <!-- Nav Tasks -->
+      <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickTasks()"
+        [matTooltip]="'NAVIGATION_BAR.links.tasks.toolTip' | translate"
+        [ariaLabel]="'NAVIGATION_BAR.links.tasks.ariaLabel' | translate">
+        <mat-icon mat-list-icon>task</mat-icon>
+        <span>
+          {{"NAVIGATION_BAR.links.tasks.label" | translate}}
+        </span>
+      </mat-list-item>
+      <!-- Nav User Profile -->
+      <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickProfile()"
+        [matTooltip]="'NAVIGATION_BAR.links.userProfile.toolTip' | translate"
+        [ariaLabel]="'NAVIGATION_BAR.links.userProfile.ariaLabel' | translate">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <span>
+          {{"NAVIGATION_BAR.links.userProfile.label" | translate}}
+        </span>
+      </mat-list-item>
+      <!-- Nav Sync Data -->
+      <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickSyncData()"
+        [matTooltip]="'NAVIGATION_BAR.links.syncData.toolTip' | translate"
+        [ariaLabel]="'NAVIGATION_BAR.links.syncData.ariaLabel' | translate">
+        <mat-icon mat-list-icon>sync</mat-icon>
+        <span>
+          {{"NAVIGATION_BAR.links.syncData.label" | translate}}
+        </span>
+      </mat-list-item>
+      <!-- Nav Logout -->
+      <mat-list-item *ngIf="isUserAuthenticated" class="list-item" (click)="onClickLogout()"
+        [matTooltip]="'NAVIGATION_BAR.links.logout.toolTip' | translate"
+        [ariaLabel]="'NAVIGATION_BAR.links.logout.ariaLabel' | translate">
+        <mat-icon mat-list-icon>logout</mat-icon>
+        <span>
+          {{"NAVIGATION_BAR.links.logout.label" | translate}}
+        </span>
+      </mat-list-item>
+      <!-- Nav Language -->
+      <mat-list-item class="list-item" (click)="onClickLanguage()"
+        [matTooltip]="'NAVIGATION_BAR.links.language.toolTip' | translate"
+        [ariaLabel]="'NAVIGATION_BAR.links.language.ariaLabel' | translate">
+        <mat-icon mat-list-icon>language</mat-icon>
+        <span>
+          {{"NAVIGATION_BAR.links.language.label" | translate}}
+        </span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="default">
+      <button mat-icon-button type="button" (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+        <mat-icon [ariaLabel]="'NAVIGATION_BAR.links.menu.ariaLabel' | translate">menu</mat-icon>
+      </button>
+      <!-- Toolbar Content AND Nav Items Here -->
+      <!-- Nav App Brand -->
+      <span class="app-brand" (click)="onClickAppBrand()" [matTooltip]="'NAVIGATION_BAR.links.menu.toolTip' | translate"
+        [ariaLabel]="'NAVIGATION_BAR.links.tasks.ariaLabel' | translate">Musto Task Reminder</span>
+      <span class="spacer"></span>
+      <div *ngIf="isUserAuthenticated && (isHandset$ | async) === false">
+        <!-- Nav Tasks -->
+        <button mat-icon-button color="default" (click)="onClickTasks()"
+          [matTooltip]="'NAVIGATION_BAR.links.tasks.toolTip' | translate"
+          [ariaLabel]="'NAVIGATION_BAR.links.tasks.ariaLabel' | translate">
+          <mat-icon>task</mat-icon>
+        </button>
+        <!-- Nav User Profile -->
+        <button mat-icon-button color="default" (click)="onClickProfile()"
+          [matTooltip]="'NAVIGATION_BAR.links.userProfile.toolTip' | translate"
+          [ariaLabel]="'NAVIGATION_BAR.links.userProfile.ariaLabel' | translate">
+          <mat-icon>person</mat-icon>
+        </button>
+        <!-- Nav Sync Data -->
+        <button mat-icon-button color="default" (click)="onClickSyncData()"
+          [matTooltip]="'NAVIGATION_BAR.links.syncData.toolTip' | translate"
+          [ariaLabel]="'NAVIGATION_BAR.links.syncData.ariaLabel' | translate">
+          <mat-icon>sync</mat-icon>
+        </button>
+        <!-- Nav Logout -->
+        <button mat-icon-button color="default" (click)="onClickLogout()"
+          [matTooltip]="'NAVIGATION_BAR.links.logout.toolTip' | translate"
+          [ariaLabel]="'NAVIGATION_BAR.links.logout.ariaLabel' | translate">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="(isHandset$ | async) === false">
+        <button mat-icon-button color="default" (click)="onClickLanguage()"
+          [matTooltip]="'NAVIGATION_BAR.links.language.toolTip' | translate"
+          [ariaLabel]="'NAVIGATION_BAR.links.language.ariaLabel' | translate">
+          <mat-icon>language</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <!-- Page Content Here -->
+    <div class="page-content">
+      <ng-content></ng-content>
+    </div>
+    <div class="page-footer">
+      <app-footer></app-footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,100 @@
+<div class="profile__container" *ngIf="userData">
+  <mat-card class="profile__item">
+    <mat-card-header>
+      <mat-card-title class="profile__title">
+        {{"USER_PROFILE.header.titleUserInfo" | translate}}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="profile__body">
+      <mat-card-subtitle class="profile__userInfo">
+        <span>
+          {{"FORM_FIELDS.user.username.label" | translate}}:
+        </span>
+        <p>
+          <strong>{{userData.username}}</strong>
+        </p>
+        <span>
+          {{"FORM_FIELDS.user.birthDate.label" | translate}}:
+        </span>
+        <p>
+          <strong>{{userData.birthDate | date:"fullDate"}}</strong>
+        </p>
+        <span>
+          {{"FORM_FIELDS.user.email.label" | translate}}:
+        </span>
+        <p>
+          <strong>{{userData.email}}</strong>
+        </p>
+      </mat-card-subtitle>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card-actions class="page-actions">
+        <!-- Button Delete Account -->
+        <button mat-stroked-button class="element__bg--error element__color--light" type="button"
+          (click)="onClickDeleteAccount()" [disabled]="isDataFetching  || !userData.username">
+          {{"USER_PROFILE.actionButtons.deleteAccount.label" | translate}}
+        </button>
+      </mat-card-actions>
+    </mat-card-footer>
+  </mat-card>
+  <mat-card class="profile__item" *ngIf="formGroupEl">
+    <form autoComplete="off" [formGroup]="formGroupEl">
+      <mat-card-header>
+        <mat-card-title class="profile__title">
+          {{"USER_PROFILE.header.titleUpdateForm" | translate}}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- Username field -->
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>
+            {{"FORM_FIELDS.user.username.label" | translate}}
+          </mat-label>
+          <input matInput type="text" formControlName="username"
+            [placeholder]="'FORM_FIELDS.user.email.label' | translate" id="username">
+          <mat-icon color="default" matSuffix>person</mat-icon>
+        </mat-form-field>
+        <!-- Birth date field -->
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>
+            {{"FORM_FIELDS.user.birthDate.label" | translate}}
+          </mat-label>
+          <input matInput type="date" formControlName="birthDate"
+            [placeholder]="'FORM_FIELDS.user.birthDate.label' | translate" id="birth">
+          <mat-icon color="default" matSuffix>calendar_month</mat-icon>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-footer>
+        <mat-card-actions align="end" class="page-actions">
+          <!-- Button Reset -->
+          <button mat-stroked-button class="element__bg--error element__color--light element__mr--10" type="button"
+            (click)="onClickReset()">
+            {{"USER_PROFILE.actionButtons.reset.label" | translate}}
+          </button>
+          <!-- Button Apply Changes -->
+          <button mat-raised-button class="element__color--light" type="button" color="default"
+            [disabled]="!formGroupEl.valid || isDataFetching" (click)="onClickApplyChanges()">
+            {{"USER_PROFILE.actionButtons.applyChanges.label" | translate}}
+          </button>
+        </mat-card-actions>
+      </mat-card-footer>
+      <!-- Help box -->
+      <div class="help-box"
+        *ngIf="!formGroupEl.valid && formGroupEl.touched && formGroupEl.dirty && ((!formGroupEl.controls['username'].valid && formGroupEl.controls['username'].touched && formGroupEl.controls['username'].dirty) || (!formGroupEl.controls['birthDate'].valid && formGroupEl.controls['birthDate'].touched && formGroupEl.controls['birthDate'].dirty))">
+        <span class="help-box__title">Help:</span>
+        <ul>
+          <!-- Username help message -->
+          <li
+            *ngIf="!formGroupEl.controls['username'].valid && formGroupEl.controls['username'].touched && formGroupEl.controls['username'].dirty">
+            {{"MESSAGES.formValidation.user.username" | translate}}
+          </li>
+          <!-- Birth date help message -->
+          <li
+            *ngIf="!formGroupEl.controls['birthDate'].valid && formGroupEl.controls['birthDate'].touched && formGroupEl.controls['birthDate'].dirty">
+            {{"MESSAGES.formValidation.user.birthDate" | translate}}
+          </li>
+        </ul>
+      </div>
+    </form>
+  </mat-card>
+</div>

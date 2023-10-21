@@ -1,0 +1,149 @@
+<div class="tasks-container" *ngIf="userData">
+  <p class="tasks-content__title">
+    <u>
+      <i>{{userData.username}}</i>
+    </u> {{"TASKS.header.title" | translate}} <br>
+  </p>
+  <mat-card class="tasks-content__tasks" *ngIf="userData.tasks && userData.tasks.length > 0">
+    <mat-card-header>
+      <mat-label>
+        {{"TASKS.header.info_1_1" | translate}}
+        <u>
+          {{tasksVisibilityFilter === 'ALL' ? ("MESSAGES.filters.visibilityFilter.all.label" | translate) : tasksVisibilityFilter === 'OPEN' ? ("MESSAGES.filters.visibilityFilter.open.label" | translate): ("MESSAGES.filters.visibilityFilter.completed.label" | translate)}}
+        </u>
+        {{"TASKS.header.info_1_2" | translate}}
+      </mat-label>
+      <mat-card-content class="space-flex"></mat-card-content>
+      <mat-card-actions>
+        <!-- Task Reminder Menu -->
+        <button mat-icon-button color="default" [matMenuTriggerFor]="menuTaskReminder"
+          [matTooltip]="taskReminders.length > 0 ? ('TASKS.actionButtons.taskReminder._on.toolTip' | translate) : ('TASKS.actionButtons.taskReminder._off.toolTip' | translate)"
+          [ariaLabel]="taskReminders.length > 0 ? ('TASKS.actionButtons.taskReminder._on.ariaLabel' | translate) :
+          ('TASKS.actionButtons.taskReminder._off.ariaLabel' | translate)">
+          <mat-icon [matBadge]="taskReminders.length"
+            matBadgeColor="warn">{{taskReminders.length > 0 ? "notifications" : "notifications_off"}}</mat-icon>
+        </button>
+        <!-- Task Reminder Menu Items -->
+        <mat-menu #menuTaskReminder="matMenu">
+          <app-task-reminder *ngFor="let taskReminderItem of taskReminders" [taskReminder]="taskReminderItem"
+            [userId]="userData.uid">
+          </app-task-reminder>
+        </mat-menu>
+        <!-- Visibility Menu -->
+        <button mat-icon-button color="default" [matMenuTriggerFor]="menuVisibility"
+          [matTooltip]="'TASKS.actionButtons.visibilityFilter.toolTip' | translate"
+          [ariaLabel]="'TASKS.actionButtons.visibilityFilter.ariaLabel' | translate">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <!-- Visibility Menu Items -->
+        <mat-menu #menuVisibility="matMenu">
+          <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('COMPLETED')" color="default"
+            [matTooltip]="'TASKS.actionButtons.visibilityFilter._completed.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.visibilityFilter._completed.ariaLabel' | translate">
+            <mat-icon color="accent">done</mat-icon>
+            {{"TASKS.actionButtons.visibilityFilter._completed.label" | translate}}
+          </button>
+          <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('OPEN')" color="default"
+            [matTooltip]="'TASKS.actionButtons.visibilityFilter._open.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.visibilityFilter._open.ariaLabel' | translate">
+            <mat-icon color="warn">timer</mat-icon>
+            {{"TASKS.actionButtons.visibilityFilter._open.label" | translate}}
+          </button>
+          <button mat-menu-item (click)="onClickChangeTasksVisibilityFilter('ALL')" color="default"
+            [matTooltip]="'TASKS.actionButtons.visibilityFilter._all.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.visibilityFilter._all.ariaLabel' | translate">
+            <mat-icon color="default">visibility_off</mat-icon>
+            {{"TASKS.actionButtons.visibilityFilter._all.label" | translate}}
+          </button>
+        </mat-menu>
+        <!-- Sort by Menu -->
+        <button mat-icon-button color="default" [matMenuTriggerFor]="menuSortBy"
+          [matTooltip]="'TASKS.actionButtons.sortBy.toolTip' | translate"
+          [ariaLabel]="'TASKS.actionButtons.sortBy.ariaLabel' | translate">
+          <mat-icon color="default">sort_by_alpha</mat-icon>
+        </button>
+        <!-- Sort by Menu Items -->
+        <mat-menu #menuSortBy="matMenu">
+          <!-- Sort by title -->
+          <button mat-menu-item color="default" [matMenuTriggerFor]="menuSortBy__title"
+            [matTooltip]="'TASKS.actionButtons.sortBy._byTitle.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.sortBy._byTitle.ariaLabel' | translate">
+            <mat-icon color="default">task</mat-icon>
+            {{"TASKS.actionButtons.sortBy._byTitle.label" | translate}}
+          </button>
+          <mat-menu #menuSortBy__title="matMenu">
+            <button mat-menu-item (click)="onClickSortBy('TITLE', 'ASC')">
+              <mat-icon class="sort-ascending" color="accent">filter_list</mat-icon>
+            </button>
+            <button mat-menu-item (click)="onClickSortBy('TITLE', 'DES')">
+              <mat-icon color="warn">filter_list</mat-icon>
+            </button>
+          </mat-menu>
+          <!-- Sort by deadline -->
+          <button mat-menu-item color="default" [matMenuTriggerFor]="menuSortBy__deadline"
+            [matTooltip]="'TASKS.actionButtons.sortBy._byDeadline.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.sortBy._byDeadline.ariaLabel' | translate">
+            <mat-icon color="default">calendar_month</mat-icon>
+            {{"TASKS.actionButtons.sortBy._byDeadline.label" | translate}}
+          </button>
+          <mat-menu #menuSortBy__deadline="matMenu">
+            <button mat-menu-item (click)="onClickSortBy('DEADLINE', 'ASC')">
+              <mat-icon class="sort-ascending" color="accent">filter_list</mat-icon>
+            </button>
+            <button mat-menu-item (click)="onClickSortBy('DEADLINE', 'DES')">
+              <mat-icon color="warn">filter_list</mat-icon>
+            </button>
+          </mat-menu>
+          <!-- Sort by Completion -->
+          <button mat-menu-item color="default" [matMenuTriggerFor]="menuSortBy__completion"
+            [matTooltip]="'TASKS.actionButtons.sortBy._byCompletion.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.sortBy._byCompletion.ariaLabel' | translate">
+            <mat-icon color="default">calendar_month</mat-icon>
+            {{"TASKS.actionButtons.sortBy._byCompletion.label" | translate}}
+          </button>
+          <mat-menu #menuSortBy__completion="matMenu">
+            <button mat-menu-item (click)="onClickSortBy('COMPLETED', 'ASC')">
+              <mat-icon class="sort-ascending" color="accent">filter_list</mat-icon>
+            </button>
+            <button mat-menu-item (click)="onClickSortBy('COMPLETED', 'DES')">
+              <mat-icon color="warn">filter_list</mat-icon>
+            </button>
+          </mat-menu>
+          <!-- No sorting -->
+          <button mat-menu-item (click)="onClickSortBy('NO_SORTING')" color="default"
+            [matTooltip]="'TASKS.actionButtons.sortBy._noSorting.toolTip' | translate"
+            [ariaLabel]="'TASKS.actionButtons.sortBy._noSorting.ariaLabel' | translate">
+            <mat-icon color="accent">cancel</mat-icon>
+            {{"TASKS.actionButtons.sortBy._noSorting.label" | translate}}
+          </button>
+        </mat-menu>
+        <button mat-icon-button color="default" (click)="onClickAddTask()"
+          [matTooltip]="'TASKS.actionButtons.addTask.toolTip' | translate"
+          [ariaLabel]="'TASKS.actionButtons.addTask.ariaLabel' | translate">
+          <mat-icon color="default">add_box</mat-icon>
+        </button>
+        <button mat-icon-button color="default" (click)="onClickDeleteAllTasks()"
+          [matTooltip]="'TASKS.actionButtons.deleteAll.toolTip' | translate"
+          [ariaLabel]="'TASKS.actionButtons.deleteAll.ariaLabel' | translate">
+          <mat-icon color="warn">delete_forever</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card-header>
+    <mat-card-content>
+      <app-tasks-list [userId]="userData.uid"
+        [tasks]="userData.tasks | tasksSort:sortBy  | tasksVisibilityFilter:tasksVisibilityFilter"></app-tasks-list>
+    </mat-card-content>
+    <mat-card-content class="space-flex"></mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="!userData.tasks || userData.tasks.length === 0">
+    <mat-card-header>
+      <p>{{"TASKS.header.noTasks" | translate}}</p>
+      <mat-card-content class="space-flex"></mat-card-content>
+      <button mat-icon-button color="default" (click)="onClickAddTask()"
+        [matTooltip]="'TASKS.actionButtons.addTask.toolTip' | translate"
+        [ariaLabel]="'TASKS.actionButtons.addTask.ariaLabel' | translate">
+        <mat-icon color="default">add_box</mat-icon>
+      </button>
+    </mat-card-header>
+  </mat-card>
+</div>

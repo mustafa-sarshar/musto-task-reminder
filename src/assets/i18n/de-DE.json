@@ -1,0 +1,607 @@
+{
+  "WELCOME_PAGE": {
+    "header": {
+      "title": "Alle Aufgaben sind wichtig",
+      "titleIconAriaLabel": "Sentiment sehr zufrieden Ikone"
+    },
+    "animation": {
+      "imageTitle": "I Love You Heart GIF von Chippy The Dog von GIPHY",
+      "imageAlt": "I Love You Heart GIF von Chippy The Dog",
+      "animationLink": "von GIPHY"
+    },
+    "actionButtons": {
+      "login": "Einloggen",
+      "signUp": "Registrieren"
+    }
+  },
+  "USER_LOGIN": {
+    "header": {
+      "title": "Einloggen!"
+    },
+    "actionButtons": {
+      "login": {
+        "label": "Einloggen",
+        "toolTip": ""
+      },
+      "cancel": {
+        "label": "Abbrechen",
+        "toolTip": ""
+      }
+    }
+  },
+  "USER_REGISTRATION": {
+    "header": {
+      "title": "Registrieren!"
+    },
+    "actionButtons": {
+      "signUp": {
+        "label": "Registrieren",
+        "toolTip": ""
+      },
+      "cancel": {
+        "label": "Abbrechen",
+        "toolTip": ""
+      }
+    }
+  },
+  "USER_PROFILE": {
+    "header": {
+      "titleUserInfo": "Benutzerinfo",
+      "titleUpdateForm": "Formular der Aktualisierung"
+    },
+    "actionButtons": {
+      "deleteAccount": {
+        "label": "Konto löschen",
+        "toolTip": ""
+      },
+      "applyChanges": {
+        "label": "Aktualisieren",
+        "toolTip": ""
+      },
+      "reset": {
+        "label": "Reset",
+        "toolTip": ""
+      }
+    }
+  },
+  "TASKS": {
+    "header": {
+      "title": " s Aufgaben",
+      "info_1_1": "Du siehst jetzt alle ",
+      "info_1_2": " Aufgaben.",
+      "noTasks": "Du hast noch keine Aufgaben erstellt!!!"
+    },
+    "actionButtons": {
+      "taskReminder": {
+        "_on": {
+          "label": "",
+          "toolTip": "Sehe alle Erinnerungen",
+          "ariaLabel": "um alle Erinnerung zu sehen"
+        },
+        "_off": {
+          "label": "",
+          "toolTip": "Du hast momentan keine Aufgabenerinnerung!",
+          "ariaLabel": "Erinnerungen sind nicht verfügbar"
+        },
+        "_delete": {
+          "label": "",
+          "toolTip": "Die Erinnerung zu löschen!",
+          "ariaLabel": "um die Erinnerung zu löschen!"
+        }
+      },
+      "visibilityFilter": {
+        "label": "",
+        "toolTip": "Ändere den Aufgabenfilter",
+        "ariaLabel": "um den Aufgabenfilter zu ändern",
+        "_completed": {
+          "label": "Nur fertiggestellte Aufgaben",
+          "toolTip": "Nur fertiggestellte Aufgaben",
+          "ariaLabel": "um nur die fertiggestellte Aufgaben zu sehen"
+        },
+        "_open": {
+          "label": "Nur ofene Aufgaben",
+          "toolTip": "Nur ofene Aufgaben",
+          "ariaLabel": "um nur die ofene Aufgaben zu sehen"
+        },
+        "_all": {
+          "label": "Kein Aufgabenfilter",
+          "toolTip": "Dieaktiviere den Aufgabenfilter",
+          "ariaLabel": "um den Aufgabenfilter zu deaktivieren"
+        }
+      },
+      "sortBy": {
+        "label": "",
+        "toolTip": "Sortiere die Aufgaben",
+        "ariaLabel": "um die Aufgaben zu sortieren",
+        "_byTitle": {
+          "label": "Sortiere nach Titel",
+          "toolTip": "Sortiere die Aufgaben nach Titel",
+          "ariaLabel": "um die Aufgaben nach Titel zu sortieren"
+        },
+        "_byDeadline": {
+          "label": "Sortiere nach Frist",
+          "toolTip": "Sortiere die Aufgaben nach Frist",
+          "ariaLabel": "um die Aufgaben nach Frist zu sortieren"
+        },
+        "_byCompletion": {
+          "label": "Sortiere nach Fertigstellungstermin",
+          "toolTip": "Sortiere die Aufgaben nach Fertigstellungstermin",
+          "ariaLabel": "um die Aufgaben nach Fertigstellungstermin zu sortieren"
+        },
+        "_noSorting": {
+          "label": "Keine Sortierung",
+          "toolTip": "Keine Sortierung",
+          "ariaLabel": "um die Aufgaben nicht zu sortieren"
+        }
+      },
+      "addTask": {
+        "label": "",
+        "toolTip": "Neue Aufgabe zu erstellen",
+        "ariaLabel": "um eine neue Aufgabe zu erstellen"
+      },
+      "deleteAll": {
+        "label": "",
+        "toolTip": "Alle Aufgaben zu löschen",
+        "ariaLabel": "um alle Aufgaben zu löschen"
+      }
+    }
+  },
+  "TASKS_TASK_ITEM": {
+    "actionButtons": {
+      "more": {
+        "label": "",
+        "toolTip": "Mehrere Optionen",
+        "ariaLabel": "um mehrere Optionen zu sehen"
+      },
+      "less": {
+        "label": "",
+        "toolTip": "Weniger Optionen",
+        "ariaLabel": "um weniger Optionen zu sehen"
+      },
+      "toggleDone": {
+        "label": "",
+        "toolTips": {
+          "open": "Frist: ",
+          "completed": "Geschlossen am: "
+        },
+        "ariaLabel": "um den Aufgabenstatus ändern"
+      },
+      "details": {
+        "label": "",
+        "toolTip": "die Details sehen",
+        "ariaLabel": "um die Details der Aufgabe zu sehen"
+      },
+      "edit": {
+        "label": "",
+        "toolTip": "die Aufgabe ändern",
+        "ariaLabel": "um die Aufgabe zu ändern"
+      },
+      "delete": {
+        "label": "",
+        "toolTip": "die Aufgabe löschen",
+        "ariaLabel": "um die Aufgabe zu löschen"
+      }
+    }
+  },
+  "TASKS_TASK_DETAILS": {
+    "header": {
+      "title": "Details der Aufgabe"
+    },
+    "actionButtons": {
+      "webLink": {
+        "label": "",
+        "toolTip": "Öffne den Web-Link",
+        "ariaLabel": "um den Web-Link zu öffnen"
+      },
+      "imageLink": {
+        "label": "",
+        "toolTip": "Öffne den Foto-Link",
+        "ariaLabel": "um den Foto-Link zu öffnen"
+      },
+      "videoLink": {
+        "label": "",
+        "toolTip": "Öffne den Video-Link",
+        "ariaLabel": "um den Video-Link zu öffnen"
+      },
+      "voiceLink": {
+        "label": "",
+        "toolTip": "Öffne den Sprach-Link",
+        "ariaLabel": "um den Sprach-Link zu öffnen"
+      },
+      "ok": {
+        "label": "OK",
+        "toolTip": "",
+        "ariaLabel": ""
+      }
+    }
+  },
+  "TASKS_TASK_ADD_EDIT": {
+    "header": {
+      "titleAddTask": "Erstellung einer neuen Aufgaben",
+      "titleEditTask": "Änderung der Aufgabenangaben"
+    },
+    "actionButtons": {
+      "cancel": {
+        "label": "Abbrechen"
+      },
+      "applyChanges": {
+        "label": "Änderungen einsetzen"
+      },
+      "add": {
+        "label": "Erstellen"
+      }
+    }
+  },
+  "TASKS_TASKS_LIST": {
+    "actionButtons": {
+      "clear": {
+        "label": "Räumen",
+        "toolTip": "das Suchfeld zu räumen"
+      },
+      "paginator": {
+        "ariaLabel": "um die Seite auszuwählen"
+      },
+      "paginatorPrev": {
+        "toolTip": "Vorherige Seite",
+        "ariaLabel": "um auf die vorherige Seite zu wechseln"
+      },
+      "paginatorNext": {
+        "toolTip": "Nächste Seite",
+        "ariaLabel": "um auf die nächste Seite zu wechseln"
+      },
+      "pageSize": {
+        "label": "Ändere die Seitengröße",
+        "toolTip": "die Seitengröße zu ändern",
+        "ariaLabel": "um die Seitengröße zu ändern"
+      },
+      "pageSize_5": {
+        "label": "5"
+      },
+      "pageSize_10": {
+        "label": "10"
+      },
+      "pageSize_50": {
+        "label": "50"
+      },
+      "pageSize_100": {
+        "label": "100"
+      }
+    }
+  },
+  "LOADING_SPINNER": {
+    "message": "Bitte warte ..."
+  },
+  "NAVIGATION_BAR": {
+    "links": {
+      "menu": {
+        "label": "Menü",
+        "toolTip": "das Menü öffnen",
+        "ariaLabel": "das Menü umschalten"
+      },
+      "tasks": {
+        "label": "Aufgaben",
+        "toolTip": "die Aufgaben kontrollieren",
+        "ariaLabel": "um alle gespeicherten Aufgaben zu kontrollieren"
+      },
+      "userProfile": {
+        "label": "Benutzerprofil",
+        "toolTip": "das Benutzerprofil kontrollieren",
+        "ariaLabel": "um das Benutzerprofil zu kontrollieren oder zu aktualisieren"
+      },
+      "syncData": {
+        "label": "Daten synchronisieren",
+        "toolTip": "Alle Daten synchronisieren",
+        "ariaLabel": "um alle Daten zu synchronisieren"
+      },
+      "logout": {
+        "label": "Ausloggen",
+        "toolTip": "Von der App ausloggen",
+        "ariaLabel": "um von der App auszuloggen"
+      },
+      "language": {
+        "label": "Sprache",
+        "toolTip": "eine andere Sprache auswählen",
+        "ariaLabel": "um eine andere Sprache auszuwählen"
+      }
+    }
+  },
+  "FOOTER": {
+    "developedMessage": {
+      "by": "Entwickelt von",
+      "year": "2023"
+    }
+  },
+  "CONFIRMATION_DIALOG": {
+    "header": {
+      "title": ""
+    },
+    "actionButtons": {
+      "ok": {
+        "label": "OK",
+        "toolTip": ""
+      },
+      "cancel": {
+        "label": "Abbrechen",
+        "toolTip": ""
+      },
+      "yes": {
+        "label": "Ja",
+        "toolTip": ""
+      },
+      "no": {
+        "label": "Nein",
+        "toolTip": ""
+      }
+    },
+    "mode": {
+      "logout": {
+        "title": "Wirklich?!",
+        "message": "Bist du sicher dass du dich ausloggen möchtest?"
+      },
+      "delete_account": {
+        "title": "Achtung!",
+        "message": "Willst du wirklich dein Benutzerkonto löschen lassen?"
+      },
+      "delete_all_tasks": {
+        "title": "Achtung!",
+        "message": "Willst du wirklich deine alle Aufgaben löschen lassen?"
+      },
+      "delete_task": {
+        "title": "Achtung!",
+        "message": "Willst du wirklich diese Aufgabe löschen lassen?"
+      },
+      "leave_page": {
+        "title": "Achtung!",
+        "message": "Wenn du jetzt die Seite verlässt, verwirfst du die Aktualisierung!"
+      },
+      "finish_the_task": {
+        "title": "Glückwünsche!",
+        "message": "Wurde die Aufgabe schon erledigt?"
+      },
+      "open_the_task": {
+        "title": "Achtung!",
+        "message": "Wurde die Aufgabe noch nicht erledigt?"
+      },
+      "delete_task_reminder": {
+        "title": "Wirklich?!",
+        "message": "Wurde die Aufgabe schon erledigt und/oder willst du wirklich die Aufgabenerinnerung löschen lassen?"
+      }
+    }
+  },
+  "LANGUAGE": {
+    "header": {
+      "title": "Sprache"
+    },
+    "actionButtons": {
+      "en": {
+        "label": "EN",
+        "toolTip": "Englisch"
+      },
+      "de": {
+        "label": "DE",
+        "toolTip": "Deutsch"
+      },
+      "tr": {
+        "label": "TR",
+        "toolTip": "Türkisch"
+      },
+      "fa": {
+        "label": "FA",
+        "toolTip": "Persisch"
+      }
+    }
+  },
+  "FORM_FIELDS": {
+    "user": {
+      "email": {
+        "label": "Emailaddresse",
+        "placeholder": "Gib deine Emailaddresse"
+      },
+      "password": {
+        "label": "Passwort",
+        "placeholder": "Gib dein Passwort"
+      },
+      "username": {
+        "label": "Benutzername",
+        "placeholder": "Gib deinen Benutzername"
+      },
+      "birthDate": {
+        "label": "Geburtsdatum",
+        "placeholder": ""
+      }
+    },
+    "task": {
+      "title": {
+        "label": "Titel",
+        "placeholder": "der Titel der Aufgabe"
+      },
+      "searchByTitle": {
+        "label": "Suche die Aufgabe",
+        "placeholder": "suche die Aufgaben nach ihrem Titel"
+      },
+      "group": {
+        "label": "Gruppe",
+        "placeholder": ""
+      },
+      "deadline": {
+        "label": "Frist",
+        "placeholder": ""
+      },
+      "deadlineDate": {
+        "label": "Fristdatum",
+        "placeholder": ""
+      },
+      "deadlineTime": {
+        "label": "Fristzeit",
+        "placeholder": ""
+      },
+      "reminder": {
+        "label": "Errinerung:"
+      },
+      "remindMe": {
+        "label": "Errinere mich daran",
+        "placeholder": ""
+      },
+      "reminderDays": {
+        "label": "Tage davor",
+        "placeholder": "0-∞"
+      },
+      "reminderHours": {
+        "label": "Stunden davor",
+        "placeholder": "0-23"
+      },
+      "reminderMinutes": {
+        "label": "Minuten davor",
+        "placeholder": "0-59"
+      },
+      "description": {
+        "label": "Beschreibung",
+        "placeholder": "beschreibe die Aufgabe"
+      },
+      "completion": {
+        "label": "Fertigstellungstermin",
+        "placeholder": ""
+      },
+      "webLink": {
+        "label": "Web-Link",
+        "placeholder": "https://...",
+        "toolTip": "Kontrolliere den jetzigen Link von web"
+      },
+      "imageLink": {
+        "label": "Foto-Link",
+        "placeholder": "https://...",
+        "toolTip": "Kontrolliere den jetzigen Link vom Foto"
+      },
+      "videoLink": {
+        "label": "Video-Link",
+        "placeholder": "https://...",
+        "toolTip": "Kontrolliere den jetzigen Link vom Video"
+      },
+      "voiceLink": {
+        "label": "Sprach-Link",
+        "placeholder": "https://...",
+        "toolTip": "Kontrolliere den jetzigen Link von Sprachakte"
+      }
+    }
+  },
+  "MESSAGES": {
+    "formValidation": {
+      "user": {
+        "username": "Benutzername muss 5-20 Zeichen haben und alphanumerisch sein! Der musst mit einem Buchstaben anfangen! Lerrzeichen, Punkt und Unterstrich sind erlaubt",
+        "email": "Emailaddresse muss gültig sein",
+        "birthDate": "Geburtsdatum muss gültig sein!",
+        "password": "Passwort muss 8-256 Zeichen, und/oder einen oder mehrere Großbuchstaben, und/oder einen oder mehrere Kleinbuchstaben, und/oder ein oder mehrere numerische Werte, und/oder einen oder mehrere Sonderzeichen haben"
+      },
+      "task": {
+        "title": "Titel muss 3-20 Zeichen haben und mit einem Buchstaben anfangen! Als Sonderzeichen, sind nur Klammerzeichen und Leerzeichen erlaubt!",
+        "description": "Beschreibung muss 5-256 Zeichen haben und alphanumerisch sein! Als Sonderzeichen, sind nur Klammerzeichen und Leerzeichen erlaubt!",
+        "deadlineDate": "Fristdatum muss gültig sein!",
+        "deadlineTime": "Fristzeit muss gültig sein!",
+        "webLink": "Bitte gib einen gültigen Link! (e.g. http://www... or https://www...)"
+      }
+    },
+    "errors": {
+      "http": {
+        "emailExists": "Die Emailaddresse ist nicht verfügbar!",
+        "emailNotFound": "Die Emailaddresse existiert nicht!",
+        "invalidPassword": "Das Passwort ist ungültig!",
+        "userDisabled": "Das Benutzerkonto ist von Admin deaktiviert!",
+        "invalidIdToken": "Die Benutzerangaben sind nicht mehr gültig!",
+        "userNotFound": "Es konnte keinen Benutzer nach diesen Angaben gefunden werden!"
+      }
+    },
+    "filters": {
+      "visibilityFilter": {
+        "all": {
+          "label": ""
+        },
+        "open": {
+          "label": "öffene"
+        },
+        "completed": {
+          "label": "fertiggestellte"
+        }
+      }
+    }
+  },
+  "NOTIFICATIONS": {
+    "login": {
+      "success": "Das Einloggen war erfolgreich!",
+      "error": "Es gab ein Problem! Bitte versuche noch mal!"
+    },
+    "registration": {
+      "success": "Die Registrierung war erfolgreich!",
+      "error": "Es gab ein Problem! Bitte versuche noch mal!",
+      "warn": "Es gab ein Problem! Bitte versuche noch mal!"
+    },
+    "sync_data": {
+      "success": "Die Daten wurden synchroniert!",
+      "error": "Die Daten konnten nicht synchroniert werden!",
+      "warn": ""
+    },
+    "delete_account": {
+      "success": "Das Benutzerkonto wurde gelöscht!",
+      "error": "Das Benutzerkonto konnte nicht gelöscht werden!",
+      "warn": ""
+    },
+    "update_account": {
+      "success": "Das Benutzerkonto wurde aktualisiert",
+      "error": "Das Benutzerkonto konnte nicht aktualisiert werden!",
+      "warn": ""
+    },
+    "delete_user_data": {
+      "success": "Die Benutzerangaben wurden gelöscht!",
+      "error": "Die Benutzerangaben konnten nicht gelöscht werden!",
+      "warn": ""
+    },
+    "update_user_data": {
+      "success": "Die Benutzerangaben wurden aktualisiert!",
+      "error": "Die Benutzerangaben konnten nicht aktualisiert werden!",
+      "warn": ""
+    },
+    "delete_all_tasks": {
+      "success": "Alle Aufgaben wurden gelöscht!",
+      "error": "Die Aufgaben konnten nicht gelöscht werden!"
+    },
+    "delete_task": {
+      "success": "Die Aufgabe wurden gelöscht!",
+      "error": "Die Aufgabe konnte nicht gelöscht werden!",
+      "warn": ""
+    },
+    "update_task": {
+      "success": "Die Aufgabe wurde aktualisiert!",
+      "error": "Die Aufgabe konnte nicht aktualisiert werden!",
+      "warn": ""
+    },
+    "add_task": {
+      "success": "Die Aufgabe wurden erstellt!",
+      "error": "Die Aufgabe konnte nicht erstellt werden!",
+      "warn": ""
+    },
+    "set_app_language": {
+      "success": "Die Sprache der App wurde gesetzt!",
+      "error": "Die Sprache der App konnte nicht gesetzt werden!"
+    },
+    "deadline": {
+      "error": "Die Frist ist nicht gültig!"
+    },
+    "reminder": {
+      "error": "Es gibt keine genüge Zeit für die Errinerung!"
+    },
+    "delete_task_reminder": {
+      "success": "Die Errinerung wurde gelöscht!",
+      "error": "Die Errinerung konnte nicht gelöscht werden!"
+    }
+  },
+  "TASK_GROUPS": {
+    "tg0": "Algemein",
+    "tg1": "Sport/Gesundheit",
+    "tg2": "Bildung",
+    "tg3": "Hobby",
+    "tg4": "Arbeit",
+    "tg5": "Familie",
+    "tg6": "Freunden",
+    "tg7": "Persönlich",
+    "tg8": "Sozial"
+  }
+}

@@ -1,0 +1,47 @@
+<div class="task-content" *ngIf="task">
+  <div *ngIf="taskItemMode === 0" class="task-content__modes">
+    <div class="task-content__title" [matTooltip]="task.description ? task.description : ''">
+      <p *ngIf="task.done" class="task-content__title---done"><s>{{task.title}}</s></p>
+      <p *ngIf="!task.done">{{task.title | stringShortener:20 }}</p>
+    </div>
+    <div class="task-content__actions---more">
+      <!-- Button See More -->
+      <button mat-button color="default" [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.more.ariaLabel' | translate"
+        (click)="onClickMore()" [matTooltip]="'TASKS_TASK_ITEM.actionButtons.more.toolTip' | translate">
+        <mat-icon color="primary">more_horiz</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="taskItemMode === 1" class="task-content__modes">
+    <div class="task-content__actions---options">
+      <!-- Button See Less -->
+      <button mat-icon-button color="default" [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.less.ariaLabel' | translate"
+        (click)="onClickLess()" [matTooltip]="'TASKS_TASK_ITEM.actionButtons.less.toolTip' | translate">
+        <mat-icon color="primary">arrow_back_ios</mat-icon>
+      </button>
+      <!-- Button Toggle Done -->
+      <button mat-icon-button color="default"
+        [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.toggleDone.ariaLabel' | translate" (click)="onClickToggleDone()"
+        [matTooltip]="task.done ? ('TASKS_TASK_ITEM.actionButtons.toggleDone.toolTips.completed' | translate) + (task.completion | date) : ('TASKS_TASK_ITEM.actionButtons.toggleDone.toolTips.open' | translate) + (task.deadline | date)">
+        <mat-icon color="{{task.done ? 'warn' : 'accent'}}">{{task.done ? 'timer' : 'done'}}</mat-icon>
+      </button>
+      <!-- Button Details -->
+      <button mat-icon-button color="default"
+        [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.details.ariaLabel' | translate" (click)="onClickDetails()"
+        [matTooltip]="'TASKS_TASK_ITEM.actionButtons.details.toolTip' | translate">
+        <mat-icon>info</mat-icon>
+      </button>
+      <!-- Button Edit -->
+      <button mat-icon-button color="default" [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.edit.ariaLabel' | translate"
+        (click)="onClickEdit()" [matTooltip]="'TASKS_TASK_ITEM.actionButtons.edit.toolTip' | translate"
+        [disabled]="task.done">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <!-- Button Delete -->
+      <button mat-icon-button color="warn" [ariaLabel]="'TASKS_TASK_ITEM.actionButtons.delete.ariaLabel' | translate"
+        (click)="onClickDelete()" [matTooltip]="'TASKS_TASK_ITEM.actionButtons.delete.toolTip' | translate">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
